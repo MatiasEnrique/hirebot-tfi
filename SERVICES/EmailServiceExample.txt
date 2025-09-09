@@ -1,0 +1,93 @@
+EMAIL SERVICE USAGE EXAMPLES
+============================
+
+The EmailService has been successfully implemented in the SERVICES layer following the project's architectural patterns.
+
+CONFIGURATION:
+- Email settings are stored in Web.config under appSettings
+- Multilanguage support through GlobalResources.resx files
+- Service is disabled by default for security (Email.EnableEmailService = "false")
+
+USAGE EXAMPLES:
+
+1. Password Recovery Email:
+```csharp
+using SERVICES;
+
+// Send password recovery email
+bool result = EmailService.SendPasswordRecoveryEmail(
+    userEmail: "user@example.com",
+    userName: "John Doe",
+    resetToken: "abc123resettoken",
+    resetUrl: "https://localhost:44383/ResetPassword.aspx"
+);
+
+if (result)
+{
+    // Email sent successfully
+}
+else 
+{
+    // Check logs for error details
+}
+```
+
+2. Password Change Confirmation:
+```csharp
+using SERVICES;
+
+// Send password change confirmation
+bool result = EmailService.SendPasswordChangeConfirmationEmail(
+    userEmail: "user@example.com",
+    userName: "John Doe"
+);
+```
+
+3. Welcome Email for New Users:
+```csharp
+using SERVICES;
+
+// Send welcome email
+bool result = EmailService.SendWelcomeEmail(
+    userEmail: "newuser@example.com",
+    userName: "Jane Smith",
+    loginUrl: "https://localhost:44383/SignIn.aspx"
+);
+```
+
+4. Test Email (for configuration verification):
+```csharp
+using SERVICES;
+
+// Send test email to verify configuration
+bool result = EmailService.SendTestEmail("admin@example.com");
+```
+
+CONFIGURATION STEPS TO ENABLE:
+1. Set Email.EnableEmailService = "true" in Web.config
+2. Configure SMTP settings:
+   - Email.Username = your email username
+   - Email.Password = your email password or app password
+3. Update Email.FromAddress and Email.FromName as needed
+4. Test with SendTestEmail() method first
+
+SECURITY CONSIDERATIONS:
+- Service is disabled by default
+- All emails are logged through LogService
+- Sensitive configuration stored in Web.config (not hardcoded)
+- Email validation and error handling implemented
+- Resource disposal properly managed
+
+MULTILANGUAGE SUPPORT:
+- Email templates automatically use current culture
+- Spanish and English translations provided
+- Fallback to key name if translation missing
+- Uses HttpContext.GetGlobalResourceObject for localization
+
+ARCHITECTURAL COMPLIANCE:
+- Follows existing SERVICES layer patterns
+- Uses LogService for comprehensive logging
+- Proper error handling and validation
+- Configuration caching for performance
+- Thread-safe implementation
+- SOLID principles applied

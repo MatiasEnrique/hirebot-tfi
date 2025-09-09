@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Authentication Pages -->
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>Welcome Back</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>Get Started</value>
+  </data>
+
+  <!-- Form Fields -->
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="UsernameOrEmail" xml:space="preserve">
+    <value>Username or Email</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+
+  <!-- Placeholders -->
+  <data name="EnterUsername" xml:space="preserve">
+    <value>Enter your username or email</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+  <data name="CreatePassword" xml:space="preserve">
+    <value>Create a password</value>
+  </data>
+  <data name="ConfirmYourPassword" xml:space="preserve">
+    <value>Confirm your password</value>
+  </data>
+  <data name="ChooseUsername" xml:space="preserve">
+    <value>Choose a username</value>
+  </data>
+
+  <!-- Messages -->
+  <data name="SignInToAccount" xml:space="preserve">
+    <value>Sign in to your Hirebot account</value>
+  </data>
+  <data name="JoinHirebot" xml:space="preserve">
+    <value>Join Hirebot today</value>
+  </data>
+  <data name="DontHaveAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="SignInHere" xml:space="preserve">
+    <value>Sign in here</value>
+  </data>
+  <data name="SignUpHere" xml:space="preserve">
+    <value>Sign up here</value>
+  </data>
+
+  <!-- Home Page -->
+  <data name="WelcomeToHirebot" xml:space="preserve">
+    <value>Welcome to Hirebot-TFI!</value>
+  </data>
+  <data name="HirebotDescription" xml:space="preserve">
+    <value>Your intelligent hiring assistant powered by advanced AI technology.</value>
+  </data>
+  <data name="WelcomeBackMessage" xml:space="preserve">
+    <value>Welcome back, {0}!</value>
+  </data>
+  <data name="SuccessfulSignIn" xml:space="preserve">
+    <value>You are successfully signed in to your Hirebot account.</value>
+  </data>
+
+  <!-- Features -->
+  <data name="AIScreening" xml:space="preserve">
+    <value>AI-Powered Screening</value>
+  </data>
+  <data name="AIScreeningDescription" xml:space="preserve">
+    <value>Intelligent candidate screening using advanced AI algorithms.</value>
+  </data>
+  <data name="CandidateManagement" xml:space="preserve">
+    <value>Candidate Management</value>
+  </data>
+  <data name="CandidateManagementDescription" xml:space="preserve">
+    <value>Comprehensive candidate tracking and management system.</value>
+  </data>
+  <data name="Analytics" xml:space="preserve">
+    <value>Analytics &amp; Insights</value>
+  </data>
+  <data name="AnalyticsDescription" xml:space="preserve">
+    <value>Detailed analytics and insights for better hiring decisions.</value>
+  </data>
+
+  <!-- Validation Messages -->
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>First name is required</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Last name is required</value>
+  </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>Please confirm your password</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Passwords do not match</value>
+  </data>
+  <data name="ValidEmailRequired" xml:space="preserve">
+    <value>Please enter a valid email address</value>
+  </data>
+
+  <!-- Help Text -->
+  <data name="UsernameHelp" xml:space="preserve">
+    <value>Username must be 3-20 characters long and contain only letters, numbers, and underscores.</value>
+  </data>
+  <data name="PasswordHelp" xml:space="preserve">
+    <value>Password must be at least 6 characters long.</value>
+  </data>
+
+  <!-- Success Messages -->
+  <data name="AccountCreatedSuccess" xml:space="preserve">
+    <value>Account created successfully! You can now sign in.</value>
+  </data>
+
+  <!-- Language -->
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+</root>

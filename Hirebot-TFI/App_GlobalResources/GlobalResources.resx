@@ -1,0 +1,2323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenido</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>Bienvenido de nuevo</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Crear Cuenta</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Iniciar Sesión</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>Comenzar</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Correo Electrónico</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="UsernameOrEmail" xml:space="preserve">
+    <value>Usuario o Correo</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Recordarme</value>
+  </data>
+  <data name="EnterUsername" xml:space="preserve">
+    <value>Ingresa tu usuario o correo</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Ingresa tu correo electrónico</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Ingresa tu contraseña</value>
+  </data>
+  <data name="CreatePassword" xml:space="preserve">
+    <value>Crea una contraseña</value>
+  </data>
+  <data name="ConfirmYourPassword" xml:space="preserve">
+    <value>Confirma tu contraseña</value>
+  </data>
+  <data name="ChooseUsername" xml:space="preserve">
+    <value>Elige un nombre de usuario</value>
+  </data>
+  <data name="SignInToAccount" xml:space="preserve">
+    <value>Inicia sesión en tu cuenta de Hirebot</value>
+  </data>
+  <data name="JoinHirebot" xml:space="preserve">
+    <value>Únete a Hirebot hoy</value>
+  </data>
+  <data name="DontHaveAccount" xml:space="preserve">
+    <value>¿No tienes una cuenta?</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>¿Ya tienes una cuenta?</value>
+  </data>
+  <data name="SignInHere" xml:space="preserve">
+    <value>Inicia sesión aquí</value>
+  </data>
+  <data name="SignUpHere" xml:space="preserve">
+    <value>Regístrate aquí</value>
+  </data>
+  <data name="WelcomeToHirebot" xml:space="preserve">
+    <value>¡Bienvenido a Hirebot-TFI!</value>
+  </data>
+  <data name="HirebotDescription" xml:space="preserve">
+    <value>Tu asistente inteligente de contratación impulsado por tecnología de IA avanzada.</value>
+  </data>
+  <data name="WelcomeBackMessage" xml:space="preserve">
+    <value>¡Bienvenido de nuevo, {0}!</value>
+  </data>
+  <data name="SuccessfulSignIn" xml:space="preserve">
+    <value>Has iniciado sesión exitosamente en tu cuenta de Hirebot.</value>
+  </data>
+  <data name="AIScreening" xml:space="preserve">
+    <value>Filtrado con IA</value>
+  </data>
+  <data name="AIScreeningDescription" xml:space="preserve">
+    <value>Filtrado inteligente de candidatos usando algoritmos de IA avanzados.</value>
+  </data>
+  <data name="CandidateManagement" xml:space="preserve">
+    <value>Gestión de Candidatos</value>
+  </data>
+  <data name="CandidateManagementDescription" xml:space="preserve">
+    <value>Sistema integral de seguimiento y gestión de candidatos.</value>
+  </data>
+  <data name="Analytics" xml:space="preserve">
+    <value>Análisis e Insights</value>
+  </data>
+  <data name="AnalyticsDescription" xml:space="preserve">
+    <value>Análisis detallados e insights para mejores decisiones de contratación.</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>El nombre de usuario es obligatorio</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>El correo electrónico es obligatorio</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>La contraseña es obligatoria</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>El nombre es obligatorio</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>El apellido es obligatorio</value>
+  </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>Por favor confirma tu contraseña</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+  <data name="ValidEmailRequired" xml:space="preserve">
+    <value>Por favor ingresa un correo electrónico válido</value>
+  </data>
+  <data name="UsernameHelp" xml:space="preserve">
+    <value>El usuario debe tener entre 3-20 caracteres y contener solo letras, números y guiones bajos.</value>
+  </data>
+  <data name="PasswordHelp" xml:space="preserve">
+    <value>La contraseña debe tener al menos 6 caracteres.</value>
+  </data>
+  <data name="AccountCreatedSuccess" xml:space="preserve">
+    <value>¡Cuenta creada exitosamente! Ya puedes iniciar sesión.</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="UsernameOrEmailRequired" xml:space="preserve">
+    <value>El nombre de usuario o correo electrónico son obligatorios.</value>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Usuario/correo o contraseña incorrectos.</value>
+  </data>
+  <data name="AccountInactive" xml:space="preserve">
+    <value>La cuenta está inactiva. Por favor contacta al soporte.</value>
+  </data>
+  <data name="SignInError" xml:space="preserve">
+    <value>Ocurrió un error durante el inicio de sesión. Por favor intenta nuevamente.</value>
+  </data>
+  <data name="RegistrationError" xml:space="preserve">
+    <value>Ocurrió un error durante el registro. Por favor intenta nuevamente.</value>
+  </data>
+  <data name="UsernameMinLength" xml:space="preserve">
+    <value>El nombre de usuario debe tener al menos 3 caracteres.</value>
+  </data>
+  <data name="UsernameMaxLength" xml:space="preserve">
+    <value>El nombre de usuario no puede tener más de 20 caracteres.</value>
+  </data>
+  <data name="UsernameInvalidChars" xml:space="preserve">
+    <value>El nombre de usuario solo puede contener letras, números y guiones bajos.</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Por favor ingresa una dirección de correo válida.</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>La contraseña debe tener al menos 6 caracteres.</value>
+  </data>
+  <data name="FirstNameMinLength" xml:space="preserve">
+    <value>El nombre debe tener al menos 2 caracteres.</value>
+  </data>
+  <data name="LastNameMinLength" xml:space="preserve">
+    <value>El apellido debe tener al menos 2 caracteres.</value>
+  </data>
+  <data name="UserExists" xml:space="preserve">
+    <value>El nombre de usuario o correo electrónico ya existe.</value>
+  </data>
+  <data name="CreateUserFailed" xml:space="preserve">
+    <value>Error al crear la cuenta de usuario. Por favor intenta nuevamente.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Panel de Control</value>
+  </data>
+  <data name="DashboardWelcomeMessage" xml:space="preserve">
+    <value>Bienvenido a tu panel de control de Hirebot-TFI</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="ManageProfile" xml:space="preserve">
+    <value>Gestiona tu perfil y configuraciones</value>
+  </data>
+  <data name="ViewProfile" xml:space="preserve">
+    <value>Ver Perfil</value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Empleos</value>
+  </data>
+  <data name="BrowseJobs" xml:space="preserve">
+    <value>Explora oportunidades laborales</value>
+  </data>
+  <data name="ViewJobs" xml:space="preserve">
+    <value>Ver Empleos</value>
+  </data>
+  <data name="HirebotChat" xml:space="preserve">
+    <value>Chat con Hirebot</value>
+  </data>
+  <data name="ChatWithBot" xml:space="preserve">
+    <value>Conversa con nuestro asistente IA</value>
+  </data>
+  <data name="StartChat" xml:space="preserve">
+    <value>Iniciar Chat</value>
+  </data>
+  <data name="UserInfo" xml:space="preserve">
+    <value>Información del Usuario</value>
+  </data>
+  <data name="PleaseSignIn" xml:space="preserve">
+    <value>Por favor inicia sesión para continuar.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Quiénes Somos</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contáctanos</value>
+  </data>
+  <data name="TermsConditions" xml:space="preserve">
+    <value>Términos y Condiciones</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Política de Privacidad</value>
+  </data>
+  <data name="SecurityPolicy" xml:space="preserve">
+    <value>Política de Seguridad</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Todos los derechos reservados.</value>
+  </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Volver al Inicio</value>
+  </data>
+  <data name="LastUpdated" xml:space="preserve">
+    <value>Última actualización</value>
+  </data>
+  <data name="AboutUsTitle" xml:space="preserve">
+    <value>Conoce a Hirebot-TFI</value>
+  </data>
+  <data name="AboutUsSubtitle" xml:space="preserve">
+    <value>Revolucionando el proceso de selección con inteligencia artificial</value>
+  </data>
+  <data name="OurMission" xml:space="preserve">
+    <value>Nuestra Misión</value>
+  </data>
+  <data name="MissionStatement" xml:space="preserve">
+    <value>Transformar el proceso de contratación mediante tecnología de IA avanzada, conectando talento excepcional con oportunidades perfectas de manera eficiente y justa.</value>
+  </data>
+  <data name="OurStory" xml:space="preserve">
+    <value>Nuestra Historia</value>
+  </data>
+  <data name="CompanyStory1" xml:space="preserve">
+    <value>Fundada en 2022 por un equipo de expertos en tecnología y recursos humanos, Hirebot-TFI nació de la visión de simplificar y mejorar el proceso de contratación para empresas de todos los tamaños.</value>
+  </data>
+  <data name="CompanyStory2" xml:space="preserve">
+    <value>Con sede en Buenos Aires, Argentina, hemos crecido rápidamente para convertirnos en líderes en soluciones de contratación impulsadas por IA en América Latina.</value>
+  </data>
+  <data name="KeyNumbers" xml:space="preserve">
+    <value>Cifras Clave</value>
+  </data>
+  <data name="CompaniesServed" xml:space="preserve">
+    <value>Empresas Atendidas</value>
+  </data>
+  <data name="CandidatesProcessed" xml:space="preserve">
+    <value>Candidatos Procesados</value>
+  </data>
+  <data name="SatisfactionRate" xml:space="preserve">
+    <value>Tasa de Satisfacción</value>
+  </data>
+  <data name="OurTeam" xml:space="preserve">
+    <value>Nuestro Equipo</value>
+  </data>
+  <data name="CEO" xml:space="preserve">
+    <value>CEO y Fundadora</value>
+  </data>
+  <data name="CEODescription" xml:space="preserve">
+    <value>15 años de experiencia en recursos humanos y tecnología. Visionaria detrás de Hirebot-TFI.</value>
+  </data>
+  <data name="CTO" xml:space="preserve">
+    <value>CTO y Co-fundador</value>
+  </data>
+  <data name="CTODescription" xml:space="preserve">
+    <value>Experto en IA y machine learning con más de 12 años desarrollando soluciones innovadoras.</value>
+  </data>
+  <data name="CMO" xml:space="preserve">
+    <value>CMO y Directora de Marketing</value>
+  </data>
+  <data name="CMODescription" xml:space="preserve">
+    <value>Especialista en marketing digital y growth hacking con experiencia en startups tecnológicas.</value>
+  </data>
+  <data name="OurValues" xml:space="preserve">
+    <value>Nuestros Valores</value>
+  </data>
+  <data name="Innovation" xml:space="preserve">
+    <value>Innovación</value>
+  </data>
+  <data name="InnovationDescription" xml:space="preserve">
+    <value>Buscamos constantemente nuevas formas de mejorar y revolucionar el proceso de contratación.</value>
+  </data>
+  <data name="Trust" xml:space="preserve">
+    <value>Confianza</value>
+  </data>
+  <data name="TrustDescription" xml:space="preserve">
+    <value>Construimos relaciones sólidas basadas en transparencia y confiabilidad.</value>
+  </data>
+  <data name="Excellence" xml:space="preserve">
+    <value>Excelencia</value>
+  </data>
+  <data name="ExcellenceDescription" xml:space="preserve">
+    <value>Nos comprometemos a ofrecer siempre la más alta calidad en nuestros servicios.</value>
+  </data>
+  <data name="Collaboration" xml:space="preserve">
+    <value>Colaboración</value>
+  </data>
+  <data name="CollaborationDescription" xml:space="preserve">
+    <value>Creemos en el poder del trabajo en equipo y la cooperación para alcanzar objetivos comunes.</value>
+  </data>
+  <data name="ContactUsTitle" xml:space="preserve">
+    <value>Ponte en Contacto</value>
+  </data>
+  <data name="ContactUsSubtitle" xml:space="preserve">
+    <value>Estamos aquí para ayudarte con todas tus consultas</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Información de Contacto</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="BusinessHours" xml:space="preserve">
+    <value>Horarios de Atención</value>
+  </data>
+  <data name="MondayToFriday" xml:space="preserve">
+    <value>Lunes a Viernes</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Sábado</value>
+  </data>
+  <data name="SocialMedia" xml:space="preserve">
+    <value>Redes Sociales</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Enviar Mensaje</value>
+  </data>
+  <data name="MessageSentSuccess" xml:space="preserve">
+    <value>Tu mensaje ha sido enviado exitosamente. Te contactaremos pronto.</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Asunto</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="SubjectRequired" xml:space="preserve">
+    <value>El asunto es obligatorio</value>
+  </data>
+  <data name="MessageRequired" xml:space="preserve">
+    <value>El mensaje es obligatorio</value>
+  </data>
+  <data name="FindUs" xml:space="preserve">
+    <value>Encuéntranos</value>
+  </data>
+  <data name="VisitOurOffice" xml:space="preserve">
+    <value>Visita Nuestra Oficina</value>
+  </data>
+  <data name="NearSubway" xml:space="preserve">
+    <value>Cerca de las estaciones de subte Callao y Tribunales</value>
+  </data>
+  <data name="TermsConditionsTitle" xml:space="preserve">
+    <value>Términos y Condiciones de Uso</value>
+  </data>
+  <data name="TermsConditionsSubtitle" xml:space="preserve">
+    <value>Por favor lee cuidadosamente nuestros términos y condiciones</value>
+  </data>
+  <data name="Introduction" xml:space="preserve">
+    <value>Introducción</value>
+  </data>
+  <data name="TermsIntroduction" xml:space="preserve">
+    <value>Estos términos y condiciones rigen el uso del sitio web y servicios de Hirebot-TFI. Al acceder o usar nuestros servicios, aceptas estar sujeto a estos términos.</value>
+  </data>
+  <data name="AcceptanceTerms" xml:space="preserve">
+    <value>Aceptación de los Términos</value>
+  </data>
+  <data name="AcceptanceTermsText" xml:space="preserve">
+    <value>Al utilizar nuestros servicios, confirmas que has leído, entendido y aceptas estar sujeto a estos términos y condiciones.</value>
+  </data>
+  <data name="ServiceDescription" xml:space="preserve">
+    <value>Descripción del Servicio</value>
+  </data>
+  <data name="ServiceDescriptionText1" xml:space="preserve">
+    <value>Hirebot-TFI proporciona una plataforma de contratación impulsada por inteligencia artificial que ayuda a empresas y candidatos a conectarse de manera eficiente.</value>
+  </data>
+  <data name="ServiceDescriptionText2" xml:space="preserve">
+    <value>Nuestros servicios incluyen filtrado de candidatos, gestión de procesos de selección, análisis de datos y herramientas de comunicación automatizadas.</value>
+  </data>
+  <data name="ServicesInclude" xml:space="preserve">
+    <value>Nuestros servicios incluyen:</value>
+  </data>
+  <data name="ServiceItem1" xml:space="preserve">
+    <value>Filtrado inteligente de candidatos usando IA</value>
+  </data>
+  <data name="ServiceItem2" xml:space="preserve">
+    <value>Sistema de gestión de candidatos (ATS)</value>
+  </data>
+  <data name="ServiceItem3" xml:space="preserve">
+    <value>Análisis y reportes de datos de contratación</value>
+  </data>
+  <data name="ServiceItem4" xml:space="preserve">
+    <value>Automatización de procesos de selección</value>
+  </data>
+  <data name="ServiceItem5" xml:space="preserve">
+    <value>Herramientas de comunicación con candidatos</value>
+  </data>
+  <data name="UserResponsibilities" xml:space="preserve">
+    <value>Responsabilidades del Usuario</value>
+  </data>
+  <data name="UserResponsibilitiesText" xml:space="preserve">
+    <value>Como usuario de nuestros servicios, te comprometes a cumplir con ciertas obligaciones y responsabilidades.</value>
+  </data>
+  <data name="UserObligations" xml:space="preserve">
+    <value>Te comprometes a:</value>
+  </data>
+  <data name="UserObligation1" xml:space="preserve">
+    <value>Proporcionar información precisa y actualizada</value>
+  </data>
+  <data name="UserObligation2" xml:space="preserve">
+    <value>Usar los servicios de manera legal y ética</value>
+  </data>
+  <data name="UserObligation3" xml:space="preserve">
+    <value>Mantener la confidencialidad de tus credenciales de acceso</value>
+  </data>
+  <data name="UserObligation4" xml:space="preserve">
+    <value>No usar los servicios para actividades fraudulentas o ilegales</value>
+  </data>
+  <data name="PrivacyDataProtection" xml:space="preserve">
+    <value>Privacidad y Protección de Datos</value>
+  </data>
+  <data name="PrivacyDataProtectionText" xml:space="preserve">
+    <value>Nos tomamos muy en serio la privacidad y protección de tus datos. Para más información, consulta nuestra Política de Privacidad.</value>
+  </data>
+  <data name="IntellectualProperty" xml:space="preserve">
+    <value>Propiedad Intelectual</value>
+  </data>
+  <data name="IntellectualPropertyText1" xml:space="preserve">
+    <value>Todos los derechos de propiedad intelectual relacionados con los servicios de Hirebot-TFI pertenecen a nuestra empresa.</value>
+  </data>
+  <data name="IntellectualPropertyText2" xml:space="preserve">
+    <value>No puedes copiar, modificar, distribuir o crear trabajos derivados de nuestro contenido sin autorización expresa.</value>
+  </data>
+  <data name="LimitationLiability" xml:space="preserve">
+    <value>Limitación de Responsabilidad</value>
+  </data>
+  <data name="LimitationLiabilityText1" xml:space="preserve">
+    <value>Hirebot-TFI no será responsable de daños indirectos, incidentales, especiales o consecuenciales que puedan surgir del uso de nuestros servicios.</value>
+  </data>
+  <data name="LimitationLiabilityText2" xml:space="preserve">
+    <value>Nuestra responsabilidad total se limita al monto pagado por los servicios en el período de doce meses previo al reclamo.</value>
+  </data>
+  <data name="ServiceTermination" xml:space="preserve">
+    <value>Terminación del Servicio</value>
+  </data>
+  <data name="ServiceTerminationText1" xml:space="preserve">
+    <value>Puedes terminar tu cuenta en cualquier momento siguiendo el proceso indicado en la plataforma.</value>
+  </data>
+  <data name="ServiceTerminationText2" xml:space="preserve">
+    <value>Nos reservamos el derecho de suspender o terminar cuentas que violen estos términos y condiciones.</value>
+  </data>
+  <data name="TermsModification" xml:space="preserve">
+    <value>Modificación de Términos</value>
+  </data>
+  <data name="TermsModificationText" xml:space="preserve">
+    <value>Podemos actualizar estos términos ocasionalmente. Te notificaremos sobre cambios significativos y tu uso continuado constituye aceptación de los términos modificados.</value>
+  </data>
+  <data name="ApplicableLaw" xml:space="preserve">
+    <value>Ley Aplicable</value>
+  </data>
+  <data name="ApplicableLawText" xml:space="preserve">
+    <value>Estos términos se rigen por las leyes de la República Argentina. Cualquier disputa se resolverá en los tribunales competentes de Buenos Aires.</value>
+  </data>
+  <data name="ContactInformationText" xml:space="preserve">
+    <value>Si tienes preguntas sobre estos términos y condiciones, puedes contactarnos en:</value>
+  </data>
+  <data name="PrivacyPolicyTitle" xml:space="preserve">
+    <value>Política de Privacidad</value>
+  </data>
+  <data name="PrivacyPolicySubtitle" xml:space="preserve">
+    <value>Tu privacidad es importante para nosotros</value>
+  </data>
+  <data name="PrivacyCommitment" xml:space="preserve">
+    <value>Nuestro Compromiso con la Privacidad</value>
+  </data>
+  <data name="PrivacyCommitmentText" xml:space="preserve">
+    <value>En Hirebot-TFI, respetamos tu privacidad y nos comprometemos a proteger tu información personal con los más altos estándares de seguridad.</value>
+  </data>
+  <data name="InformationCollection" xml:space="preserve">
+    <value>Recopilación de Información</value>
+  </data>
+  <data name="InformationCollectionText" xml:space="preserve">
+    <value>Recopilamos información que nos proporcionas directamente y automáticamente cuando usas nuestros servicios.</value>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>Información Personal que Recopilamos:</value>
+  </data>
+  <data name="PersonalInfo1" xml:space="preserve">
+    <value>Nombre completo y información de contacto</value>
+  </data>
+  <data name="PersonalInfo2" xml:space="preserve">
+    <value>Información profesional y laboral</value>
+  </data>
+  <data name="PersonalInfo3" xml:space="preserve">
+    <value>Datos de empresas y organizaciones</value>
+  </data>
+  <data name="PersonalInfo4" xml:space="preserve">
+    <value>Comunicaciones y correspondencia</value>
+  </data>
+  <data name="PersonalInfo5" xml:space="preserve">
+    <value>Información de facturación y pagos</value>
+  </data>
+  <data name="TechnicalInformation" xml:space="preserve">
+    <value>Información Técnica:</value>
+  </data>
+  <data name="TechnicalInfo1" xml:space="preserve">
+    <value>Direcciones IP y datos de conexión</value>
+  </data>
+  <data name="TechnicalInfo2" xml:space="preserve">
+    <value>Información del navegador y dispositivo</value>
+  </data>
+  <data name="TechnicalInfo3" xml:space="preserve">
+    <value>Cookies y tecnologías similares</value>
+  </data>
+  <data name="TechnicalInfo4" xml:space="preserve">
+    <value>Registros de actividad en la plataforma</value>
+  </data>
+  <data name="InformationUse" xml:space="preserve">
+    <value>Uso de la Información</value>
+  </data>
+  <data name="InformationUseText" xml:space="preserve">
+    <value>Utilizamos tu información para proporcionar, mejorar y personalizar nuestros servicios.</value>
+  </data>
+  <data name="MainPurposes" xml:space="preserve">
+    <value>Propósitos principales:</value>
+  </data>
+  <data name="Purpose1" xml:space="preserve">
+    <value>Proporcionar y mantener nuestros servicios</value>
+  </data>
+  <data name="Purpose2" xml:space="preserve">
+    <value>Procesar transacciones y comunicaciones</value>
+  </data>
+  <data name="Purpose3" xml:space="preserve">
+    <value>Mejorar y personalizar la experiencia del usuario</value>
+  </data>
+  <data name="Purpose4" xml:space="preserve">
+    <value>Análisis y desarrollo de nuevas funcionalidades</value>
+  </data>
+  <data name="Purpose5" xml:space="preserve">
+    <value>Cumplimiento legal y prevención de fraudes</value>
+  </data>
+  <data name="InformationSharing" xml:space="preserve">
+    <value>Compartir Información</value>
+  </data>
+  <data name="InformationSharingText1" xml:space="preserve">
+    <value>No vendemos, alquilamos ni compartimos tu información personal con terceros para fines comerciales sin tu consentimiento.</value>
+  </data>
+  <data name="InformationSharingText2" xml:space="preserve">
+    <value>Podemos compartir información en circunstancias específicas y limitadas:</value>
+  </data>
+  <data name="SharingCircumstances" xml:space="preserve">
+    <value>Compartimos información solo cuando:</value>
+  </data>
+  <data name="SharingCircumstance1" xml:space="preserve">
+    <value>Tenemos tu consentimiento explícito</value>
+  </data>
+  <data name="SharingCircumstance2" xml:space="preserve">
+    <value>Es requerido por ley o autoridades competentes</value>
+  </data>
+  <data name="SharingCircumstance3" xml:space="preserve">
+    <value>Con proveedores de servicios que nos ayudan a operar</value>
+  </data>
+  <data name="SharingCircumstance4" xml:space="preserve">
+    <value>Para proteger derechos, seguridad o propiedad</value>
+  </data>
+  <data name="DataSecurity" xml:space="preserve">
+    <value>Seguridad de Datos</value>
+  </data>
+  <data name="DataSecurityText1" xml:space="preserve">
+    <value>Implementamos medidas de seguridad técnicas y organizacionales para proteger tu información personal.</value>
+  </data>
+  <data name="SecurityMeasures" xml:space="preserve">
+    <value>Medidas de seguridad:</value>
+  </data>
+  <data name="SecurityMeasure1" xml:space="preserve">
+    <value>Cifrado de datos en tránsito y en reposo</value>
+  </data>
+  <data name="SecurityMeasure2" xml:space="preserve">
+    <value>Control de acceso y autenticación multifactor</value>
+  </data>
+  <data name="SecurityMeasure3" xml:space="preserve">
+    <value>Monitoreo continuo y auditorías de seguridad</value>
+  </data>
+  <data name="SecurityMeasure4" xml:space="preserve">
+    <value>Capacitación regular del personal en seguridad</value>
+  </data>
+  <data name="UserRights" xml:space="preserve">
+    <value>Derechos del Usuario</value>
+  </data>
+  <data name="UserRightsText" xml:space="preserve">
+    <value>Tienes varios derechos respecto a tu información personal que respetamos y facilitamos.</value>
+  </data>
+  <data name="YourRights" xml:space="preserve">
+    <value>Tus derechos incluyen:</value>
+  </data>
+  <data name="Right1" xml:space="preserve">
+    <value>Acceder a tu información personal</value>
+  </data>
+  <data name="Right2" xml:space="preserve">
+    <value>Rectificar datos inexactos o incompletos</value>
+  </data>
+  <data name="Right3" xml:space="preserve">
+    <value>Solicitar la eliminación de tus datos</value>
+  </data>
+  <data name="Right4" xml:space="preserve">
+    <value>Restringir el procesamiento de tu información</value>
+  </data>
+  <data name="Right5" xml:space="preserve">
+    <value>Portabilidad de datos cuando sea aplicable</value>
+  </data>
+  <data name="CookiesTracking" xml:space="preserve">
+    <value>Cookies y Seguimiento</value>
+  </data>
+  <data name="CookiesTrackingText1" xml:space="preserve">
+    <value>Utilizamos cookies y tecnologías similares para mejorar tu experiencia y analizar el uso de nuestros servicios.</value>
+  </data>
+  <data name="CookiesTrackingText2" xml:space="preserve">
+    <value>Puedes controlar las cookies a través de la configuración de tu navegador, aunque esto puede afectar algunas funcionalidades.</value>
+  </data>
+  <data name="DataRetention" xml:space="preserve">
+    <value>Retención de Datos</value>
+  </data>
+  <data name="DataRetentionText1" xml:space="preserve">
+    <value>Conservamos tu información personal solo durante el tiempo necesario para cumplir con los propósitos descritos en esta política.</value>
+  </data>
+  <data name="DataRetentionText2" xml:space="preserve">
+    <value>Cuando ya no sea necesaria, eliminamos o anonimizamos tu información de manera segura.</value>
+  </data>
+  <data name="ChildrenPrivacy" xml:space="preserve">
+    <value>Privacidad de Menores</value>
+  </data>
+  <data name="ChildrenPrivacyText" xml:space="preserve">
+    <value>Nuestros servicios no están dirigidos a menores de 18 años. No recopilamos información personal de menores conscientemente.</value>
+  </data>
+  <data name="PolicyChanges" xml:space="preserve">
+    <value>Cambios en la Política</value>
+  </data>
+  <data name="PolicyChangesText" xml:space="preserve">
+    <value>Podemos actualizar esta política ocasionalmente. Te notificaremos sobre cambios significativos por email o mediante avisos en nuestra plataforma.</value>
+  </data>
+  <data name="PrivacyContactText" xml:space="preserve">
+    <value>Para consultas sobre privacidad o ejercer tus derechos, contáctanos en:</value>
+  </data>
+  <data name="SecurityPolicyTitle" xml:space="preserve">
+    <value>Política de Seguridad</value>
+  </data>
+  <data name="SecurityPolicySubtitle" xml:space="preserve">
+    <value>Protegiendo tu información con los más altos estándares</value>
+  </data>
+  <data name="SecurityCommitment" xml:space="preserve">
+    <value>Compromiso con la Seguridad</value>
+  </data>
+  <data name="SecurityCommitmentText" xml:space="preserve">
+    <value>La seguridad es fundamental en todo lo que hacemos. Implementamos medidas robustas para proteger tu información y nuestros sistemas.</value>
+  </data>
+  <data name="DataProtection" xml:space="preserve">
+    <value>Protección de Datos</value>
+  </data>
+  <data name="DataProtectionText" xml:space="preserve">
+    <value>Utilizamos múltiples capas de seguridad para proteger tu información sensible en todo momento.</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Cifrado</value>
+  </data>
+  <data name="EncryptionDescription" xml:space="preserve">
+    <value>Todos los datos se cifran usando algoritmos AES-256 tanto en tránsito como en reposo.</value>
+  </data>
+  <data name="SecureServers" xml:space="preserve">
+    <value>Servidores Seguros</value>
+  </data>
+  <data name="SecureServersDescription" xml:space="preserve">
+    <value>Nuestros servidores están alojados en centros de datos certificados con seguridad física 24/7.</value>
+  </data>
+  <data name="AccessControl" xml:space="preserve">
+    <value>Control de Acceso</value>
+  </data>
+  <data name="AccessControlDescription" xml:space="preserve">
+    <value>Implementamos autenticación multifactor y principios de menor privilegio.</value>
+  </data>
+  <data name="Monitoring" xml:space="preserve">
+    <value>Monitoreo</value>
+  </data>
+  <data name="MonitoringDescription" xml:space="preserve">
+    <value>Supervisión continua 24/7 de todos nuestros sistemas y redes.</value>
+  </data>
+  <data name="UserSecurity" xml:space="preserve">
+    <value>Seguridad del Usuario</value>
+  </data>
+  <data name="UserSecurityText" xml:space="preserve">
+    <value>Tu seguridad es una responsabilidad compartida. Te proporcionamos herramientas y recomendaciones para mantener tu cuenta segura.</value>
+  </data>
+  <data name="SecurityRecommendations" xml:space="preserve">
+    <value>Recomendaciones de Seguridad:</value>
+  </data>
+  <data name="SecurityRec1" xml:space="preserve">
+    <value>Usa contraseñas fuertes y únicas</value>
+  </data>
+  <data name="SecurityRec2" xml:space="preserve">
+    <value>Habilita la autenticación de dos factores</value>
+  </data>
+  <data name="SecurityRec3" xml:space="preserve">
+    <value>Mantén actualizada tu información de contacto</value>
+  </data>
+  <data name="SecurityRec4" xml:space="preserve">
+    <value>No compartas tus credenciales de acceso</value>
+  </data>
+  <data name="SecurityRec5" xml:space="preserve">
+    <value>Reporta actividad sospechosa inmediatamente</value>
+  </data>
+  <data name="IncidentResponse" xml:space="preserve">
+    <value>Respuesta a Incidentes</value>
+  </data>
+  <data name="IncidentResponseText1" xml:space="preserve">
+    <value>Tenemos un plan integral de respuesta a incidentes de seguridad que nos permite actuar rápidamente ante cualquier amenaza.</value>
+  </data>
+  <data name="IncidentResponseText2" xml:space="preserve">
+    <value>Nuestro equipo de seguridad está disponible 24/7 para responder a emergencias de seguridad.</value>
+  </data>
+  <data name="IncidentProcedure" xml:space="preserve">
+    <value>Procedimiento ante Incidentes:</value>
+  </data>
+  <data name="IncidentStep1" xml:space="preserve">
+    <value>Detección y evaluación inmediata de la amenaza</value>
+  </data>
+  <data name="IncidentStep2" xml:space="preserve">
+    <value>Contención y mitigación del incidente</value>
+  </data>
+  <data name="IncidentStep3" xml:space="preserve">
+    <value>Investigación forense y análisis de causa raíz</value>
+  </data>
+  <data name="IncidentStep4" xml:space="preserve">
+    <value>Notificación a usuarios afectados si corresponde</value>
+  </data>
+  <data name="IncidentStep5" xml:space="preserve">
+    <value>Implementación de mejoras preventivas</value>
+  </data>
+  <data name="ComplianceCertifications" xml:space="preserve">
+    <value>Cumplimiento y Certificaciones</value>
+  </data>
+  <data name="ComplianceCertificationsText" xml:space="preserve">
+    <value>Mantenemos las certificaciones más importantes de la industria para garantizar los más altos estándares de seguridad.</value>
+  </data>
+  <data name="ISO27001Description" xml:space="preserve">
+    <value>Gestión de seguridad de la información</value>
+  </data>
+  <data name="SOC2Description" xml:space="preserve">
+    <value>Controles de seguridad operacional</value>
+  </data>
+  <data name="GDPRDescription" xml:space="preserve">
+    <value>Protección de datos personales</value>
+  </data>
+  <data name="RegularAudits" xml:space="preserve">
+    <value>Auditorías Regulares</value>
+  </data>
+  <data name="RegularAuditsText" xml:space="preserve">
+    <value>Realizamos auditorías de seguridad regulares tanto internas como por terceros independientes.</value>
+  </data>
+  <data name="AuditTypes" xml:space="preserve">
+    <value>Tipos de auditoría:</value>
+  </data>
+  <data name="AuditType1" xml:space="preserve">
+    <value>Pruebas de penetración trimestrales</value>
+  </data>
+  <data name="AuditType2" xml:space="preserve">
+    <value>Evaluaciones de vulnerabilidades mensuales</value>
+  </data>
+  <data name="AuditType3" xml:space="preserve">
+    <value>Revisiones de código de seguridad</value>
+  </data>
+  <data name="AuditType4" xml:space="preserve">
+    <value>Auditorías de cumplimiento anuales</value>
+  </data>
+  <data name="ReportingSecurity" xml:space="preserve">
+    <value>Reporte de Problemas de Seguridad</value>
+  </data>
+  <data name="ReportingSecurityText" xml:space="preserve">
+    <value>Si descubres una vulnerabilidad de seguridad, te alentamos a reportarla de manera responsable a través de nuestros canales seguros.</value>
+  </data>
+  <data name="SecurityContact" xml:space="preserve">
+    <value>Contacto de Seguridad</value>
+  </data>
+  <data name="SecurityContactText" xml:space="preserve">
+    <value>Para reportar problemas de seguridad o emergencias, contáctanos inmediatamente:</value>
+  </data>
+  <data name="EmergencyPhone" xml:space="preserve">
+    <value>Teléfono de Emergencia</value>
+  </data>
+  <data name="SecurityPortal" xml:space="preserve">
+    <value>Portal de Seguridad</value>
+  </data>
+  <data name="PolicyUpdates" xml:space="preserve">
+    <value>Actualizaciones de Política</value>
+  </data>
+  <data name="PolicyUpdatesText" xml:space="preserve">
+    <value>Esta política se revisa y actualiza regularmente para reflejar las mejores prácticas de seguridad y cambios en la legislación aplicable.</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Panel de Administración</value>
+  </data>
+  <data name="ProductManagement" xml:space="preserve">
+    <value>Gestión de Productos</value>
+  </data>
+  <data name="CatalogManagement" xml:space="preserve">
+    <value>Gestión de Catálogos</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Nombre del Producto</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="ImageUrl" xml:space="preserve">
+    <value>URL de Imagen</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="CreateProduct" xml:space="preserve">
+    <value>Crear Producto</value>
+  </data>
+  <data name="UpdateProduct" xml:space="preserve">
+    <value>Actualizar Producto</value>
+  </data>
+  <data name="DeleteProduct" xml:space="preserve">
+    <value>Eliminar Producto</value>
+  </data>
+  <data name="CatalogName" xml:space="preserve">
+    <value>Nombre del Catálogo</value>
+  </data>
+  <data name="CreateCatalog" xml:space="preserve">
+    <value>Crear Catálogo</value>
+  </data>
+  <data name="UpdateCatalog" xml:space="preserve">
+    <value>Actualizar Catálogo</value>
+  </data>
+  <data name="DeleteCatalog" xml:space="preserve">
+    <value>Eliminar Catálogo</value>
+  </data>
+  <data name="AddProductToCatalog" xml:space="preserve">
+    <value>Agregar Producto al Catálogo</value>
+  </data>
+  <data name="SelectCatalog" xml:space="preserve">
+    <value>Seleccionar Catálogo</value>
+  </data>
+  <data name="SelectProduct" xml:space="preserve">
+    <value>Seleccionar Producto</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="InvalidPrice" xml:space="preserve">
+    <value>Por favor ingresa un precio válido.</value>
+  </data>
+  <data name="InvalidStock" xml:space="preserve">
+    <value>Por favor ingresa una cantidad de stock válida.</value>
+  </data>
+  <data name="SelectProductFirst" xml:space="preserve">
+    <value>Por favor selecciona un producto primero.</value>
+  </data>
+  <data name="SelectCatalogFirst" xml:space="preserve">
+    <value>Por favor selecciona un catálogo primero.</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Ocurrió un error inesperado. Por favor intenta nuevamente.</value>
+  </data>
+  <data name="ProductCreatedSuccess" xml:space="preserve">
+    <value>Producto creado exitosamente.</value>
+  </data>
+  <data name="ProductCreationError" xml:space="preserve">
+    <value>Error al crear el producto.</value>
+  </data>
+  <data name="ProductUpdatedSuccess" xml:space="preserve">
+    <value>Producto actualizado exitosamente.</value>
+  </data>
+  <data name="ProductUpdateError" xml:space="preserve">
+    <value>Error al actualizar el producto.</value>
+  </data>
+  <data name="ProductDeletedSuccess" xml:space="preserve">
+    <value>Producto eliminado exitosamente.</value>
+  </data>
+  <data name="ProductDeleteError" xml:space="preserve">
+    <value>Error al eliminar el producto.</value>
+  </data>
+  <data name="ConfirmDeleteProduct" xml:space="preserve">
+    <value>¿Está seguro de que desea eliminar el producto "{0}"?
+
+Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="ConfirmAction" xml:space="preserve">
+    <value>Confirmar Acción</value>
+  </data>
+  <data name="ActionCannotBeUndone" xml:space="preserve">
+    <value>Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="CancelEdit" xml:space="preserve">
+    <value>Cancelar Edición</value>
+  </data>
+  <data name="EditCancelled" xml:space="preserve">
+    <value>Edición cancelada</value>
+  </data>
+  <data name="ProductNameRequired" xml:space="preserve">
+    <value>El nombre del producto es requerido.</value>
+  </data>
+  <data name="ProductNameMinLength" xml:space="preserve">
+    <value>El nombre del producto debe tener al menos 2 caracteres.</value>
+  </data>
+  <data name="ProductNameMaxLength" xml:space="preserve">
+    <value>El nombre del producto no puede tener más de 100 caracteres.</value>
+  </data>
+  <data name="ProductPriceInvalid" xml:space="preserve">
+    <value>El precio del producto debe ser mayor o igual a 0.</value>
+  </data>
+  <data name="ProductStockInvalid" xml:space="preserve">
+    <value>El stock del producto debe ser mayor o igual a 0.</value>
+  </data>
+  <data name="CatalogCreatedSuccess" xml:space="preserve">
+    <value>Catálogo creado exitosamente.</value>
+  </data>
+  <data name="CatalogCreationError" xml:space="preserve">
+    <value>Error al crear el catálogo.</value>
+  </data>
+  <data name="CatalogUpdatedSuccess" xml:space="preserve">
+    <value>Catálogo actualizado exitosamente.</value>
+  </data>
+  <data name="CatalogUpdateError" xml:space="preserve">
+    <value>Error al actualizar el catálogo.</value>
+  </data>
+  <data name="CatalogDeletedSuccess" xml:space="preserve">
+    <value>Catálogo eliminado exitosamente.</value>
+  </data>
+  <data name="CatalogDeleteError" xml:space="preserve">
+    <value>Error al eliminar el catálogo.</value>
+  </data>
+  <data name="CatalogNameRequired" xml:space="preserve">
+    <value>El nombre del catálogo es requerido.</value>
+  </data>
+  <data name="CatalogNameMinLength" xml:space="preserve">
+    <value>El nombre del catálogo debe tener al menos 2 caracteres.</value>
+  </data>
+  <data name="CatalogNameMaxLength" xml:space="preserve">
+    <value>El nombre del catálogo no puede tener más de 100 caracteres.</value>
+  </data>
+  <data name="ProductAddedToCatalogSuccess" xml:space="preserve">
+    <value>Producto agregado al catálogo exitosamente.</value>
+  </data>
+  <data name="ProductAddToCatalogError" xml:space="preserve">
+    <value>Error al agregar el producto al catálogo.</value>
+  </data>
+  <data name="ProductRemovedFromCatalogSuccess" xml:space="preserve">
+    <value>Producto removido del catálogo exitosamente.</value>
+  </data>
+  <data name="ProductRemoveFromCatalogError" xml:space="preserve">
+    <value>Error al remover el producto del catálogo.</value>
+  </data>
+  <data name="ProductCatalog" xml:space="preserve">
+    <value>Catálogo</value>
+  </data>
+  <data name="AboutCompany" xml:space="preserve">
+    <value>Acerca de la Empresa</value>
+  </data>
+  <data name="ExploreOurProducts" xml:space="preserve">
+    <value>Explora nuestros productos</value>
+  </data>
+  <data name="ProductsAvailable" xml:space="preserve">
+    <value>productos disponibles</value>
+  </data>
+  <data name="FilterByCategory" xml:space="preserve">
+    <value>Filtrar por categoría</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>Todas las categorías</value>
+  </data>
+  <data name="NoCatalogSelected" xml:space="preserve">
+    <value>Ningún catálogo seleccionado</value>
+  </data>
+  <data name="NoCatalogSelectedMessage" xml:space="preserve">
+    <value>El administrador aún no ha seleccionado un catálogo para mostrar. Por favor vuelve más tarde.</value>
+  </data>
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>No se encontraron productos</value>
+  </data>
+  <data name="NoProductsFoundMessage" xml:space="preserve">
+    <value>No hay productos disponibles en esta categoría o el catálogo está vacío.</value>
+  </data>
+  <data name="InStock" xml:space="preserve">
+    <value>en stock</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>Ver detalles</value>
+  </data>
+  <data name="FooterDescription" xml:space="preserve">
+    <value>Sistema de gestión de recursos humanos con inteligencia artificial para optimizar procesos de reclutamiento.</value>
+  </data>
+  <data name="DisplayCatalogManagement" xml:space="preserve">
+    <value>Gestión de Catálogo Mostrado</value>
+  </data>
+  <data name="SelectCatalogToDisplay" xml:space="preserve">
+    <value>Seleccionar catálogo a mostrar</value>
+  </data>
+  <data name="DisplayedCatalogHint" xml:space="preserve">
+    <value>Este catálogo será visible para todos los usuarios en la página pública</value>
+  </data>
+  <data name="SetDisplayedCatalog" xml:space="preserve">
+    <value>Establecer catálogo</value>
+  </data>
+  <data name="CurrentlyDisplayed" xml:space="preserve">
+    <value>Actualmente mostrado</value>
+  </data>
+  <data name="NoCatalogDisplayed" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="DisplayedCatalogUpdated" xml:space="preserve">
+    <value>Catálogo mostrado actualizado exitosamente.</value>
+  </data>
+  <data name="BillingCycle" xml:space="preserve">
+    <value>Ciclo de facturación</value>
+  </data>
+  <data name="MaxChatbots" xml:space="preserve">
+    <value>Chatbots máx.</value>
+  </data>
+  <data name="ChatbotManagement" xml:space="preserve">
+    <value>Gestión de Chatbots</value>
+  </data>
+  <data name="ChatbotAdmin" xml:space="preserve">
+    <value>Administración de Chatbots</value>
+  </data>
+  <data name="CreateChatbot" xml:space="preserve">
+    <value>Crear Chatbot</value>
+  </data>
+  <data name="CreateFirstChatbot" xml:space="preserve">
+    <value>Crea tu primer chatbot para comenzar a gestionar conversaciones automatizadas.</value>
+  </data>
+  <data name="EditChatbot" xml:space="preserve">
+    <value>Editar Chatbot</value>
+  </data>
+  <data name="DeleteChatbot" xml:space="preserve">
+    <value>Eliminar Chatbot</value>
+  </data>
+  <data name="ChatbotName" xml:space="preserve">
+    <value>Nombre del Chatbot</value>
+  </data>
+  <data name="ChatbotInstructions" xml:space="preserve">
+    <value>Instrucciones del Chatbot</value>
+  </data>
+  <data name="ChatbotColor" xml:space="preserve">
+    <value>Color del Chatbot</value>
+  </data>
+  <data name="AssignToOrganization" xml:space="preserve">
+    <value>Asignar a Organización</value>
+  </data>
+  <data name="UnassignFromOrganization" xml:space="preserve">
+    <value>Desasignar de Organización</value>
+  </data>
+  <data name="UnassignedChatbots" xml:space="preserve">
+    <value>Chatbots Sin Asignar</value>
+  </data>
+  <data name="AssignedChatbots" xml:space="preserve">
+    <value>Chatbots Asignados</value>
+  </data>
+  <data name="SelectOrganization" xml:space="preserve">
+    <value>Seleccionar Organización</value>
+  </data>
+  <data name="ChatbotCreatedSuccess" xml:space="preserve">
+    <value>Chatbot creado exitosamente.</value>
+  </data>
+  <data name="ChatbotUpdatedSuccess" xml:space="preserve">
+    <value>Chatbot actualizado exitosamente.</value>
+  </data>
+  <data name="ChatbotDeletedSuccess" xml:space="preserve">
+    <value>Chatbot eliminado exitosamente.</value>
+  </data>
+  <data name="ChatbotAssignedSuccess" xml:space="preserve">
+    <value>Chatbot asignado exitosamente.</value>
+  </data>
+  <data name="ChatbotUnassignedSuccess" xml:space="preserve">
+    <value>Chatbot desasignado exitosamente.</value>
+  </data>
+  <data name="ChatbotNameRequired" xml:space="preserve">
+    <value>El nombre del chatbot es requerido.</value>
+  </data>
+  <data name="ChatbotInstructionsRequired" xml:space="preserve">
+    <value>Las instrucciones del chatbot son requeridas.</value>
+  </data>
+  <data name="InvalidColorFormat" xml:space="preserve">
+    <value>Formato de color inválido. Use formato hexadecimal (#RRGGBB).</value>
+  </data>
+  <data name="ChatbotNameExists" xml:space="preserve">
+    <value>Ya existe un chatbot con este nombre.</value>
+  </data>
+  <data name="OrganizationRequired" xml:space="preserve">
+    <value>Debe seleccionar una organización.</value>
+  </data>
+  <data name="ConfirmDeleteChatbot" xml:space="preserve">
+    <value>¿Está seguro de que desea eliminar este chatbot?</value>
+  </data>
+  <data name="ConfirmUnassignChatbot" xml:space="preserve">
+    <value>¿Está seguro de que desea desasignar este chatbot?</value>
+  </data>
+  <data name="ChatbotNotFound" xml:space="preserve">
+    <value>Chatbot no encontrado.</value>
+  </data>
+  <data name="NoPermissionChatbot" xml:space="preserve">
+    <value>No tiene permisos para administrar chatbots.</value>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>Instrucciones</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Organization" xml:space="preserve">
+    <value>Organización</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactivo</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>Asignado</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Sin Asignar</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Fecha de Creación</value>
+  </data>
+  <data name="UpdatedDate" xml:space="preserve">
+    <value>Fecha de Actualización</value>
+  </data>
+  <data name="ShowInactive" xml:space="preserve">
+    <value>Mostrar Inactivos</value>
+  </data>
+  <data name="FilterByOrganization" xml:space="preserve">
+    <value>Filtrar por Organización</value>
+  </data>
+  <data name="AllOrganizations" xml:space="preserve">
+    <value>Todas las Organizaciones</value>
+  </data>
+  <data name="MaxMessages" xml:space="preserve">
+    <value>Mensajes/Mes máx.</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Características (JSON)</value>
+  </data>
+  <data name="BotsText" xml:space="preserve">
+    <value>bots</value>
+  </data>
+  <data name="MonthText" xml:space="preserve">
+    <value>mes</value>
+  </data>
+  <data name="LogManagement" xml:space="preserve">
+    <value>Gestión de Logs</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="TotalLogs" xml:space="preserve">
+    <value>Total de Logs</value>
+  </data>
+  <data name="TodaysLogs" xml:space="preserve">
+    <value>Logs de Hoy</value>
+  </data>
+  <data name="ErrorLogs" xml:space="preserve">
+    <value>Logs de Error</value>
+  </data>
+  <data name="LoginLogs" xml:space="preserve">
+    <value>Logs de Inicio de Sesión</value>
+  </data>
+  <data name="LogRecords" xml:space="preserve">
+    <value>Registros de Log</value>
+  </data>
+  <data name="ExportCSV" xml:space="preserve">
+    <value>Exportar CSV</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="LogType" xml:space="preserve">
+    <value>Tipo de Log</value>
+  </data>
+  <data name="AllTypes" xml:space="preserve">
+    <value>Todos los Tipos</value>
+  </data>
+  <data name="AllUsers" xml:space="preserve">
+    <value>Todos los Usuarios</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Fecha de Inicio</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Fecha de Fin</value>
+  </data>
+  <data name="QuickDateRange" xml:space="preserve">
+    <value>Rango de Fecha Rápido</value>
+  </data>
+  <data name="CustomRange" xml:space="preserve">
+    <value>Rango Personalizado</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Hoy</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Ayer</value>
+  </data>
+  <data name="ThisWeek" xml:space="preserve">
+    <value>Esta Semana</value>
+  </data>
+  <data name="ThisMonth" xml:space="preserve">
+    <value>Este Mes</value>
+  </data>
+  <data name="Last7Days" xml:space="preserve">
+    <value>Últimos 7 Días</value>
+  </data>
+  <data name="Last30Days" xml:space="preserve">
+    <value>Últimos 30 Días</value>
+  </data>
+  <data name="ApplyFilters" xml:space="preserve">
+    <value>Aplicar Filtros</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Limpiar</value>
+  </data>
+  <data name="SearchInDescription" xml:space="preserve">
+    <value>Buscar en descripción...</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Creado</value>
+  </data>
+  <data name="NoLogsFound" xml:space="preserve">
+    <value>No se encontraron logs</value>
+  </data>
+  <data name="NoLogsFoundMessage" xml:space="preserve">
+    <value>Intenta ajustar tus filtros o vuelve más tarde.</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Inicio de Sesión</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cierre de Sesión</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Access" xml:space="preserve">
+    <value>Acceso</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Actualización</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Eliminación</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Creación</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="WelcomeAdmin" xml:space="preserve">
+    <value>Bienvenido, Administrador</value>
+  </data>
+  <data name="AdminDashboardDescription" xml:space="preserve">
+    <value>Panel de control administrativo para gestionar el sistema Hirebot-TFI</value>
+  </data>
+  <data name="CatalogManagementDescription" xml:space="preserve">
+    <value>Administra productos, categorías y contenido del catálogo</value>
+  </data>
+  <data name="LogManagementDescription" xml:space="preserve">
+    <value>Revisa registros del sistema y actividad de usuarios</value>
+  </data>
+  <data name="SystemOverview" xml:space="preserve">
+    <value>Resumen del Sistema</value>
+  </data>
+  <data name="SystemOverviewDescription" xml:space="preserve">
+    <value>Estadísticas generales y estado del sistema</value>
+  </data>
+  <data name="ManageCatalog" xml:space="preserve">
+    <value>Gestionar Catálogo</value>
+  </data>
+  <data name="ViewLogs" xml:space="preserve">
+    <value>Ver Registros</value>
+  </data>
+  <data name="TotalUsers" xml:space="preserve">
+    <value>Total Usuarios</value>
+  </data>
+  <data name="TotalProducts" xml:space="preserve">
+    <value>Total Productos</value>
+  </data>
+  <data name="LastLogin" xml:space="preserve">
+    <value>Último Acceso</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>No se encontraron registros</value>
+  </data>
+  <data name="NoRecordsFoundMessage" xml:space="preserve">
+    <value>No hay datos disponibles para mostrar en este momento.</value>
+  </data>
+  <data name="Showing" xml:space="preserve">
+    <value>Mostrando</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="Records" xml:space="preserve">
+    <value>registros</value>
+  </data>
+  <data name="RecordsPerPage" xml:space="preserve">
+    <value>Registros por página</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comentarios</value>
+  </data>
+  <data name="AddComment" xml:space="preserve">
+    <value>Agregar Comentario</value>
+  </data>
+  <data name="WriteComment" xml:space="preserve">
+    <value>Escribe tu comentario...</value>
+  </data>
+  <data name="PostComment" xml:space="preserve">
+    <value>Publicar Comentario</value>
+  </data>
+  <data name="EditComment" xml:space="preserve">
+    <value>Editar Comentario</value>
+  </data>
+  <data name="DeleteComment" xml:space="preserve">
+    <value>Eliminar Comentario</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Calificación</value>
+  </data>
+  <data name="RateProduct" xml:space="preserve">
+    <value>Calificar producto</value>
+  </data>
+  <data name="NoComments" xml:space="preserve">
+    <value>Sin comentarios</value>
+  </data>
+  <data name="NoCommentsMessage" xml:space="preserve">
+    <value>Sé el primero en comentar este producto.</value>
+  </data>
+  <data name="CommentAddedSuccess" xml:space="preserve">
+    <value>Comentario agregado exitosamente.</value>
+  </data>
+  <data name="CommentUpdatedSuccess" xml:space="preserve">
+    <value>Comentario actualizado exitosamente.</value>
+  </data>
+  <data name="CommentDeletedSuccess" xml:space="preserve">
+    <value>Comentario eliminado exitosamente.</value>
+  </data>
+  <data name="CommentError" xml:space="preserve">
+    <value>Error al procesar el comentario. Intenta nuevamente.</value>
+  </data>
+  <data name="CommentCreationFailed" xml:space="preserve">
+    <value>Error al crear el comentario</value>
+  </data>
+  <data name="CommentRequired" xml:space="preserve">
+    <value>El comentario es obligatorio.</value>
+  </data>
+  <data name="CommentTooLong" xml:space="preserve">
+    <value>El comentario no puede exceder los 1000 caracteres.</value>
+  </data>
+  <data name="LoginToComment" xml:space="preserve">
+    <value>Inicia sesión para comentar</value>
+  </data>
+  <data name="LoginToCommentMessage" xml:space="preserve">
+    <value>Debes iniciar sesión para poder agregar comentarios y calificaciones.</value>
+  </data>
+  <data name="ShowAllComments" xml:space="preserve">
+    <value>Ver todos los comentarios</value>
+  </data>
+  <data name="ShowLessComments" xml:space="preserve">
+    <value>Ver menos comentarios</value>
+  </data>
+  <data name="CommentBy" xml:space="preserve">
+    <value>Por</value>
+  </data>
+  <data name="CommentOn" xml:space="preserve">
+    <value>el</value>
+  </data>
+  <data name="Stars" xml:space="preserve">
+    <value>estrellas</value>
+  </data>
+  <data name="AverageRating" xml:space="preserve">
+    <value>Calificación promedio</value>
+  </data>
+  <data name="BasedOnReviews" xml:space="preserve">
+    <value>basado en {0} reseñas</value>
+  </data>
+  <data name="ConfirmDeleteComment" xml:space="preserve">
+    <value>¿Estás seguro de que deseas eliminar este comentario?</value>
+  </data>
+  <data name="CommentTooShort" xml:space="preserve">
+    <value>El comentario debe tener al menos 10 caracteres.</value>
+  </data>
+  <data name="CommentPendingApproval" xml:space="preserve">
+    <value>Comentario agregado exitosamente. Será visible después de la moderación.</value>
+  </data>
+  <data name="MainNavigation" xml:space="preserve">
+    <value>Navegación Principal</value>
+  </data>
+  <data name="SystemManagement" xml:space="preserve">
+    <value>Gestión del Sistema</value>
+  </data>
+  <data name="CommentApproval" xml:space="preserve">
+    <value>Aprobación de Comentarios</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>Administrador</value>
+  </data>
+  <data name="SystemAdmin" xml:space="preserve">
+    <value>Admin del Sistema</value>
+  </data>
+  
+  <!-- Email Service Localization Keys -->
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Todos los derechos reservados</value>
+  </data>
+  <data name="VisitWebsite" xml:space="preserve">
+    <value>Visitar Sitio Web</value>
+  </data>
+  
+  <!-- Password Recovery Email -->
+  <data name="PasswordRecoverySubject" xml:space="preserve">
+    <value>Recuperación de Contraseña - Hirebot TFI</value>
+  </data>
+  <data name="PasswordRecoveryTitle" xml:space="preserve">
+    <value>Recuperación de Contraseña</value>
+  </data>
+  <data name="PasswordRecoveryGreeting" xml:space="preserve">
+    <value>Hola {0},</value>
+  </data>
+  <data name="PasswordRecoveryGreetingGeneric" xml:space="preserve">
+    <value>Hola,</value>
+  </data>
+  <data name="PasswordRecoveryMessage" xml:space="preserve">
+    <value>Hemos recibido una solicitud para restablecer tu contraseña. Si no solicitaste este cambio, puedes ignorar este email con seguridad.</value>
+  </data>
+  <data name="PasswordRecoveryInstructions" xml:space="preserve">
+    <value>Para restablecer tu contraseña, haz clic en el botón de abajo. Este enlace es válido por 24 horas por razones de seguridad.</value>
+  </data>
+  <data name="PasswordRecoveryExpiration" xml:space="preserve">
+    <value>Este enlace expirará en 24 horas por tu seguridad.</value>
+  </data>
+  <data name="PasswordRecoveryDisclaimer" xml:space="preserve">
+    <value>Si no solicitaste restablecer tu contraseña, puedes ignorar este email. Tu contraseña no será cambiada.</value>
+  </data>
+  <data name="ResetPasswordButton" xml:space="preserve">
+    <value>Restablecer Contraseña</value>
+  </data>
+  
+  <!-- Password Change Confirmation Email -->
+  <data name="PasswordChangeConfirmationSubject" xml:space="preserve">
+    <value>Confirmación de Cambio de Contraseña - Hirebot TFI</value>
+  </data>
+  <data name="PasswordChangeConfirmationTitle" xml:space="preserve">
+    <value>Contraseña Cambiada Exitosamente</value>
+  </data>
+  <data name="PasswordChangeConfirmationGreeting" xml:space="preserve">
+    <value>Hola {0},</value>
+  </data>
+  <data name="PasswordChangeConfirmationGreetingGeneric" xml:space="preserve">
+    <value>Hola,</value>
+  </data>
+  <data name="PasswordChangeConfirmationMessage" xml:space="preserve">
+    <value>Tu contraseña ha sido cambiada exitosamente. Si realizaste este cambio, no necesitas hacer nada más.</value>
+  </data>
+  <data name="PasswordChangeConfirmationSecurity" xml:space="preserve">
+    <value>Si no realizaste este cambio, contacta inmediatamente a nuestro equipo de soporte para proteger tu cuenta.</value>
+  </data>
+  <data name="PasswordChangeConfirmationContact" xml:space="preserve">
+    <value>Si tienes alguna pregunta o inquietud, no dudes en contactarnos en cualquier momento.</value>
+  </data>
+  
+  <!-- Welcome Email -->
+  <data name="WelcomeEmailSubject" xml:space="preserve">
+    <value>¡Bienvenido a Hirebot TFI!</value>
+  </data>
+  <data name="WelcomeEmailTitle" xml:space="preserve">
+    <value>¡Bienvenido a Bordo!</value>
+  </data>
+  <data name="WelcomeEmailGreeting" xml:space="preserve">
+    <value>¡Hola {0}!</value>
+  </data>
+  <data name="WelcomeEmailGreetingGeneric" xml:space="preserve">
+    <value>¡Hola!</value>
+  </data>
+  <data name="WelcomeEmailMessage" xml:space="preserve">
+    <value>¡Nos complace darte la bienvenida a {0}! Tu cuenta ha sido creada exitosamente y ya puedes comenzar a explorar todas nuestras funcionalidades.</value>
+  </data>
+  <data name="WelcomeEmailFeatures" xml:space="preserve">
+    <value>Con tu nueva cuenta puedes:</value>
+  </data>
+  <data name="WelcomeEmailFeature1" xml:space="preserve">
+    <value>Explorar nuestro catálogo de productos</value>
+  </data>
+  <data name="WelcomeEmailFeature2" xml:space="preserve">
+    <value>Dejar comentarios y calificaciones</value>
+  </data>
+  <data name="WelcomeEmailFeature3" xml:space="preserve">
+    <value>Acceder a características exclusivas para usuarios registrados</value>
+  </data>
+  <data name="WelcomeEmailSupport" xml:space="preserve">
+    <value>Si tienes alguna pregunta o necesitas ayuda, nuestro equipo de soporte está aquí para ayudarte.</value>
+  </data>
+  <data name="GetStartedButton" xml:space="preserve">
+    <value>Comenzar</value>
+  </data>
+  
+  <!-- Password Recovery Localization Keys -->
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>¿Olvidaste tu contraseña?</value>
+  </data>
+  <data name="PasswordRecovery" xml:space="preserve">
+    <value>Recuperar Contraseña</value>
+  </data>
+  <data name="EnterEmailForRecovery" xml:space="preserve">
+    <value>Ingresa tu correo electrónico o nombre de usuario para recuperar tu contraseña</value>
+  </data>
+  <data name="SendRecoveryEmail" xml:space="preserve">
+    <value>Enviar correo de recuperación</value>
+  </data>
+  <data name="EmailOrUsernameForRecovery" xml:space="preserve">
+    <value>Correo electrónico o nombre de usuario</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirmar nueva contraseña</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Restablecer contraseña</value>
+  </data>
+  <data name="PasswordResetSuccess" xml:space="preserve">
+    <value>Tu contraseña ha sido restablecida exitosamente. Ya puedes iniciar sesión con tu nueva contraseña.</value>
+  </data>
+  <data name="RecoveryEmailSent" xml:space="preserve">
+    <value>Si el correo electrónico o usuario existe en nuestro sistema, recibirás un mensaje con instrucciones para restablecer tu contraseña.</value>
+  </data>
+  <data name="TokenExpired" xml:space="preserve">
+    <value>El enlace de recuperación ha expirado. Por favor solicita un nuevo enlace.</value>
+  </data>
+  <data name="TokenInvalid" xml:space="preserve">
+    <value>El enlace de recuperación no es válido. Por favor solicita un nuevo enlace.</value>
+  </data>
+  <data name="TokenAlreadyUsed" xml:space="preserve">
+    <value>Este enlace de recuperación ya ha sido utilizado. Por favor solicita un nuevo enlace si necesitas restablecer tu contraseña nuevamente.</value>
+  </data>
+  <data name="PasswordResetError" xml:space="preserve">
+    <value>Ocurrió un error al restablecer la contraseña. Por favor intenta nuevamente.</value>
+  </data>
+  <data name="RecoveryRequestError" xml:space="preserve">
+    <value>Ocurrió un error al procesar tu solicitud. Por favor intenta nuevamente.</value>
+  </data>
+  <data name="EnterNewPassword" xml:space="preserve">
+    <value>Ingresa tu nueva contraseña</value>
+  </data>
+  <data name="ConfirmYourNewPassword" xml:space="preserve">
+    <value>Confirma tu nueva contraseña</value>
+  </data>
+  <data name="EnterEmailOrUsername" xml:space="preserve">
+    <value>Ingresa tu correo o usuario</value>
+  </data>
+  <data name="BackToSignIn" xml:space="preserve">
+    <value>Volver al inicio de sesión</value>
+  </data>
+  <data name="PasswordRecoveryTitle" xml:space="preserve">
+    <value>Recuperar tu contraseña</value>
+  </data>
+  <data name="PasswordResetTitle" xml:space="preserve">
+    <value>Restablecer tu contraseña</value>
+  </data>
+  <data name="PasswordRecoveryEmailSent" xml:space="preserve">
+    <value>Si existe una cuenta asociada con ese email o nombre de usuario, recibirás un enlace para restablecer tu contraseña</value>
+  </data>
+  <data name="PasswordRecoveryError" xml:space="preserve">
+    <value>Ocurrió un error durante la recuperación de contraseña. Por favor intenta nuevamente</value>
+  </data>
+  <data name="InvalidRecoveryToken" xml:space="preserve">
+    <value>El enlace de recuperación es inválido o ha expirado</value>
+  </data>
+  <data name="RecoveryTokenExpired" xml:space="preserve">
+    <value>El enlace de recuperación ha expirado. Por favor solicita uno nuevo</value>
+  </data>
+  <data name="RecoveryTokenUsed" xml:space="preserve">
+    <value>Este enlace de recuperación ya ha sido usado. Por favor solicita uno nuevo si necesitas restablecer tu contraseña nuevamente</value>
+  </data>
+  <data name="NewPasswordRequired" xml:space="preserve">
+    <value>La nueva contraseña es obligatoria</value>
+  </data>
+  <data name="ConfirmNewPasswordRequired" xml:space="preserve">
+    <value>La confirmación de contraseña es obligatoria</value>
+  </data>
+  <data name="NewPasswordsDoNotMatch" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+  <data name="EmailOrUsernameRequired" xml:space="preserve">
+    <value>El correo electrónico o nombre de usuario son obligatorios</value>
+  </data>
+  <!-- Organization Management Resources -->
+  <data name="Organizations" xml:space="preserve">
+    <value>Organizaciones</value>
+  </data>
+  <data name="MyOrganizations" xml:space="preserve">
+    <value>Mis Organizaciones</value>
+  </data>
+  <data name="OrganizationAdmin" xml:space="preserve">
+    <value>Administración de Organizaciones</value>
+  </data>
+  <data name="OrganizationDashboard" xml:space="preserve">
+    <value>Panel de Organización</value>
+  </data>
+  <data name="OrganizationName" xml:space="preserve">
+    <value>Nombre de la Organización</value>
+  </data>
+  <data name="OrganizationSlug" xml:space="preserve">
+    <value>Slug de la Organización</value>
+  </data>
+  <data name="OrganizationDescription" xml:space="preserve">
+    <value>Descripción de la Organización</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Propietario</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Miembros</value>
+  </data>
+  <data name="MemberCount" xml:space="preserve">
+    <value>Número de Miembros</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rol</value>
+  </data>
+  <data name="Member" xml:space="preserve">
+    <value>Miembro</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Administrador</value>
+  </data>
+  <data name="OrganizationAdmin" xml:space="preserve">
+    <value>Administrador de Organización</value>
+  </data>
+  <data name="CreateOrganization" xml:space="preserve">
+    <value>Crear Organización</value>
+  </data>
+  <data name="EditOrganization" xml:space="preserve">
+    <value>Editar Organización</value>
+  </data>
+  <data name="DeleteOrganization" xml:space="preserve">
+    <value>Eliminar Organización</value>
+  </data>
+  <data name="ViewOrganization" xml:space="preserve">
+    <value>Ver Organización</value>
+  </data>
+  <data name="ManageOrganization" xml:space="preserve">
+    <value>Gestionar Organización</value>
+  </data>
+  <data name="ManageMembers" xml:space="preserve">
+    <value>Gestionar Miembros</value>
+  </data>
+  <data name="AddMember" xml:space="preserve">
+    <value>Agregar Miembro</value>
+  </data>
+  <data name="RemoveMember" xml:space="preserve">
+    <value>Eliminar Miembro</value>
+  </data>
+  <data name="UpdateRole" xml:space="preserve">
+    <value>Actualizar Rol</value>
+  </data>
+  <data name="JoinOrganization" xml:space="preserve">
+    <value>Unirse a la Organización</value>
+  </data>
+  <data name="LeaveOrganization" xml:space="preserve">
+    <value>Salir de la Organización</value>
+  </data>
+  <data name="OrganizationDetails" xml:space="preserve">
+    <value>Detalles de la Organización</value>
+  </data>
+  <data name="OrganizationStatistics" xml:space="preserve">
+    <value>Estadísticas de la Organización</value>
+  </data>
+  <data name="AllOrganizations" xml:space="preserve">
+    <value>Todas las Organizaciones</value>
+  </data>
+  <data name="NoOrganizations" xml:space="preserve">
+    <value>No hay organizaciones disponibles</value>
+  </data>
+  <data name="NoMembers" xml:space="preserve">
+    <value>No hay miembros en esta organización</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Fecha de Creación</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>Fecha de Modificación</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactivo</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="SearchOrganizations" xml:space="preserve">
+    <value>Buscar organizaciones...</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>Ahora</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Cargando...</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Procesando...</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Éxito</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Advertencia</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notificación</value>
+  </data>
+  <!-- Organization Validation Messages -->
+  <data name="OrganizationNameRequired" xml:space="preserve">
+    <value>El nombre de la organización es obligatorio</value>
+  </data>
+  <data name="OrganizationSlugRequired" xml:space="preserve">
+    <value>El slug de la organización es obligatorio</value>
+  </data>
+  <data name="OrganizationNameMinLength" xml:space="preserve">
+    <value>El nombre debe tener al menos 2 caracteres</value>
+  </data>
+  <data name="OrganizationNameMaxLength" xml:space="preserve">
+    <value>El nombre no puede exceder 100 caracteres</value>
+  </data>
+  <data name="OrganizationSlugMinLength" xml:space="preserve">
+    <value>El slug debe tener al menos 3 caracteres</value>
+  </data>
+  <data name="OrganizationSlugMaxLength" xml:space="preserve">
+    <value>El slug no puede exceder 50 caracteres</value>
+  </data>
+  <data name="OrganizationSlugInvalid" xml:space="preserve">
+    <value>El slug solo puede contener letras, números y guiones</value>
+  </data>
+  <data name="OrganizationDescriptionMaxLength" xml:space="preserve">
+    <value>La descripción no puede exceder 500 caracteres</value>
+  </data>
+  <data name="OwnerRequired" xml:space="preserve">
+    <value>El propietario es obligatorio</value>
+  </data>
+  <data name="RoleRequired" xml:space="preserve">
+    <value>El rol es obligatorio</value>
+  </data>
+  <!-- Organization Success Messages -->
+  <data name="OrganizationCreatedSuccess" xml:space="preserve">
+    <value>Organización creada exitosamente</value>
+  </data>
+  <data name="OrganizationUpdatedSuccess" xml:space="preserve">
+    <value>Organización actualizada exitosamente</value>
+  </data>
+  <data name="OrganizationDeletedSuccess" xml:space="preserve">
+    <value>Organización eliminada exitosamente</value>
+  </data>
+  <data name="MemberAddedSuccess" xml:space="preserve">
+    <value>Miembro agregado exitosamente</value>
+  </data>
+  <data name="MemberRemovedSuccess" xml:space="preserve">
+    <value>Miembro eliminado exitosamente</value>
+  </data>
+  <data name="MemberRoleUpdatedSuccess" xml:space="preserve">
+    <value>Rol del miembro actualizado exitosamente</value>
+  </data>
+  <data name="JoinedOrganizationSuccess" xml:space="preserve">
+    <value>Te has unido a la organización exitosamente</value>
+  </data>
+  <data name="LeftOrganizationSuccess" xml:space="preserve">
+    <value>Has salido de la organización exitosamente</value>
+  </data>
+  <!-- Organization Error Messages -->
+  <data name="OrganizationNotFound" xml:space="preserve">
+    <value>Organización no encontrada</value>
+  </data>
+  <data name="OrganizationAccessDenied" xml:space="preserve">
+    <value>No tienes permisos para acceder a esta organización</value>
+  </data>
+  <data name="OrganizationSlugExists" xml:space="preserve">
+    <value>Ya existe una organización con este slug</value>
+  </data>
+  <data name="InvalidOrganizationData" xml:space="preserve">
+    <value>Los datos de la organización no son válidos</value>
+  </data>
+  <data name="CannotDeleteOrganizationWithMembers" xml:space="preserve">
+    <value>No se puede eliminar una organización con miembros</value>
+  </data>
+  <data name="MemberAlreadyExists" xml:space="preserve">
+    <value>El usuario ya es miembro de esta organización</value>
+  </data>
+  <data name="MemberNotFound" xml:space="preserve">
+    <value>Miembro no encontrado</value>
+  </data>
+  <data name="CannotRemoveOwner" xml:space="preserve">
+    <value>No se puede eliminar al propietario de la organización</value>
+  </data>
+  <data name="InsufficientPermissions" xml:space="preserve">
+    <value>Permisos insuficientes para realizar esta acción</value>
+  </data>
+  <!-- Organization Confirmation Messages -->
+  <data name="ConfirmDeleteOrganization" xml:space="preserve">
+    <value>¿Estás seguro de que deseas eliminar esta organización? Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="ConfirmRemoveMember" xml:space="preserve">
+    <value>¿Estás seguro de que deseas eliminar este miembro de la organización?</value>
+  </data>
+  <data name="ConfirmLeaveOrganization" xml:space="preserve">
+    <value>¿Estás seguro de que deseas salir de esta organización?</value>
+  </data>
+  <!-- Organization Placeholders -->
+  <data name="EnterOrganizationName" xml:space="preserve">
+    <value>Ingresa el nombre de la organización</value>
+  </data>
+  <data name="EnterOrganizationSlug" xml:space="preserve">
+    <value>Ingresa el slug de la organización</value>
+  </data>
+  <data name="EnterOrganizationDescription" xml:space="preserve">
+    <value>Ingresa la descripción de la organización (opcional)</value>
+  </data>
+  <data name="SelectOwner" xml:space="preserve">
+    <value>Selecciona un propietario</value>
+  </data>
+  <data name="SelectMember" xml:space="preserve">
+    <value>Selecciona un miembro</value>
+  </data>
+  <data name="SelectRole" xml:space="preserve">
+    <value>Selecciona un rol</value>
+  </data>
+  <!-- Additional MyOrganizations Resources -->
+  <data name="OwnedOrganizations" xml:space="preserve">
+    <value>Organizaciones que Posees</value>
+  </data>
+  <data name="ManagedOrganizations" xml:space="preserve">
+    <value>Organizaciones que Administras</value>
+  </data>
+  <data name="MemberOfOrganizations" xml:space="preserve">
+    <value>Organizaciones de las que Eres Miembro</value>
+  </data>
+  <data name="YouHaveFullAccess" xml:space="preserve">
+    <value>Tienes acceso completo</value>
+  </data>
+  <data name="YouCanManageMembers" xml:space="preserve">
+    <value>Puedes gestionar miembros</value>
+  </data>
+  <data name="YouAreAMember" xml:space="preserve">
+    <value>Eres un miembro</value>
+  </data>
+  <data name="QuickActions" xml:space="preserve">
+    <value>Acciones Rápidas</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>Ver Detalles</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Gestionar</value>
+  </data>
+  <data name="MyOrganizationsDashboard" xml:space="preserve">
+    <value>Panel de Mis Organizaciones</value>
+  </data>
+  <data name="ManageYourOrganizations" xml:space="preserve">
+    <value>Gestiona todas las organizaciones en las que participas</value>
+  </data>
+  <data name="OrganizationRole" xml:space="preserve">
+    <value>Rol en la Organización</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Propietario</value>
+  </data>
+  <data name="OrganizationAdministrator" xml:space="preserve">
+    <value>Administrador de Organización</value>
+  </data>
+  <data name="RegularMember" xml:space="preserve">
+    <value>Miembro Regular</value>
+  </data>
+  <data name="NoOrganizationAccess" xml:space="preserve">
+    <value>No perteneces a ninguna organización aún</value>
+  </data>
+  <data name="CreateOrJoinOrganization" xml:space="preserve">
+    <value>Crea una nueva organización o únete a una existente para comenzar</value>
+  </data>
+  <data name="ContactAdminToCreateOrganization" xml:space="preserve">
+    <value>Contacta al administrador para crear una nueva organización</value>
+  </data>
+  <data name="ManageAllOrganizations" xml:space="preserve">
+    <value>Administra todas las organizaciones del sistema desde este panel. Puedes crear, editar y supervisar organizaciones y sus miembros.</value>
+  </data>
+  <data name="PageSize" xml:space="preserve">
+    <value>Tamaño de página</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="CreateFirstOrganization" xml:space="preserve">
+    <value>Crea tu primera organización para comenzar</value>
+  </data>
+  <data name="SlugHelpText" xml:space="preserve">
+    <value>Solo letras, números y guiones. Se usará en la URL de la organización.</value>
+  </data>
+  <data name="Characters" xml:space="preserve">
+    <value>caracteres</value>
+  </data>
+  <data name="AddFirstMember" xml:space="preserve">
+    <value>Agregar primer miembro</value>
+  </data>
+  <data name="Administrators" xml:space="preserve">
+    <value>Administradores</value>
+  </data>
+  <data name="Admins" xml:space="preserve">
+    <value>Admins</value>
+  </data>
+  <data name="AlreadyMember" xml:space="preserve">
+    <value>Ya eres miembro</value>
+  </data>
+  <data name="BeFirstToJoin" xml:space="preserve">
+    <value>Sé el primero en unirte</value>
+  </data>
+  <data name="Established" xml:space="preserve">
+    <value>Fundada</value>
+  </data>
+  <data name="JoinOrganizationDescription" xml:space="preserve">
+    <value>Únete a esta organización para acceder a sus recursos y colaborar con otros miembros</value>
+  </data>
+  <data name="JoinThisOrganization" xml:space="preserve">
+    <value>Unirse a esta organización</value>
+  </data>
+  <data name="JoinToViewMembers" xml:space="preserve">
+    <value>Únete para ver los miembros</value>
+  </data>
+  <data name="JoinedOn" xml:space="preserve">
+    <value>Se unió el</value>
+  </data>
+  <data name="ManageMembersDescription" xml:space="preserve">
+    <value>Administra los miembros de la organización y sus roles</value>
+  </data>
+  <data name="MembersListPrivate" xml:space="preserve">
+    <value>La lista de miembros es privada</value>
+  </data>
+  <data name="OrganizationMembers" xml:space="preserve">
+    <value>Miembros de la organización</value>
+  </data>
+  <data name="OrganizationSettings" xml:space="preserve">
+    <value>Configuración de la organización</value>
+  </data>
+  <data name="OwnerCannotBeChanged" xml:space="preserve">
+    <value>El propietario no puede ser cambiado</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Seleccionar usuario</value>
+  </data>
+  <data name="TotalMembers" xml:space="preserve">
+    <value>Total de miembros</value>
+  </data>
+  <data name="UserRequired" xml:space="preserve">
+    <value>Usuario requerido</value>
+  </data>
+  <data name="YourRole" xml:space="preserve">
+    <value>Tu rol</value>
+  </data>
+  <data name="Catalog" xml:space="preserve">
+    <value>Catálogo</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Guardar cambios</value>
+  </data>
+  <data name="DetailedAnalytics" xml:space="preserve">
+    <value>Análisis detallado</value>
+  </data>
+  <data name="QuickStats" xml:space="preserve">
+    <value>Estadísticas rápidas</value>
+  </data>
+  <data name="UpdateOrgDetails" xml:space="preserve">
+    <value>Actualizar detalles de la organización</value>
+  </data>
+  <data name="ViewStatistics" xml:space="preserve">
+    <value>Ver estadísticas</value>
+  </data>
+  <data name="SelectOwner" xml:space="preserve">
+    <value>Seleccionar propietario</value>
+  </data>
+  <data name="NoUsersAvailable" xml:space="preserve">
+    <value>No hay usuarios disponibles</value>
+  </data>
+  <data name="ErrorLoadingUsers" xml:space="preserve">
+    <value>Error al cargar usuarios</value>
+  </data>
+  <data name="ChatbotManagementDescription" xml:space="preserve">
+    <value>Gestiona todos los chatbots del sistema, incluyendo creación, edición, eliminación y asignación organizacional.</value>
+  </data>
+  <data name="SystemManagement" xml:space="preserve">
+    <value>Gestión del Sistema</value>
+  </data>
+  <data name="CommentApproval" xml:space="preserve">
+    <value>Aprobación de Comentarios</value>
+  </data>
+  <data name="AllStatuses" xml:space="preserve">
+    <value>Todos los Estados</value>
+  </data>
+  <data name="SearchChatbots" xml:space="preserve">
+    <value>Buscar por nombre...</value>
+  </data>
+  <data name="NoChatbotsFound" xml:space="preserve">
+    <value>No se encontraron chatbots.</value>
+  </data>
+  <data name="ChatbotInstructionsHelp" xml:space="preserve">
+    <value>Instrucciones que definen el comportamiento y personalidad del chatbot.</value>
+  </data>
+  <data name="ColorHexFormat" xml:space="preserve">
+    <value>Formato hexadecimal (ej: #FF5733)</value>
+  </data>
+  <data name="UnassignedChatbot" xml:space="preserve">
+    <value>Chatbot sin asignar</value>
+  </data>
+  <data name="OrganizationAssignmentHelp" xml:space="preserve">
+    <value>Selecciona la organización a la que pertenecerá este chatbot.</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Asignar</value>
+  </data>
+  <data name="ErrorClearingSearch" xml:space="preserve">
+    <value>Error al limpiar la búsqueda</value>
+  </data>
+  <!-- Forgot Password Page Keys -->
+  <data name="HowItWorks" xml:space="preserve">
+    <value>¿Cómo funciona?</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>¿Olvidaste tu contraseña?</value>
+  </data>
+  <data name="ForgotPasswordSubtitle" xml:space="preserve">
+    <value>No te preocupes, te ayudamos a recuperarla</value>
+  </data>
+  <data name="RecoveryInstructionsShort" xml:space="preserve">
+    <value>Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña de forma segura.</value>
+  </data>
+  <data name="ResetPasswordTitle" xml:space="preserve">
+    <value>Restablecer Contraseña</value>
+  </data>
+  <data name="EmailSent" xml:space="preserve">
+    <value>Correo enviado</value>
+  </data>
+  <!-- Additional Forgot Password Keys -->
+  <data name="EnterEmailOrUsernameHelp" xml:space="preserve">
+    <value>Ingresa tu correo electrónico o nombre de usuario para recuperar el acceso a tu cuenta</value>
+  </data>
+  <data name="NeedMoreHelp" xml:space="preserve">
+    <value>¿Necesitas más ayuda?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>Contactar Soporte</value>
+  </data>
+  <!-- Reset Password Page Keys -->
+  <data name="PasswordResetTitle" xml:space="preserve">
+    <value>Restablecer Contraseña</value>
+  </data>
+  <data name="TokenExpiresSoon" xml:space="preserve">
+    <value>Este enlace expira pronto por tu seguridad</value>
+  </data>
+  <data name="PasswordRequirements" xml:space="preserve">
+    <value>Requisitos de Contraseña</value>
+  </data>
+  <data name="PasswordMustContain" xml:space="preserve">
+    <value>Debe contener letras y números</value>
+  </data>
+  <data name="PasswordSpecialChars" xml:space="preserve">
+    <value>Se recomiendan caracteres especiales</value>
+  </data>
+  <data name="TokenExpiredHelp" xml:space="preserve">
+    <value>Si tu enlace ha expirado o no funciona, puedes solicitar uno nuevo</value>
+  </data>
+  <data name="RequestNewLink" xml:space="preserve">
+    <value>Solicitar nuevo enlace</value>
+  </data>
+  <data name="CanSendAnotherRecoveryEmail" xml:space="preserve">
+    <value>Puedes enviar otro correo de recuperación si es necesario.</value>
+  </data>
+</root>

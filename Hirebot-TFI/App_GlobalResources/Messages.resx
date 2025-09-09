@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Error Messages -->
+  <data name="UsernameOrEmailRequired" xml:space="preserve">
+    <value>El nombre de usuario o correo electrónico son obligatorios.</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>La contraseña es obligatoria.</value>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Usuario/correo o contraseña incorrectos.</value>
+  </data>
+  <data name="AccountInactive" xml:space="preserve">
+    <value>La cuenta está inactiva. Por favor contacta al soporte.</value>
+  </data>
+  <data name="SignInError" xml:space="preserve">
+    <value>Ocurrió un error durante el inicio de sesión. Por favor intenta nuevamente.</value>
+  </data>
+  <data name="RegistrationError" xml:space="preserve">
+    <value>Ocurrió un error durante el registro. Por favor intenta nuevamente.</value>
+  </data>
+  
+  <!-- Validation Messages -->
+  <data name="UsernameMinLength" xml:space="preserve">
+    <value>El nombre de usuario debe tener al menos 3 caracteres.</value>
+  </data>
+  <data name="UsernameMaxLength" xml:space="preserve">
+    <value>El nombre de usuario no puede tener más de 20 caracteres.</value>
+  </data>
+  <data name="UsernameInvalidChars" xml:space="preserve">
+    <value>El nombre de usuario solo puede contener letras, números y guiones bajos.</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Por favor ingresa una dirección de correo válida.</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>La contraseña debe tener al menos 6 caracteres.</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Las contraseñas no coinciden.</value>
+  </data>
+  <data name="FirstNameMinLength" xml:space="preserve">
+    <value>El nombre debe tener al menos 2 caracteres.</value>
+  </data>
+  <data name="LastNameMinLength" xml:space="preserve">
+    <value>El apellido debe tener al menos 2 caracteres.</value>
+  </data>
+  <data name="UserExists" xml:space="preserve">
+    <value>El nombre de usuario o correo electrónico ya existe.</value>
+  </data>
+  <data name="CreateUserFailed" xml:space="preserve">
+    <value>Error al crear la cuenta de usuario. Por favor intenta nuevamente.</value>
+  </data>
+
+  <!-- Success Messages -->
+  <data name="AccountCreatedSuccess" xml:space="preserve">
+    <value>¡Cuenta creada exitosamente! Ya puedes iniciar sesión.</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>¡Bienvenido de nuevo, {0}!</value>
+  </data>
+
+  <!-- Field Requirements -->
+  <data name="AllFieldsRequired" xml:space="preserve">
+    <value>Todos los campos son obligatorios.</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>El nombre de usuario es obligatorio.</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>El correo electrónico es obligatorio.</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>El nombre es obligatorio.</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>El apellido es obligatorio.</value>
+  </data>
+</root>

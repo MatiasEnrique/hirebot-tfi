@@ -1,0 +1,147 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Protected.master.cs" Inherits="Hirebot_TFI.Protected" %>
+<%@ Register Src="~/Controls/LanguageSelector.ascx" TagPrefix="uc" TagName="LanguageSelector" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server">
+            Hirebot-TFI
+        </asp:ContentPlaceHolder>
+    </title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        :root {
+            --eerie-black: #222222;
+            --ultra-violet: #4b4e6d;
+            --tiffany-blue: #84dcc6;
+            --cadet-gray: #95a3b3;
+            --white: #ffffff;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .navbar { 
+            background-color: var(--eerie-black) !important; 
+        }
+        
+        .btn-primary { 
+            background-color: var(--ultra-violet); 
+            border-color: var(--ultra-violet); 
+        }
+        
+        .btn-primary:hover { 
+            background-color: var(--tiffany-blue); 
+            border-color: var(--tiffany-blue); 
+            color: var(--eerie-black); 
+        }
+        
+        .btn-success { 
+            background-color: var(--tiffany-blue); 
+            border-color: var(--tiffany-blue); 
+            color: var(--eerie-black); 
+        }
+        
+        .btn-success:hover { 
+            background-color: var(--cadet-gray); 
+            border-color: var(--cadet-gray); 
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        
+        .welcome-header {
+            background: var(--ultra-violet);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 1rem;
+                margin: 1rem auto;
+                border-radius: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .content-card {
+                padding: 1rem;
+                margin: 0.5rem auto;
+            }
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="Dashboard.aspx">
+                    <i class="fas fa-robot me-2"></i>Hirebot-TFI
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="Dashboard.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Dashboard %>" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Catalog %>" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="MyOrganizations.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" /></a>
+                        </li>
+                        <asp:Panel ID="pnlAdminNavigation" runat="server" Visible="false">
+                            <li class="nav-item">
+                                <a class="nav-link" href="OrganizationAdmin.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" /></a>
+                            </li>
+                        </asp:Panel>
+                        <asp:ContentPlaceHolder ID="NavigationContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </ul>
+                    
+                    <ul class="navbar-nav">
+                        <uc:LanguageSelector ID="ucLanguageSelector" runat="server" />
+                        <li class="nav-item">
+                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="nav-link" OnClick="btnLogout_Click">
+                                <i class="fas fa-sign-out-alt me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignOut %>" />
+                            </asp:LinkButton>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid mt-4">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
