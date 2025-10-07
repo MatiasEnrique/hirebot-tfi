@@ -33,6 +33,13 @@ namespace Hirebot_TFI
                     lblEmail.Text = currentUser.Email;
                     lblFirstName.Text = currentUser.FirstName;
                     lblLastName.Text = currentUser.LastName;
+
+                    // Survey control loads automatically through its own Page_Load
+                    // The SurveyDisplay user control is already on the page and will:
+                    // 1. Call SurveySecurity.GetActiveSurveyForCurrentUser() in its Page_Load
+                    // 2. Automatically display the survey if one is available
+                    // 3. Hide itself if no survey is available or user already responded
+                    // No explicit initialization needed from Dashboard
                 }
                 else
                 {
@@ -49,24 +56,24 @@ namespace Hirebot_TFI
         protected void btnProfile_Click(object sender, EventArgs e)
         {
             // TODO: Redirect to profile page when implemented
-            ShowMessage("Profile management coming soon!");
+            ShowMessage("ProfileComingSoon");
         }
 
         protected void btnJobs_Click(object sender, EventArgs e)
         {
             // TODO: Redirect to jobs page when implemented
-            ShowMessage("Job browsing coming soon!");
+            ShowMessage("JobsComingSoon");
         }
 
         protected void btnChat_Click(object sender, EventArgs e)
         {
-            ShowMessage("Hirebot chat coming soon!");
+            ShowMessage("ChatComingSoon");
         }
 
-        private void ShowMessage(string message)
+        private void ShowMessage(string resourceKey)
         {
-            // Simple JavaScript alert for now
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+            var message = HttpContext.GetGlobalResourceObject("GlobalResources", resourceKey) as string ?? resourceKey;
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{HttpUtility.JavaScriptStringEncode(message)}');", true);
         }
     }
 }

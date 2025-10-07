@@ -218,6 +218,9 @@ namespace ABSTRACTIONS
         public DateTime? LastCommentDate { get; set; }
         
         // Legacy properties for backward compatibility
-        public int TotalRatedComments => CommentsWithRating;
+        public int TotalRatedComments
+        {
+            get { return CommentsWithRating; }
+        }
     }
 }

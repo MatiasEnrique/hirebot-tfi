@@ -104,17 +104,35 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="Dashboard.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Dashboard %>" /></a>
+                            <a id="lnkDashboard" runat="server" class="nav-link" href="Dashboard.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Dashboard %>" /></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Catalog %>" /></a>
+                            <a id="lnkAccount" runat="server" class="nav-link" href="Account.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AccountNav %>" /></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="MyOrganizations.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" /></a>
+                            <a id="lnkCatalog" runat="server" class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Catalog %>" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkSubscriptions" runat="server" class="nav-link" href="Subscriptions.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SubscriptionsNav %>" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkOrganizations" runat="server" class="nav-link" href="MyOrganizations.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" /></a>
                         </li>
                         <asp:Panel ID="pnlAdminNavigation" runat="server" Visible="false">
                             <li class="nav-item">
-                                <a class="nav-link" href="OrganizationAdmin.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" /></a>
+                                <a id="lnkAdminOrganizations" runat="server" class="nav-link" href="OrganizationAdmin.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" /></a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="lnkAdminNews" runat="server" class="nav-link" href="AdminNews.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagementNav %>" /></a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="lnkAdminSurveys" runat="server" class="nav-link" href="AdminSurveys.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SurveyManagementNav %>" /></a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="lnkAdminBilling" runat="server" class="nav-link" href="AdminBilling.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BillingManagementNav %>" /></a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="lnkAdminReports" runat="server" class="nav-link" href="AdminReports.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AdminReportsNav %>" /></a>
                             </li>
                         </asp:Panel>
                         <asp:ContentPlaceHolder ID="NavigationContent" runat="server">

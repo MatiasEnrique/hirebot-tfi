@@ -172,19 +172,6 @@ namespace Hirebot_TFI
             txtConfirmNewPassword.Attributes["placeholder"] = GetLocalizedString("ConfirmYourNewPassword");
         }
 
-        protected void btnSpanish_Click(object sender, EventArgs e)
-        {
-            Session["Language"] = "es";
-            Response.Redirect(Request.Url.ToString());
-        }
-
-        protected void btnEnglish_Click(object sender, EventArgs e)
-        {
-            Session["Language"] = "en";
-            Response.Redirect(Request.Url.ToString());
-        }
-        
-        
         protected void btnResetPassword_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid)

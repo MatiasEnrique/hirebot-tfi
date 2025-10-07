@@ -198,6 +198,189 @@
   <data name="SignUpHere" xml:space="preserve">
     <value>Sign up here</value>
   </data>
+  <data name="AdminReportsTitle" xml:space="preserve">
+    <value>Admin Reports</value>
+  </data>
+  <data name="AdminReportsHeading" xml:space="preserve">
+    <value>Administrative Reports</value>
+  </data>
+  <data name="AdminReportsYearFilter" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="AdminReportsYearHint" xml:space="preserve">
+    <value>Enter a year between 2000 and 2100.</value>
+  </data>
+  <data name="AdminReportsSortLabel" xml:space="preserve">
+    <value>Month order</value>
+  </data>
+  <data name="AdminReportsSortAscending" xml:space="preserve">
+    <value>Oldest first</value>
+  </data>
+  <data name="AdminReportsSortDescending" xml:space="preserve">
+    <value>Newest first</value>
+  </data>
+  <data name="AdminReportsApplyFilters" xml:space="preserve">
+    <value>Apply filters</value>
+  </data>
+  <data name="AdminReportsBillingSummary" xml:space="preserve">
+    <value>Billing summary</value>
+  </data>
+  <data name="AdminReportsBillingTotalDocuments" xml:space="preserve">
+    <value>Total documents</value>
+  </data>
+  <data name="AdminReportsBillingPaidDocuments" xml:space="preserve">
+    <value>Paid documents</value>
+  </data>
+  <data name="AdminReportsBillingOutstandingDocuments" xml:space="preserve">
+    <value>Outstanding documents</value>
+  </data>
+  <data name="AdminReportsBillingCancelledDocuments" xml:space="preserve">
+    <value>Cancelled documents</value>
+  </data>
+  <data name="AdminReportsBillingTotalAmount" xml:space="preserve">
+    <value>Total amount</value>
+  </data>
+  <data name="AdminReportsBillingPaidAmount" xml:space="preserve">
+    <value>Paid amount</value>
+  </data>
+  <data name="AdminReportsBillingOutstandingAmount" xml:space="preserve">
+    <value>Outstanding amount</value>
+  </data>
+  <data name="AdminReportsBillingAverageAmount" xml:space="preserve">
+    <value>Average invoice amount</value>
+  </data>
+  <data name="AdminReportsBillingLastUpdated" xml:space="preserve">
+    <value>Last updated</value>
+  </data>
+  <data name="AdminReportsBillingChartTitle" xml:space="preserve">
+    <value>Monthly billing performance</value>
+  </data>
+  <data name="AdminReportsBillingTableTitle" xml:space="preserve">
+    <value>Monthly billing breakdown</value>
+  </data>
+  <data name="AdminReportsBillingTableMonth" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="AdminReportsBillingTableTotalDocs" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="AdminReportsBillingTablePaidDocs" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="AdminReportsBillingTableOutstandingDocs" xml:space="preserve">
+    <value>Outstanding</value>
+  </data>
+  <data name="AdminReportsBillingTableCancelledDocs" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="AdminReportsBillingTableTotalAmount" xml:space="preserve">
+    <value>Total amount</value>
+  </data>
+  <data name="AdminReportsBillingTablePaidAmount" xml:space="preserve">
+    <value>Paid amount</value>
+  </data>
+  <data name="AdminReportsBillingTableOutstandingAmount" xml:space="preserve">
+    <value>Outstanding amount</value>
+  </data>
+  <data name="AdminReportsSurveySummary" xml:space="preserve">
+    <value>Survey summary</value>
+  </data>
+  <data name="AdminReportsSurveyTotal" xml:space="preserve">
+    <value>Total surveys</value>
+  </data>
+  <data name="AdminReportsSurveyActive" xml:space="preserve">
+    <value>Active surveys</value>
+  </data>
+  <data name="AdminReportsSurveyScheduled" xml:space="preserve">
+    <value>Scheduled surveys</value>
+  </data>
+  <data name="AdminReportsSurveyExpired" xml:space="preserve">
+    <value>Expired surveys</value>
+  </data>
+  <data name="AdminReportsSurveyTotalResponses" xml:space="preserve">
+    <value>Total responses</value>
+  </data>
+  <data name="AdminReportsSurveyResponses30" xml:space="preserve">
+    <value>Responses (30 days)</value>
+  </data>
+  <data name="AdminReportsSurveyAverageResponses" xml:space="preserve">
+    <value>Average per survey</value>
+  </data>
+  <data name="AdminReportsSurveyLastResponse" xml:space="preserve">
+    <value>Last response</value>
+  </data>
+  <data name="AdminReportsSurveyChartTitle" xml:space="preserve">
+    <value>Survey responses by survey</value>
+  </data>
+  <data name="AdminReportsSurveyTableTitle" xml:space="preserve">
+    <value>Survey details</value>
+  </data>
+  <data name="AdminReportsSurveyTableTitleCol" xml:space="preserve">
+    <value>Survey</value>
+  </data>
+  <data name="AdminReportsSurveyTableStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AdminReportsSurveyTableQuestions" xml:space="preserve">
+    <value>Questions</value>
+  </data>
+  <data name="AdminReportsSurveyTableTotalResponses" xml:space="preserve">
+    <value>Total responses</value>
+  </data>
+  <data name="AdminReportsSurveyTableRecentResponses" xml:space="preserve">
+    <value>Responses (30 days)</value>
+  </data>
+  <data name="AdminReportsSurveyTableWindow" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="AdminReportsSurveyTableLastResponse" xml:space="preserve">
+    <value>Last response</value>
+  </data>
+  <data name="AdminReportsNoData" xml:space="preserve">
+    <value>No data</value>
+  </data>
+  <data name="AdminReportsBillingDatasetTotal" xml:space="preserve">
+    <value>Total amount</value>
+  </data>
+  <data name="AdminReportsBillingDatasetPaid" xml:space="preserve">
+    <value>Paid amount</value>
+  </data>
+  <data name="AdminReportsBillingDatasetOutstanding" xml:space="preserve">
+    <value>Outstanding amount</value>
+  </data>
+  <data name="AdminReportsSurveyDatasetTotal" xml:space="preserve">
+    <value>Total responses</value>
+  </data>
+  <data name="AdminReportsSurveyDatasetRecent" xml:space="preserve">
+    <value>Responses in last 30 days</value>
+  </data>
+  <data name="AdminReportsGenericError" xml:space="preserve">
+    <value>An unexpected error occurred.</value>
+  </data>
+  <data name="AdminReportsNoStart" xml:space="preserve">
+    <value>No start date</value>
+  </data>
+  <data name="AdminReportsNoEnd" xml:space="preserve">
+    <value>No end date</value>
+  </data>
+  <data name="AdminReportsNoSchedule" xml:space="preserve">
+    <value>No schedule defined</value>
+  </data>
+  <data name="AdminReportsSurveyStatusOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="AdminReportsSurveyStatusScheduled" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
+  <data name="AdminReportsSurveyStatusExpired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="AdminReportsSurveyStatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="AdminReportsSurveyStatusInactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
   <data name="WelcomeToHirebot" xml:space="preserve">
     <value>Welcome to Hirebot-TFI!</value>
   </data>
@@ -1607,7 +1790,6 @@ This action cannot be undone.</value>
   <data name="SystemAdmin" xml:space="preserve">
     <value>System Admin</value>
   </data>
-  
   <!-- Email Service Localization Keys -->
   <data name="AllRightsReserved" xml:space="preserve">
     <value>All rights reserved</value>
@@ -1615,7 +1797,6 @@ This action cannot be undone.</value>
   <data name="VisitWebsite" xml:space="preserve">
     <value>Visit Website</value>
   </data>
-  
   <!-- Password Recovery Email -->
   <data name="PasswordRecoverySubject" xml:space="preserve">
     <value>Password Recovery - Hirebot TFI</value>
@@ -1644,7 +1825,6 @@ This action cannot be undone.</value>
   <data name="ResetPasswordButton" xml:space="preserve">
     <value>Reset Password</value>
   </data>
-  
   <!-- Password Change Confirmation Email -->
   <data name="PasswordChangeConfirmationSubject" xml:space="preserve">
     <value>Password Change Confirmation - Hirebot TFI</value>
@@ -1667,7 +1847,6 @@ This action cannot be undone.</value>
   <data name="PasswordChangeConfirmationContact" xml:space="preserve">
     <value>If you have any questions or concerns, don't hesitate to contact us anytime.</value>
   </data>
-  
   <!-- Welcome Email -->
   <data name="WelcomeEmailSubject" xml:space="preserve">
     <value>Welcome to Hirebot TFI!</value>
@@ -1702,7 +1881,6 @@ This action cannot be undone.</value>
   <data name="GetStartedButton" xml:space="preserve">
     <value>Get Started</value>
   </data>
-  
   <!-- Password Recovery Localization Keys -->
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot your password?</value>
@@ -2319,5 +2497,1049 @@ This action cannot be undone.</value>
   </data>
   <data name="CanSendAnotherRecoveryEmail" xml:space="preserve">
     <value>You can send another recovery email if needed.</value>
+  </data>
+  <data name="CaptchaRequired" xml:space="preserve">
+    <value>Please complete the reCAPTCHA verification.</value>
+  </data>
+  <data name="CaptchaValidationFailed" xml:space="preserve">
+    <value>We could not verify the reCAPTCHA. Try again.</value>
+  </data>
+  <data name="CaptchaConfigurationError" xml:space="preserve">
+    <value>Contact the administrator: reCAPTCHA configuration is missing.</value>
+  </data>
+  <data name="StatusUnpublished">
+    <value>Unpublished</value>
+  </data>
+  <data name="SurveyManagement" xml:space="preserve">
+    <value>Survey Management</value>
+  </data>
+  <data name="SurveyManagementSubtitle" xml:space="preserve">
+    <value>Create and manage dynamic surveys for your users.</value>
+  </data>
+  <data name="ExistingSurveys" xml:space="preserve">
+    <value>Existing Surveys</value>
+  </data>
+  <data name="CreateSurvey" xml:space="preserve">
+    <value>Create Survey</value>
+  </data>
+  <data name="AddQuestion" xml:space="preserve">
+    <value>Add question</value>
+  </data>
+  <data name="NoSurveysFound" xml:space="preserve">
+    <value>No surveys found.</value>
+  </data>
+  <data name="SurveyStatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="SurveyStatusInactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="ConfirmDeleteSurvey" xml:space="preserve">
+    <value>Do you want to delete this survey?</value>
+  </data>
+  <data name="SurveyCreateTitle" xml:space="preserve">
+    <value>Create Survey</value>
+  </data>
+  <data name="SurveyEditTitle" xml:space="preserve">
+    <value>Edit Survey</value>
+  </data>
+  <data name="SurveyTitleRequired" xml:space="preserve">
+    <value>Survey title is required.</value>
+  </data>
+  <data name="AllowMultipleResponses" xml:space="preserve">
+    <value>Allow multiple responses</value>
+  </data>
+  <data name="SurveyQuestions" xml:space="preserve">
+    <value>Survey Questions</value>
+  </data>
+  <data name="NoQuestionsFound" xml:space="preserve">
+    <value>No questions have been added.</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="ConfirmDeleteQuestion" xml:space="preserve">
+    <value>Delete this question?</value>
+  </data>
+  <data name="QuestionTextRequired" xml:space="preserve">
+    <value>Question text is required.</value>
+  </data>
+  <data name="QuestionOptions" xml:space="preserve">
+    <value>Question Options</value>
+  </data>
+  <data name="NoOptionsFound" xml:space="preserve">
+    <value>No options have been added.</value>
+  </data>
+  <data name="OptionText" xml:space="preserve">
+    <value>Option text</value>
+  </data>
+  <data name="OptionValue" xml:space="preserve">
+    <value>Option value</value>
+  </data>
+  <data name="OptionTextRequired" xml:space="preserve">
+    <value>Option text is required.</value>
+  </data>
+  <data name="ConfirmDeleteOption" xml:space="preserve">
+    <value>Delete this option?</value>
+  </data>
+  <data name="SurveySaved" xml:space="preserve">
+    <value>Survey saved successfully.</value>
+  </data>
+  <data name="SurveySaveFailed" xml:space="preserve">
+    <value>Unable to save the survey.</value>
+  </data>
+  <data name="SurveyDeleted" xml:space="preserve">
+    <value>Survey deleted successfully.</value>
+  </data>
+  <data name="SurveyDeleteFailed" xml:space="preserve">
+    <value>Unable to delete the survey.</value>
+  </data>
+  <data name="SurveyNotSelected" xml:space="preserve">
+    <value>Select a survey before continuing.</value>
+  </data>
+  <data name="SurveyRetrieveFailed" xml:space="preserve">
+    <value>Unable to retrieve surveys.</value>
+  </data>
+  <data name="SurveyPayloadMissing" xml:space="preserve">
+    <value>Survey payload cannot be empty.</value>
+  </data>
+  <data name="SurveyInvalidIdentifier" xml:space="preserve">
+    <value>Survey identifier is invalid.</value>
+  </data>
+  <data name="SurveyNotFound" xml:space="preserve">
+    <value>Survey not found.</value>
+  </data>
+  <data name="SurveyAlreadyAnswered" xml:space="preserve">
+    <value>You have already answered this survey.</value>
+  </data>
+  <data name="SurveyNotAvailable" xml:space="preserve">
+    <value>There are no available surveys at this time.</value>
+  </data>
+  <data name="SurveyUnavailable" xml:space="preserve">
+    <value>No survey is available.</value>
+  </data>
+  <data name="SurveyAnswersMissing" xml:space="preserve">
+    <value>No answers were provided for the survey.</value>
+  </data>
+  <data name="SurveySubmitFailed" xml:space="preserve">
+    <value>Unable to submit the survey.</value>
+  </data>
+  <data name="SurveySubmitted" xml:space="preserve">
+    <value>Thanks for participating! Your response was recorded.</value>
+  </data>
+  <data name="SurveySkipped" xml:space="preserve">
+    <value>Survey dismissed. You can return later.</value>
+  </data>
+  <data name="SurveyValidationError" xml:space="preserve">
+    <value>Please complete the required questions.</value>
+  </data>
+  <data name="SurveyRequiresAtLeastOneQuestion" xml:space="preserve">
+    <value>The survey must have at least one question.</value>
+  </data>
+  <data name="SurveyQuestionRequired" xml:space="preserve">
+    <value>Question &quot;{0}&quot; is required.</value>
+  </data>
+  <data name="SurveyInvalidOption" xml:space="preserve">
+    <value>You selected an invalid option for &quot;{0}&quot;.</value>
+  </data>
+  <data name="SurveyQuestionRequiredMessage" xml:space="preserve">
+    <value>This question is required.</value>
+  </data>
+  <data name="SurveyQuestionRequiredLabel" xml:space="preserve">
+    <value>(Required)</value>
+  </data>
+  <data name="QuestionSaved" xml:space="preserve">
+    <value>Question saved successfully.</value>
+  </data>
+  <data name="QuestionSaveFailed" xml:space="preserve">
+    <value>Unable to save the question.</value>
+  </data>
+  <data name="QuestionDeleted" xml:space="preserve">
+    <value>Question deleted successfully.</value>
+  </data>
+  <data name="QuestionDeleteFailed" xml:space="preserve">
+    <value>Unable to delete the question.</value>
+  </data>
+  <data name="QuestionNotFound" xml:space="preserve">
+    <value>Question not found.</value>
+  </data>
+  <data name="QuestionNotSelected" xml:space="preserve">
+    <value>Select a question to continue.</value>
+  </data>
+  <data name="SurveyQuestionInvalidIdentifier" xml:space="preserve">
+    <value>Question identifier is invalid.</value>
+  </data>
+  <data name="SurveyQuestionPayloadMissing" xml:space="preserve">
+    <value>Question payload cannot be empty.</value>
+  </data>
+  <data name="SurveyOptionPayloadMissing" xml:space="preserve">
+    <value>Option payload cannot be empty.</value>
+  </data>
+  <data name="SurveyOptionInvalidIdentifier" xml:space="preserve">
+    <value>Option identifier is invalid.</value>
+  </data>
+  <data name="OptionSaved" xml:space="preserve">
+    <value>Option saved successfully.</value>
+  </data>
+  <data name="OptionSaveFailed" xml:space="preserve">
+    <value>Unable to save the option.</value>
+  </data>
+  <data name="OptionDeleted" xml:space="preserve">
+    <value>Option deleted successfully.</value>
+  </data>
+  <data name="OptionDeleteFailed" xml:space="preserve">
+    <value>Unable to delete the option.</value>
+  </data>
+  <data name="OptionNotFound" xml:space="preserve">
+    <value>Option not found.</value>
+  </data>
+  <data name="SurveyCreateFailed" xml:space="preserve">
+    <value>Unable to create the survey.</value>
+  </data>
+  <data name="SurveyUpdateFailed" xml:space="preserve">
+    <value>Unable to update the survey.</value>
+  </data>
+  <data name="SurveyOmissionFailed" xml:space="preserve">
+    <value>Unable to skip the survey.</value>
+  </data>
+  <data name="SurveyOmissionRecorded" xml:space="preserve">
+    <value>Survey successfully skipped.</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="QuestionTypeSingleChoice" xml:space="preserve">
+    <value>Single choice</value>
+  </data>
+  <data name="QuestionTypeMultipleChoice" xml:space="preserve">
+    <value>Multiple choice</value>
+  </data>
+  <data name="QuestionTypeText" xml:space="preserve">
+    <value>Open answer</value>
+  </data>
+  <data name="DateNotSet" xml:space="preserve">
+    <value>Not set</value>
+  </data>
+  <data name="NewsManagement">
+    <value>News management</value>
+  </data>
+  <data name="Title">
+    <value>Title</value>
+  </data>
+  <data name="NewsHeroSubtitle">
+    <value>Discover releases, announcements, and stories from our community.</value>
+  </data>
+  <data name="Unpublish">
+    <value>Unpublish</value>
+  </data>
+  <data name="PublishImmediately">
+    <value>Publish immediately</value>
+  </data>
+  <data name="SubscribedError">
+    <value>We could not complete your subscription. Please try again.</value>
+  </data>
+  <data name="NewsletterSubtitle">
+    <value>Receive updates and product news straight to your inbox.</value>
+  </data>
+  <data name="Publish">
+    <value>Publish</value>
+  </data>
+  <data name="StatusPublished">
+    <value>Published</value>
+  </data>
+  <data name="TotalSubscribers">
+    <value>Total subscribers</value>
+  </data>
+  <data name="NewSubscribers30Days">
+    <value>Subscribers last 30 days</value>
+  </data>
+  <data name="SearchEmail">
+    <value>Search by email</value>
+  </data>
+  <data name="ValidationTitleRequired">
+    <value>Title is required.</value>
+  </data>
+  <data name="NewsResultsCount">
+    <value>{0} articles found</value>
+  </data>
+  <data name="PublishedDate">
+    <value>Published on</value>
+  </data>
+  <data name="SubscribedSuccess">
+    <value>Thank you for subscribing! Check your inbox for updates.</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="AdminNewsSubtitle">
+    <value>Manage site announcements and the official newsletter.</value>
+  </data>
+  <data name="StatusArchived">
+    <value>Archived</value>
+  </data>
+  <data name="AdminNewsTitle">
+    <value>News &amp; Newsletter</value>
+  </data>
+  <data name="PublicNewsPageTitle">
+    <value>News</value>
+  </data>
+  <data name="SearchPlaceholder">
+    <value>Search by title or content</value>
+  </data>
+  <data name="StatusAll">
+    <value>All</value>
+  </data>
+  <data name="NewsSaved">
+    <value>News article saved successfully.</value>
+  </data>
+  <data name="ValidationContentRequired">
+    <value>Content is required.</value>
+  </data>
+  <data name="NewsHeroTitle">
+    <value>Latest updates</value>
+  </data>
+  <data name="Keyword">
+    <value>Keyword</value>
+  </data>
+  <data name="SubscriberRemoveError">
+    <value>We could not remove the subscriber.</value>
+  </data>
+  <data name="NoSubscribersFound">
+    <value>No subscribers found.</value>
+  </data>
+  <data name="NewsManagementDescription">
+    <value>Create, edit, and publish updates for your users.</value>
+  </data>
+  <data name="SubscriberRemoved">
+    <value>Subscriber removed.</value>
+  </data>
+  <data name="CreateNews">
+    <value>Create news</value>
+  </data>
+  <data name="PublishStatusError">
+    <value>We could not update the publish status.</value>
+  </data>
+  <data name="NewsManagementNav">
+    <value>News &amp; newsletter</value>
+  </data>
+  <data name="SurveyManagementNav" xml:space="preserve">
+    <value>Survey management</value>
+  </data>
+  <data name="BillingManagementNav" xml:space="preserve">
+    <value>Billing</value>
+  </data>
+  <data name="AdminReportsNav" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="BillingManagement" xml:space="preserve">
+    <value>Billing management</value>
+  </data>
+  <data name="PublishStatusUpdated">
+    <value>Publish status updated.</value>
+  </data>
+  <data name="NewsArchived">
+    <value>The news article was archived.</value>
+  </data>
+  <data name="NewsSaveError">
+    <value>We could not save the news article.</value>
+  </data>
+  <data name="NewsCountSummary">
+    <value>{0} news articles found</value>
+  </data>
+  <data name="NoNewsFound">
+    <value>No news matched your filters.</value>
+  </data>
+  <data name="Subscribe">
+    <value>Subscribe</value>
+  </data>
+  <data name="NewsletterSubscribers">
+    <value>Subscribers</value>
+  </data>
+  <data name="ReadMore">
+    <value>Read more</value>
+  </data>
+  <data name="NoNewsAvailable">
+    <value>There are no news articles yet.</value>
+  </data>
+  <data name="Summary">
+    <value>Summary</value>
+  </data>
+  <data name="SubscriberLoadError">
+    <value>We could not load subscribers.</value>
+  </data>
+  <data name="ValidationError">
+    <value>Please review the highlighted information.</value>
+  </data>
+  <data name="NewsArchiveError">
+    <value>We could not archive the news article.</value>
+  </data>
+  <data name="NewsletterTitle">
+    <value>Join our newsletter</value>
+  </data>
+  <data name="Content">
+    <value>Content</value>
+  </data>
+  <data name="NotPublished">
+    <value>Not published</value>
+  </data>
+  <data name="Unsubscribe">
+    <value>Unsubscribe</value>
+  </data>
+  <data name="EmailPlaceholder">
+    <value>enter your email address</value>
+  </data>
+  <data name="NewsletterSummary">
+    <value>Newsletter summary</value>
+  </data>
+  <data name="NewsLoadError">
+    <value>We could not load the news.</value>
+  </data>
+  <data name="SubscribedOn">
+    <value>Subscribed on</value>
+  </data>
+  <data name="AllLanguages">
+    <value>All languages</value>
+  </data>
+  <data name="Optional">
+    <value>Optional</value>
+  </data>
+  <data name="Reads">
+    <value>reads</value>
+  </data>
+  <data name="Reset">
+    <value>Reset</value>
+  </data>
+  <data name="CannotPublishArchived">
+    <value>You cannot publish an archived news item.</value>
+  </data>
+  <data name="Archive">
+    <value>Archive</value>
+  </data>
+  <data name="NewsNavigation">
+    <value>News</value>
+  </data>
+  <data name="ManageNews" xml:space="preserve">
+    <value>Manage news</value>
+  </data>
+  <data name="ActivityLogs" xml:space="preserve">
+    <value>Activity logs</value>
+  </data>
+  <data name="Chatbots" xml:space="preserve">
+    <value>Chatbots</value>
+  </data>
+  <data name="AdminArea" xml:space="preserve">
+    <value>Admin area</value>
+  </data>
+  <data name="ProfileComingSoon" xml:space="preserve">
+    <value>Profile management coming soon!</value>
+  </data>
+  <data name="JobsComingSoon" xml:space="preserve">
+    <value>Job browsing coming soon!</value>
+  </data>
+  <data name="ChatComingSoon" xml:space="preserve">
+    <value>Hirebot chat coming soon!</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="ConfirmDeleteSurveyMessage" xml:space="preserve">
+    <value>Are you sure you want to delete this survey?</value>
+  </data>
+  <data name="ConfirmDeleteQuestionMessage" xml:space="preserve">
+    <value>Delete this question?</value>
+  </data>
+  <data name="ConfirmDeleteOptionMessage" xml:space="preserve">
+    <value>Delete this option?</value>
+  </data>
+  <data name="FAQPageTitle" xml:space="preserve">
+    <value>Frequently Asked Questions</value>
+  </data>
+  <data name="FAQHeroTitle" xml:space="preserve">
+    <value>Get answers about our AI-powered HR chatbots</value>
+  </data>
+  <data name="FAQHeroSubtitle" xml:space="preserve">
+    <value>Learn how Hirebot-TFI transforms the talent acquisition experience from the very first interaction.</value>
+  </data>
+  <data name="FAQSectionHeading" xml:space="preserve">
+    <value>Frequently asked questions</value>
+  </data>
+  <data name="FAQSectionDescription" xml:space="preserve">
+    <value>We gathered the top questions we receive from talent teams evaluating intelligent HR assistants.</value>
+  </data>
+  <data name="FAQQuestionOne" xml:space="preserve">
+    <value>What is Hirebot-TFI and how does it help HR teams?</value>
+  </data>
+  <data name="FAQAnswerOne" xml:space="preserve">
+    <value>Hirebot-TFI is an AI-driven conversational assistant that automates initial candidate engagement, answers frequent questions, runs tailored pre-screenings, and captures structured insights so recruiters can focus on strategic interviews.</value>
+  </data>
+  <data name="FAQQuestionTwo" xml:space="preserve">
+    <value>How do you ensure fair and unbiased evaluations?</value>
+  </data>
+  <data name="FAQAnswerTwo" xml:space="preserve">
+    <value>We train our models on audited datasets, enforce compliance rules, monitor performance continuously, and schedule human reviews to detect and correct bias. Transparent reporting keeps every interaction accountable.</value>
+  </data>
+  <data name="FAQQuestionThree" xml:space="preserve">
+    <value>Does Hirebot-TFI integrate with our current ATS or systems?</value>
+  </data>
+  <data name="FAQAnswerThree" xml:space="preserve">
+    <value>We provide standard connectors and a REST API to integrate with leading ATS, CRM, and HR suites, and we configure custom workflows to synchronize data in real time.</value>
+  </data>
+  <data name="FAQQuestionFour" xml:space="preserve">
+    <value>What security and privacy measures are in place?</value>
+  </data>
+  <data name="FAQAnswerFour" xml:space="preserve">
+    <value>Every conversation is protected with encryption in transit and at rest, we comply with GDPR and CCPA, isolate tenant data, and enforce role-based access with full audit trails.</value>
+  </data>
+  <data name="FAQQuestionFive" xml:space="preserve">
+    <value>How long does it take to deploy the chatbot in our organization?</value>
+  </data>
+  <data name="FAQAnswerFive" xml:space="preserve">
+    <value>Most implementations are completed in 2–4 weeks, covering discovery workshops, flow configuration, content training, and a controlled pilot before full launch.</value>
+  </data>
+  <data name="FAQQuestionSix" xml:space="preserve">
+    <value>What kind of support and training do you provide?</value>
+  </data>
+  <data name="FAQAnswerSix" xml:space="preserve">
+    <value>We include guided onboarding, a resource library, recruiter training sessions, and multichannel support from specialists in digital HR transformation.</value>
+  </data>
+  <data name="FAQNavigation" xml:space="preserve">
+    <value>FAQs</value>
+  </data>
+  <data name="AdminBillingSubtitle" xml:space="preserve">
+    <value>Manage invoices, debit notes, and credit notes.</value>
+  </data>
+  <data name="CreateBillingDocument" xml:space="preserve">
+    <value>Create billing document</value>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>Document type</value>
+  </data>
+  <data name="DocumentNumber" xml:space="preserve">
+    <value>Document number</value>
+  </data>
+  <data name="UserSearch" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>From date</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>To date</value>
+  </data>
+  <data name="IssueDate" xml:space="preserve">
+    <value>Issue date</value>
+  </data>
+  <data name="DueDate" xml:space="preserve">
+    <value>Due date</value>
+  </data>
+  <data name="CurrencyCode" xml:space="preserve">
+    <value>Currency code</value>
+  </data>
+  <data name="NoBillingDocumentsFound" xml:space="preserve">
+    <value>No billing documents found.</value>
+  </data>
+  <data name="MarkIssued" xml:space="preserve">
+    <value>Mark as issued</value>
+  </data>
+  <data name="MarkPaid" xml:space="preserve">
+    <value>Mark as paid</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Select user</value>
+  </data>
+  <data name="ValidationDocumentTypeRequired" xml:space="preserve">
+    <value>Document type is required.</value>
+  </data>
+  <data name="ValidationUserRequired" xml:space="preserve">
+    <value>A user must be selected.</value>
+  </data>
+  <data name="ValidationItemProduct" xml:space="preserve">
+    <value>You must select a product.</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="LineItems" xml:space="preserve">
+    <value>Line items</value>
+  </data>
+  <data name="BillingProductLabel" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="SelectProductOption" xml:space="preserve">
+    <value>Select a product</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>Unit price</value>
+  </data>
+  <data name="TaxRate" xml:space="preserve">
+    <value>Tax rate (%)</value>
+  </data>
+  <data name="AddItem" xml:space="preserve">
+    <value>Add item</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Subtotal" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Tax</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="LineTotal" xml:space="preserve">
+    <value>Line total</value>
+  </data>
+  <data name="ValidationAtLeastOneItem" xml:space="preserve">
+    <value>You must add at least one line item.</value>
+  </data>
+  <data name="DocumentCreated" xml:space="preserve">
+    <value>Billing document created successfully.</value>
+  </data>
+  <data name="DocumentCreateError" xml:space="preserve">
+    <value>Unable to create billing document.</value>
+  </data>
+  <data name="ValidationItemDescription" xml:space="preserve">
+    <value>Description is required.</value>
+  </data>
+  <data name="ValidationItemQuantity" xml:space="preserve">
+    <value>Quantity must be greater than zero.</value>
+  </data>
+  <data name="ValidationItemUnitPrice" xml:space="preserve">
+    <value>Unit price must be zero or greater.</value>
+  </data>
+  <data name="ValidationItemTaxRate" xml:space="preserve">
+    <value>Tax rate must be zero or greater.</value>
+  </data>
+  <data name="DocumentTypeInvoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="DocumentTypeDebitNote" xml:space="preserve">
+    <value>Debit note</value>
+  </data>
+  <data name="DocumentTypeCreditNote" xml:space="preserve">
+    <value>Credit note</value>
+  </data>
+  <data name="DocumentTypeUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="StatusAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="StatusDraft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="StatusIssued" xml:space="preserve">
+    <value>Issued</value>
+  </data>
+  <data name="StatusPaid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="StatusCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="SelectOption" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="UnknownUser" xml:space="preserve">
+    <value>Unknown user</value>
+  </data>
+  <data name="UnknownProduct" xml:space="preserve">
+    <value>Unknown product</value>
+  </data>
+  <data name="BillingCountSummary" xml:space="preserve">
+    <value>{0} documents found</value>
+  </data>
+  <data name="BillingLoadError" xml:space="preserve">
+    <value>Unable to load billing documents.</value>
+  </data>
+  <data name="NoDueDate" xml:space="preserve">
+    <value>No due date</value>
+  </data>
+  <data name="StatusUpdated" xml:space="preserve">
+    <value>Status updated successfully.</value>
+  </data>
+  <data name="StatusUpdateError" xml:space="preserve">
+    <value>Unable to update status.</value>
+  </data>
+  <data name="DocumentLoadError" xml:space="preserve">
+    <value>Unable to load billing document.</value>
+  </data>
+  <data name="SubscriptionAlreadyExists" xml:space="preserve">
+    <value>You already have an active subscription for this product.</value>
+  </data>
+  <data name="SubscriptionAuthRequired" xml:space="preserve">
+    <value>You must be signed in to subscribe to a product.</value>
+  </data>
+  <data name="SubscriptionCancelledOn" xml:space="preserve">
+    <value>Cancelled on {0}</value>
+  </data>
+  <data name="SubscriptionCardNumberInvalid" xml:space="preserve">
+    <value>The card number is not valid.</value>
+  </data>
+  <data name="SubscriptionCardNumberLength" xml:space="preserve">
+    <value>The card number must contain between 12 and 19 digits.</value>
+  </data>
+  <data name="SubscriptionCardNumberLabel" xml:space="preserve">
+    <value>Card number</value>
+  </data>
+  <data name="SubscriptionCardNumberRequired" xml:space="preserve">
+    <value>Enter the card number.</value>
+  </data>
+  <data name="SubscriptionCardholderLabel" xml:space="preserve">
+    <value>Cardholder name</value>
+  </data>
+  <data name="SubscriptionCardholderRequired" xml:space="preserve">
+    <value>Enter the cardholder name.</value>
+  </data>
+  <data name="SubscriptionCreatedOn" xml:space="preserve">
+    <value>Created on {0}</value>
+  </data>
+  <data name="SubscriptionCreatedSuccess" xml:space="preserve">
+    <value>Subscription created successfully.</value>
+  </data>
+  <data name="SubscriptionCreationFailed" xml:space="preserve">
+    <value>Unable to create the subscription.</value>
+  </data>
+  <data name="SubscriptionEmailButton" xml:space="preserve">
+    <value>Go to dashboard</value>
+  </data>
+  <data name="SubscriptionEmailDefaultCycle" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="SubscriptionEmailGreeting" xml:space="preserve">
+    <value>Hello {0},</value>
+  </data>
+  <data name="SubscriptionEmailGreetingGeneric" xml:space="preserve">
+    <value>Hello,</value>
+  </data>
+  <data name="SubscriptionEmailIntro" xml:space="preserve">
+    <value>Thank you for subscribing to the {0} plan. Below are the details of your subscription.</value>
+  </data>
+  <data name="SubscriptionEmailPayment" xml:space="preserve">
+    <value>Payment method</value>
+  </data>
+  <data name="SubscriptionEmailPlan" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="SubscriptionEmailPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="SubscriptionEmailProduct" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="SubscriptionEmailSubject" xml:space="preserve">
+    <value>Subscription confirmation</value>
+  </data>
+  <data name="SubscriptionEmailSupport" xml:space="preserve">
+    <value>If you have any questions about your subscription, please contact our support team.</value>
+  </data>
+  <data name="SubscriptionEmailTitle" xml:space="preserve">
+    <value>Subscription confirmed</value>
+  </data>
+  <data name="SubscriptionExpirationExpired" xml:space="preserve">
+    <value>The card is expired.</value>
+  </data>
+  <data name="SubscriptionExpirationInvalid" xml:space="preserve">
+    <value>The expiration date is not valid.</value>
+  </data>
+  <data name="SubscriptionExpirationMonth" xml:space="preserve">
+    <value>Expiration month</value>
+  </data>
+  <data name="SubscriptionExpirationRequired" xml:space="preserve">
+    <value>Select an expiration date.</value>
+  </data>
+  <data name="SubscriptionExpirationYear" xml:space="preserve">
+    <value>Expiration year</value>
+  </data>
+  <data name="SubscriptionFormDescription" xml:space="preserve">
+    <value>Select a product and provide the card details to activate your subscription.</value>
+  </data>
+  <data name="SubscriptionListError" xml:space="preserve">
+    <value>An error occurred while retrieving subscriptions.</value>
+  </data>
+  <data name="SubscriptionListHeading" xml:space="preserve">
+    <value>Current subscriptions</value>
+  </data>
+  <data name="SubscriptionListSuccess" xml:space="preserve">
+    <value>Subscriptions loaded successfully.</value>
+  </data>
+  <data name="SubscriptionNoItems" xml:space="preserve">
+    <value>You do not have any active subscriptions yet.</value>
+  </data>
+  <data name="SubscriptionNoProductsAvailable" xml:space="preserve">
+    <value>There are no products available for subscription at this time.</value>
+  </data>
+  <data name="ValidationSummaryHeader" xml:space="preserve">
+    <value>Please review the following errors:</value>
+  </data>
+  <data name="SubscriptionPageHeading" xml:space="preserve">
+    <value>Manage subscriptions</value>
+  </data>
+  <data name="SubscriptionPageTitle" xml:space="preserve">
+    <value>My Subscriptions - Hirebot TFI</value>
+  </data>
+  <data name="SubscriptionPaymentColumn" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="SubscriptionPlanColumn" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="SubscriptionPriceColumn" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="SubscriptionProductColumn" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="SubscriptionProductInactive" xml:space="preserve">
+    <value>The selected product is not available.</value>
+  </data>
+  <data name="SubscriptionProductLabel" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="SubscriptionProductNotFound" xml:space="preserve">
+    <value>The selected product does not exist.</value>
+  </data>
+  <data name="SubscriptionProductRequired" xml:space="preserve">
+    <value>Select a product.</value>
+  </data>
+  <data name="SubscriptionSelectMonth" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="SubscriptionSelectProduct" xml:space="preserve">
+    <value>Select a product</value>
+  </data>
+  <data name="SubscriptionSelectYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="SubscriptionStatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="SubscriptionStatusCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="SubscriptionStatusColumn" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SubscriptionSubmitButton" xml:space="preserve">
+    <value>Confirm subscription</value>
+  </data>
+  <data name="SubscriptionUnexpectedError" xml:space="preserve">
+    <value>An unexpected error occurred while processing the subscription.</value>
+  </data>
+  <data name="SubscriptionUserRequired" xml:space="preserve">
+    <value>The subscription user is not valid.</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found.</value>
+  </data>
+  <data name="ProfileUpdateSuccess" xml:space="preserve">
+    <value>Your profile was updated successfully.</value>
+  </data>
+  <data name="ProfileUpdateError" xml:space="preserve">
+    <value>We couldn't update your profile. Please try again.</value>
+  </data>
+  <data name="PasswordMustDiffer" xml:space="preserve">
+    <value>The new password must be different from the current one.</value>
+  </data>
+  <data name="PasswordChangeSuccess" xml:space="preserve">
+    <value>Your password was changed successfully.</value>
+  </data>
+  <data name="PasswordChangeError" xml:space="preserve">
+    <value>We couldn't change your password. Please try again.</value>
+  </data>
+  <data name="CurrentPasswordRequired" xml:space="preserve">
+    <value>You must enter your current password.</value>
+  </data>
+  <data name="PasswordConfirmationRequired" xml:space="preserve">
+    <value>Please confirm the new password.</value>
+  </data>
+  <data name="FirstNameMaxLength" xml:space="preserve">
+    <value>First name cannot exceed 100 characters.</value>
+  </data>
+  <data name="LastNameMaxLength" xml:space="preserve">
+    <value>Last name cannot exceed 100 characters.</value>
+  </data>
+  <data name="AccountTitle" xml:space="preserve">
+    <value>My Account</value>
+  </data>
+  <data name="AccountNav" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="AccountOverviewHeading" xml:space="preserve">
+    <value>Account Overview</value>
+  </data>
+  <data name="AccountFullName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="AccountEmailLabel" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="AccountUsernameLabel" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="AccountCreatedDateLabel" xml:space="preserve">
+    <value>Created on</value>
+  </data>
+  <data name="AccountLastLoginLabel" xml:space="preserve">
+    <value>Last login</value>
+  </data>
+  <data name="AccountSubscriptionHeading" xml:space="preserve">
+    <value>Subscriptions</value>
+  </data>
+  <data name="AccountSubscriptionActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="AccountSubscriptionInactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="AccountSubscriptionCancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AccountSubscriptionCancelConfirm" xml:space="preserve">
+    <value>Do you want to cancel this subscription?</value>
+  </data>
+  <data name="AccountSubscriptionPriceFormat" xml:space="preserve">
+    <value>{0} - {1}</value>
+  </data>
+  <data name="AccountSubscriptionCardMask" xml:space="preserve">
+    <value>****</value>
+  </data>
+  <data name="AccountSubscriptionCardFormat" xml:space="preserve">
+    <value>{0} {1} {2}</value>
+  </data>
+  <data name="AccountSubscriptionCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="AccountNoSubscriptions" xml:space="preserve">
+    <value>You don't have any active subscriptions right now.</value>
+  </data>
+  <data name="AccountBillingHeading" xml:space="preserve">
+    <value>Billing documents</value>
+  </data>
+  <data name="AccountBillingDocumentNumber" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="AccountBillingIssueDate" xml:space="preserve">
+    <value>Issue date</value>
+  </data>
+  <data name="AccountBillingDueDate" xml:space="preserve">
+    <value>Due date</value>
+  </data>
+  <data name="AccountBillingStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AccountBillingTotal" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="AccountBillingSummaryHeading" xml:space="preserve">
+    <value>Account summary</value>
+  </data>
+  <data name="AccountBillingSummaryInvoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="AccountBillingSummaryCreditNotes" xml:space="preserve">
+    <value>Credit notes</value>
+  </data>
+  <data name="AccountBillingSummaryDebitNotes" xml:space="preserve">
+    <value>Debit notes</value>
+  </data>
+  <data name="AccountBillingSummaryBalance" xml:space="preserve">
+    <value>Current balance</value>
+  </data>
+  <data name="AccountNoBillingDocuments" xml:space="preserve">
+    <value>No billing documents are available yet.</value>
+  </data>
+  <data name="AccountUpdateProfileHeading" xml:space="preserve">
+    <value>Update personal information</value>
+  </data>
+  <data name="AccountFirstNameLabel" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="AccountLastNameLabel" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="AccountUpdateProfileButton" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="AccountChangePasswordHeading" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="AccountCurrentPasswordLabel" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="AccountNewPasswordLabel" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="AccountConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="AccountChangePasswordButton" xml:space="preserve">
+    <value>Update password</value>
+  </data>
+  <data name="AccountChatHeading" xml:space="preserve">
+    <value>Chat with Hirebot</value>
+  </data>
+  <data name="AccountChatPlaceholder" xml:space="preserve">
+    <value>The chat will be available soon.</value>
+  </data>
+  <data name="AccountChatInputPlaceholder" xml:space="preserve">
+    <value>Type a message…</value>
+  </data>
+  <data name="AccountNotAvailable" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+  <data name="AccountNeverLoggedIn" xml:space="preserve">
+    <value>Never signed in</value>
+  </data>
+  <data name="AccountLoadError" xml:space="preserve">
+    <value>We couldn't load your account. Please try again.</value>
+  </data>
+  <data name="AccountActionSuccess" xml:space="preserve">
+    <value>Action completed successfully.</value>
+  </data>
+  <data name="AccountActionError" xml:space="preserve">
+    <value>We couldn't complete the action.</value>
+  </data>
+  <data name="SubscriptionInvalid" xml:space="preserve">
+    <value>The subscription is invalid.</value>
+  </data>
+  <data name="SubscriptionNotFound" xml:space="preserve">
+    <value>We couldn't find that subscription.</value>
+  </data>
+  <data name="SubscriptionAlreadyCancelled" xml:space="preserve">
+    <value>The subscription is already cancelled.</value>
+  </data>
+  <data name="SubscriptionCancelSuccess" xml:space="preserve">
+    <value>Your subscription was cancelled successfully.</value>
+  </data>
+  <data name="SubscriptionCancelError" xml:space="preserve">
+    <value>We couldn't cancel the subscription.</value>
+  </data>
+  <data name="SubscriptionsNav" xml:space="preserve">
+    <value>Subscriptions</value>
   </data>
 </root>

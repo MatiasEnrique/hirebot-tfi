@@ -31,17 +31,34 @@ namespace ABSTRACTIONS
         /// <summary>
         /// Total number of pages available
         /// </summary>
-        public int TotalPages => PageSize > 0 ? (int)System.Math.Ceiling((double)TotalRecords / PageSize) : 0;
+        public int TotalPages
+        {
+            get
+            {
+                if (PageSize <= 0)
+                {
+                    return 0;
+                }
+
+                return (int)System.Math.Ceiling((double)TotalRecords / PageSize);
+            }
+        }
 
         /// <summary>
         /// Whether there is a previous page
         /// </summary>
-        public bool HasPreviousPage => CurrentPage > 1;
+        public bool HasPreviousPage
+        {
+            get { return CurrentPage > 1; }
+        }
 
         /// <summary>
         /// Whether there is a next page
         /// </summary>
-        public bool HasNextPage => CurrentPage < TotalPages;
+        public bool HasNextPage
+        {
+            get { return CurrentPage < TotalPages; }
+        }
 
         /// <summary>
         /// Constructor

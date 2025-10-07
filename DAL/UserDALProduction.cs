@@ -17,6 +17,269 @@ namespace DAL
             // Use the existing connection service
         }
 
+        #region User Account Module Methods
+
+        /// <summary>
+        /// Retrieves user account dashboard information including profile, subscriptions, and billing summary
+        /// </summary>
+        /// <param name="userId">Authenticated user identifier</param>
+        /// <returns>UserAccountDashboardResult containing composite data</returns>
+        public UserAccountDashboardResult GetUserAccountDashboard(int userId)
+        {
+            if (userId <= 0)
+            {
+                return UserAccountDashboardResult.Failure(-1, "Invalid user identifier.");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_UserAccount_GetDashboardData", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UserId", userId);
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            var dashboard = new UserAccountDashboard();
+
+                            if (reader.Read())
+                            {
+                                dashboard.Profile = MapUserAccountProfile(reader);
+                            }
+
+                            if (dashboard.Profile == null)
+                            {
+                                return UserAccountDashboardResult.Failure(0, "User not found.");
+                            }
+
+                            if (reader.NextResult())
+                            {
+                                while (reader.Read())
+                                {
+                                    dashboard.Subscriptions.Add(MapSubscriptionFromReader(reader));
+                                }
+                            }
+
+                            if (reader.NextResult())
+                            {
+                                while (reader.Read())
+                                {
+                                    dashboard.BillingDocuments.Add(MapBillingSummaryFromReader(reader));
+                                }
+                            }
+
+                            return UserAccountDashboardResult.Success(dashboard, "Account dashboard retrieved successfully.");
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return UserAccountDashboardResult.Failure(-50010, $"Database error: {sqlEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                return UserAccountDashboardResult.Failure("Unexpected error loading account dashboard.", ex);
+            }
+        }
+
+        /// <summary>
+        /// Updates personal information for the authenticated user
+        /// </summary>
+        /// <param name="userId">User identifier</param>
+        /// <param name="firstName">First name</param>
+        /// <param name="lastName">Last name</param>
+        /// <param name="email">Email address</param>
+        /// <returns>DatabaseResult indicating outcome</returns>
+        public DatabaseResult UpdateUserProfile(int userId, string firstName, string lastName, string email)
+        {
+            if (userId <= 0)
+            {
+                return DatabaseResult.Failure(-1, "Invalid user identifier.");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_UserAccount_UpdateProfile", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@FirstName", firstName ?? string.Empty);
+                        command.Parameters.AddWithValue("@LastName", lastName ?? string.Empty);
+                        command.Parameters.AddWithValue("@Email", email ?? string.Empty);
+
+                        SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultCodeParam);
+
+                        SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultMessageParam);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                        int resultCode = Convert.ToInt32(resultCodeParam.Value ?? -999);
+                        string resultMessage = resultMessageParam.Value?.ToString() ?? "Unknown result";
+
+                        if (resultCode > 0)
+                        {
+                            return DatabaseResult.Success(resultMessage);
+                        }
+
+                        return DatabaseResult.Failure(resultCode, resultMessage);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult.Failure($"Database error updating profile: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult.Failure($"Unexpected error updating profile: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Updates the password hash for a user after validating the current hash
+        /// </summary>
+        /// <param name="userId">User identifier</param>
+        /// <param name="currentPasswordHash">Current password hash</param>
+        /// <param name="newPasswordHash">New password hash</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult UpdateUserPassword(int userId, string currentPasswordHash, string newPasswordHash)
+        {
+            if (userId <= 0)
+            {
+                return DatabaseResult.Failure(-1, "Invalid user identifier.");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_UserAccount_UpdatePassword", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@CurrentPasswordHash", currentPasswordHash ?? string.Empty);
+                        command.Parameters.AddWithValue("@NewPasswordHash", newPasswordHash ?? string.Empty);
+
+                        SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultCodeParam);
+
+                        SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultMessageParam);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                        int resultCode = Convert.ToInt32(resultCodeParam.Value ?? -999);
+                        string resultMessage = resultMessageParam.Value?.ToString() ?? "Unknown result";
+
+                        if (resultCode > 0)
+                        {
+                            return DatabaseResult.Success(resultMessage);
+                        }
+
+                        return DatabaseResult.Failure(resultCode, resultMessage);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult.Failure($"Database error updating password: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult.Failure($"Unexpected error updating password: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Cancels an active subscription for a user
+        /// </summary>
+        /// <param name="userId">User identifier</param>
+        /// <param name="subscriptionId">Subscription identifier</param>
+        /// <returns>DatabaseResult indicating the outcome</returns>
+        public DatabaseResult CancelUserSubscription(int userId, int subscriptionId)
+        {
+            if (userId <= 0)
+            {
+                return DatabaseResult.Failure(-1, "Invalid user identifier.");
+            }
+
+            if (subscriptionId <= 0)
+            {
+                return DatabaseResult.Failure(-2, "Invalid subscription identifier.");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_UserAccount_CancelSubscription", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@SubscriptionId", subscriptionId);
+
+                        SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultCodeParam);
+
+                        SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultMessageParam);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                        int resultCode = Convert.ToInt32(resultCodeParam.Value ?? -999);
+                        string resultMessage = resultMessageParam.Value?.ToString() ?? "Unknown result";
+
+                        if (resultCode > 0)
+                        {
+                            return DatabaseResult.Success(resultMessage);
+                        }
+
+                        return DatabaseResult.Failure(resultCode, resultMessage);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult.Failure($"Database error cancelling subscription: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult.Failure($"Unexpected error cancelling subscription: {ex.Message}", ex);
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// Creates a new user account with comprehensive validation and error reporting
         /// </summary>
@@ -884,6 +1147,67 @@ namespace DAL
                 user.LastLoginDate = reader["LastLoginDate"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(reader["LastLoginDate"]);
 
             return user;
+        }
+
+        private UserAccountProfile MapUserAccountProfile(SqlDataReader reader)
+        {
+            if (reader == null)
+            {
+                return null;
+            }
+
+            if (reader["UserId"] == DBNull.Value)
+            {
+                return null;
+            }
+
+            return new UserAccountProfile
+            {
+                UserId = Convert.ToInt32(reader["UserId"]),
+                Username = reader["Username"]?.ToString() ?? string.Empty,
+                Email = reader["Email"]?.ToString() ?? string.Empty,
+                FirstName = reader["FirstName"]?.ToString() ?? string.Empty,
+                LastName = reader["LastName"]?.ToString() ?? string.Empty,
+                CreatedDate = reader["CreatedDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(reader["CreatedDate"]),
+                LastLoginDate = reader["LastLoginDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["LastLoginDate"]),
+                IsActive = reader["IsActive"] != DBNull.Value && Convert.ToBoolean(reader["IsActive"])
+            };
+        }
+
+        private ProductSubscription MapSubscriptionFromReader(SqlDataReader reader)
+        {
+            return new ProductSubscription
+            {
+                SubscriptionId = reader["SubscriptionId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SubscriptionId"]),
+                ProductId = reader["ProductId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ProductId"]),
+                UserId = reader["UserId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["UserId"]),
+                ProductName = reader["ProductName"]?.ToString() ?? string.Empty,
+                ProductPrice = reader["ProductPrice"] == DBNull.Value ? 0 : Convert.ToDecimal(reader["ProductPrice"]),
+                BillingCycle = reader["BillingCycle"]?.ToString() ?? string.Empty,
+                CardholderName = reader["CardholderName"]?.ToString() ?? string.Empty,
+                CardLast4 = reader["CardLast4"]?.ToString() ?? string.Empty,
+                CardBrand = reader["CardBrand"]?.ToString() ?? string.Empty,
+                ExpirationMonth = reader["ExpirationMonth"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ExpirationMonth"]),
+                ExpirationYear = reader["ExpirationYear"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ExpirationYear"]),
+                CreatedDateUtc = reader["CreatedDateUtc"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(reader["CreatedDateUtc"]),
+                IsActive = reader["IsActive"] != DBNull.Value && Convert.ToBoolean(reader["IsActive"]),
+                CancelledDateUtc = reader["CancelledDateUtc"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["CancelledDateUtc"])
+            };
+        }
+
+        private BillingDocumentSummary MapBillingSummaryFromReader(SqlDataReader reader)
+        {
+            return new BillingDocumentSummary
+            {
+                BillingDocumentId = reader["BillingDocumentId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["BillingDocumentId"]),
+                DocumentType = reader["DocumentType"]?.ToString() ?? string.Empty,
+                DocumentNumber = reader["DocumentNumber"]?.ToString() ?? string.Empty,
+                IssueDateUtc = reader["IssueDateUtc"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(reader["IssueDateUtc"]),
+                DueDateUtc = reader["DueDateUtc"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["DueDateUtc"]),
+                TotalAmount = reader["TotalAmount"] == DBNull.Value ? 0 : Convert.ToDecimal(reader["TotalAmount"]),
+                Status = reader["Status"]?.ToString() ?? string.Empty,
+                CurrencyCode = reader["CurrencyCode"]?.ToString() ?? string.Empty
+            };
         }
 
         /// <summary>

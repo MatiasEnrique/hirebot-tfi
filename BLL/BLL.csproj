@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,11 +45,15 @@
     <Compile Include="CatalogBLL.cs" />
     <Compile Include="ChatbotBLL.cs" />
     <Compile Include="CommentBLL.cs" />
+    <Compile Include="BillingBLL.cs" />
     <Compile Include="LogBLL.cs" />
     <Compile Include="OrganizationBLL.cs" />
     <Compile Include="ProductBLL.cs" />
+    <Compile Include="ProductSubscriptionBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBLL.cs" />
+    <Compile Include="NewsBLL.cs" />
+    <Compile Include="SurveyBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ABSTRACTIONS\ABSTRACTIONS.csproj">

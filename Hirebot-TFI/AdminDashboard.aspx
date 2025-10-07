@@ -264,6 +264,9 @@
             margin-bottom: 2rem;
             text-align: center;
         }
+        .icon-news {
+            background: linear-gradient(135deg, var(--tiffany-blue), var(--ultra-violet));
+        }
         
         /* Language Selector in Sidebar */
         .sidebar-language-selector {
@@ -402,6 +405,30 @@
                         </a>
                     </div>
                     <div class="sidebar-nav-item">
+                        <a href="AdminNews.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-newspaper"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminBilling.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-receipt"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BillingManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminSurveys.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-clipboard-check"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SurveyManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminReports.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-graph-up"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AdminReportsNav %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
                         <a href="AdminLogs.aspx" class="sidebar-nav-link">
                             <i class="bi bi-journal-text"></i>
                             <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,LogManagement %>" />
@@ -482,6 +509,23 @@
                         <a href="AdminLogs.aspx" class="btn btn-primary">
                             <i class="bi bi-arrow-right me-1"></i>
                             <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ViewLogs %>" />
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News & Newsletter Card -->
+                <div class="col-md-4">
+                    <div class="dashboard-card p-4 h-100 text-center">
+                        <div class="dashboard-icon icon-news">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+                        <h4 class="mb-3"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" /></h4>
+                        <p class="text-muted mb-4">
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagementDescription %>" />
+                        </p>
+                        <a href="AdminNews.aspx" class="btn btn-primary">
+                            <i class="bi bi-arrow-right me-1"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ManageNews %>" />
                         </a>
                     </div>
                 </div>

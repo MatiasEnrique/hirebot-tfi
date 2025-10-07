@@ -1,6 +1,8 @@
 using System;
+using System.Configuration;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using SECURITY;
 
 namespace Hirebot_TFI
@@ -12,6 +14,7 @@ namespace Hirebot_TFI
         protected void Page_Load(object sender, EventArgs e)
         {
             userSecurity = new UserSecurity();
+            ConfigureRecaptchaWidget();
 
             if (userSecurity.IsUserAuthenticated())
             {
@@ -25,6 +28,54 @@ namespace Hirebot_TFI
             }
         }
 
+        private void ConfigureRecaptchaWidget()
+        {
+            string siteKey = ConfigurationManager.AppSettings["Recaptcha.SiteKey"];
+
+            if (!string.IsNullOrWhiteSpace(siteKey))
+            {
+                recaptchaWidget.Attributes["data-sitekey"] = siteKey;
+                cvRecaptcha.Enabled = true;
+            }
+            else
+            {
+                recaptchaWidget.Visible = false;
+                cvRecaptcha.Enabled = false;
+            }
+        }
+
+        protected void cvRecaptcha_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (userSecurity == null)
+            {
+                userSecurity = new UserSecurity();
+            }
+
+            string token = Request?.Form["g-recaptcha-response"];
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                args.IsValid = false;
+                cvRecaptcha.ErrorMessage = GetLocalizedString("CaptchaRequired");
+                return;
+            }
+
+            string userIpAddress = Request?.UserHostAddress;
+            var validationResult = userSecurity.ValidateRecaptchaToken(token, userIpAddress);
+
+            if (!validationResult.IsValid)
+            {
+                cvRecaptcha.ErrorMessage = string.Equals(validationResult.FailureReason, "missing-secret", StringComparison.OrdinalIgnoreCase)
+                    ? GetLocalizedString("CaptchaConfigurationError")
+                    : GetLocalizedString("CaptchaValidationFailed");
+
+                args.IsValid = false;
+                return;
+            }
+
+            args.IsValid = true;
+            cvRecaptcha.ErrorMessage = string.Empty;
+        }
         protected void btnSignUp_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid)
@@ -115,16 +166,6 @@ namespace Hirebot_TFI
             txtConfirmPassword.Attributes["placeholder"] = GetLocalizedString("ConfirmYourPassword");
         }
 
-        protected void btnSpanish_Click(object sender, EventArgs e)
-        {
-            Session["Language"] = "es";
-            Response.Redirect(Request.Url.ToString());
-        }
-
-        protected void btnEnglish_Click(object sender, EventArgs e)
-        {
-            Session["Language"] = "en";
-            Response.Redirect(Request.Url.ToString());
-        }
     }
+
 }

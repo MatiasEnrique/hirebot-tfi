@@ -10,36 +10,63 @@ Hirebot-TFI is an ASP.NET Web Forms application built with C# and .NET Framework
 
 The project follows a strict 5-layer architecture pattern:
 
-- **APP**: Presentation layer (ASP.NET Web Forms) - Currently empty/planned
-- **Security**: Authentication and authorization layer - Currently empty/planned  
-- **BLL**: Business Logic Layer - Currently empty/planned
-- **DAL**: Data Access Layer using raw SQL queries to stored procedures - Currently empty/planned
-- **Abstractions**: Entity definitions and shared classes - Currently empty/planned
-- **Services**: Additional application services (e.g., EncryptionService)
+- **UI** (`Hirebot-TFI/`): Presentation layer (ASP.NET Web Forms pages, master pages, user controls)
+- **Security** (`security/`): Authentication and authorization layer with role-based access control
+- **BLL** (`BLL/`): Business Logic Layer implementing business rules and validation
+- **DAL** (`DAL/`): Data Access Layer using raw SQL queries to stored procedures
+- **Abstractions** (`ABSTRACTIONS/`): Entity definitions, DTOs, and shared classes
+- **Services** (`SERVICES/`): Cross-cutting services (EncryptionService, EmailService, LogService, RecaptchaService)
 
 **Critical Rule**: All application logic must follow this flow: `UI -> Security -> BLL -> DAL`. This path must be strictly followed for every method, even if a layer doesn't add value and acts as a pass-through.
 
 ## Development Commands
 
 ### Build and Run
-- **Build solution**: `msbuild Hirebot-TFI.sln` or use Visual Studio Build > Build Solution (Ctrl+Shift+B)
+- **Build solution** (from Git Bash or WSL):
+  ```bash
+  cmd.exe /c "\"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe\" Hirebot-TFI.sln /p:Configuration=Debug /verbosity:minimal"
+  ```
+  Or use Visual Studio Build > Build Solution (Ctrl+Shift+B)
 - **Restore packages**: `nuget restore Hirebot-TFI.sln` or right-click solution in Visual Studio
+- **Clean rebuild**:
+  ```bash
+  cmd.exe /c "\"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe\" Hirebot-TFI.sln /t:Clean,Rebuild /verbosity:minimal"
+  ```
 - **Run application**: Use Visual Studio F5 or Debug > Start Debugging
 - **Development URL**: https://localhost:44383/ (configured in project properties)
 
+### Database Setup
+- **Create database**: Run `Database/01_CreateDatabase.sql` in SQL Server Management Studio
+- **Stored procedures**: Execute SQL files in `Database/` folder in order:
+  - `ProductionStoredProcedures.sql` - Product catalog operations
+  - `ProductCommentStoredProcedures.sql` - Comment and rating system
+  - `OrganizationStoredProcedures.sql` - Organization management
+  - `ChatbotStoredProcedures.sql` - Chatbot functionality
+  - `PasswordRecoveryStoredProcedures.sql` - Password reset workflow
+  - `NewsAndNewsletterStoredProcedures.sql` - News and newsletter features
+  - `SurveyStoredProcedures.sql` - Survey management
+- **Connection string**: Update `web.config` connection string to match your SQL Server instance
+
 ### Project Structure
-- Main project located in `Hirebot-TFI/Hirebot-TFI/` subdirectory
+- Main project located in `Hirebot-TFI/` subdirectory (UI.csproj)
 - Solution file: `Hirebot-TFI.sln` at root level
-- Entry point: `Default.aspx` with basic welcome page
+- Entry point: `Default.aspx` landing page
+- Master pages: `Public.master` (anonymous users), `Protected.master` (authenticated users)
+- Database scripts: `Database/` folder with creation and stored procedure scripts
 
 ## Technology Stack
 
 - **Framework**: ASP.NET Web Forms (.NET Framework 4.8.1)
-- **Language**: C# 
+- **Language**: C#
 - **UI Library**: Bootstrap 5.3.7
-- **Database**: SQL Server (configuration pending)
-- **Security**: SHA256 password encryption via EncryptionService
-- **IDE**: Visual Studio with IIS Express
+- **Database**: SQL Server (Hirebot database)
+- **Security**:
+  - SHA256 password encryption via EncryptionService
+  - Forms authentication with 30-minute timeout
+  - Google reCAPTCHA v2 for bot protection
+- **Email**: SMTP integration via EmailService (configurable in web.config)
+- **IDE**: Visual Studio 2022 Community with IIS Express
+- **Web Server**: IIS Express on https://localhost:44383/
 
 ## Key Conventions
 
@@ -157,15 +184,25 @@ This project uses specialized Claude Code agents for optimal development efficie
 
 ## Current State
 
-The project has the following implemented features:
-- Complete 5-layer architecture with authentication system
-- User registration and sign-in functionality with SHA256 encryption
-- Multilanguage support (Spanish/English) with resource files
-- Fully responsive Bootstrap UI for authentication pages
-- Forms authentication with session management
-- Database integration using stored procedures
-- BasePage class for culture initialization
-- **Complete product comment system** with rating functionality, moderation workflow, and real-time updates
-- **Multi-agent coordination patterns** proven through comment system implementation
-- GEMINI.md contains detailed architecture documentation
-- Always check the csproj after making any changes to keep references updated
+### Implemented Features
+- **Authentication**: Complete user registration, sign-in, password recovery with email verification
+- **Organizations**: Multi-tenant organization management with role-based access (Owner/Admin/Member)
+- **Product Catalog**: Product management with comment/rating system and moderation workflow
+- **Chatbot**: AI-powered recruitment chatbot with conversation management
+- **News System**: Article publishing and newsletter subscription management
+- **Surveys**: Survey creation and response collection
+- **Admin Dashboard**: System administration, user management, and audit logging
+- **Multilanguage**: Full Spanish/English support via resource files
+- **Responsive UI**: Bootstrap 5.3.7 with mobile, tablet, and desktop layouts
+
+### Key Pages
+- **Public**: Default.aspx, SignIn.aspx, SignUp.aspx, ForgotPassword.aspx, ResetPassword.aspx
+- **Protected**: Dashboard.aspx, Catalog.aspx, MyOrganizations.aspx, OrganizationView.aspx, News.aspx
+- **Admin**: AdminDashboard.aspx, AdminCatalog.aspx, AdminLogs.aspx, AdminNews.aspx, AdminSurveys.aspx, ChatbotAdmin.aspx
+
+### Configuration Notes
+- **Email**: Configure SMTP settings in web.config (currently set for Gmail)
+- **reCAPTCHA**: Test keys configured (replace with production keys before deployment)
+- **Database**: Connection string in web.config must match your SQL Server instance
+- **Culture**: Default culture is es-ES (Spanish), switchable via language selector
+- **Always check .csproj files** after adding references to keep project structure consistent

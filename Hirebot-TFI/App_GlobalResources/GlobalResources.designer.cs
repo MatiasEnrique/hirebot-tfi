@@ -3139,6 +3139,997 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Agregar ítem.
+        /// </summary>
+        internal static string AddItem {
+            get {
+                return ResourceManager.GetString("AddItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Administra facturas, notas de débito y notas de crédito.
+        /// </summary>
+        internal static string AdminBillingSubtitle {
+            get {
+                return ResourceManager.GetString("AdminBillingSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se encontraron {0} documentos.
+        /// </summary>
+        internal static string BillingCountSummary {
+            get {
+                return ResourceManager.GetString("BillingCountSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudieron cargar los documentos de facturación.
+        /// </summary>
+        internal static string BillingLoadError {
+            get {
+                return ResourceManager.GetString("BillingLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Crear documento de facturación.
+        /// </summary>
+        internal static string CreateBillingDocument {
+            get {
+                return ResourceManager.GetString("CreateBillingDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código de moneda.
+        /// </summary>
+        internal static string CurrencyCode {
+            get {
+                return ResourceManager.GetString("CurrencyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo crear el documento de facturación.
+        /// </summary>
+        internal static string DocumentCreateError {
+            get {
+                return ResourceManager.GetString("DocumentCreateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El documento de facturación se creó correctamente.
+        /// </summary>
+        internal static string DocumentCreated {
+            get {
+                return ResourceManager.GetString("DocumentCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo cargar el documento de facturación.
+        /// </summary>
+        internal static string DocumentLoadError {
+            get {
+                return ResourceManager.GetString("DocumentLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número de documento.
+        /// </summary>
+        internal static string DocumentNumber {
+            get {
+                return ResourceManager.GetString("DocumentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipo de documento.
+        /// </summary>
+        internal static string DocumentType {
+            get {
+                return ResourceManager.GetString("DocumentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nota de crédito.
+        /// </summary>
+        internal static string DocumentTypeCreditNote {
+            get {
+                return ResourceManager.GetString("DocumentTypeCreditNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nota de débito.
+        /// </summary>
+        internal static string DocumentTypeDebitNote {
+            get {
+                return ResourceManager.GetString("DocumentTypeDebitNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Factura.
+        /// </summary>
+        internal static string DocumentTypeInvoice {
+            get {
+                return ResourceManager.GetString("DocumentTypeInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Desconocido.
+        /// </summary>
+        internal static string DocumentTypeUnknown {
+            get {
+                return ResourceManager.GetString("DocumentTypeUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de vencimiento.
+        /// </summary>
+        internal static string DueDate {
+            get {
+                return ResourceManager.GetString("DueDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha desde.
+        /// </summary>
+        internal static string FromDate {
+            get {
+                return ResourceManager.GetString("FromDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de emisión.
+        /// </summary>
+        internal static string IssueDate {
+            get {
+                return ResourceManager.GetString("IssueDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ítems.
+        /// </summary>
+        internal static string LineItems {
+            get {
+                return ResourceManager.GetString("LineItems", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Producto.
+        /// </summary>
+        internal static string BillingProductLabel {
+            get {
+                return ResourceManager.GetString("BillingProductLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccionar producto.
+        /// </summary>
+        internal static string SelectProductOption {
+            get {
+                return ResourceManager.GetString("SelectProductOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total de línea.
+        /// </summary>
+        internal static string LineTotal {
+            get {
+                return ResourceManager.GetString("LineTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Marcar como emitido.
+        /// </summary>
+        internal static string MarkIssued {
+            get {
+                return ResourceManager.GetString("MarkIssued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Marcar como pagado.
+        /// </summary>
+        internal static string MarkPaid {
+            get {
+                return ResourceManager.GetString("MarkPaid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se encontraron documentos de facturación.
+        /// </summary>
+        internal static string NoBillingDocumentsFound {
+            get {
+                return ResourceManager.GetString("NoBillingDocumentsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sin fecha de vencimiento.
+        /// </summary>
+        internal static string NoDueDate {
+            get {
+                return ResourceManager.GetString("NoDueDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Notas.
+        /// </summary>
+        internal static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cantidad.
+        /// </summary>
+        internal static string Quantity {
+            get {
+                return ResourceManager.GetString("Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Quitar.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccionar.
+        /// </summary>
+        internal static string SelectOption {
+            get {
+                return ResourceManager.GetString("SelectOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccionar usuario.
+        /// </summary>
+        internal static string SelectUser {
+            get {
+                return ResourceManager.GetString("SelectUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Todos.
+        /// </summary>
+        internal static string StatusAll {
+            get {
+                return ResourceManager.GetString("StatusAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancelado.
+        /// </summary>
+        internal static string StatusCancelled {
+            get {
+                return ResourceManager.GetString("StatusCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Borrador.
+        /// </summary>
+        internal static string StatusDraft {
+            get {
+                return ResourceManager.GetString("StatusDraft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Emitido.
+        /// </summary>
+        internal static string StatusIssued {
+            get {
+                return ResourceManager.GetString("StatusIssued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pagado.
+        /// </summary>
+        internal static string StatusPaid {
+            get {
+                return ResourceManager.GetString("StatusPaid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo actualizar el estado.
+        /// </summary>
+        internal static string StatusUpdateError {
+            get {
+                return ResourceManager.GetString("StatusUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Estado actualizado correctamente.
+        /// </summary>
+        internal static string StatusUpdated {
+            get {
+                return ResourceManager.GetString("StatusUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ya posee una suscripción activa para este producto.
+        /// </summary>
+        internal static string SubscriptionAlreadyExists {
+            get {
+                return ResourceManager.GetString("SubscriptionAlreadyExists", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debe iniciar sesión para suscribirse a un producto.
+        /// </summary>
+        internal static string SubscriptionAuthRequired {
+            get {
+                return ResourceManager.GetString("SubscriptionAuthRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancelada el {0}.
+        /// </summary>
+        internal static string SubscriptionCancelledOn {
+            get {
+                return ResourceManager.GetString("SubscriptionCancelledOn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a El número de tarjeta no es válido.
+        /// </summary>
+        internal static string SubscriptionCardNumberInvalid {
+            get {
+                return ResourceManager.GetString("SubscriptionCardNumberInvalid", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a El número de tarjeta debe tener entre 12 y 19 dígitos.
+        /// </summary>
+        internal static string SubscriptionCardNumberLength {
+            get {
+                return ResourceManager.GetString("SubscriptionCardNumberLength", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número de tarjeta.
+        /// </summary>
+        internal static string SubscriptionCardNumberLabel {
+            get {
+                return ResourceManager.GetString("SubscriptionCardNumberLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese el número de la tarjeta.
+        /// </summary>
+        internal static string SubscriptionCardNumberRequired {
+            get {
+                return ResourceManager.GetString("SubscriptionCardNumberRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Titular de la tarjeta.
+        /// </summary>
+        internal static string SubscriptionCardholderLabel {
+            get {
+                return ResourceManager.GetString("SubscriptionCardholderLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese el titular de la tarjeta.
+        /// </summary>
+        internal static string SubscriptionCardholderRequired {
+            get {
+                return ResourceManager.GetString("SubscriptionCardholderRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Creada el {0}.
+        /// </summary>
+        internal static string SubscriptionCreatedOn {
+            get {
+                return ResourceManager.GetString("SubscriptionCreatedOn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suscripción creada correctamente.
+        /// </summary>
+        internal static string SubscriptionCreatedSuccess {
+            get {
+                return ResourceManager.GetString("SubscriptionCreatedSuccess", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo crear la suscripción.
+        /// </summary>
+        internal static string SubscriptionCreationFailed {
+            get {
+                return ResourceManager.GetString("SubscriptionCreationFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ir al panel.
+        /// </summary>
+        internal static string SubscriptionEmailButton {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailButton", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mensual.
+        /// </summary>
+        internal static string SubscriptionEmailDefaultCycle {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailDefaultCycle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hola {0},.
+        /// </summary>
+        internal static string SubscriptionEmailGreeting {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailGreeting", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hola,.
+        /// </summary>
+        internal static string SubscriptionEmailGreetingGeneric {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailGreetingGeneric", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Gracias por suscribirse al plan {0}. A continuación encontrará los detalles de su suscripción..
+        /// </summary>
+        internal static string SubscriptionEmailIntro {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailIntro", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Método de pago.
+        /// </summary>
+        internal static string SubscriptionEmailPayment {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailPayment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Plan.
+        /// </summary>
+        internal static string SubscriptionEmailPlan {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailPlan", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio.
+        /// </summary>
+        internal static string SubscriptionEmailPrice {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailPrice", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Producto.
+        /// </summary>
+        internal static string SubscriptionEmailProduct {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailProduct", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirmación de suscripción.
+        /// </summary>
+        internal static string SubscriptionEmailSubject {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailSubject", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Si tiene preguntas sobre su suscripción, contáctese con nuestro equipo de soporte..
+        /// </summary>
+        internal static string SubscriptionEmailSupport {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailSupport", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suscripción confirmada.
+        /// </summary>
+        internal static string SubscriptionEmailTitle {
+            get {
+                return ResourceManager.GetString("SubscriptionEmailTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a La tarjeta se encuentra vencida..
+        /// </summary>
+        internal static string SubscriptionExpirationExpired {
+            get {
+                return ResourceManager.GetString("SubscriptionExpirationExpired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a La fecha de vencimiento no es válida..
+        /// </summary>
+        internal static string SubscriptionExpirationInvalid {
+            get {
+                return ResourceManager.GetString("SubscriptionExpirationInvalid", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mes de vencimiento.
+        /// </summary>
+        internal static string SubscriptionExpirationMonth {
+            get {
+                return ResourceManager.GetString("SubscriptionExpirationMonth", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccione una fecha de vencimiento..
+        /// </summary>
+        internal static string SubscriptionExpirationRequired {
+            get {
+                return ResourceManager.GetString("SubscriptionExpirationRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Año de vencimiento.
+        /// </summary>
+        internal static string SubscriptionExpirationYear {
+            get {
+                return ResourceManager.GetString("SubscriptionExpirationYear", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccione un producto y complete los datos de la tarjeta para activar su suscripción..
+        /// </summary>
+        internal static string SubscriptionFormDescription {
+            get {
+                return ResourceManager.GetString("SubscriptionFormDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error al obtener las suscripciones..
+        /// </summary>
+        internal static string SubscriptionListError {
+            get {
+                return ResourceManager.GetString("SubscriptionListError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suscripciones actuales.
+        /// </summary>
+        internal static string SubscriptionListHeading {
+            get {
+                return ResourceManager.GetString("SubscriptionListHeading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suscripciones cargadas correctamente..
+        /// </summary>
+        internal static string SubscriptionListSuccess {
+            get {
+                return ResourceManager.GetString("SubscriptionListSuccess", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Aún no tiene suscripciones activas..
+        /// </summary>
+        internal static string SubscriptionNoItems {
+            get {
+                return ResourceManager.GetString("SubscriptionNoItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay productos disponibles para suscribirse en este momento..
+        /// </summary>
+        internal static string SubscriptionNoProductsAvailable {
+            get {
+                return ResourceManager.GetString("SubscriptionNoProductsAvailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Administrar suscripciones.
+        /// </summary>
+        internal static string SubscriptionPageHeading {
+            get {
+                return ResourceManager.GetString("SubscriptionPageHeading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mis Suscripciones - Hirebot TFI.
+        /// </summary>
+        internal static string SubscriptionPageTitle {
+            get {
+                return ResourceManager.GetString("SubscriptionPageTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pago.
+        /// </summary>
+        internal static string SubscriptionPaymentColumn {
+            get {
+                return ResourceManager.GetString("SubscriptionPaymentColumn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Plan.
+        /// </summary>
+        internal static string SubscriptionPlanColumn {
+            get {
+                return ResourceManager.GetString("SubscriptionPlanColumn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio.
+        /// </summary>
+        internal static string SubscriptionPriceColumn {
+            get {
+                return ResourceManager.GetString("SubscriptionPriceColumn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Producto.
+        /// </summary>
+        internal static string SubscriptionProductColumn {
+            get {
+                return ResourceManager.GetString("SubscriptionProductColumn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a El producto seleccionado no está disponible..
+        /// </summary>
+        internal static string SubscriptionProductInactive {
+            get {
+                return ResourceManager.GetString("SubscriptionProductInactive", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Producto.
+        /// </summary>
+        internal static string SubscriptionProductLabel {
+            get {
+                return ResourceManager.GetString("SubscriptionProductLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a El producto seleccionado no existe..
+        /// </summary>
+        internal static string SubscriptionProductNotFound {
+            get {
+                return ResourceManager.GetString("SubscriptionProductNotFound", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccione un producto..
+        /// </summary>
+        internal static string SubscriptionProductRequired {
+            get {
+                return ResourceManager.GetString("SubscriptionProductRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mes.
+        /// </summary>
+        internal static string SubscriptionSelectMonth {
+            get {
+                return ResourceManager.GetString("SubscriptionSelectMonth", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccione un producto.
+        /// </summary>
+        internal static string SubscriptionSelectProduct {
+            get {
+                return ResourceManager.GetString("SubscriptionSelectProduct", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Año.
+        /// </summary>
+        internal static string SubscriptionSelectYear {
+            get {
+                return ResourceManager.GetString("SubscriptionSelectYear", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Activa.
+        /// </summary>
+        internal static string SubscriptionStatusActive {
+            get {
+                return ResourceManager.GetString("SubscriptionStatusActive", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancelada.
+        /// </summary>
+        internal static string SubscriptionStatusCancelled {
+            get {
+                return ResourceManager.GetString("SubscriptionStatusCancelled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Estado.
+        /// </summary>
+        internal static string SubscriptionStatusColumn {
+            get {
+                return ResourceManager.GetString("SubscriptionStatusColumn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirmar suscripción.
+        /// </summary>
+        internal static string SubscriptionSubmitButton {
+            get {
+                return ResourceManager.GetString("SubscriptionSubmitButton", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error inesperado al procesar la suscripción..
+        /// </summary>
+        internal static string SubscriptionUnexpectedError {
+            get {
+                return ResourceManager.GetString("SubscriptionUnexpectedError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a El usuario de la suscripción no es válido..
+        /// </summary>
+        internal static string SubscriptionUserRequired {
+            get {
+                return ResourceManager.GetString("SubscriptionUserRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Suscripciones.
+        /// </summary>
+        internal static string SubscriptionsNav {
+            get {
+                return ResourceManager.GetString("SubscriptionsNav", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a Subtotal.
+        /// </summary>
+        internal static string Subtotal {
+            get {
+                return ResourceManager.GetString("Subtotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Impuestos.
+        /// </summary>
+        internal static string Tax {
+            get {
+                return ResourceManager.GetString("Tax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tasa de impuesto (%).
+        /// </summary>
+        internal static string TaxRate {
+            get {
+                return ResourceManager.GetString("TaxRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total.
+        /// </summary>
+        internal static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuario desconocido.
+        /// </summary>
+        internal static string UnknownUser {
+            get {
+                return ResourceManager.GetString("UnknownUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Producto desconocido.
+        /// </summary>
+        internal static string UnknownProduct {
+            get {
+                return ResourceManager.GetString("UnknownProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio unitario.
+        /// </summary>
+        internal static string UnitPrice {
+            get {
+                return ResourceManager.GetString("UnitPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuario.
+        /// </summary>
+        internal static string UserSearch {
+            get {
+                return ResourceManager.GetString("UserSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debes agregar al menos un ítem..
+        /// </summary>
+        internal static string ValidationAtLeastOneItem {
+            get {
+                return ResourceManager.GetString("ValidationAtLeastOneItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debes seleccionar un tipo de documento..
+        /// </summary>
+        internal static string ValidationDocumentTypeRequired {
+            get {
+                return ResourceManager.GetString("ValidationDocumentTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La descripción es obligatoria..
+        /// </summary>
+        internal static string ValidationItemDescription {
+            get {
+                return ResourceManager.GetString("ValidationItemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La cantidad debe ser mayor que cero..
+        /// </summary>
+        internal static string ValidationItemQuantity {
+            get {
+                return ResourceManager.GetString("ValidationItemQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La tasa de impuesto debe ser cero o mayor..
+        /// </summary>
+        internal static string ValidationItemTaxRate {
+            get {
+                return ResourceManager.GetString("ValidationItemTaxRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El precio unitario debe ser cero o mayor..
+        /// </summary>
+        internal static string ValidationItemUnitPrice {
+            get {
+                return ResourceManager.GetString("ValidationItemUnitPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor revise los siguientes errores:.
+        /// </summary>
+        internal static string ValidationSummaryHeader {
+            get {
+                return ResourceManager.GetString("ValidationSummaryHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debes seleccionar un usuario..
+        /// </summary>
+        internal static string ValidationUserRequired {
+            get {
+                return ResourceManager.GetString("ValidationUserRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debes seleccionar un producto..
+        /// </summary>
+        internal static string ValidationItemProduct {
+            get {
+                return ResourceManager.GetString("ValidationItemProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Por favor ingresa un correo electrónico válido.
         /// </summary>
         internal static string ValidEmailRequired {

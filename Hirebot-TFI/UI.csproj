@@ -1,4 +1,4 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -118,6 +118,7 @@
     <Content Include="ForgotPassword.aspx" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="FAQ.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="AboutUs.aspx" />
     <Content Include="ContactUs.aspx" />
@@ -132,6 +133,7 @@
     <Content Include="Controls\PublicLanguageSelector.ascx" />
     <Content Include="Controls\PaginatedDataTable.ascx" />
     <Content Include="Controls\ToastNotification.ascx" />
+    <Content Include="Controls\SurveyDisplay.ascx" />
     <Content Include="Catalog.aspx" />
     <Content Include="OrganizationAdmin.aspx" />
     <Content Include="OrganizationDashboard.aspx" />
@@ -140,6 +142,13 @@
     <Content Include="Public.master" />
     <Content Include="Protected.master" />
     <Content Include="Global.asax" />
+    <Content Include="AdminNews.aspx" />
+    <Content Include="AdminBilling.aspx" />
+    <Content Include="AdminReports.aspx" />
+    <Content Include="AdminSurveys.aspx" />
+    <Content Include="News.aspx" />
+    <Content Include="Subscriptions.aspx" />
+    <Content Include="Account.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_GlobalResources\GlobalResources.designer.cs">
@@ -209,6 +218,13 @@
     </Compile>
     <Compile Include="AboutUs.aspx.designer.cs">
       <DependentUpon>AboutUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FAQ.aspx.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FAQ.aspx.designer.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
     </Compile>
     <Compile Include="ContactUs.aspx.cs">
       <DependentUpon>ContactUs.aspx</DependentUpon>
@@ -294,6 +310,13 @@
     <Compile Include="Controls\ToastNotification.ascx.designer.cs">
       <DependentUpon>ToastNotification.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SurveyDisplay.ascx.cs">
+      <DependentUpon>SurveyDisplay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SurveyDisplay.ascx.designer.cs">
+      <DependentUpon>SurveyDisplay.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Catalog.aspx.cs">
       <DependentUpon>Catalog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -336,6 +359,55 @@
     <Compile Include="Public.master.designer.cs">
       <DependentUpon>Public.master</DependentUpon>
     </Compile>
+    <Compile Include="AdminNews.aspx.cs">
+      <DependentUpon>AdminNews.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminNews.aspx.designer.cs">
+      <DependentUpon>AdminNews.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminBilling.aspx.cs">
+      <DependentUpon>AdminBilling.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminBilling.aspx.designer.cs">
+      <DependentUpon>AdminBilling.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminReports.aspx.cs">
+      <DependentUpon>AdminReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminReports.aspx.designer.cs">
+      <DependentUpon>AdminReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSurveys.aspx.cs">
+      <DependentUpon>AdminSurveys.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSurveys.aspx.designer.cs">
+      <DependentUpon>AdminSurveys.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Subscriptions.aspx.cs">
+      <DependentUpon>Subscriptions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subscriptions.aspx.designer.cs">
+      <DependentUpon>Subscriptions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ABSTRACTIONS\ABSTRACTIONS.csproj">
@@ -349,6 +421,10 @@
     <ProjectReference Include="..\security\SECURITY.csproj">
       <Project>{4f21d190-d656-4672-8957-3bb8ab68f9a7}</Project>
       <Name>SECURITY</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SERVICES\SERVICES.csproj">
+      <Project>{c5083eee-e985-40f1-b0c6-91b4b2bcee7e}</Project>
+      <Name>SERVICES</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

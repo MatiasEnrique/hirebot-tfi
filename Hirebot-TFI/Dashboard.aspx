@@ -1,4 +1,5 @@
 <%@ Page Title="Dashboard - Hirebot-TFI" Language="C#" MasterPageFile="~/Protected.master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="Hirebot_TFI.Dashboard" %>
+<%@ Register Src="~/Controls/SurveyDisplay.ascx" TagPrefix="uc" TagName="SurveyDisplay" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Dashboard - Hirebot-TFI
@@ -22,6 +23,12 @@
                         <h1><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Welcome %>" /></h1>
                         <h3><asp:Label ID="lblUserName" runat="server"></asp:Label></h3>
                         <p class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,DashboardWelcomeMessage %>" /></p>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <uc:SurveyDisplay ID="SurveyDisplayControl" runat="server" />
+                        </div>
                     </div>
 
                     <div class="row">

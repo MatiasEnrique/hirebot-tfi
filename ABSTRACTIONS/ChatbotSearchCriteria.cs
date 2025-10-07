@@ -66,8 +66,22 @@ namespace ABSTRACTIONS
             if (PageSize > 100) PageSize = 100;
 
             // Normalize string values
-            Name = Name?.Trim() ?? string.Empty;
-            Color = Color?.Trim()?.ToUpper() ?? string.Empty;
+            if (!string.IsNullOrEmpty(Name))
+            {
+                Name = Name.Trim();
+            }
+            else
+            {
+                Name = string.Empty;
+            }
+            if (!string.IsNullOrEmpty(Color))
+            {
+                Color = Color.Trim().ToUpper();
+            }
+            else
+            {
+                Color = string.Empty;
+            }
 
             // Validate sort column
             var validSortColumns = new[] { "chatbot_id", "name", "created_date", "updated_date", "organization_name" };
@@ -77,7 +91,14 @@ namespace ABSTRACTIONS
             }
 
             // Validate sort direction
-            SortDirection = SortDirection?.ToUpper();
+            if (!string.IsNullOrEmpty(SortDirection))
+            {
+                SortDirection = SortDirection.ToUpper();
+            }
+            else
+            {
+                SortDirection = string.Empty;
+            }
             if (SortDirection != "ASC" && SortDirection != "DESC")
             {
                 SortDirection = "DESC";

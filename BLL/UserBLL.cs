@@ -17,6 +17,189 @@ namespace BLL
             userDAL = new UserDALProduction();
         }
 
+        #region User Account Module
+
+        public UserAccountDashboardResult GetUserAccountDashboard(int userId)
+        {
+            if (userId <= 0)
+            {
+                return UserAccountDashboardResult.Failure(-1, GetLocalizedString("UserNotFound"));
+            }
+
+            return userDAL.GetUserAccountDashboard(userId);
+        }
+
+        public DatabaseResult UpdateUserProfile(int userId, string firstName, string lastName, string email)
+        {
+            var validation = ValidateProfileUpdate(userId, firstName, lastName, email);
+            if (!validation.IsSuccessful)
+            {
+                return validation;
+            }
+
+            var result = userDAL.UpdateUserProfile(userId, firstName.Trim(), lastName.Trim(), email.Trim());
+            if (result.IsSuccessful)
+            {
+                return DatabaseResult.Success(GetLocalizedString("ProfileUpdateSuccess"));
+            }
+
+            return DatabaseResult.Failure(result.ResultCode, string.IsNullOrWhiteSpace(result.ErrorMessage)
+                ? GetLocalizedString("ProfileUpdateError")
+                : result.ErrorMessage);
+        }
+
+        public DatabaseResult ChangePassword(int userId, string currentPassword, string newPassword, string confirmPassword)
+        {
+            var validation = ValidatePasswordChange(userId, currentPassword, newPassword, confirmPassword);
+            if (!validation.IsSuccessful)
+            {
+                return validation;
+            }
+
+            string currentHash = SERVICES.EncryptionService.EncryptPassword(currentPassword);
+            string newHash = SERVICES.EncryptionService.EncryptPassword(newPassword);
+
+            if (string.Equals(currentHash, newHash, StringComparison.OrdinalIgnoreCase))
+            {
+                return DatabaseResult.Failure(-6, GetLocalizedString("PasswordMustDiffer"));
+            }
+
+            var result = userDAL.UpdateUserPassword(userId, currentHash, newHash);
+            if (result.IsSuccessful)
+            {
+                TrySendPasswordChangeEmail(userId);
+                return DatabaseResult.Success(GetLocalizedString("PasswordChangeSuccess"));
+            }
+
+            return DatabaseResult.Failure(result.ResultCode, string.IsNullOrWhiteSpace(result.ErrorMessage)
+                ? GetLocalizedString("PasswordChangeError")
+                : result.ErrorMessage);
+        }
+
+        public DatabaseResult CancelSubscription(int userId, int subscriptionId)
+        {
+            if (userId <= 0)
+            {
+                return DatabaseResult.Failure(-1, GetLocalizedString("UserNotFound"));
+            }
+
+            if (subscriptionId <= 0)
+            {
+                return DatabaseResult.Failure(-2, GetLocalizedString("SubscriptionInvalid"));
+            }
+
+            var result = userDAL.CancelUserSubscription(userId, subscriptionId);
+            if (result.IsSuccessful)
+            {
+                return DatabaseResult.Success(GetLocalizedString("SubscriptionCancelSuccess"));
+            }
+
+            string messageKey = string.Empty;
+            switch (result.ResultCode)
+            {
+                case -1:
+                case -3:
+                    messageKey = "UserNotFound";
+                    break;
+                case -2:
+                    messageKey = "SubscriptionInvalid";
+                    break;
+                case -4:
+                    messageKey = "SubscriptionNotFound";
+                    break;
+                case -5:
+                    messageKey = "SubscriptionAlreadyCancelled";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(messageKey))
+            {
+                return DatabaseResult.Failure(result.ResultCode, GetLocalizedString(messageKey));
+            }
+
+            return DatabaseResult.Failure(result.ResultCode,
+                string.IsNullOrWhiteSpace(result.ErrorMessage)
+                    ? GetLocalizedString("SubscriptionCancelError")
+                    : result.ErrorMessage);
+        }
+
+        private DatabaseResult ValidateProfileUpdate(int userId, string firstName, string lastName, string email)
+        {
+            if (userId <= 0)
+                return DatabaseResult.Failure(-1, GetLocalizedString("UserNotFound"));
+
+            if (string.IsNullOrWhiteSpace(firstName))
+                return DatabaseResult.Failure(-2, GetLocalizedString("FirstNameRequired"));
+
+            if (firstName.Trim().Length < 2)
+                return DatabaseResult.Failure(-3, GetLocalizedString("FirstNameMinLength"));
+
+            if (firstName.Trim().Length > 100)
+                return DatabaseResult.Failure(-4, GetLocalizedString("FirstNameMaxLength"));
+
+            if (string.IsNullOrWhiteSpace(lastName))
+                return DatabaseResult.Failure(-5, GetLocalizedString("LastNameRequired"));
+
+            if (lastName.Trim().Length < 2)
+                return DatabaseResult.Failure(-6, GetLocalizedString("LastNameMinLength"));
+
+            if (lastName.Trim().Length > 100)
+                return DatabaseResult.Failure(-7, GetLocalizedString("LastNameMaxLength"));
+
+            if (string.IsNullOrWhiteSpace(email))
+                return DatabaseResult.Failure(-8, GetLocalizedString("EmailRequired"));
+
+            if (!IsEmailFormat(email.Trim()))
+                return DatabaseResult.Failure(-9, GetLocalizedString("EmailInvalid"));
+
+            return DatabaseResult.Success();
+        }
+
+        private DatabaseResult ValidatePasswordChange(int userId, string currentPassword, string newPassword, string confirmPassword)
+        {
+            if (userId <= 0)
+                return DatabaseResult.Failure(-1, GetLocalizedString("UserNotFound"));
+
+            if (string.IsNullOrWhiteSpace(currentPassword))
+                return DatabaseResult.Failure(-2, GetLocalizedString("CurrentPasswordRequired"));
+
+            if (string.IsNullOrWhiteSpace(newPassword))
+                return DatabaseResult.Failure(-3, GetLocalizedString("PasswordRequired"));
+
+            if (newPassword.Length < 6)
+                return DatabaseResult.Failure(-4, GetLocalizedString("PasswordMinLength"));
+
+            if (string.IsNullOrWhiteSpace(confirmPassword))
+                return DatabaseResult.Failure(-5, GetLocalizedString("PasswordConfirmationRequired"));
+
+            if (!string.Equals(newPassword, confirmPassword))
+                return DatabaseResult.Failure(-6, GetLocalizedString("PasswordsDoNotMatch"));
+
+            if (string.Equals(currentPassword, newPassword, StringComparison.Ordinal))
+                return DatabaseResult.Failure(-7, GetLocalizedString("PasswordMustDiffer"));
+
+            return DatabaseResult.Success();
+        }
+
+        private void TrySendPasswordChangeEmail(int userId)
+        {
+            try
+            {
+                var dashboard = userDAL.GetUserAccountDashboard(userId);
+                if (!dashboard.IsSuccessful || dashboard.Data?.Profile == null)
+                    return;
+
+                var profile = dashboard.Data.Profile;
+                EmailService.SendPasswordChangeConfirmationEmail(profile.Email, profile.FullName);
+            }
+            catch
+            {
+                // Swallow email errors to avoid breaking password change flow
+            }
+        }
+
+        #endregion
+
         public AuthenticationResult RegisterUser(string username, string email, string password, string confirmPassword, string firstName, string lastName)
         {
             var validationResult = ValidateRegistration(username, email, password, confirmPassword, firstName, lastName);

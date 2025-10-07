@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;
+using System.Globalization;
 using System.Text;
 using System.Web;
 
@@ -152,6 +153,11 @@ namespace SERVICES
             return message;
         }
 
+        private static void AppendLineWithFormat(StringBuilder builder, string format, params object[] args)
+        {
+            builder.AppendLine(string.Format(CultureInfo.InvariantCulture, format, args));
+        }
+
         /// <summary>
         /// Sends an email with proper error handling and logging
         /// </summary>
@@ -243,7 +249,7 @@ namespace SERVICES
             sb.AppendLine("<head>");
             sb.AppendLine("    <meta charset=\"UTF-8\">");
             sb.AppendLine("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
-            sb.AppendLine($"    <title>{title}</title>");
+            AppendLineWithFormat(sb, "    <title>{0}</title>", title);
             sb.AppendLine("    <style>");
             sb.AppendLine("        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f4f4; }");
             sb.AppendLine("        .container { max-width: 600px; margin: 0 auto; background-color: white; }");
@@ -256,24 +262,24 @@ namespace SERVICES
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
             sb.AppendLine("    <div class=\"container\">");
-            sb.AppendLine($"        <div class=\"header\">");
-            sb.AppendLine($"            <h1>{config.CompanyName}</h1>");
-            sb.AppendLine($"        </div>");
+            sb.AppendLine("        <div class=\"header\">");
+            AppendLineWithFormat(sb, "            <h1>{0}</h1>", config.CompanyName);
+            sb.AppendLine("        </div>");
             sb.AppendLine("        <div class=\"content\">");
-            sb.AppendLine($"            <h2>{title}</h2>");
+            AppendLineWithFormat(sb, "            <h2>{0}</h2>", title);
             sb.AppendLine(content);
             
             if (!string.IsNullOrEmpty(buttonText) && !string.IsNullOrEmpty(buttonUrl))
             {
                 sb.AppendLine("            <div style=\"text-align: center;\">");
-                sb.AppendLine($"                <a href=\"{buttonUrl}\" class=\"button\">{buttonText}</a>");
+                AppendLineWithFormat(sb, "                <a href=\"{0}\" class=\"button\">{1}</a>", buttonUrl, buttonText);
                 sb.AppendLine("            </div>");
             }
             
             sb.AppendLine("        </div>");
             sb.AppendLine("        <div class=\"footer\">");
-            sb.AppendLine($"            <p>&copy; 2024 {config.CompanyName}. {GetLocalizedString("AllRightsReserved")}</p>");
-            sb.AppendLine($"            <p><a href=\"mailto:{config.SupportEmail}\">{config.SupportEmail}</a> | <a href=\"{config.CompanyWebsite}\">{GetLocalizedString("VisitWebsite")}</a></p>");
+            AppendLineWithFormat(sb, "            <p>&copy; 2024 {0}. {1}</p>", config.CompanyName, GetLocalizedString("AllRightsReserved"));
+            AppendLineWithFormat(sb, "            <p><a href=\"mailto:{0}\">{0}</a> | <a href=\"{1}\">{2}</a></p>", config.SupportEmail, config.CompanyWebsite, GetLocalizedString("VisitWebsite"));
             sb.AppendLine("        </div>");
             sb.AppendLine("    </div>");
             sb.AppendLine("</body>");
@@ -306,11 +312,11 @@ namespace SERVICES
                     : string.Format(GetLocalizedString("PasswordRecoveryGreeting"), userName);
                 
                 var content = new StringBuilder();
-                content.AppendLine($"<p>{greeting}</p>");
-                content.AppendLine($"<p>{GetLocalizedString("PasswordRecoveryMessage")}</p>");
-                content.AppendLine($"<p>{GetLocalizedString("PasswordRecoveryInstructions")}</p>");
-                content.AppendLine($"<p style=\"color: #666; font-size: 12px;\">{GetLocalizedString("PasswordRecoveryExpiration")}</p>");
-                content.AppendLine($"<p style=\"color: #666; font-size: 12px;\">{GetLocalizedString("PasswordRecoveryDisclaimer")}</p>");
+                AppendLineWithFormat(content, "<p>{0}</p>", greeting);
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("PasswordRecoveryMessage"));
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("PasswordRecoveryInstructions"));
+                AppendLineWithFormat(content, "<p style=\"color: #666; font-size: 12px;\">{0}</p>", GetLocalizedString("PasswordRecoveryExpiration"));
+                AppendLineWithFormat(content, "<p style=\"color: #666; font-size: 12px;\">{0}</p>", GetLocalizedString("PasswordRecoveryDisclaimer"));
 
                 string htmlBody = BuildEmailTemplate(
                     GetLocalizedString("PasswordRecoveryTitle"),
@@ -361,10 +367,10 @@ namespace SERVICES
                     : string.Format(GetLocalizedString("PasswordChangeConfirmationGreeting"), userName);
 
                 var content = new StringBuilder();
-                content.AppendLine($"<p>{greeting}</p>");
-                content.AppendLine($"<p>{GetLocalizedString("PasswordChangeConfirmationMessage")}</p>");
-                content.AppendLine($"<p>{GetLocalizedString("PasswordChangeConfirmationSecurity")}</p>");
-                content.AppendLine($"<p>{GetLocalizedString("PasswordChangeConfirmationContact")}</p>");
+                AppendLineWithFormat(content, "<p>{0}</p>", greeting);
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("PasswordChangeConfirmationMessage"));
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("PasswordChangeConfirmationSecurity"));
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("PasswordChangeConfirmationContact"));
 
                 string htmlBody = BuildEmailTemplate(
                     GetLocalizedString("PasswordChangeConfirmationTitle"),
@@ -387,6 +393,67 @@ namespace SERVICES
             catch (Exception ex)
             {
                 // Error sending password change confirmation email to {userEmail}: {ex.Message}
+                return false;
+            }
+        }
+
+        public static bool SendSubscriptionConfirmationEmail(string userEmail, string userName, string productName, string billingCycle, decimal productPrice, string cardLast4, string cardBrand)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(userEmail) || string.IsNullOrWhiteSpace(productName))
+                {
+                    return false;
+                }
+
+                string subject = GetLocalizedString("SubscriptionEmailSubject");
+                string greeting = string.IsNullOrWhiteSpace(userName)
+                    ? GetLocalizedString("SubscriptionEmailGreetingGeneric")
+                    : string.Format(GetLocalizedString("SubscriptionEmailGreeting"), userName);
+
+                var content = new StringBuilder();
+                AppendLineWithFormat(content, "<p>{0}</p>", greeting);
+                AppendLineWithFormat(content, "<p>{0}</p>", string.Format(GetLocalizedString("SubscriptionEmailIntro"), productName));
+                AppendLineWithFormat(content, "<p><strong>{0}:</strong> {1}</p>", GetLocalizedString("SubscriptionEmailProduct"), productName);
+
+                string cycleText = string.IsNullOrWhiteSpace(billingCycle)
+                    ? GetLocalizedString("SubscriptionEmailDefaultCycle")
+                    : billingCycle;
+                AppendLineWithFormat(content, "<p><strong>{0}:</strong> {1}</p>", GetLocalizedString("SubscriptionEmailPlan"), cycleText);
+
+                AppendLineWithFormat(
+                    content,
+                    "<p><strong>{0}:</strong> {1}</p>",
+                    GetLocalizedString("SubscriptionEmailPrice"),
+                    productPrice.ToString("C", CultureInfo.CurrentCulture));
+
+                if (!string.IsNullOrWhiteSpace(cardLast4))
+                {
+                    string maskedCard = string.Format(CultureInfo.InvariantCulture, "**** **** **** {0}", cardLast4);
+                    string paymentDetail = maskedCard;
+
+                    if (!string.IsNullOrWhiteSpace(cardBrand))
+                    {
+                        paymentDetail = string.Format(CultureInfo.InvariantCulture, "{0} ({1})", maskedCard, cardBrand);
+                    }
+
+                    AppendLineWithFormat(content, "<p><strong>{0}:</strong> {1}</p>", GetLocalizedString("SubscriptionEmailPayment"), paymentDetail);
+                }
+
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("SubscriptionEmailSupport"));
+
+                var config = GetConfiguration();
+                string htmlBody = BuildEmailTemplate(
+                    GetLocalizedString("SubscriptionEmailTitle"),
+                    content.ToString(),
+                    GetLocalizedString("SubscriptionEmailButton"),
+                    config.CompanyWebsite
+                );
+
+                return SendEmail(userEmail, userName, subject, htmlBody);
+            }
+            catch
+            {
                 return false;
             }
         }
@@ -415,15 +482,15 @@ namespace SERVICES
                     : string.Format(GetLocalizedString("WelcomeEmailGreeting"), userName);
 
                 var content = new StringBuilder();
-                content.AppendLine($"<p>{greeting}</p>");
-                content.AppendLine($"<p>{string.Format(GetLocalizedString("WelcomeEmailMessage"), config.CompanyName)}</p>");
-                content.AppendLine($"<p>{GetLocalizedString("WelcomeEmailFeatures")}</p>");
+                AppendLineWithFormat(content, "<p>{0}</p>", greeting);
+                AppendLineWithFormat(content, "<p>{0}</p>", string.Format(GetLocalizedString("WelcomeEmailMessage"), config.CompanyName));
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("WelcomeEmailFeatures"));
                 content.AppendLine("<ul>");
-                content.AppendLine($"    <li>{GetLocalizedString("WelcomeEmailFeature1")}</li>");
-                content.AppendLine($"    <li>{GetLocalizedString("WelcomeEmailFeature2")}</li>");
-                content.AppendLine($"    <li>{GetLocalizedString("WelcomeEmailFeature3")}</li>");
+                AppendLineWithFormat(content, "    <li>{0}</li>", GetLocalizedString("WelcomeEmailFeature1"));
+                AppendLineWithFormat(content, "    <li>{0}</li>", GetLocalizedString("WelcomeEmailFeature2"));
+                AppendLineWithFormat(content, "    <li>{0}</li>", GetLocalizedString("WelcomeEmailFeature3"));
                 content.AppendLine("</ul>");
-                content.AppendLine($"<p>{GetLocalizedString("WelcomeEmailSupport")}</p>");
+                AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("WelcomeEmailSupport"));
 
                 string buttonText = "";
                 string buttonUrl = "";
@@ -476,13 +543,13 @@ namespace SERVICES
                 }
 
                 var config = GetConfiguration();
-                string subject = $"{config.CompanyName} - Email Service Test";
+                string subject = string.Format("{0} - Email Service Test", config.CompanyName);
                 
                 var content = new StringBuilder();
                 content.AppendLine("<p>This is a test email to verify that the email service is working correctly.</p>");
-                content.AppendLine($"<p>Sent at: {DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>");
-                content.AppendLine($"<p>SMTP Server: {config.SmtpServer}:{config.SmtpPort}</p>");
-                content.AppendLine($"<p>SSL Enabled: {config.EnableSSL}</p>");
+                AppendLineWithFormat(content, "<p>Sent at: {0}</p>", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
+                AppendLineWithFormat(content, "<p>SMTP Server: {0}:{1}</p>", config.SmtpServer, config.SmtpPort);
+                AppendLineWithFormat(content, "<p>SSL Enabled: {0}</p>", config.EnableSSL);
 
                 string htmlBody = BuildEmailTemplate("Email Service Test", content.ToString());
 

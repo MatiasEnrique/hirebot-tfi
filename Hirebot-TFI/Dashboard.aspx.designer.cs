@@ -15,6 +15,16 @@ namespace Hirebot_TFI
     {
 
         /// <summary>
+        /// SurveyDisplayControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Hirebot_TFI.Controls.SurveyDisplay SurveyDisplayControl;
+
+
+        /// <summary>
         /// lblUserName control.
         /// </summary>
         /// <remarks>

@@ -37,7 +37,20 @@
       "Bash(net start:*)",
       "Bash(powershell.exe:*)",
       "Bash(cmd.exe /c \"sc query MSSQL$SQLEXPRESS\")",
-      "Read(//usr/**)"
+      "Read(//usr/**)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" Hirebot-TFI.sln /p:Configuration=Debug /nologo /verbosity:minimal)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" Hirebot-TFI.sln /p:Configuration=Debug /verbosity:minimal)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" \"Hirebot-TFI\\Hirebot-TFI.csproj\" /p:Configuration=Debug /verbosity:minimal)",
+      "Bash(csc:*)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" ABSTRACTIONS.csproj /p:Configuration=Debug /verbosity:minimal)",
+      "Bash(for key in ProfileComingSoon JobsComingSoon ChatComingSoon)",
+      "Bash(if grep -q \"name=\"\"$key\"\"\" GlobalResources.en.resx)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" Hirebot-TFI.sln /p:Configuration=Debug /t:Build /nologo /v:minimal)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" Hirebot-TFI.sln /p:Configuration=Debug /v:minimal)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" \"Hirebot-TFI.sln\")",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" \"C:\\Users\\matis\\Documents\\Facultad\\Hirebot-TFI\\Hirebot-TFI.sln\" /p:Configuration=Debug /t:Build /v:minimal)",
+      "Bash(\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe\" \"C:\\Users\\matis\\Documents\\Facultad\\Hirebot-TFI\\Hirebot-TFI.sln\" /p:Configuration=Debug /v:minimal)",
+      "Bash(cmd.exe:*)"
     ],
     "deny": [],
     "ask": []

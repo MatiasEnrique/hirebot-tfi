@@ -71,6 +71,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ProductCatalog %>" /></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="News.aspx">
+                                <i class="bi bi-newspaper me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsNavigation %>" />
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="institutionalDropdown" role="button" data-bs-toggle="dropdown">
                                 <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutCompany %>" />
@@ -78,6 +83,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="AboutUs.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutUs %>" /></a></li>
                                 <li><a class="dropdown-item" href="ContactUs.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ContactUs %>" /></a></li>
+                                <li><a class="dropdown-item" href="FAQ.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,FAQNavigation %>" /></a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="TermsConditions.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TermsConditions %>" /></a></li>
                                 <li><a class="dropdown-item" href="PrivacyPolicy.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PrivacyPolicy %>" /></a></li>
@@ -104,6 +110,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="Dashboard.aspx"><i class="bi bi-speedometer2 me-2"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Dashboard %>" /></a></li>
+                                    <li><a class="dropdown-item" href="Subscriptions.aspx"><i class="bi bi-credit-card me-2"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SubscriptionsNav %>" /></a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" OnClick="btnLogout_Click">

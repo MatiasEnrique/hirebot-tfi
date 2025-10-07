@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
@@ -13,13 +14,242 @@ namespace SECURITY
     {
         private readonly UserBLL userBLL;
         private readonly LogBLL _logBLL;
+        private readonly RecaptchaService _recaptchaService;
 
         public UserSecurity()
         {
             userBLL = new UserBLL();
             _logBLL = new LogBLL();
+            _recaptchaService = new RecaptchaService();
         }
 
+        #region User Account Module
+
+        public UserAccountDashboardResult GetCurrentUserAccountDashboard()
+        {
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                {
+                    return UserAccountDashboardResult.Failure(-401, "User not authenticated.");
+                }
+
+                var result = userBLL.GetUserAccountDashboard(currentUser.UserId);
+                if (result.IsSuccessful && result.Data?.Profile != null)
+                {
+                    UpdateSessionUser(result.Data.Profile);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logBLL.CreateLog(new Log
+                {
+                    LogType = LogService.LogTypes.ERROR,
+                    UserId = null,
+                    Description = $"Account dashboard error: {ex.Message}",
+                    CreatedAt = DateTime.Now
+                });
+
+                return UserAccountDashboardResult.Failure(-999, "Error loading account information.");
+            }
+        }
+
+        public DatabaseResult UpdateCurrentUserProfile(string firstName, string lastName, string email)
+        {
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                {
+                    return DatabaseResult.Failure(-401, "User not authenticated.");
+                }
+
+                var result = userBLL.UpdateUserProfile(currentUser.UserId, firstName, lastName, email);
+                if (result.IsSuccessful)
+                {
+                    _logBLL.CreateLog(new Log
+                    {
+                        LogType = LogService.LogTypes.UPDATE,
+                        UserId = currentUser.UserId,
+                        Description = $"User {currentUser.Username} updated profile",
+                        CreatedAt = DateTime.Now
+                    });
+
+                    RefreshCurrentUser();
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logBLL.CreateLog(new Log
+                {
+                    LogType = LogService.LogTypes.ERROR,
+                    UserId = null,
+                    Description = $"Profile update error: {ex.Message}",
+                    CreatedAt = DateTime.Now
+                });
+
+                return DatabaseResult.Failure(-999, "An unexpected error occurred.");
+            }
+        }
+
+        public DatabaseResult ChangeCurrentUserPassword(string currentPassword, string newPassword, string confirmPassword)
+        {
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                {
+                    return DatabaseResult.Failure(-401, "User not authenticated.");
+                }
+
+                var result = userBLL.ChangePassword(currentUser.UserId, currentPassword, newPassword, confirmPassword);
+                if (result.IsSuccessful)
+                {
+                    _logBLL.CreateLog(new Log
+                    {
+                        LogType = LogService.LogTypes.SYSTEM,
+                        UserId = currentUser.UserId,
+                        Description = $"User {currentUser.Username} changed password",
+                        CreatedAt = DateTime.Now
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logBLL.CreateLog(new Log
+                {
+                    LogType = LogService.LogTypes.ERROR,
+                    UserId = null,
+                    Description = $"Password change error: {ex.Message}",
+                    CreatedAt = DateTime.Now
+                });
+
+                return DatabaseResult.Failure(-999, "An unexpected error occurred.");
+            }
+        }
+
+        public DatabaseResult CancelCurrentUserSubscription(int subscriptionId)
+        {
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                {
+                    return DatabaseResult.Failure(-401, "User not authenticated.");
+                }
+
+                var result = userBLL.CancelSubscription(currentUser.UserId, subscriptionId);
+                if (result.IsSuccessful)
+                {
+                    _logBLL.CreateLog(new Log
+                    {
+                        LogType = LogService.LogTypes.UPDATE,
+                        UserId = currentUser.UserId,
+                        Description = $"User {currentUser.Username} cancelled subscription {subscriptionId}",
+                        CreatedAt = DateTime.Now
+                    });
+
+                    RefreshCurrentUser();
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logBLL.CreateLog(new Log
+                {
+                    LogType = LogService.LogTypes.ERROR,
+                    UserId = null,
+                    Description = $"Subscription cancel error: {ex.Message}",
+                    CreatedAt = DateTime.Now
+                });
+
+                return DatabaseResult.Failure(-999, "An unexpected error occurred.");
+            }
+        }
+
+        private void UpdateSessionUser(UserAccountProfile profile)
+        {
+            try
+            {
+                if (profile == null || HttpContext.Current?.Session == null)
+                {
+                    return;
+                }
+
+                var sessionUser = HttpContext.Current.Session["CurrentUser"] as User;
+                if (sessionUser == null)
+                {
+                    sessionUser = new User();
+                }
+
+                sessionUser.UserId = profile.UserId;
+                sessionUser.Username = profile.Username;
+                sessionUser.Email = profile.Email;
+                sessionUser.FirstName = profile.FirstName;
+                sessionUser.LastName = profile.LastName;
+                sessionUser.IsActive = profile.IsActive;
+
+                HttpContext.Current.Session["CurrentUser"] = sessionUser;
+            }
+            catch
+            {
+                // Ignore session update errors
+            }
+        }
+
+        private void RefreshCurrentUser()
+        {
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                {
+                    return;
+                }
+
+                var refreshed = userBLL.GetUserByUsername(currentUser.Username);
+                if (refreshed != null && HttpContext.Current?.Session != null)
+                {
+                    HttpContext.Current.Session["CurrentUser"] = refreshed;
+                }
+            }
+            catch
+            {
+                // Ignore refresh errors
+            }
+        }
+
+        #endregion
+
+        public RecaptchaValidationResult ValidateRecaptchaToken(string responseToken, string userIpAddress)
+        {
+            var result = _recaptchaService.ValidateToken(
+                responseToken,
+                ConfigurationManager.AppSettings["Recaptcha.SecretKey"],
+                userIpAddress);
+
+            if (!result.IsValid && (string.Equals(result.FailureReason, "missing-secret", StringComparison.OrdinalIgnoreCase) ||
+                                    string.Equals(result.FailureReason, "verification-exception", StringComparison.OrdinalIgnoreCase)))
+            {
+                _logBLL.CreateLog(new Log
+                {
+                    LogType = LogService.LogTypes.ERROR,
+                    UserId = null,
+                    Description = $"reCAPTCHA validation issue: {result.FailureReason}",
+                    CreatedAt = DateTime.Now
+                });
+            }
+
+            return result;
+        }
         public AuthenticationResult RegisterUser(string username, string email, string password, string confirmPassword, string firstName, string lastName)
         {
             try
