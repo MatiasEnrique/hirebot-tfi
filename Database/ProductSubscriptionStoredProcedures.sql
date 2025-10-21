@@ -20,6 +20,8 @@ BEGIN
         [CardholderName] NVARCHAR(150) NOT NULL,
         [CardLast4] CHAR(4) NOT NULL,
         [CardBrand] NVARCHAR(50) NULL,
+        [EncryptedCardNumber] NVARCHAR(MAX) NOT NULL,
+        [EncryptedCardholderName] NVARCHAR(MAX) NOT NULL,
         [ExpirationMonth] TINYINT NOT NULL,
         [ExpirationYear] SMALLINT NOT NULL,
         [CreatedDateUtc] DATETIME NOT NULL DEFAULT GETUTCDATE(),
@@ -50,6 +52,34 @@ BEGIN
 END
 GO
 
+IF COL_LENGTH('dbo.ProductSubscriptions', 'EncryptedCardNumber') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[ProductSubscriptions]
+        ADD [EncryptedCardNumber] NVARCHAR(MAX) NULL;
+
+    UPDATE [dbo].[ProductSubscriptions]
+        SET [EncryptedCardNumber] = ''
+        WHERE [EncryptedCardNumber] IS NULL;
+
+    ALTER TABLE [dbo].[ProductSubscriptions]
+        ALTER COLUMN [EncryptedCardNumber] NVARCHAR(MAX) NOT NULL;
+END
+GO
+
+IF COL_LENGTH('dbo.ProductSubscriptions', 'EncryptedCardholderName') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[ProductSubscriptions]
+        ADD [EncryptedCardholderName] NVARCHAR(MAX) NULL;
+
+    UPDATE [dbo].[ProductSubscriptions]
+        SET [EncryptedCardholderName] = ''
+        WHERE [EncryptedCardholderName] IS NULL;
+
+    ALTER TABLE [dbo].[ProductSubscriptions]
+        ALTER COLUMN [EncryptedCardholderName] NVARCHAR(MAX) NOT NULL;
+END
+GO
+
 /* =============================================
    STORED PROCEDURES
    ============================================= */
@@ -63,6 +93,8 @@ ALTER PROCEDURE [dbo].[sp_ProductSubscription_Create]
     @CardholderName NVARCHAR(150),
     @CardLast4 CHAR(4),
     @CardBrand NVARCHAR(50) = NULL,
+    @EncryptedCardNumber NVARCHAR(MAX),
+    @EncryptedCardholderName NVARCHAR(MAX),
     @ExpirationMonth TINYINT,
     @ExpirationYear SMALLINT,
     @ResultCode INT OUTPUT,
@@ -86,11 +118,17 @@ BEGIN
     IF (@CardLast4 IS NULL OR LEN(@CardLast4) <> 4)
     BEGIN SET @ResultCode = -4; SET @ResultMessage = N'Card last 4 digits are required.'; RETURN; END
 
+    IF (@EncryptedCardNumber IS NULL OR LEN(@EncryptedCardNumber) = 0)
+    BEGIN SET @ResultCode = -5; SET @ResultMessage = N'Encrypted card number is required.'; RETURN; END
+
+    IF (@EncryptedCardholderName IS NULL OR LEN(@EncryptedCardholderName) = 0)
+    BEGIN SET @ResultCode = -6; SET @ResultMessage = N'Encrypted cardholder name is required.'; RETURN; END
+
     IF (@ExpirationMonth < 1 OR @ExpirationMonth > 12)
-    BEGIN SET @ResultCode = -5; SET @ResultMessage = N'Expiration month is invalid.'; RETURN; END
+    BEGIN SET @ResultCode = -7; SET @ResultMessage = N'Expiration month is invalid.'; RETURN; END
 
     IF (@ExpirationYear < YEAR(GETUTCDATE()) OR @ExpirationYear > YEAR(GETUTCDATE()) + 30)
-    BEGIN SET @ResultCode = -6; SET @ResultMessage = N'Expiration year is invalid.'; RETURN; END
+    BEGIN SET @ResultCode = -8; SET @ResultMessage = N'Expiration year is invalid.'; RETURN; END
 
     DECLARE @ProductPrice DECIMAL(18,2);
     DECLARE @BillingCycle NVARCHAR(20);
@@ -100,17 +138,17 @@ BEGIN
     WHERE [ProductId] = @ProductId AND [IsActive] = 1;
 
     IF (@ProductPrice IS NULL)
-    BEGIN SET @ResultCode = -7; SET @ResultMessage = N'Product not found or inactive.'; RETURN; END
+    BEGIN SET @ResultCode = -9; SET @ResultMessage = N'Product not found or inactive.'; RETURN; END
 
     IF EXISTS (SELECT 1 FROM [dbo].[ProductSubscriptions]
                WHERE [UserId] = @UserId AND [ProductId] = @ProductId AND [IsActive] = 1)
-    BEGIN SET @ResultCode = -8; SET @ResultMessage = N'User already has an active subscription for this product.'; RETURN; END
+    BEGIN SET @ResultCode = -10; SET @ResultMessage = N'User already has an active subscription for this product.'; RETURN; END
 
     BEGIN TRY
         INSERT INTO [dbo].[ProductSubscriptions]
-        ([UserId], [ProductId], [CardholderName], [CardLast4], [CardBrand], [ExpirationMonth], [ExpirationYear])
+        ([UserId], [ProductId], [CardholderName], [CardLast4], [CardBrand], [EncryptedCardNumber], [EncryptedCardholderName], [ExpirationMonth], [ExpirationYear])
         VALUES
-        (@UserId, @ProductId, LTRIM(RTRIM(@CardholderName)), @CardLast4, NULLIF(LTRIM(RTRIM(@CardBrand)), ''), @ExpirationMonth, @ExpirationYear);
+        (@UserId, @ProductId, LTRIM(RTRIM(@CardholderName)), @CardLast4, NULLIF(LTRIM(RTRIM(@CardBrand)), ''), @EncryptedCardNumber, @EncryptedCardholderName, @ExpirationMonth, @ExpirationYear);
 
         SET @NewSubscriptionId = SCOPE_IDENTITY();
         SET @ResultCode = 1; SET @ResultMessage = N'Subscription created successfully.';
@@ -141,6 +179,8 @@ BEGIN
         ps.[CardholderName],
         ps.[CardLast4],
         ps.[CardBrand],
+        ps.[EncryptedCardNumber],
+        ps.[EncryptedCardholderName],
         ps.[ExpirationMonth],
         ps.[ExpirationYear],
         ps.[CreatedDateUtc],
@@ -173,6 +213,8 @@ BEGIN
         ps.[CardholderName],
         ps.[CardLast4],
         ps.[CardBrand],
+        ps.[EncryptedCardNumber],
+        ps.[EncryptedCardholderName],
         ps.[ExpirationMonth],
         ps.[ExpirationYear],
         ps.[CreatedDateUtc],
@@ -205,6 +247,8 @@ BEGIN
         ps.[CardholderName],
         ps.[CardLast4],
         ps.[CardBrand],
+        ps.[EncryptedCardNumber],
+        ps.[EncryptedCardholderName],
         ps.[ExpirationMonth],
         ps.[ExpirationYear],
         ps.[CreatedDateUtc],

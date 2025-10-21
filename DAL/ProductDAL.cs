@@ -233,6 +233,8 @@ namespace DAL
                         command.Parameters.AddWithValue("@CardholderName", subscription.CardholderName ?? string.Empty);
                         command.Parameters.AddWithValue("@CardLast4", subscription.CardLast4 ?? string.Empty);
                         command.Parameters.AddWithValue("@CardBrand", string.IsNullOrWhiteSpace(subscription.CardBrand) ? (object)DBNull.Value : subscription.CardBrand);
+                        command.Parameters.AddWithValue("@EncryptedCardNumber", subscription.EncryptedCardNumber ?? string.Empty);
+                        command.Parameters.AddWithValue("@EncryptedCardholderName", subscription.EncryptedCardholderName ?? string.Empty);
                         command.Parameters.AddWithValue("@ExpirationMonth", subscription.ExpirationMonth);
                         command.Parameters.AddWithValue("@ExpirationYear", subscription.ExpirationYear);
 
@@ -435,6 +437,8 @@ namespace DAL
                 CardholderName = reader["CardholderName"].ToString(),
                 CardLast4 = reader["CardLast4"].ToString(),
                 CardBrand = reader["CardBrand"] == DBNull.Value ? null : reader["CardBrand"].ToString(),
+                EncryptedCardNumber = reader["EncryptedCardNumber"] == DBNull.Value ? null : reader["EncryptedCardNumber"].ToString(),
+                EncryptedCardholderName = reader["EncryptedCardholderName"] == DBNull.Value ? null : reader["EncryptedCardholderName"].ToString(),
                 ExpirationMonth = reader["ExpirationMonth"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ExpirationMonth"]),
                 ExpirationYear = reader["ExpirationYear"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ExpirationYear"]),
                 CreatedDateUtc = reader["CreatedDateUtc"] == DBNull.Value ? DateTime.MinValue : (DateTime)reader["CreatedDateUtc"],

@@ -1185,6 +1185,8 @@ namespace DAL
                 ProductPrice = reader["ProductPrice"] == DBNull.Value ? 0 : Convert.ToDecimal(reader["ProductPrice"]),
                 BillingCycle = reader["BillingCycle"]?.ToString() ?? string.Empty,
                 CardholderName = reader["CardholderName"]?.ToString() ?? string.Empty,
+                EncryptedCardNumber = reader["EncryptedCardNumber"] == DBNull.Value ? null : reader["EncryptedCardNumber"].ToString(),
+                EncryptedCardholderName = reader["EncryptedCardholderName"] == DBNull.Value ? null : reader["EncryptedCardholderName"].ToString(),
                 CardLast4 = reader["CardLast4"]?.ToString() ?? string.Empty,
                 CardBrand = reader["CardBrand"]?.ToString() ?? string.Empty,
                 ExpirationMonth = reader["ExpirationMonth"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ExpirationMonth"]),

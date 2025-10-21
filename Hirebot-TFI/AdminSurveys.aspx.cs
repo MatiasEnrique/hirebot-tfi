@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 
 using System.Web;
+using System.Web.Security;
 
 using System.Web.UI.WebControls;
 
@@ -263,6 +264,40 @@ namespace Hirebot_TFI
             Response.Redirect("~/AdminSurveys.aspx", false);
 
             Context.ApplicationInstance.CompleteRequest();
+
+        }
+
+
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+
+        {
+
+            try
+
+            {
+
+                Session.Clear();
+
+                Session.Abandon();
+
+                FormsAuthentication.SignOut();
+
+                Response.Redirect("~/SignIn.aspx", false);
+
+                Context.ApplicationInstance.CompleteRequest();
+
+            }
+
+            catch
+
+            {
+
+                Response.Redirect("~/SignIn.aspx", false);
+
+                Context.ApplicationInstance.CompleteRequest();
+
+            }
 
         }
 

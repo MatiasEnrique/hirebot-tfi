@@ -13,6 +13,10 @@ namespace ABSTRACTIONS
         public string CardholderName { get; set; }
         public string CardLast4 { get; set; }
         public string CardBrand { get; set; }
+        public string EncryptedCardNumber { get; set; }
+        public string EncryptedCardholderName { get; set; }
+        public string DecryptedCardNumber { get; set; }
+        public string DecryptedCardholderName { get; set; }
         public int ExpirationMonth { get; set; }
         public int ExpirationYear { get; set; }
         public DateTime CreatedDateUtc { get; set; }

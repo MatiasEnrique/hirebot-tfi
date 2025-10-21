@@ -1,4 +1,8 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminBilling.aspx.cs" Inherits="Hirebot_TFI.AdminBilling" MasterPageFile="~/Protected.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminBilling.aspx.cs" Inherits="Hirebot_TFI.AdminBilling" MasterPageFile="~/Admin.master" %>
+
+<asp:Content ID="AdminBillingTitle" ContentPlaceHolderID="TitleContent" runat="server">
+    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BillingManagement %>" />
+</asp:Content>
 
 <asp:Content ID="AdminBillingHead" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
@@ -11,7 +15,7 @@
 
         .admin-title .bi-receipt {
             font-size: 1.5rem;
-            color: var(--ultra-violet, #4b4e6d);
+            color: #4b4e6d;
         }
 
         .card-rounded {
@@ -44,9 +48,7 @@
 </asp:Content>
 
 <asp:Content ID="AdminBillingMain" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="smAdminBilling" runat="server" />
-
-    <asp:Panel ID="pnlAlert" runat="server" CssClass="alert alert-dismissible fade show" Visible="false">
+    <asp:Panel ID="pnlAlert" runat="server" CssClass="alert alert-dismissible fade show d-none" Visible="false">
         <asp:Label ID="lblAlert" runat="server" />
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </asp:Panel>
@@ -188,7 +190,7 @@
                             <label for="txtDueDate" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,DueDate %>" /></label>
                             <asp:TextBox ID="txtDueDate" runat="server" CssClass="form-control" TextMode="Date" />
                         </div>
-                        <div class="col-12">
+                        <div class="col-md-4">
                             <label for="txtNotes" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Notes %>" /></label>
                             <asp:TextBox ID="txtNotes" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" />
                         </div>
@@ -208,6 +210,7 @@
                             <asp:TextBox ID="txtItemDescription" runat="server" CssClass="form-control" MaxLength="300" ReadOnly="true" />
                         </div>
                     </div>
+
                     <div class="row g-3 align-items-end mb-3">
                         <div class="col-md-4">
                             <label for="txtItemQuantity" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Quantity %>" /></label>
@@ -361,7 +364,9 @@
 
         function showCreateBillingModal() {
             var modalEl = document.getElementById('billingCreateModal');
-            if (!modalEl) return;
+            if (!modalEl) {
+                return;
+            }
             var modal = bootstrap.Modal.getInstance(modalEl);
             if (!modal) {
                 modal = new bootstrap.Modal(modalEl);
@@ -371,7 +376,9 @@
 
         function showViewBillingModal() {
             var modalEl = document.getElementById('billingViewModal');
-            if (!modalEl) return;
+            if (!modalEl) {
+                return;
+            }
             var modal = bootstrap.Modal.getInstance(modalEl);
             if (!modal) {
                 modal = new bootstrap.Modal(modalEl);
@@ -381,7 +388,9 @@
 
         function showAlert(type) {
             const panel = document.getElementById('<%= pnlAlert.ClientID %>');
-            if (!panel) return;
+            if (!panel) {
+                return;
+            }
             panel.classList.remove('d-none');
             panel.classList.remove('alert-success', 'alert-danger', 'alert-info', 'alert-warning');
             panel.classList.add('alert-' + type);

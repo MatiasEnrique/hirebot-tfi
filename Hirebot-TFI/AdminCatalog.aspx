@@ -352,6 +352,30 @@
                         </a>
                     </div>
                     <div class="sidebar-nav-item">
+                        <a href="AdminNews.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-newspaper"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminBilling.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-receipt"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BillingManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminSurveys.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-clipboard-check"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SurveyManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminReports.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-graph-up"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AdminReportsNav %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
                         <a href="AdminLogs.aspx" class="sidebar-nav-link">
                             <i class="bi bi-journal-text"></i>
                             <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,LogManagement %>" />

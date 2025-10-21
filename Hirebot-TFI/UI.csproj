@@ -141,6 +141,7 @@
     <Content Include="MyOrganizations.aspx" />
     <Content Include="Public.master" />
     <Content Include="Protected.master" />
+    <Content Include="Admin.master" />
     <Content Include="Global.asax" />
     <Content Include="AdminNews.aspx" />
     <Content Include="AdminBilling.aspx" />
@@ -208,6 +209,13 @@
     </Compile>
     <Compile Include="Protected.master.designer.cs">
       <DependentUpon>Protected.master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.master.cs">
+      <DependentUpon>Admin.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.master.designer.cs">
+      <DependentUpon>Admin.master</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

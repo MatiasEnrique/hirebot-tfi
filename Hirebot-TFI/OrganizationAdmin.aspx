@@ -442,8 +442,8 @@
             <!-- Sidebar Brand -->
             <div class="sidebar-brand">
                 <h4>
-                    <i class="bi bi-building brand-icon"></i>
-                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" />
+                    <i class="bi bi-robot brand-icon"></i>
+                    Hirebot Admin
                 </h4>
             </div>
 
@@ -476,6 +476,30 @@
                         <a href="AdminCatalog.aspx" class="sidebar-nav-link">
                             <i class="bi bi-box-seam"></i>
                             <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CatalogManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminNews.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-newspaper"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminBilling.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-receipt"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BillingManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminSurveys.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-clipboard-check"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SurveyManagement %>" />
+                        </a>
+                    </div>
+                    <div class="sidebar-nav-item">
+                        <a href="AdminReports.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-graph-up"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AdminReportsNav %>" />
                         </a>
                     </div>
                     <div class="sidebar-nav-item">

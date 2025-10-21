@@ -15,11 +15,6 @@ namespace Hirebot_TFI
     {
 
         /// <summary>
-        /// smAdminBilling control.
-        /// </summary>
-        protected global::System.Web.UI.ScriptManager smAdminBilling;
-
-        /// <summary>
         /// pnlAlert control.
         /// </summary>
         protected global::System.Web.UI.WebControls.Panel pnlAlert;
@@ -139,7 +134,6 @@ namespace Hirebot_TFI
         /// </summary>
         protected global::System.Web.UI.WebControls.TextBox txtDueDate;
 
-        /// <summary>
         /// <summary>
         /// txtNotes control.
         /// </summary>

@@ -5,6 +5,7 @@ using System.Web;
 using DAL;
 using ABSTRACTIONS;
 using SERVICES;
+using ServiceEncryption = SERVICES.EncryptionService;
 
 namespace BLL
 {
@@ -26,7 +27,17 @@ namespace BLL
                 return UserAccountDashboardResult.Failure(-1, GetLocalizedString("UserNotFound"));
             }
 
-            return userDAL.GetUserAccountDashboard(userId);
+            var dashboardResult = userDAL.GetUserAccountDashboard(userId);
+
+            if (dashboardResult != null && dashboardResult.IsSuccessful && dashboardResult.Data?.Subscriptions != null)
+            {
+                foreach (var subscription in dashboardResult.Data.Subscriptions)
+                {
+                    SanitizeSubscription(subscription);
+                }
+            }
+
+            return dashboardResult;
         }
 
         public DatabaseResult UpdateUserProfile(int userId, string firstName, string lastName, string email)
@@ -196,6 +207,62 @@ namespace BLL
             {
                 // Swallow email errors to avoid breaking password change flow
             }
+        }
+
+        private void SanitizeSubscription(ProductSubscription subscription)
+        {
+            if (subscription == null)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(subscription.EncryptedCardholderName))
+                {
+                    string decryptedName = ServiceEncryption.DecryptAsymmetric(subscription.EncryptedCardholderName);
+                    subscription.CardholderName = MaskCardholderName(decryptedName);
+                }
+                else
+                {
+                    subscription.CardholderName = MaskCardholderName(subscription.CardholderName);
+                }
+            }
+            catch
+            {
+                subscription.CardholderName = MaskCardholderName(subscription.CardholderName);
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(subscription.EncryptedCardNumber))
+                {
+                    string decryptedNumber = ServiceEncryption.DecryptSymmetric(subscription.EncryptedCardNumber);
+                    if (!string.IsNullOrEmpty(decryptedNumber) && decryptedNumber.Length >= 4)
+                    {
+                        subscription.CardLast4 = decryptedNumber.Substring(decryptedNumber.Length - 4);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private string MaskCardholderName(string cardholderName)
+        {
+            if (string.IsNullOrWhiteSpace(cardholderName))
+            {
+                return string.Empty;
+            }
+
+            string trimmed = cardholderName.Trim();
+            if (trimmed.Length <= 2)
+            {
+                return new string('*', trimmed.Length);
+            }
+
+            return string.Concat(trimmed[0], new string('*', trimmed.Length - 2), trimmed[trimmed.Length - 1]);
         }
 
         #endregion

@@ -5,6 +5,7 @@ using System.Web;
 using ABSTRACTIONS;
 using DAL;
 using SERVICES;
+using ServiceEncryption = SERVICES.EncryptionService;
 
 namespace BLL
 {
@@ -56,6 +57,10 @@ namespace BLL
             }
 
             string cardBrand = DetermineCardBrand(normalizedCardNumber);
+            string trimmedCardholder = cardholderName.Trim();
+            string encryptedCardNumber = ServiceEncryption.EncryptSymmetric(normalizedCardNumber);
+            string encryptedCardholderName = ServiceEncryption.EncryptAsymmetric(trimmedCardholder);
+            string maskedCardholder = MaskCardholderName(trimmedCardholder);
 
             var subscription = new ProductSubscription
             {
@@ -64,9 +69,11 @@ namespace BLL
                 ProductName = product.Name,
                 ProductPrice = product.Price,
                 BillingCycle = string.IsNullOrWhiteSpace(product.BillingCycle) ? "Monthly" : product.BillingCycle,
-                CardholderName = cardholderName.Trim(),
+                CardholderName = maskedCardholder,
                 CardLast4 = normalizedCardNumber.Substring(normalizedCardNumber.Length - 4),
                 CardBrand = cardBrand,
+                EncryptedCardNumber = encryptedCardNumber,
+                EncryptedCardholderName = encryptedCardholderName,
                 ExpirationMonth = expirationMonth,
                 ExpirationYear = expirationYear,
                 CreatedDateUtc = DateTime.UtcNow,
@@ -83,6 +90,7 @@ namespace BLL
             persistedSubscription.ProductName = subscription.ProductName;
             persistedSubscription.ProductPrice = subscription.ProductPrice;
             persistedSubscription.BillingCycle = subscription.BillingCycle;
+            HydrateSensitiveData(persistedSubscription);
 
             SendSubscriptionEmail(userId, persistedSubscription);
 
@@ -99,12 +107,68 @@ namespace BLL
             try
             {
                 List<ProductSubscription> subscriptions = productDAL.GetSubscriptionsByUser(userId) ?? new List<ProductSubscription>();
+                foreach (var subscription in subscriptions)
+                {
+                    HydrateSensitiveData(subscription);
+                }
                 return ProductSubscriptionListResult.Success(subscriptions, GetLocalizedString("SubscriptionListSuccess"));
             }
             catch (Exception ex)
             {
                 return ProductSubscriptionListResult.Failure(GetLocalizedString("SubscriptionListError"), ex);
             }
+        }
+
+        private void HydrateSensitiveData(ProductSubscription subscription)
+        {
+            if (subscription == null)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(subscription.EncryptedCardholderName))
+                {
+                    string decryptedName = ServiceEncryption.DecryptAsymmetric(subscription.EncryptedCardholderName);
+                    subscription.CardholderName = MaskCardholderName(decryptedName);
+                }
+            }
+            catch
+            {
+                // Ignore decryption issues to avoid leaking sensitive information via errors
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(subscription.EncryptedCardNumber))
+                {
+                    string decryptedNumber = ServiceEncryption.DecryptSymmetric(subscription.EncryptedCardNumber);
+                    if (!string.IsNullOrEmpty(decryptedNumber) && decryptedNumber.Length >= 4)
+                    {
+                        subscription.CardLast4 = decryptedNumber.Substring(decryptedNumber.Length - 4);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private string MaskCardholderName(string cardholderName)
+        {
+            if (string.IsNullOrWhiteSpace(cardholderName))
+            {
+                return string.Empty;
+            }
+
+            string trimmed = cardholderName.Trim();
+            if (trimmed.Length <= 2)
+            {
+                return new string('*', trimmed.Length);
+            }
+
+            return string.Concat(trimmed[0], new string('*', trimmed.Length - 2), trimmed[trimmed.Length - 1]);
         }
 
         private string ValidateSubscriptionInputs(string cardholderName, string cardNumber, int expirationMonth, int expirationYear, out string normalizedCardNumber)

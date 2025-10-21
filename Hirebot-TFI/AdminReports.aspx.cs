@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ABSTRACTIONS;
@@ -246,6 +247,23 @@ namespace Hirebot_TFI
         {
             var value = GetGlobalResourceObject("GlobalResources", key) as string;
             return string.IsNullOrWhiteSpace(value) ? fallback : value;
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session.Clear();
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                Response.Redirect("~/SignIn.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch
+            {
+                Response.Redirect("~/SignIn.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
         }
 
         protected string Encode(object value)

@@ -1,4 +1,8 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminNews.aspx.cs" Inherits="Hirebot_TFI.AdminNews" MasterPageFile="~/Protected.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminNews.aspx.cs" Inherits="Hirebot_TFI.AdminNews" MasterPageFile="~/Admin.master" %>
+
+<asp:Content ID="AdminNewsTitle" ContentPlaceHolderID="TitleContent" runat="server">
+    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" />
+</asp:Content>
 
 <asp:Content ID="AdminNewsHead" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
@@ -11,7 +15,7 @@
 
         .admin-title .bi-newspaper {
             font-size: 1.5rem;
-            color: var(--ultra-violet, #4b4e6d);
+            color: #4b4e6d;
         }
 
         .filter-card,
@@ -46,12 +50,31 @@
             padding: 0.35rem 0.75rem;
             font-size: 0.75rem;
         }
+
+        .btn-primary {
+            background-color: #4b4e6d;
+            border-color: #4b4e6d;
+        }
+
+        .btn-primary:hover {
+            background-color: #84dcc6;
+            border-color: #84dcc6;
+            color: #222222;
+        }
+
+        .btn-outline-primary {
+            border-color: #4b4e6d;
+            color: #4b4e6d;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #4b4e6d;
+            color: #ffffff;
+        }
     </style>
 </asp:Content>
 
 <asp:Content ID="AdminNewsMain" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="smAdminNews" runat="server" />
-
     <asp:Panel ID="pnlAlert" runat="server" CssClass="alert alert-dismissible fade show" Visible="false">
         <asp:Label ID="lblAlert" runat="server" />
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -311,12 +334,12 @@
             var publishCheckbox = document.getElementById('<%= chkNewsPublish.ClientID %>');
             var errorLabel = document.getElementById('<%= lblModalError.ClientID %>');
 
-            if (titleInput) titleInput.value = '';
-            if (summaryInput) summaryInput.value = '';
-            if (contentInput) contentInput.value = '';
-            if (languageSelect && languageSelect.options.length > 0) languageSelect.selectedIndex = 0;
-            if (publishDateInput) publishDateInput.value = '';
-            if (publishCheckbox) publishCheckbox.checked = false;
+            if (titleInput) { titleInput.value = ''; }
+            if (summaryInput) { summaryInput.value = ''; }
+            if (contentInput) { contentInput.value = ''; }
+            if (languageSelect && languageSelect.options.length > 0) { languageSelect.selectedIndex = 0; }
+            if (publishDateInput) { publishDateInput.value = ''; }
+            if (publishCheckbox) { publishCheckbox.checked = false; }
             if (errorLabel) {
                 errorLabel.textContent = '';
                 errorLabel.style.display = 'none';
@@ -348,7 +371,9 @@
 
         function showNewsModal() {
             var modalEl = document.getElementById('newsModal');
-            if (!modalEl) return;
+            if (!modalEl) {
+                return;
+            }
             var modal = bootstrap.Modal.getInstance(modalEl);
             if (!modal) {
                 modal = new bootstrap.Modal(modalEl);
@@ -358,7 +383,9 @@
 
         function hideNewsModal() {
             var modalEl = document.getElementById('newsModal');
-            if (!modalEl) return;
+            if (!modalEl) {
+                return;
+            }
             var modal = bootstrap.Modal.getInstance(modalEl);
             if (modal) {
                 modal.hide();
@@ -367,7 +394,9 @@
 
         function showAlert(type) {
             const panel = document.getElementById('<%= pnlAlert.ClientID %>');
-            if (!panel) return;
+            if (!panel) {
+                return;
+            }
             panel.classList.remove('d-none');
             panel.classList.remove('alert-success', 'alert-danger', 'alert-info', 'alert-warning');
             panel.classList.add('alert-' + type);
