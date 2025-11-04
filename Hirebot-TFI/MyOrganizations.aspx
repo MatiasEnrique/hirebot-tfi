@@ -1,7 +1,7 @@
 <%@ Page Title="My Organizations - Hirebot-TFI" Language="C#" MasterPageFile="~/Protected.master" AutoEventWireup="true" CodeBehind="MyOrganizations.aspx.cs" Inherits="Hirebot_TFI.MyOrganizations" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" /> - Hirebot-TFI
+    <asp:Literal runat="server" Text="Mis Organizaciones" /> - Hirebot-TFI
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
@@ -325,14 +325,14 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="NavigationContent" runat="server">
     <li class="nav-item">
-        <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Catalog %>" /></a>
+        <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="Catálogo" /></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="MyOrganizations.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" /></a>
+        <a class="nav-link active" href="MyOrganizations.aspx"><asp:Literal runat="server" Text="Mis Organizaciones" /></a>
     </li>
     <asp:Panel ID="pnlAdminNavigation" runat="server" Visible="false">
         <li class="nav-item">
-            <a class="nav-link" href="OrganizationAdmin.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" /></a>
+            <a class="nav-link" href="OrganizationAdmin.aspx"><asp:Literal runat="server" Text="Administrador de Organización" /></a>
         </li>
     </asp:Panel>
 </asp:Content>
@@ -350,24 +350,24 @@
                 <div class="organizations-hero-content">
                     <h1 class="mb-3">
                         <i class="bi bi-building-check me-3"></i>
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizationsDashboard %>" />
+                        <asp:Literal runat="server" Text="Panel de Mis Organizaciones" />
                     </h1>
                     <p class="mb-0 fs-5">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ManageYourOrganizations %>" />
+                        <asp:Literal runat="server" Text="Gestiona todas las organizaciones en las que participas" />
                     </p>
                     
                     <div class="organizations-stats">
                         <div class="stat-item">
                             <span class="stat-number"><asp:Label ID="lblOwnedCount" runat="server">0</asp:Label></span>
-                            <span class="stat-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OwnedOrganizations %>" /></span>
+                            <span class="stat-label"><asp:Literal runat="server" Text="Organizaciones que Posees" /></span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number"><asp:Label ID="lblManagedCount" runat="server">0</asp:Label></span>
-                            <span class="stat-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ManagedOrganizations %>" /></span>
+                            <span class="stat-label"><asp:Literal runat="server" Text="Organizaciones que Administras" /></span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number"><asp:Label ID="lblMemberCount" runat="server">0</asp:Label></span>
-                            <span class="stat-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MemberOfOrganizations %>" /></span>
+                            <span class="stat-label"><asp:Literal runat="server" Text="Organizaciones de las que Eres Miembro" /></span>
                         </div>
                     </div>
                 </div>
@@ -377,15 +377,15 @@
             <div class="quick-create-section">
                 <h4 class="text-center mb-3">
                     <i class="bi bi-lightning-charge me-2"></i>
-                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,QuickActions %>" />
+                    <asp:Literal runat="server" Text="Acciones Rápidas" />
                 </h4>
                 <div class="quick-actions">
                     <asp:Button ID="btnCreateOrganization" runat="server" CssClass="btn btn-success btn-lg" OnClick="btnCreateOrganization_Click">
-                        <i class="bi bi-plus-circle me-2"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CreateOrganization %>" />
+                        <i class="bi bi-plus-circle me-2"></i><asp:Literal runat="server" Text="Crear Organización" />
                     </asp:Button>
                     <asp:Panel ID="pnlAdminActions" runat="server" Visible="false">
                         <asp:Button ID="btnAdminPanel" runat="server" CssClass="btn btn-primary btn-lg" OnClick="btnAdminPanel_Click">
-                            <i class="bi bi-gear me-2"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" />
+                            <i class="bi bi-gear me-2"></i><asp:Literal runat="server" Text="Administrador de Organización" />
                         </asp:Button>
                     </asp:Panel>
                 </div>
@@ -396,10 +396,10 @@
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="bi bi-crown"></i>
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OwnedOrganizations %>" />
+                        <asp:Literal runat="server" Text="Organizaciones que Posees" />
                     </h2>
                     <small class="text-muted">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,YouHaveFullAccess %>" />
+                        <asp:Literal runat="server" Text="Tienes acceso completo" />
                     </small>
                 </div>
                 
@@ -410,7 +410,7 @@
                                 <div class="organization-header owner">
                                     <div class="role-badge">
                                         <i class="bi bi-crown me-1"></i>
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Owner %>" />
+                                        <asp:Literal runat="server" Text="Propietario" />
                                     </div>
                                     <h3 class="organization-title"><%# Eval("Name") %></h3>
                                     <div class="organization-slug">@<%# Eval("Slug") %></div>
@@ -422,7 +422,7 @@
                                     <div class="organization-stats">
                                         <div class="stat-item">
                                             <i class="bi bi-people"></i>
-                                            <span><%# Eval("MemberCount") ?? 0 %> <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Members %>" /></span>
+                                            <span><%# Eval("MemberCount") ?? 0 %> <asp:Literal runat="server" Text="Miembros" /></span>
                                         </div>
                                         <div class="stat-item">
                                             <i class="bi bi-calendar-plus"></i>
@@ -439,11 +439,11 @@
                                     <div class="action-buttons">
                                         <asp:LinkButton ID="btnViewDetails" runat="server" CssClass="btn btn-outline-info btn-sm" 
                                             CommandName="ViewDetails" CommandArgument='<%# Eval("Id") %>'>
-                                            <i class="bi bi-eye me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ViewDetails %>" />
+                                            <i class="bi bi-eye me-1"></i><asp:Literal runat="server" Text="Ver Detalles" />
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnManage" runat="server" CssClass="btn btn-success btn-sm" 
                                             CommandName="Manage" CommandArgument='<%# Eval("Id") %>'>
-                                            <i class="bi bi-gear me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Manage %>" />
+                                            <i class="bi bi-gear me-1"></i><asp:Literal runat="server" Text="Gestionar" />
                                         </asp:LinkButton>
                                     </div>
                                 </div>
@@ -458,10 +458,10 @@
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="bi bi-person-gear"></i>
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ManagedOrganizations %>" />
+                        <asp:Literal runat="server" Text="Organizaciones que Administras" />
                     </h2>
                     <small class="text-muted">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,YouCanManageMembers %>" />
+                        <asp:Literal runat="server" Text="Puedes gestionar miembros" />
                     </small>
                 </div>
                 
@@ -472,7 +472,7 @@
                                 <div class="organization-header admin">
                                     <div class="role-badge">
                                         <i class="bi bi-person-gear me-1"></i>
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdministrator %>" />
+                                        <asp:Literal runat="server" Text="Administrador de Organización" />
                                     </div>
                                     <h3 class="organization-title"><%# Eval("Name") %></h3>
                                     <div class="organization-slug">@<%# Eval("Slug") %></div>
@@ -484,7 +484,7 @@
                                     <div class="organization-stats">
                                         <div class="stat-item">
                                             <i class="bi bi-people"></i>
-                                            <span><%# Eval("MemberCount") ?? 0 %> <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Members %>" /></span>
+                                            <span><%# Eval("MemberCount") ?? 0 %> <asp:Literal runat="server" Text="Miembros" /></span>
                                         </div>
                                         <div class="stat-item">
                                             <i class="bi bi-person-check"></i>
@@ -501,11 +501,11 @@
                                     <div class="action-buttons">
                                         <asp:LinkButton ID="btnViewDetails" runat="server" CssClass="btn btn-outline-info btn-sm" 
                                             CommandName="ViewDetails" CommandArgument='<%# Eval("Id") %>'>
-                                            <i class="bi bi-eye me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ViewDetails %>" />
+                                            <i class="bi bi-eye me-1"></i><asp:Literal runat="server" Text="Ver Detalles" />
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnManageMembers" runat="server" CssClass="btn btn-primary btn-sm" 
                                             CommandName="ManageMembers" CommandArgument='<%# Eval("Id") %>'>
-                                            <i class="bi bi-people me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ManageMembers %>" />
+                                            <i class="bi bi-people me-1"></i><asp:Literal runat="server" Text="Gestionar Miembros" />
                                         </asp:LinkButton>
                                     </div>
                                 </div>
@@ -520,10 +520,10 @@
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="bi bi-people"></i>
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MemberOfOrganizations %>" />
+                        <asp:Literal runat="server" Text="Organizaciones de las que Eres Miembro" />
                     </h2>
                     <small class="text-muted">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,YouAreAMember %>" />
+                        <asp:Literal runat="server" Text="Eres un miembro" />
                     </small>
                 </div>
                 
@@ -534,7 +534,7 @@
                                 <div class="organization-header member">
                                     <div class="role-badge">
                                         <i class="bi bi-person me-1"></i>
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Member %>" />
+                                        <asp:Literal runat="server" Text="Miembro" />
                                     </div>
                                     <h3 class="organization-title"><%# Eval("Name") %></h3>
                                     <div class="organization-slug">@<%# Eval("Slug") %></div>
@@ -546,7 +546,7 @@
                                     <div class="organization-stats">
                                         <div class="stat-item">
                                             <i class="bi bi-people"></i>
-                                            <span><%# Eval("MemberCount") ?? 0 %> <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Members %>" /></span>
+                                            <span><%# Eval("MemberCount") ?? 0 %> <asp:Literal runat="server" Text="Miembros" /></span>
                                         </div>
                                         <div class="stat-item">
                                             <i class="bi bi-person-check"></i>
@@ -563,7 +563,7 @@
                                     <div class="action-buttons">
                                         <asp:LinkButton ID="btnViewDetails" runat="server" CssClass="btn btn-outline-info btn-sm" 
                                             CommandName="ViewDetails" CommandArgument='<%# Eval("Id") %>'>
-                                            <i class="bi bi-eye me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ViewDetails %>" />
+                                            <i class="bi bi-eye me-1"></i><asp:Literal runat="server" Text="Ver Detalles" />
                                         </asp:LinkButton>
                                     </div>
                                 </div>
@@ -580,13 +580,13 @@
                         <i class="bi bi-building"></i>
                     </div>
                     <h3>
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoOrganizationAccess %>" />
+                        <asp:Literal runat="server" Text="No perteneces a ninguna organización aún" />
                     </h3>
                     <p class="fs-5">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CreateOrJoinOrganization %>" />
+                        <asp:Literal runat="server" Text="Crea una nueva organización o únete a una existente para comenzar" />
                     </p>
                     <asp:Button ID="btnCreateFirstOrganization" runat="server" CssClass="btn btn-success btn-lg" OnClick="btnCreateOrganization_Click">
-                        <i class="bi bi-plus-circle me-2"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CreateOrganization %>" />
+                        <i class="bi bi-plus-circle me-2"></i><asp:Literal runat="server" Text="Crear Organización" />
                     </asp:Button>
                 </div>
             </asp:Panel>

@@ -212,15 +212,7 @@ namespace UI
 
         private string GetLocalizedString(string key)
         {
-            try
-            {
-                var resourceObj = HttpContext.GetGlobalResourceObject("GlobalResources", key);
-                return resourceObj != null ? resourceObj.ToString() : key;
-            }
-            catch
-            {
-                return key;
-            }
+            return key;
         }
 
         private void InitializeCommentCounts()

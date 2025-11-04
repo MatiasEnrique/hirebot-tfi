@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordResetTitle %>" /> - Hirebot-TFI</title>
+    <title><asp:Literal runat="server" Text="Restablecer Contraseña" /> - Hirebot-TFI</title>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/site.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -237,22 +237,22 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="Default.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Home %>" /></a>
+                            <a class="nav-link" href="Default.aspx"><asp:Literal runat="server" Text="Inicio" /></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ProductCatalog %>" /></a>
+                            <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="Catálogo" /></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="institutionalDropdown" role="button" data-bs-toggle="dropdown">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutCompany %>" />
+                                <asp:Literal runat="server" Text="Acerca de la Empresa" />
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="AboutUs.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutUs %>" /></a></li>
-                                <li><a class="dropdown-item" href="ContactUs.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ContactUs %>" /></a></li>
+                                <li><a class="dropdown-item" href="AboutUs.aspx"><asp:Literal runat="server" Text="Quiénes Somos" /></a></li>
+                                <li><a class="dropdown-item" href="ContactUs.aspx"><asp:Literal runat="server" Text="Contáctanos" /></a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="TermsConditions.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TermsConditions %>" /></a></li>
-                                <li><a class="dropdown-item" href="PrivacyPolicy.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PrivacyPolicy %>" /></a></li>
-                                <li><a class="dropdown-item" href="SecurityPolicy.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SecurityPolicy %>" /></a></li>
+                                <li><a class="dropdown-item" href="TermsConditions.aspx"><asp:Literal runat="server" Text="Términos y Condiciones" /></a></li>
+                                <li><a class="dropdown-item" href="PrivacyPolicy.aspx"><asp:Literal runat="server" Text="Política de Privacidad" /></a></li>
+                                <li><a class="dropdown-item" href="SecurityPolicy.aspx"><asp:Literal runat="server" Text="Política de Seguridad" /></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -260,15 +260,15 @@
                         <!-- Language Selector -->
                         <div class="dropdown me-3">
                             <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-globe me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Language %>" />
+                                <i class="fas fa-globe me-1"></i><asp:Literal runat="server" Text="Idioma" />
                             </button>
                             <ul class="dropdown-menu">
-                                <li><asp:LinkButton ID="btnSpanish" runat="server" CssClass="dropdown-item" OnClick="btnSpanish_Click"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Spanish %>" /></asp:LinkButton></li>
-                                <li><asp:LinkButton ID="btnEnglish" runat="server" CssClass="dropdown-item" OnClick="btnEnglish_Click"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,English %>" /></asp:LinkButton></li>
+                                <li><asp:LinkButton ID="btnSpanish" runat="server" CssClass="dropdown-item" OnClick="btnSpanish_Click"><asp:Literal runat="server" Text="Español" /></asp:LinkButton></li>
+                                <li><asp:LinkButton ID="btnEnglish" runat="server" CssClass="dropdown-item" OnClick="btnEnglish_Click"><asp:Literal runat="server" Text="English" /></asp:LinkButton></li>
                             </ul>
                         </div>
-                        <a href="SignIn.aspx" class="btn btn-outline-light me-2"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignIn %>" /></a>
-                        <a href="SignUp.aspx" class="btn btn-light"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignUp %>" /></a>
+                        <a href="SignIn.aspx" class="btn btn-outline-light me-2"><asp:Literal runat="server" Text="Iniciar Sesión" /></a>
+                        <a href="SignUp.aspx" class="btn btn-light"><asp:Literal runat="server" Text="Registrarse" /></a>
                     </div>
                 </div>
             </div>
@@ -277,23 +277,23 @@
         <div class="auth-container">
             <div class="auth-card">
                 <div class="text-center mb-4">
-                    <h2 class="text-primary-custom fw-bold"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordResetTitle %>" /></h2>
-                    <p class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,EnterNewPassword %>" /></p>
+                    <h2 class="text-primary-custom fw-bold"><asp:Literal runat="server" Text="Restablecer Contraseña" /></h2>
+                    <p class="text-muted"><asp:Literal runat="server" Text="Ingresa tu nueva contraseña" /></p>
                 </div>
 
                 <!-- Token Info -->
                 <asp:Panel ID="pnlTokenInfo" runat="server" CssClass="token-info">
-                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TokenExpiresSoon %>" />
+                    <asp:Literal runat="server" Text="Este enlace expira pronto por tu seguridad" />
                     <span class="countdown" id="countdownTimer"></span>
                 </asp:Panel>
 
                 <!-- Password Requirements Section -->
                 <div class="password-requirements">
-                    <h6><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordRequirements %>" /></h6>
+                    <h6><asp:Literal runat="server" Text="Requisitos de Contraseña" /></h6>
                     <ul>
-                        <li><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordMinLength %>" /></li>
-                        <li><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordMustContain %>" /></li>
-                        <li><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordSpecialChars %>" /></li>
+                        <li><asp:Literal runat="server" Text="La contraseña debe tener al menos 6 caracteres." /></li>
+                        <li><asp:Literal runat="server" Text="Debe contener letras y números" /></li>
+                        <li><asp:Literal runat="server" Text="Se recomiendan caracteres especiales" /></li>
                     </ul>
                 </div>
 
@@ -302,7 +302,7 @@
                 </asp:Panel>
 
                 <asp:Panel ID="pnlSuccess" runat="server" CssClass="success-message" Visible="false">
-                    <h4><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordResetSuccess %>" /></h4>
+                    <h4><asp:Literal runat="server" Text="Tu contraseña ha sido restablecida exitosamente. Ya puedes iniciar sesión con tu nueva contraseña." /></h4>
                     <p><asp:Label ID="lblSuccess" runat="server"></asp:Label></p>
                 </asp:Panel>
 
@@ -311,19 +311,19 @@
                         <ContentTemplate>
                             <div class="mb-3">
                                 <label for="txtNewPassword" class="form-label fw-semibold">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewPassword %>" />
+                                    <asp:Literal runat="server" Text="Nueva contraseña" />
                                 </label>
                                 <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="form-control" MaxLength="100"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="rfvNewPassword" runat="server" 
                                     ControlToValidate="txtNewPassword" 
-                                    ErrorMessage="<%$ Resources:GlobalResources,NewPasswordRequired %>" 
+                                    ErrorMessage="La nueva contraseña es obligatoria" 
                                     CssClass="text-danger small" 
                                     Display="Dynamic" 
                                     ValidationGroup="ResetPassword">
                                 </asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="revNewPassword" runat="server" 
                                     ControlToValidate="txtNewPassword" 
-                                    ErrorMessage="<%$ Resources:GlobalResources,PasswordMinLength %>" 
+                                    ErrorMessage="La contraseña debe tener al menos 6 caracteres." 
                                     ValidationExpression=".{6,}" 
                                     CssClass="text-danger small" 
                                     Display="Dynamic" 
@@ -333,12 +333,12 @@
 
                             <div class="mb-3">
                                 <label for="txtConfirmNewPassword" class="form-label fw-semibold">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ConfirmNewPassword %>" />
+                                    <asp:Literal runat="server" Text="Confirmar nueva contraseña" />
                                 </label>
                                 <asp:TextBox ID="txtConfirmNewPassword" runat="server" TextMode="Password" CssClass="form-control" MaxLength="100"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="rfvConfirmNewPassword" runat="server" 
                                     ControlToValidate="txtConfirmNewPassword" 
-                                    ErrorMessage="<%$ Resources:GlobalResources,ConfirmNewPasswordRequired %>" 
+                                    ErrorMessage="La confirmación de contraseña es obligatoria" 
                                     CssClass="text-danger small" 
                                     Display="Dynamic" 
                                     ValidationGroup="ResetPassword">
@@ -346,7 +346,7 @@
                                 <asp:CompareValidator ID="cvNewPassword" runat="server" 
                                     ControlToValidate="txtConfirmNewPassword" 
                                     ControlToCompare="txtNewPassword" 
-                                    ErrorMessage="<%$ Resources:GlobalResources,NewPasswordsDoNotMatch %>" 
+                                    ErrorMessage="Las contraseñas no coinciden" 
                                     CssClass="text-danger small" 
                                     Display="Dynamic" 
                                     ValidationGroup="ResetPassword">
@@ -355,7 +355,7 @@
 
                             <div class="d-grid mb-3">
                                 <asp:Button ID="btnResetPassword" runat="server" 
-                                    Text="<%$ Resources:GlobalResources,ResetPassword %>" 
+                                    Text="Restablecer contraseña" 
                                     CssClass="btn btn-primary-custom btn-lg" 
                                     OnClick="btnResetPassword_Click" 
                                     ValidationGroup="ResetPassword" 
@@ -371,7 +371,7 @@
 
                 <div class="text-center">
                     <a href="SignIn.aspx" class="link-custom fw-semibold">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BackToSignIn %>" />
+                        <asp:Literal runat="server" Text="Volver al inicio de sesión" />
                     </a>
                 </div>
 
@@ -379,10 +379,10 @@
                 <div class="mt-4 pt-3 border-top">
                     <div class="text-center">
                         <p class="text-muted mb-2 small">
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TokenExpiredHelp %>" />
+                            <asp:Literal runat="server" Text="Si tu enlace ha expirado o no funciona, puedes solicitar uno nuevo" />
                         </p>
                         <a href="ForgotPassword.aspx" class="link-custom small">
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,RequestNewLink %>" />
+                            <asp:Literal runat="server" Text="Solicitar nuevo enlace" />
                         </a>
                     </div>
                 </div>

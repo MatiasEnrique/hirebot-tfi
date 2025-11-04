@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SECURITY;
 using ABSTRACTIONS;
+using SERVICES;
 
 namespace UI
 {
@@ -13,13 +14,17 @@ namespace UI
     {
         private UserSecurity userSecurity;
 
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            // Set culture from Google Translate cookie
+            string language = LanguageService.EnsureLanguage(HttpContext.Current);
+            LanguageService.ApplyCulture(language);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             userSecurity = new UserSecurity();
-            
-            // Set culture from session or default to Spanish
-            SetCulture();
-            
+
             if (!IsPostBack)
             {
                 CheckUserAuthentication();
@@ -77,16 +82,6 @@ namespace UI
                 // Handle logout error
                 Response.Redirect("~/Default.aspx");
             }
-        }
-
-
-        private void SetCulture()
-        {
-            string language = Session["Language"] as string ?? "es";
-            
-            CultureInfo culture = new CultureInfo(language);
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
         }
     }
 }

@@ -586,7 +586,7 @@ namespace BLL
             var nameParts = fullName.Trim().Split(' ');
             if (nameParts.Length >= 2)
             {
-                return $"{nameParts[0]} {nameParts[nameParts.Length - 1].Substring(0, 1)}.";
+                return string.Format("{0} {1}.", nameParts[0], nameParts[nameParts.Length - 1].Substring(0, 1));
             }
             return nameParts[0];
         }

@@ -42,10 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminRoleBLL.cs" />
     <Compile Include="CatalogBLL.cs" />
     <Compile Include="ChatbotBLL.cs" />
     <Compile Include="CommentBLL.cs" />
     <Compile Include="BillingBLL.cs" />
+    <Compile Include="DatabaseBackupBLL.cs" />
+    <Compile Include="HomepageAdBLL.cs" />
     <Compile Include="LogBLL.cs" />
     <Compile Include="OrganizationBLL.cs" />
     <Compile Include="ProductBLL.cs" />

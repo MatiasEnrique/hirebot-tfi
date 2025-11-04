@@ -23,6 +23,32 @@ namespace Hirebot_TFI
         /// </remarks>
         protected global::Hirebot_TFI.Controls.SurveyDisplay SurveyDisplayControl;
 
+        /// <summary>
+        /// pnlSurveyResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSurveyResults;
+
+        /// <summary>
+        /// lblSurveyResultsTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSurveyResultsTitle;
+
+        /// <summary>
+        /// rptSurveyResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptSurveyResults;
 
         /// <summary>
         /// lblUserName control.

@@ -66,17 +66,17 @@
             <div class="row align-items-center g-5">
                 <div class="col-lg-5 text-center text-lg-start">
                     <h1 class="display-5 fw-bold mb-4">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,WelcomeBack %>" />
+                        <asp:Literal runat="server" Text="Bienvenido de nuevo" />
                     </h1>
                     <p class="lead mb-4">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignInToAccount %>" />
+                        <asp:Literal runat="server" Text="Inicia sesión en tu cuenta de Hirebot" />
                     </p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
                         <a href="SignUp.aspx" class="btn btn-light btn-lg px-4">
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CreateAccount %>" />
+                            <asp:Literal runat="server" Text="Crear Cuenta" />
                         </a>
                         <a href="ForgotPassword.aspx" class="btn btn-outline-light btn-lg px-4">
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ForgotPassword %>" />
+                            <asp:Literal runat="server" Text="¿Olvidaste tu contraseña?" />
                         </a>
                     </div>
                 </div>
@@ -94,45 +94,45 @@
                             <asp:Panel ID="pnlSignIn" runat="server">
                                 <div class="mb-3">
                                     <label for="<%= txtUsernameOrEmail.ClientID %>" class="form-label fw-semibold text-dark">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,UsernameOrEmail %>" />
+                                        <asp:Literal runat="server" Text="Usuario o Correo" />
                                     </label>
                                     <asp:TextBox ID="txtUsernameOrEmail" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvUsernameOrEmail" runat="server" ControlToValidate="txtUsernameOrEmail"
-                                        ErrorMessage="<%$ Resources:GlobalResources,UsernameRequired %>" CssClass="text-danger small" Display="Dynamic" ValidationGroup="SignIn"></asp:RequiredFieldValidator>
+                                        ErrorMessage="El nombre de usuario es obligatorio" CssClass="text-danger small" Display="Dynamic" ValidationGroup="SignIn"></asp:RequiredFieldValidator>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="<%= txtPassword.ClientID %>" class="form-label fw-semibold text-dark">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Password %>" />
+                                        <asp:Literal runat="server" Text="Contraseña" />
                                     </label>
                                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword"
-                                        ErrorMessage="<%$ Resources:GlobalResources,PasswordRequired %>" CssClass="text-danger small" Display="Dynamic" ValidationGroup="SignIn"></asp:RequiredFieldValidator>
+                                        ErrorMessage="La contraseña es obligatoria" CssClass="text-danger small" Display="Dynamic" ValidationGroup="SignIn"></asp:RequiredFieldValidator>
                                 </div>
 
                                 <div class="mb-3 form-check">
                                     <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="form-check-input" />
                                     <label class="form-check-label" for="<%= chkRememberMe.ClientID %>">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,RememberMe %>" />
+                                        <asp:Literal runat="server" Text="Recordarme" />
                                     </label>
                                 </div>
 
                                 <div class="d-grid mb-3">
-                                    <asp:Button ID="btnSignIn" runat="server" Text="<%$ Resources:GlobalResources,SignIn %>" CssClass="btn btn-gradient btn-lg" OnClick="btnSignIn_Click" ValidationGroup="SignIn" />
+                                    <asp:Button ID="btnSignIn" runat="server" Text="Iniciar Sesión" CssClass="btn btn-gradient btn-lg" OnClick="btnSignIn_Click" ValidationGroup="SignIn" />
                                 </div>
 
                                 <div class="text-center mb-3">
                                     <a href="ForgotPassword.aspx" class="auth-link">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ForgotPassword %>" />
+                                        <asp:Literal runat="server" Text="¿Olvidaste tu contraseña?" />
                                     </a>
                                 </div>
 
                                 <div class="text-center">
                                     <span class="text-muted">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,DontHaveAccount %>" />
+                                        <asp:Literal runat="server" Text="¿No tienes una cuenta?" />
                                     </span>
                                     <a href="SignUp.aspx" class="auth-link ms-1">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignUp %>" />
+                                        <asp:Literal runat="server" Text="Registrarse" />
                                     </a>
                                 </div>
                             </asp:Panel>
@@ -140,39 +140,39 @@
                             <asp:Panel ID="pnlPasswordReset" runat="server" Visible="false">
                                 <div class="text-center mb-4">
                                     <h2 class="fw-bold text-dark">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordResetTitle %>" />
+                                        <asp:Literal runat="server" Text="Restablecer Contraseña" />
                                     </h2>
                                     <p class="text-muted mb-0">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,EnterNewPassword %>" />
+                                        <asp:Literal runat="server" Text="Ingresa tu nueva contraseña" />
                                     </p>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="<%= txtNewPassword.ClientID %>" class="form-label fw-semibold text-dark">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewPassword %>" />
+                                        <asp:Literal runat="server" Text="Nueva contraseña" />
                                     </label>
                                     <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvNewPassword" runat="server" ControlToValidate="txtNewPassword"
-                                        ErrorMessage="<%$ Resources:GlobalResources,NewPasswordRequired %>" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:RequiredFieldValidator>
+                                        ErrorMessage="La nueva contraseña es obligatoria" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revNewPassword" runat="server" ControlToValidate="txtNewPassword"
-                                        ErrorMessage="<%$ Resources:GlobalResources,PasswordMinLength %>" ValidationExpression=".{6,}" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:RegularExpressionValidator>
+                                        ErrorMessage="La contraseña debe tener al menos 6 caracteres." ValidationExpression=".{6,}" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:RegularExpressionValidator>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="<%= txtConfirmNewPassword.ClientID %>" class="form-label fw-semibold text-dark">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ConfirmNewPassword %>" />
+                                        <asp:Literal runat="server" Text="Confirmar nueva contraseña" />
                                     </label>
                                     <asp:TextBox ID="txtConfirmNewPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvConfirmNewPassword" runat="server" ControlToValidate="txtConfirmNewPassword"
-                                        ErrorMessage="<%$ Resources:GlobalResources,ConfirmNewPasswordRequired %>" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:RequiredFieldValidator>
+                                        ErrorMessage="La confirmación de contraseña es obligatoria" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:RequiredFieldValidator>
                                     <asp:CompareValidator ID="cvNewPassword" runat="server" ControlToValidate="txtConfirmNewPassword" ControlToCompare="txtNewPassword"
-                                        ErrorMessage="<%$ Resources:GlobalResources,NewPasswordsDoNotMatch %>" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:CompareValidator>
+                                        ErrorMessage="Las contraseñas no coinciden" CssClass="text-danger small" Display="Dynamic" ValidationGroup="PasswordReset"></asp:CompareValidator>
                                 </div>
 
                                 <div class="d-grid mb-3">
                                     <asp:UpdatePanel ID="upPasswordReset" runat="server">
                                         <ContentTemplate>
-                                            <asp:Button ID="btnResetPassword" runat="server" Text="<%$ Resources:GlobalResources,ResetPassword %>" CssClass="btn btn-gradient btn-lg"
+                                            <asp:Button ID="btnResetPassword" runat="server" Text="Restablecer contraseña" CssClass="btn btn-gradient btn-lg"
                                                 OnClick="btnResetPassword_Click" ValidationGroup="PasswordReset" OnClientClick="return handlePasswordResetSubmit();" />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
@@ -180,7 +180,7 @@
 
                                 <div class="text-center">
                                     <a href="SignIn.aspx" class="auth-link">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BackToSignIn %>" />
+                                        <asp:Literal runat="server" Text="Volver al inicio de sesión" />
                                     </a>
                                 </div>
                             </asp:Panel>

@@ -278,6 +278,384 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// Retrieves current user's feedback for a given subscription (if any)
+        /// Uses sp_ProductSubscriptionFeedback_GetBySubscription
+        /// </summary>
+        public ProductSubscriptionFeedbackResult GetProductSubscriptionFeedbackBySubscription(int subscriptionId, int userId)
+        {
+            if (subscriptionId <= 0 || userId <= 0)
+            {
+                return ProductSubscriptionFeedbackResult.Failure(-1, "Invalid identifiers.");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                using (SqlCommand command = new SqlCommand("sp_ProductSubscriptionFeedback_GetBySubscription", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@SubscriptionId", subscriptionId);
+                    command.Parameters.AddWithValue("@UserId", userId);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            var feedback = new ABSTRACTIONS.ProductSubscriptionFeedback
+                            {
+                                FeedbackId = reader["FeedbackId"] != DBNull.Value ? Convert.ToInt32(reader["FeedbackId"]) : 0,
+                                SubscriptionId = reader["SubscriptionId"] != DBNull.Value ? Convert.ToInt32(reader["SubscriptionId"]) : subscriptionId,
+                                UserId = reader["UserId"] != DBNull.Value ? Convert.ToInt32(reader["UserId"]) : userId,
+                                Rating = reader["Rating"] != DBNull.Value ? Convert.ToByte(reader["Rating"]) : (byte)0,
+                                Comment = reader["Comment"] == DBNull.Value ? null : reader["Comment"].ToString(),
+                                CreatedDateUtc = reader["CreatedDateUtc"] != DBNull.Value ? (DateTime?)Convert.ToDateTime(reader["CreatedDateUtc"]) : null,
+                                UpdatedDateUtc = reader["UpdatedDateUtc"] != DBNull.Value ? (DateTime?)Convert.ToDateTime(reader["UpdatedDateUtc"]) : null
+                            };
+                            return ProductSubscriptionFeedbackResult.Success(feedback, "Feedback retrieved successfully");
+                        }
+                    }
+
+                    return ProductSubscriptionFeedbackResult.Success(null, "No feedback found");
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return ProductSubscriptionFeedbackResult.Failure($"Database error retrieving feedback: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return ProductSubscriptionFeedbackResult.Failure($"Unexpected error retrieving feedback: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Saves (insert/update) current user's feedback for a subscription
+        /// Uses sp_ProductSubscriptionFeedback_Save
+        /// </summary>
+        public DatabaseResult SaveProductSubscriptionFeedback(int subscriptionId, int userId, byte rating, string comment)
+        {
+            if (subscriptionId <= 0)
+                return DatabaseResult.Failure(-1, "Invalid subscription identifier.");
+            if (userId <= 0)
+                return DatabaseResult.Failure(-2, "Invalid user identifier.");
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                using (SqlCommand command = new SqlCommand("sp_ProductSubscriptionFeedback_Save", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@SubscriptionId", subscriptionId);
+                    command.Parameters.AddWithValue("@UserId", userId);
+                    command.Parameters.AddWithValue("@Rating", rating);
+                    command.Parameters.AddWithValue("@Comment", (object)(comment ?? (string)null) ?? DBNull.Value);
+
+                    SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(resultCodeParam);
+
+                    SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(resultMessageParam);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    int resultCode = Convert.ToInt32(resultCodeParam.Value ?? -999);
+                    string resultMessage = resultMessageParam.Value?.ToString() ?? "Unknown result";
+
+                    if (resultCode > 0)
+                    {
+                        return DatabaseResult.Success(resultMessage);
+                    }
+
+                    return DatabaseResult.Failure(resultCode, resultMessage);
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult.Failure($"Database error saving feedback: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult.Failure($"Unexpected error saving feedback: {ex.Message}", ex);
+            }
+        }
+
+        #endregion
+
+        #region Admin User Management Methods
+
+        /// <summary>
+        /// Gets a user by ID for admin editing
+        /// </summary>
+        /// <param name="userId">User ID to retrieve</param>
+        /// <returns>DatabaseResult containing User object or error information</returns>
+        public DatabaseResult<User> GetUserById(int userId)
+        {
+            if (userId <= 0)
+            {
+                return DatabaseResult<User>.Failure(-1, "Invalid user ID");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_Admin_GetUserById", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UserId", userId);
+
+                        SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultCodeParam);
+
+                        SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultMessageParam);
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                User user = MapUserFromReader(reader);
+                                return DatabaseResult<User>.Success(user, "User found successfully");
+                            }
+                        }
+
+                        int resultCode = Convert.ToInt32(resultCodeParam.Value ?? 0);
+                        string resultMessage = resultMessageParam.Value?.ToString() ?? "User not found";
+
+                        return DatabaseResult<User>.Failure(resultCode, resultMessage);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult<User>.Failure($"Database error: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult<User>.Failure($"Unexpected error: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Updates user information (admin operation)
+        /// </summary>
+        /// <param name="user">User object with updated information</param>
+        /// <param name="modifiedBy">ID of admin making the change</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult UpdateUser(User user, int modifiedBy)
+        {
+            if (user == null)
+            {
+                return DatabaseResult.Failure(-1, "User object cannot be null");
+            }
+
+            if (modifiedBy <= 0)
+            {
+                return DatabaseResult.Failure(-2, "Invalid modifier user ID");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_Admin_UpdateUser", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        
+                        command.Parameters.AddWithValue("@UserId", user.UserId);
+                        command.Parameters.AddWithValue("@Username", user.Username ?? string.Empty);
+                        command.Parameters.AddWithValue("@Email", user.Email ?? string.Empty);
+                        command.Parameters.AddWithValue("@FirstName", user.FirstName ?? string.Empty);
+                        command.Parameters.AddWithValue("@LastName", user.LastName ?? string.Empty);
+                        command.Parameters.AddWithValue("@UserRole", user.UserRole ?? "user");
+                        command.Parameters.AddWithValue("@IsActive", user.IsActive);
+                        command.Parameters.AddWithValue("@ModifiedBy", modifiedBy);
+
+                        SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultCodeParam);
+
+                        SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultMessageParam);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                        int resultCode = Convert.ToInt32(resultCodeParam.Value ?? -999);
+                        string resultMessage = resultMessageParam.Value?.ToString() ?? "Unknown result";
+
+                        if (resultCode > 0)
+                        {
+                            return DatabaseResult.Success(resultMessage);
+                        }
+
+                        return DatabaseResult.Failure(resultCode, resultMessage);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult.Failure($"Database error: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult.Failure($"Unexpected error: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Deletes (deactivates) a user (admin operation)
+        /// </summary>
+        /// <param name="userId">User ID to delete</param>
+        /// <param name="deletedBy">ID of admin performing the deletion</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult DeleteUser(int userId, int deletedBy)
+        {
+            if (userId <= 0)
+            {
+                return DatabaseResult.Failure(-1, "Invalid user ID");
+            }
+
+            if (deletedBy <= 0)
+            {
+                return DatabaseResult.Failure(-2, "Invalid deleter user ID");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_Admin_DeleteUser", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@DeletedBy", deletedBy);
+
+                        SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultCodeParam);
+
+                        SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultMessageParam);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                        int resultCode = Convert.ToInt32(resultCodeParam.Value ?? -999);
+                        string resultMessage = resultMessageParam.Value?.ToString() ?? "Unknown result";
+
+                        if (resultCode > 0)
+                        {
+                            return DatabaseResult.Success(resultMessage);
+                        }
+
+                        return DatabaseResult.Failure(resultCode, resultMessage);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult.Failure($"Database error: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult.Failure($"Unexpected error: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Activates a user (admin operation)
+        /// </summary>
+        /// <param name="userId">User ID to activate</param>
+        /// <param name="activatedBy">ID of admin performing the activation</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult ActivateUser(int userId, int activatedBy)
+        {
+            if (userId <= 0)
+            {
+                return DatabaseResult.Failure(-1, "Invalid user ID");
+            }
+
+            if (activatedBy <= 0)
+            {
+                return DatabaseResult.Failure(-2, "Invalid activator user ID");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_Admin_ActivateUser", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@ActivatedBy", activatedBy);
+
+                        SqlParameter resultCodeParam = new SqlParameter("@ResultCode", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultCodeParam);
+
+                        SqlParameter resultMessageParam = new SqlParameter("@ResultMessage", SqlDbType.NVarChar, 255)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(resultMessageParam);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                        int resultCode = Convert.ToInt32(resultCodeParam.Value ?? -999);
+                        string resultMessage = resultMessageParam.Value?.ToString() ?? "Unknown result";
+
+                        if (resultCode > 0)
+                        {
+                            return DatabaseResult.Success(resultMessage);
+                        }
+
+                        return DatabaseResult.Failure(resultCode, resultMessage);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return DatabaseResult.Failure($"Database error: {sqlEx.Message}", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return DatabaseResult.Failure($"Unexpected error: {ex.Message}", ex);
+            }
+        }
+
         #endregion
 
         /// <summary>

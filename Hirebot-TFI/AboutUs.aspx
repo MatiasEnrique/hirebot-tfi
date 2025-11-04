@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Public.master" AutoEventWireup="true" CodeBehind="AboutUs.aspx.cs" Inherits="Hirebot_TFI.AboutUs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutUs %>" /> - Hirebot-TFI
+    <asp:Literal runat="server" Text="Quiénes Somos" /> - Hirebot-TFI
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
@@ -30,8 +30,8 @@
         <!-- Hero Section -->
         <div class="hero-section">
             <div class="container text-center">
-                <h1 class="display-4 fw-bold mb-4"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutUsTitle %>" /></h1>
-                <p class="lead"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutUsSubtitle %>" /></p>
+                <h1 class="display-4 fw-bold mb-4"><asp:Literal runat="server" Text="Conoce a Hirebot-TFI" /></h1>
+                <p class="lead"><asp:Literal runat="server" Text="Revolucionando el proceso de selección con inteligencia artificial" /></p>
             </div>
         </div>
 
@@ -40,33 +40,33 @@
             <!-- Company Mission -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OurMission %>" /></h2>
-                    <p class="lead"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MissionStatement %>" /></p>
+                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="Nuestra Misión" /></h2>
+                    <p class="lead"><asp:Literal runat="server" Text="Transformar el proceso de contratación mediante tecnología de IA avanzada, conectando talento excepcional con oportunidades perfectas de manera eficiente y justa." /></p>
                 </div>
             </div>
 
             <!-- Company Story -->
             <div class="row mb-5">
                 <div class="col-lg-6">
-                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OurStory %>" /></h2>
-                    <p><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CompanyStory1 %>" /></p>
-                    <p><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CompanyStory2 %>" /></p>
+                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="Nuestra Historia" /></h2>
+                    <p><asp:Literal runat="server" Text="Fundada en 2022 por un equipo de expertos en tecnología y recursos humanos, Hirebot-TFI nació de la visión de simplificar y mejorar el proceso de contratación para empresas de todos los tamaños." /></p>
+                    <p><asp:Literal runat="server" Text="Con sede en Buenos Aires, Argentina, hemos crecido rápidamente para convertirnos en líderes en soluciones de contratación impulsadas por IA en América Latina." /></p>
                 </div>
                 <div class="col-lg-6">
                     <div class="bg-light p-4 rounded">
-                        <h4 style="color: var(--ultra-violet);"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,KeyNumbers %>" /></h4>
+                        <h4 style="color: var(--ultra-violet);"><asp:Literal runat="server" Text="Cifras Clave" /></h4>
                         <div class="row text-center mt-4">
                             <div class="col-4">
                                 <h3 style="color: var(--tiffany-blue);">500+</h3>
-                                <small><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CompaniesServed %>" /></small>
+                                <small><asp:Literal runat="server" Text="Empresas Atendidas" /></small>
                             </div>
                             <div class="col-4">
                                 <h3 style="color: var(--tiffany-blue);">10K+</h3>
-                                <small><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CandidatesProcessed %>" /></small>
+                                <small><asp:Literal runat="server" Text="Candidatos Procesados" /></small>
                             </div>
                             <div class="col-4">
                                 <h3 style="color: var(--tiffany-blue);">98%</h3>
-                                <small><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SatisfactionRate %>" /></small>
+                                <small><asp:Literal runat="server" Text="Tasa de Satisfacción" /></small>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
             <!-- Team Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OurTeam %>" /></h2>
+                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="Nuestro Equipo" /></h2>
                 </div>
             </div>
 
@@ -88,8 +88,8 @@
                                 <i class="fas fa-user text-white fa-2x"></i>
                             </div>
                             <h5 class="card-title">María González</h5>
-                            <p class="text-muted mb-2"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CEO %>" /></p>
-                            <p class="card-text"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CEODescription %>" /></p>
+                            <p class="text-muted mb-2"><asp:Literal runat="server" Text="CEO y Fundadora" /></p>
+                            <p class="card-text"><asp:Literal runat="server" Text="15 años de experiencia en recursos humanos y tecnología. Visionaria detrás de Hirebot-TFI." /></p>
                         </div>
                     </div>
                 </div>
@@ -100,8 +100,8 @@
                                 <i class="fas fa-user text-white fa-2x"></i>
                             </div>
                             <h5 class="card-title">Carlos Rodríguez</h5>
-                            <p class="text-muted mb-2"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CTO %>" /></p>
-                            <p class="card-text"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CTODescription %>" /></p>
+                            <p class="text-muted mb-2"><asp:Literal runat="server" Text="CTO y Co-fundador" /></p>
+                            <p class="card-text"><asp:Literal runat="server" Text="Experto en IA y machine learning con más de 12 años desarrollando soluciones innovadoras." /></p>
                         </div>
                     </div>
                 </div>
@@ -112,8 +112,8 @@
                                 <i class="fas fa-user text-white fa-2x"></i>
                             </div>
                             <h5 class="card-title">Ana López</h5>
-                            <p class="text-muted mb-2"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CMO %>" /></p>
-                            <p class="card-text"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CMODescription %>" /></p>
+                            <p class="text-muted mb-2"><asp:Literal runat="server" Text="CMO y Directora de Marketing" /></p>
+                            <p class="card-text"><asp:Literal runat="server" Text="Especialista en marketing digital y growth hacking con experiencia en startups tecnológicas." /></p>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
             <!-- Values Section -->
             <div class="row mt-5">
                 <div class="col-12">
-                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OurValues %>" /></h2>
+                    <h2 class="section-title mb-4"><asp:Literal runat="server" Text="Nuestros Valores" /></h2>
                 </div>
             </div>
 
@@ -132,8 +132,8 @@
                         <div class="mb-3" style="color: var(--ultra-violet);">
                             <i class="fas fa-lightbulb fa-3x"></i>
                         </div>
-                        <h5><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Innovation %>" /></h5>
-                        <p><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,InnovationDescription %>" /></p>
+                        <h5><asp:Literal runat="server" Text="Innovación" /></h5>
+                        <p><asp:Literal runat="server" Text="Buscamos constantemente nuevas formas de mejorar y revolucionar el proceso de contratación." /></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -141,8 +141,8 @@
                         <div class="mb-3" style="color: var(--tiffany-blue);">
                             <i class="fas fa-handshake fa-3x"></i>
                         </div>
-                        <h5><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Trust %>" /></h5>
-                        <p><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TrustDescription %>" /></p>
+                        <h5><asp:Literal runat="server" Text="Confianza" /></h5>
+                        <p><asp:Literal runat="server" Text="Construimos relaciones sólidas basadas en transparencia y confiabilidad." /></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -150,8 +150,8 @@
                         <div class="mb-3" style="color: var(--cadet-gray);">
                             <i class="fas fa-star fa-3x"></i>
                         </div>
-                        <h5><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Excellence %>" /></h5>
-                        <p><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ExcellenceDescription %>" /></p>
+                        <h5><asp:Literal runat="server" Text="Excelencia" /></h5>
+                        <p><asp:Literal runat="server" Text="Nos comprometemos a ofrecer siempre la más alta calidad en nuestros servicios." /></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -159,8 +159,8 @@
                         <div class="mb-3" style="color: var(--eerie-black);">
                             <i class="fas fa-users fa-3x"></i>
                         </div>
-                        <h5><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Collaboration %>" /></h5>
-                        <p><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CollaborationDescription %>" /></p>
+                        <h5><asp:Literal runat="server" Text="Colaboración" /></h5>
+                        <p><asp:Literal runat="server" Text="Creemos en el poder del trabajo en equipo y la cooperación para alcanzar objetivos comunes." /></p>
                     </div>
                 </div>
             </div>

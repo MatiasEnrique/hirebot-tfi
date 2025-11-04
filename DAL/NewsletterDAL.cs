@@ -76,11 +76,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<NewsletterSubscription>.Failure($"Database error processing subscription: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<NewsletterSubscription>.Failure(string.Format("Database error processing subscription: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<NewsletterSubscription>.Failure($"Unexpected error processing subscription: {ex.Message}", ex);
+                return DatabaseResult<NewsletterSubscription>.Failure(string.Format("Unexpected error processing subscription: {0}", ex.Message), ex);
             }
         }
 
@@ -127,11 +127,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error unsubscribing email: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error unsubscribing email: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error unsubscribing email: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error unsubscribing email: {0}", ex.Message), ex);
             }
         }
 
@@ -174,15 +174,15 @@ namespace DAL
                     }
                 }
 
-                return DatabaseResult<List<NewsletterSubscription>>.Success(subscriptions, $"Retrieved {subscriptions.Count} subscription(s).");
+                return DatabaseResult<List<NewsletterSubscription>>.Success(subscriptions, string.Format("Retrieved {0} subscription(s).", subscriptions.Count));
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<List<NewsletterSubscription>>.Failure($"Database error retrieving subscriptions: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<List<NewsletterSubscription>>.Failure(string.Format("Database error retrieving subscriptions: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<List<NewsletterSubscription>>.Failure($"Unexpected error retrieving subscriptions: {ex.Message}", ex);
+                return DatabaseResult<List<NewsletterSubscription>>.Failure(string.Format("Unexpected error retrieving subscriptions: {0}", ex.Message), ex);
             }
         }
 
@@ -217,11 +217,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<NewsletterSummary>.Failure($"Database error retrieving summary: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<NewsletterSummary>.Failure(string.Format("Database error retrieving summary: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<NewsletterSummary>.Failure($"Unexpected error retrieving summary: {ex.Message}", ex);
+                return DatabaseResult<NewsletterSummary>.Failure(string.Format("Unexpected error retrieving summary: {0}", ex.Message), ex);
             }
         }
 

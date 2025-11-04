@@ -134,6 +134,47 @@ namespace BLL
                     : result.ErrorMessage);
         }
 
+        /// <summary>
+        /// Retrieves a user's feedback for a specific subscription
+        /// </summary>
+        public ProductSubscriptionFeedbackResult GetSubscriptionFeedback(int userId, int subscriptionId)
+        {
+            if (userId <= 0)
+                return ProductSubscriptionFeedbackResult.Failure(-1, GetLocalizedString("UserNotFound"));
+            if (subscriptionId <= 0)
+                return ProductSubscriptionFeedbackResult.Failure(-2, GetLocalizedString("SubscriptionInvalid"));
+
+            var result = userDAL.GetProductSubscriptionFeedbackBySubscription(subscriptionId, userId);
+            return result;
+        }
+
+        /// <summary>
+        /// Saves (insert/update) a user's feedback for a subscription
+        /// </summary>
+        public DatabaseResult SaveSubscriptionFeedback(int userId, int subscriptionId, int rating, string comment)
+        {
+            if (userId <= 0)
+                return DatabaseResult.Failure(-1, GetLocalizedString("UserNotFound"));
+            if (subscriptionId <= 0)
+                return DatabaseResult.Failure(-2, GetLocalizedString("SubscriptionInvalid"));
+
+            if (rating < 1 || rating > 5)
+                return DatabaseResult.Failure(-3, GetLocalizedString("RatingOutOfRange"));
+
+            // Normalize comment to max 1000 characters (matches DB proc parameter)
+            string safeComment = comment ?? string.Empty;
+            safeComment = safeComment.Trim();
+            if (safeComment.Length > 1000)
+            {
+                safeComment = safeComment.Substring(0, 1000);
+            }
+
+            var result = userDAL.SaveProductSubscriptionFeedback(subscriptionId, userId, (byte)rating, string.IsNullOrWhiteSpace(safeComment) ? null : safeComment);
+            return result.IsSuccessful
+                ? DatabaseResult.Success(GetLocalizedString("SubscriptionFeedbackSavedSuccess"))
+                : DatabaseResult.Failure(result.ResultCode, string.IsNullOrWhiteSpace(result.ErrorMessage) ? GetLocalizedString("SubscriptionFeedbackSaveError") : result.ErrorMessage);
+        }
+
         private DatabaseResult ValidateProfileUpdate(int userId, string firstName, string lastName, string email)
         {
             if (userId <= 0)
@@ -263,6 +304,250 @@ namespace BLL
             }
 
             return string.Concat(trimmed[0], new string('*', trimmed.Length - 2), trimmed[trimmed.Length - 1]);
+        }
+
+        #endregion
+
+        #region Admin User Management Methods
+
+        /// <summary>
+        /// Gets all users (admin operation)
+        /// </summary>
+        /// <param name="includeInactive">Whether to include inactive users</param>
+        /// <returns>List of users</returns>
+        public List<User> GetAllUsersForAdmin(bool includeInactive = true)
+        {
+            var result = userDAL.GetAllUsers(includeInactive);
+            return result.IsSuccessful ? result.Data : new List<User>();
+        }
+
+        /// <summary>
+        /// Gets a user by ID (admin operation)
+        /// </summary>
+        /// <param name="userId">User ID</param>
+        /// <returns>User object or null</returns>
+        public User GetUserById(int userId)
+        {
+            if (userId <= 0)
+                return null;
+
+            var result = userDAL.GetUserById(userId);
+            return result.IsSuccessful ? result.Data : null;
+        }
+
+        /// <summary>
+        /// Updates a user (admin operation) with business validation
+        /// </summary>
+        /// <param name="user">User object with updated information</param>
+        /// <param name="modifiedBy">ID of admin making the change</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult UpdateUserAdmin(User user, int modifiedBy)
+        {
+            if (user == null)
+                return DatabaseResult.Failure(-1, "User object cannot be null");
+
+            if (modifiedBy <= 0)
+                return DatabaseResult.Failure(-2, "Invalid modifier user ID");
+
+            // Validate user data
+            var validation = ValidateUserData(user);
+            if (!validation.IsSuccessful)
+                return validation;
+
+            // Perform the update
+            return userDAL.UpdateUser(user, modifiedBy);
+        }
+
+        /// <summary>
+        /// Deletes (deactivates) a user (admin operation)
+        /// </summary>
+        /// <param name="userId">User ID to delete</param>
+        /// <param name="deletedBy">ID of admin performing the deletion</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult DeleteUserAdmin(int userId, int deletedBy)
+        {
+            if (userId <= 0)
+                return DatabaseResult.Failure(-1, "Invalid user ID");
+
+            if (deletedBy <= 0)
+                return DatabaseResult.Failure(-2, "Invalid deleter user ID");
+
+            if (userId == deletedBy)
+                return DatabaseResult.Failure(-3, "Cannot delete your own account");
+
+            return userDAL.DeleteUser(userId, deletedBy);
+        }
+
+        /// <summary>
+        /// Activates a user (admin operation)
+        /// </summary>
+        /// <param name="userId">User ID to activate</param>
+        /// <param name="activatedBy">ID of admin performing the activation</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult ActivateUserAdmin(int userId, int activatedBy)
+        {
+            if (userId <= 0)
+                return DatabaseResult.Failure(-1, "Invalid user ID");
+
+            if (activatedBy <= 0)
+                return DatabaseResult.Failure(-2, "Invalid activator user ID");
+
+            return userDAL.ActivateUser(userId, activatedBy);
+        }
+
+        /// <summary>
+        /// Validates user data for admin updates
+        /// </summary>
+        private DatabaseResult ValidateUserData(User user)
+        {
+            if (string.IsNullOrWhiteSpace(user.Username))
+                return DatabaseResult.Failure(-1, "El nombre de usuario es requerido");
+
+            if (user.Username.Trim().Length < 3)
+                return DatabaseResult.Failure(-2, "El nombre de usuario debe tener al menos 3 caracteres");
+
+            if (user.Username.Trim().Length > 50)
+                return DatabaseResult.Failure(-3, "El nombre de usuario no puede exceder 50 caracteres");
+
+            if (!IsValidUsername(user.Username.Trim()))
+                return DatabaseResult.Failure(-4, "El nombre de usuario solo puede contener letras, números y guiones bajos");
+
+            if (string.IsNullOrWhiteSpace(user.Email))
+                return DatabaseResult.Failure(-5, "El correo electrónico es requerido");
+
+            if (!IsEmailFormat(user.Email.Trim()))
+                return DatabaseResult.Failure(-6, "Formato de correo electrónico inválido");
+
+            if (string.IsNullOrWhiteSpace(user.FirstName))
+                return DatabaseResult.Failure(-7, "El nombre es requerido");
+
+            if (user.FirstName.Trim().Length < 2)
+                return DatabaseResult.Failure(-8, "El nombre debe tener al menos 2 caracteres");
+
+            if (string.IsNullOrWhiteSpace(user.LastName))
+                return DatabaseResult.Failure(-9, "El apellido es requerido");
+
+            if (user.LastName.Trim().Length < 2)
+                return DatabaseResult.Failure(-10, "El apellido debe tener al menos 2 caracteres");
+
+            if (string.IsNullOrWhiteSpace(user.UserRole))
+                return DatabaseResult.Failure(-11, "El rol de usuario es requerido");
+
+            if (user.UserRole != "user" && user.UserRole != "admin")
+                return DatabaseResult.Failure(-12, "Rol de usuario inválido. Debe ser 'user' o 'admin'");
+
+            return DatabaseResult.Success();
+        }
+
+        /// <summary>
+        /// Creates a new user (admin operation) with specified role and business validation
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="email">Email address</param>
+        /// <param name="password">Password</param>
+        /// <param name="firstName">First name</param>
+        /// <param name="lastName">Last name</param>
+        /// <param name="userRole">User role (user or admin)</param>
+        /// <param name="isActive">Whether user is active</param>
+        /// <param name="createdBy">ID of admin creating the user</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult CreateUserAdmin(string username, string email, string password, string firstName, string lastName, string userRole, bool isActive, int createdBy)
+        {
+            if (createdBy <= 0)
+                return DatabaseResult.Failure(-1, "ID del creador inválido");
+
+            // Validate user data
+            var validation = ValidateUserCreation(username, email, password, firstName, lastName, userRole);
+            if (!validation.IsSuccessful)
+                return validation;
+
+            // Check if user already exists
+            var existenceResult = userDAL.CheckUserExists(username, email);
+            if (!existenceResult.IsSuccessful)
+                return DatabaseResult.Failure(existenceResult.ResultCode, existenceResult.ErrorMessage);
+
+            if (existenceResult.UserExists)
+            {
+                string conflictMessage = existenceResult.ConflictType == "Both" 
+                    ? "El nombre de usuario y el correo electrónico ya existen"
+                    : existenceResult.ConflictType == "Username" 
+                        ? "El nombre de usuario ya existe" 
+                        : "El correo electrónico ya existe";
+                return DatabaseResult.Failure(-2, conflictMessage);
+            }
+
+            // Create user object
+            var user = new User
+            {
+                Username = username.Trim(),
+                Email = email.Trim().ToLower(),
+                PasswordHash = SERVICES.EncryptionService.EncryptPassword(password),
+                FirstName = firstName.Trim(),
+                LastName = lastName.Trim(),
+                UserRole = userRole,
+                CreatedDate = DateTime.Now,
+                IsActive = isActive
+            };
+
+            // Create the user
+            var createResult = userDAL.CreateUser(user);
+            if (!createResult.IsSuccessful)
+                return DatabaseResult.Failure(createResult.ResultCode, 
+                    string.IsNullOrWhiteSpace(createResult.ErrorMessage) 
+                        ? "Error al crear el usuario" 
+                        : createResult.ErrorMessage);
+
+            return DatabaseResult.Success("Usuario creado exitosamente");
+        }
+
+        /// <summary>
+        /// Validates user data for admin user creation
+        /// </summary>
+        private DatabaseResult ValidateUserCreation(string username, string email, string password, string firstName, string lastName, string userRole)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                return DatabaseResult.Failure(-1, "El nombre de usuario es requerido");
+
+            if (username.Trim().Length < 3)
+                return DatabaseResult.Failure(-2, "El nombre de usuario debe tener al menos 3 caracteres");
+
+            if (username.Trim().Length > 50)
+                return DatabaseResult.Failure(-3, "El nombre de usuario no puede exceder 50 caracteres");
+
+            if (!IsValidUsername(username.Trim()))
+                return DatabaseResult.Failure(-4, "El nombre de usuario solo puede contener letras, números y guiones bajos");
+
+            if (string.IsNullOrWhiteSpace(email))
+                return DatabaseResult.Failure(-5, "El correo electrónico es requerido");
+
+            if (!IsEmailFormat(email.Trim()))
+                return DatabaseResult.Failure(-6, "Formato de correo electrónico inválido");
+
+            if (string.IsNullOrWhiteSpace(password))
+                return DatabaseResult.Failure(-7, "La contraseña es requerida");
+
+            if (password.Length < 6)
+                return DatabaseResult.Failure(-8, "La contraseña debe tener al menos 6 caracteres");
+
+            if (string.IsNullOrWhiteSpace(firstName))
+                return DatabaseResult.Failure(-9, "El nombre es requerido");
+
+            if (firstName.Trim().Length < 2)
+                return DatabaseResult.Failure(-10, "El nombre debe tener al menos 2 caracteres");
+
+            if (string.IsNullOrWhiteSpace(lastName))
+                return DatabaseResult.Failure(-11, "El apellido es requerido");
+
+            if (lastName.Trim().Length < 2)
+                return DatabaseResult.Failure(-12, "El apellido debe tener al menos 2 caracteres");
+
+            if (string.IsNullOrWhiteSpace(userRole))
+                return DatabaseResult.Failure(-13, "El rol de usuario es requerido");
+
+            if (userRole != "user" && userRole != "admin")
+                return DatabaseResult.Failure(-14, "Rol de usuario inválido. Debe ser 'user' o 'admin'");
+
+            return DatabaseResult.Success();
         }
 
         #endregion
@@ -492,10 +777,10 @@ namespace BLL
 
                 // Send password recovery email with proper token URL
                 string baseResetUrl = GetPasswordResetUrl();
-                string resetUrl = $"{baseResetUrl}?token={createResult.RecoveryToken}";
+                string resetUrl = string.Format("{0}?token={1}", baseResetUrl, createResult.RecoveryToken);
                 bool emailSent = EmailService.SendPasswordRecoveryEmail(
                     user.Email, 
-                    $"{user.FirstName} {user.LastName}".Trim(),
+                    string.Format("{0} {1}", user.FirstName, user.LastName).Trim(),
                     createResult.RecoveryToken.ToString(),
                     resetUrl
                 );
@@ -612,7 +897,7 @@ namespace BLL
                     // Send password change confirmation email
                     EmailService.SendPasswordChangeConfirmationEmail(
                         user.Email,
-                        $"{user.FirstName} {user.LastName}".Trim()
+                        string.Format("{0} {1}", user.FirstName, user.LastName).Trim()
                     );
                 }
 
@@ -637,7 +922,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Cleanup error: {ex.Message}");
+                return DatabaseResult.Failure(string.Format("Cleanup error: {0}", ex.Message));
             }
         }
 
@@ -657,38 +942,13 @@ namespace BLL
                 if (HttpContext.Current != null && HttpContext.Current.Request != null)
                 {
                     string baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-                    return $"{baseUrl}/ResetPassword.aspx"; // FIXED: Correct URL
+                    return string.Format("{0}/ResetPassword.aspx", baseUrl); // FIXED: Correct URL
                 }
                 return "https://localhost:44383/ResetPassword.aspx"; // Fallback for development
             }
             catch
             {
                 return "https://localhost:44383/ResetPassword.aspx"; // Fallback
-            }
-        }
-
-        /// <summary>
-        /// Helper method to get user by user ID
-        /// Used for email confirmation after password reset
-        /// </summary>
-        /// <param name="userId">User ID</param>
-        /// <returns>User object or null if not found</returns>
-        private User GetUserById(int userId)
-        {
-            try
-            {
-                // Get all users and find by ID - this could be optimized with a specific method
-                var users = userDAL.GetAllUsers(includeInactive: true);
-                if (users.IsSuccessful && users.Data != null)
-                {
-                    var user = users.Data.Find(u => u.UserId == userId);
-                    return user;
-                }
-                return null;
-            }
-            catch
-            {
-                return null;
             }
         }
 

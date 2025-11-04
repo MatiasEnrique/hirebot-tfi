@@ -1,5 +1,4 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Protected.master.cs" Inherits="Hirebot_TFI.Protected" %>
-<%@ Register Src="~/Controls/LanguageSelector.ascx" TagPrefix="uc" TagName="LanguageSelector" %>
 
 <!DOCTYPE html>
 
@@ -11,8 +10,11 @@
             Hirebot-TFI
         </asp:ContentPlaceHolder>
     </title>
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="Content/site.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
         :root {
@@ -85,12 +87,27 @@
                 margin: 0.5rem auto;
             }
         }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        body {
+            top: 0px !important;
+        }
+
+        /* Language selector styling */
+        #languageSelector {
+            min-width: 150px;
+        }
     </style>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand fw-bold" href="Dashboard.aspx">
@@ -103,47 +120,47 @@
                 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a id="lnkDashboard" runat="server" class="nav-link" href="Dashboard.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Dashboard %>" /></a>
+                        <li id="navDashboard" runat="server" class="nav-item">
+                            <a id="lnkDashboard" runat="server" class="nav-link" href="Dashboard.aspx">Panel de Control</a>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkAccount" runat="server" class="nav-link" href="Account.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AccountNav %>" /></a>
+                        <li id="navAccount" runat="server" class="nav-item">
+                            <a id="lnkAccount" runat="server" class="nav-link" href="Account.aspx">Mi Cuenta</a>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkCatalog" runat="server" class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Catalog %>" /></a>
+                        <li id="navCatalog" runat="server" class="nav-item">
+                            <a id="lnkCatalog" runat="server" class="nav-link" href="Catalog.aspx">Catálogo</a>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkSubscriptions" runat="server" class="nav-link" href="Subscriptions.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SubscriptionsNav %>" /></a>
+                        <li id="navSubscriptions" runat="server" class="nav-item">
+                            <a id="lnkSubscriptions" runat="server" class="nav-link" href="Subscriptions.aspx">Suscripciones</a>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkOrganizations" runat="server" class="nav-link" href="MyOrganizations.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" /></a>
+                        <li id="navOrganizations" runat="server" class="nav-item">
+                            <a id="lnkOrganizations" runat="server" class="nav-link" href="MyOrganizations.aspx">Mis Organizaciones</a>
                         </li>
-                        <asp:Panel ID="pnlAdminNavigation" runat="server" Visible="false">
-                            <li class="nav-item">
-                                <a id="lnkAdminOrganizations" runat="server" class="nav-link" href="OrganizationAdmin.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" /></a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="lnkAdminNews" runat="server" class="nav-link" href="AdminNews.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagementNav %>" /></a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="lnkAdminSurveys" runat="server" class="nav-link" href="AdminSurveys.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SurveyManagementNav %>" /></a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="lnkAdminBilling" runat="server" class="nav-link" href="AdminBilling.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BillingManagementNav %>" /></a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="lnkAdminReports" runat="server" class="nav-link" href="AdminReports.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AdminReportsNav %>" /></a>
-                            </li>
-                        </asp:Panel>
+                        <li id="navAdminOrganizations" runat="server" class="nav-item" visible="false">
+                            <a id="lnkAdminOrganizations" runat="server" class="nav-link" href="OrganizationAdmin.aspx">Administrar Organizaciones</a>
+                        </li>
+                        <li id="navAdminNews" runat="server" class="nav-item" visible="false">
+                            <a id="lnkAdminNews" runat="server" class="nav-link" href="AdminNews.aspx">Gestión de Noticias</a>
+                        </li>
+                        <li id="navAdminSurveys" runat="server" class="nav-item" visible="false">
+                            <a id="lnkAdminSurveys" runat="server" class="nav-link" href="AdminSurveys.aspx">Gestión de Encuestas</a>
+                        </li>
+                        <li id="navAdminBilling" runat="server" class="nav-item" visible="false">
+                            <a id="lnkAdminBilling" runat="server" class="nav-link" href="AdminBilling.aspx">Gestión de Facturación</a>
+                        </li>
+                        <li id="navAdminReports" runat="server" class="nav-item" visible="false">
+                            <a id="lnkAdminReports" runat="server" class="nav-link" href="AdminReports.aspx">Informes de Administración</a>
+                        </li>
                         <asp:ContentPlaceHolder ID="NavigationContent" runat="server">
                         </asp:ContentPlaceHolder>
                     </ul>
-                    
+
                     <ul class="navbar-nav">
-                        <uc:LanguageSelector ID="ucLanguageSelector" runat="server" />
+                        <li class="nav-item me-2">
+                            <select id="languageSelector" class="form-select form-select-sm"></select>
+                        </li>
                         <li class="nav-item">
                             <asp:LinkButton ID="btnLogout" runat="server" CssClass="nav-link" OnClick="btnLogout_Click">
-                                <i class="fas fa-sign-out-alt me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignOut %>" />
+                                <i class="fas fa-sign-out-alt me-1"></i>Cerrar Sesión
                             </asp:LinkButton>
                         </li>
                     </ul>
@@ -155,10 +172,174 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+        <div id="google_translate_element" style="display:none;"></div>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="Scripts/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        // All available languages
+        var allLanguages = [
+            { code: 'es', name: 'Español', flag: '🇪🇸' },
+            { code: 'en', name: 'English', flag: '🇬🇧' },
+            { code: 'fr', name: 'Français', flag: '🇫🇷' },
+            { code: 'pt', name: 'Português', flag: '🇵🇹' },
+            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+            { code: 'ja', name: '日本語', flag: '🇯🇵' },
+            { code: 'zh-CN', name: '中文', flag: '🇨🇳' },
+            { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+            { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
+            { code: 'ko', name: '한국어', flag: '🇰🇷' },
+            { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+            { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+            { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+            { code: 'th', name: 'ไทย', flag: '🇹🇭' },
+            { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+            { code: 'fi', name: 'Suomi', flag: '🇫🇮' },
+            { code: 'da', name: 'Dansk', flag: '🇩🇰' }
+        ];
+
+        // Google Translate initialization flag
+        var googleTranslateReady = false;
+
+        // Initialize Google Translate
+        function googleTranslateElementInit() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'es',
+                    includedLanguages: allLanguages.map(function(l) { return l.code; }).join(','),
+                    autoDisplay: false
+                }, 'google_translate_element');
+                googleTranslateReady = true;
+                console.log('✅ Google Translate inicializado correctamente');
+            } catch (e) {
+                console.error('❌ Error inicializando Google Translate:', e);
+            }
+        }
+
+        // Get current language from cookie
+        function getCurrentLanguage() {
+            var currentLang = 'es';
+            var cookies = document.cookie.split('; ');
+            for (var i = 0; i < cookies.length; i++) {
+                if (cookies[i].startsWith('googtrans=')) {
+                    var value = cookies[i].substring('googtrans='.length);
+                    var parts = value.split('/');
+                    if (parts.length >= 3) {
+                        currentLang = parts[2];
+                        console.log('🔍 Idioma actual desde cookie:', currentLang);
+                    }
+                    break;
+                }
+            }
+            return currentLang;
+        }
+
+        // Change language function
+        function changeLanguage(langCode) {
+            console.log('🔄 Cambiando idioma a:', langCode);
+
+            // Set Google Translate cookie
+            if (langCode !== 'es') {
+                var val = '/auto/' + langCode;
+                var oneYear = new Date(Date.now() + 365*24*60*60*1000).toUTCString();
+                var host = location.hostname.replace(/^www\./, '');
+
+                document.cookie = 'googtrans=' + val + '; expires=' + oneYear + '; path=/';
+                document.cookie = 'googtransopt=1; expires=' + oneYear + '; path=/';
+
+                if (host && host !== 'localhost') {
+                    document.cookie = 'googtrans=' + val + '; expires=' + oneYear + '; path=/; domain=' + host;
+                    document.cookie = 'googtransopt=1; expires=' + oneYear + '; path=/; domain=' + host;
+                }
+
+                console.log('✅ Cookie de Google Translate establecida:', val);
+            } else {
+                // Clear cookies for Spanish (default)
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                document.cookie = 'googtransopt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+                var host = location.hostname.replace(/^www\./, '');
+                if (host && host !== 'localhost') {
+                    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + host;
+                    document.cookie = 'googtransopt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + host;
+                }
+
+                console.log('✅ Cookies de Google Translate limpiadas (español por defecto)');
+            }
+
+            // Reload page to apply translation
+            console.log('🔄 Recargando página para aplicar traducción...');
+            window.location.reload();
+        }
+
+        // Initialize Select2 on document ready
+        $(document).ready(function() {
+            console.log('📋 Inicializando selector de idioma');
+
+            // Populate language selector
+            var $selector = $('#languageSelector');
+            allLanguages.forEach(function(lang) {
+                var option = new Option(lang.flag + ' ' + lang.name, lang.code);
+                $selector.append(option);
+            });
+
+            // Initialize Select2
+            $selector.select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                minimumResultsForSearch: 5,
+                templateResult: formatLanguage,
+                templateSelection: formatLanguage
+            });
+
+            // Get current language from cookie
+            var currentLang = getCurrentLanguage();
+            console.log('🌐 Idioma detectado:', currentLang);
+
+            // Set current language without triggering change event
+            $selector.val(currentLang).trigger('change.select2');
+
+            // Handle language change
+            $selector.on('select2:select', function(e) {
+                var selectedLang = e.params.data.id;
+                var currentDisplayLang = getCurrentLanguage();
+
+                console.log('👆 Usuario seleccionó:', selectedLang);
+                console.log('📍 Idioma actual:', currentDisplayLang);
+
+                // Only change if different from current
+                if (selectedLang && selectedLang !== currentDisplayLang) {
+                    changeLanguage(selectedLang);
+                } else {
+                    console.log('ℹ️ Mismo idioma seleccionado, sin cambios');
+                }
+            });
+
+            console.log('✅ Selector de idioma inicializado correctamente');
+        });
+
+        // Format language option with flag
+        function formatLanguage(lang) {
+            if (!lang.id) {
+                return lang.text;
+            }
+            var langObj = allLanguages.find(function(l) { return l.code === lang.id; });
+            if (langObj) {
+                return $('<span>' + langObj.flag + ' ' + langObj.name + '</span>');
+            }
+            return lang.text;
+        }
+    </script>
+
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
     </asp:ContentPlaceHolder>
 </body>

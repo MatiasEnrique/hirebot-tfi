@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="EmailService.cs" />
     <Compile Include="EncryptionService.cs" />
+    <Compile Include="LanguageService.cs" />
     <Compile Include="LogService.cs" />
     <Compile Include="RecaptchaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

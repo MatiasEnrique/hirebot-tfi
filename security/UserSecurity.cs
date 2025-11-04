@@ -175,6 +175,81 @@ namespace SECURITY
             }
         }
 
+        public ProductSubscriptionFeedbackResult GetCurrentUserSubscriptionFeedback(int subscriptionId)
+        {
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                {
+                    return ProductSubscriptionFeedbackResult.Failure(-401, "User not authenticated.");
+                }
+
+                return userBLL.GetSubscriptionFeedback(currentUser.UserId, subscriptionId);
+            }
+            catch (Exception ex)
+            {
+                _logBLL.CreateLog(new Log
+                {
+                    LogType = LogService.LogTypes.ERROR,
+                    UserId = null,
+                    Description = $"Get subscription feedback error: {ex.Message}",
+                    CreatedAt = DateTime.Now
+                });
+
+                return ProductSubscriptionFeedbackResult.Failure("An unexpected error occurred.", ex);
+            }
+        }
+
+        public DatabaseResult SaveCurrentUserSubscriptionFeedback(int subscriptionId, int rating, string comment)
+        {
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                {
+                    return DatabaseResult.Failure(-401, "User not authenticated.");
+                }
+
+                var result = userBLL.SaveSubscriptionFeedback(currentUser.UserId, subscriptionId, rating, comment);
+
+                if (result.IsSuccessful)
+                {
+                    _logBLL.CreateLog(new Log
+                    {
+                        LogType = LogService.LogTypes.CREATE,
+                        UserId = currentUser.UserId,
+                        Description = $"User {currentUser.Username} saved feedback for subscription {subscriptionId} (rating {rating})",
+                        CreatedAt = DateTime.Now
+                    });
+                }
+                else
+                {
+                    _logBLL.CreateLog(new Log
+                    {
+                        LogType = LogService.LogTypes.ERROR,
+                        UserId = currentUser.UserId,
+                        Description = $"Feedback save failed for subscription {subscriptionId}: {result.ErrorMessage}",
+                        CreatedAt = DateTime.Now
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logBLL.CreateLog(new Log
+                {
+                    LogType = LogService.LogTypes.ERROR,
+                    UserId = null,
+                    Description = $"Save subscription feedback error: {ex.Message}",
+                    CreatedAt = DateTime.Now
+                });
+
+                return DatabaseResult.Failure(-999, "An unexpected error occurred.");
+            }
+        }
+
         private void UpdateSessionUser(UserAccountProfile profile)
         {
             try
@@ -198,6 +273,8 @@ namespace SECURITY
                 sessionUser.IsActive = profile.IsActive;
 
                 HttpContext.Current.Session["CurrentUser"] = sessionUser;
+                HttpContext.Current.Session["UserId"] = sessionUser.UserId;
+                HttpContext.Current.Session["Username"] = sessionUser.Username;
             }
             catch
             {
@@ -219,6 +296,8 @@ namespace SECURITY
                 if (refreshed != null && HttpContext.Current?.Session != null)
                 {
                     HttpContext.Current.Session["CurrentUser"] = refreshed;
+                    HttpContext.Current.Session["UserId"] = refreshed.UserId;
+                    HttpContext.Current.Session["Username"] = refreshed.Username;
                 }
             }
             catch
@@ -302,11 +381,19 @@ namespace SECURITY
                         Description = $"User {result.User.Username} logged in", 
                         CreatedAt = DateTime.Now 
                     });
-                    
-                    // Clear any cached user data to ensure fresh retrieval
-                    if (HttpContext.Current?.Session != null)
+
+                    var session = HttpContext.Current?.Session;
+                    if (session != null)
                     {
-                        HttpContext.Current.Session.Remove("CurrentUser");
+                        session["UserId"] = result.User.UserId;
+                        session["Username"] = result.User.Username;
+                        session.Remove("CurrentUser");
+                        session.Remove("CurrentUserPermissionSet");
+                        session.Remove("AllPermissionKeys");
+                        session.Remove("IsAdminUser");
+
+                        var authorizationSecurity = new AuthorizationSecurity();
+                        authorizationSecurity.RefreshCurrentUserPermissions();
                     }
                 }
                 else
@@ -458,6 +545,8 @@ namespace SECURITY
                     System.Threading.Thread.CurrentPrincipal = principal;
                     
                     HttpContext.Current.Session["CurrentUser"] = user;
+                    HttpContext.Current.Session["UserId"] = user.UserId;
+                    HttpContext.Current.Session["Username"] = user.Username;
                 }
             }
             catch (Exception)

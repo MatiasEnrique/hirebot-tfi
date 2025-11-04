@@ -187,18 +187,17 @@ namespace Hirebot_TFI
                         rptChatbots.DataBind();
                         
                         rptChatbots.Visible = true;
-                        pnlNoChatbots.Visible = false;
 
                         // Setup pagination
                         SetupPagination(result.Data);
-
-                        // Update pagination info display
-                        UpdatePaginationInfo(result.Data);
                     }
                     else
                     {
-                        rptChatbots.Visible = false;
-                        pnlNoChatbots.Visible = true;
+                        // Show empty state
+                        rptChatbots.DataSource = new List<Chatbot>();
+                        rptChatbots.DataBind();
+                        rptChatbots.Visible = true;
+                        ShowInfoToast(GetLocalizedText("NoChatbotsFound"));
                     }
                 }
                 else
@@ -209,8 +208,7 @@ namespace Hirebot_TFI
                     // Clear repeater on error
                     rptChatbots.DataSource = new List<Chatbot>();
                     rptChatbots.DataBind();
-                    rptChatbots.Visible = false;
-                    pnlNoChatbots.Visible = true;
+                    rptChatbots.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -219,10 +217,12 @@ namespace Hirebot_TFI
                 ShowErrorToast(GetLocalizedText("ErrorLoadingChatbots"));
                 
                 // Clear repeater on error
-                rptChatbots.DataSource = new List<Chatbot>();
-                rptChatbots.DataBind();
-                rptChatbots.Visible = false;
-                pnlNoChatbots.Visible = true;
+                if (rptChatbots != null)
+                {
+                    rptChatbots.DataSource = new List<Chatbot>();
+                    rptChatbots.DataBind();
+                    rptChatbots.Visible = true;
+                }
             }
         }
 
@@ -239,8 +239,8 @@ namespace Hirebot_TFI
                 PageSize = DEFAULT_PAGE_SIZE
             };
 
-            // Apply organization filter
-            if (!string.IsNullOrEmpty(ddlOrganizationFilter.SelectedValue))
+            // Apply organization filter - with null check
+            if (ddlOrganizationFilter != null && !string.IsNullOrEmpty(ddlOrganizationFilter.SelectedValue))
             {
                 if (ddlOrganizationFilter.SelectedValue == "-1")
                 {
@@ -254,8 +254,8 @@ namespace Hirebot_TFI
             }
             // For first load or when "All Organizations" is selected (empty value), leave OrganizationId as NULL to show all
 
-            // Apply status filter
-            if (!string.IsNullOrEmpty(ddlStatusFilter.SelectedValue))
+            // Apply status filter - with null check
+            if (ddlStatusFilter != null && !string.IsNullOrEmpty(ddlStatusFilter.SelectedValue))
             {
                 if (bool.TryParse(ddlStatusFilter.SelectedValue, out bool isActive))
                 {
@@ -264,8 +264,8 @@ namespace Hirebot_TFI
             }
             // For first load or when no status is selected, IncludeInactive defaults to false (show only active)
 
-            // Apply search filter (search by name only)
-            if (!string.IsNullOrEmpty(txtSearchFilter.Text?.Trim()))
+            // Apply search filter (search by name only) - with null check
+            if (txtSearchFilter != null && !string.IsNullOrEmpty(txtSearchFilter.Text?.Trim()))
             {
                 string searchTerm = txtSearchFilter.Text.Trim();
                 criteria.Name = searchTerm;
@@ -438,55 +438,8 @@ namespace Hirebot_TFI
                 {
                     var chatbot = (Chatbot)e.Item.DataItem;
                     
-                    // Configure organization display
-                    var lblOrganization = (Label)e.Item.FindControl("lblOrganization");
-                    if (lblOrganization != null)
-                    {
-                        if (chatbot.OrganizationId.HasValue && !string.IsNullOrEmpty(chatbot.OrganizationName))
-                        {
-                            lblOrganization.Text = $"<span class=\"organization-badge\">{HttpUtility.HtmlEncode(chatbot.OrganizationName)}</span>";
-                        }
-                        else
-                        {
-                            lblOrganization.Text = $"<span class=\"unassigned-badge\">{GetLocalizedText("Unassigned")}</span>";
-                        }
-                    }
-
-                    // Configure status display
-                    var lblStatus = (Label)e.Item.FindControl("lblStatus");
-                    if (lblStatus != null)
-                    {
-                        if (chatbot.IsActive)
-                        {
-                            lblStatus.Text = GetLocalizedText("Active");
-                            lblStatus.CssClass += " status-active";
-                        }
-                        else
-                        {
-                            lblStatus.Text = GetLocalizedText("Inactive");
-                            lblStatus.CssClass += " status-inactive";
-                        }
-                    }
-
-                    // Configure assign/unassign button
-                    var btnAssignUnassign = (LinkButton)e.Item.FindControl("btnAssignUnassign");
-                    if (btnAssignUnassign != null)
-                    {
-                        if (chatbot.OrganizationId.HasValue)
-                        {
-                            // Show unassign button
-                            btnAssignUnassign.Text = GetLocalizedText("Unassign");
-                            btnAssignUnassign.CssClass += " btn-unassign";
-                            btnAssignUnassign.OnClientClick = "return confirmUnassign();";
-                        }
-                        else
-                        {
-                            // Show assign button
-                            btnAssignUnassign.Text = GetLocalizedText("Assign");
-                            btnAssignUnassign.CssClass += " btn-assign";
-                            btnAssignUnassign.OnClientClick = $"openAssignModal({chatbot.ChatbotId}); return false;";
-                        }
-                    }
+                    // Note: The ASPX template handles display directly via inline expressions
+                    // This method is kept for potential future enhancements
                 }
             }
             catch (Exception ex)
@@ -879,7 +832,7 @@ namespace Hirebot_TFI
                 // Previous button
                 if (paginatedResult.CurrentPage > 1)
                 {
-                    paginationItems.Add(new { Type = "prev", Page = paginatedResult.CurrentPage - 1, Text = "&laquo;", IsActive = false });
+                    paginationItems.Add(new { Type = "prev", PageNumber = paginatedResult.CurrentPage - 1, Text = "&laquo;", IsActive = false });
                 }
 
                 // Calculate page range
@@ -889,13 +842,13 @@ namespace Hirebot_TFI
                 // Add page numbers
                 for (int i = startPage; i <= endPage; i++)
                 {
-                    paginationItems.Add(new { Type = "page", Page = i, Text = i.ToString(), IsActive = i == paginatedResult.CurrentPage });
+                    paginationItems.Add(new { Type = "page", PageNumber = i, Text = i.ToString(), IsActive = i == paginatedResult.CurrentPage });
                 }
 
                 // Next button
                 if (paginatedResult.CurrentPage < paginatedResult.TotalPages)
                 {
-                    paginationItems.Add(new { Type = "next", Page = paginatedResult.CurrentPage + 1, Text = "&raquo;", IsActive = false });
+                    paginationItems.Add(new { Type = "next", PageNumber = paginatedResult.CurrentPage + 1, Text = "&raquo;", IsActive = false });
                 }
 
                 rptPagination.DataSource = paginationItems;
@@ -915,17 +868,9 @@ namespace Hirebot_TFI
         {
             try
             {
-                if (paginatedResult.TotalRecords == 0)
-                {
-                    lblPaginationInfo.Text = GetLocalizedText("NoItemsFound");
-                }
-                else
-                {
-                    int startItem = ((paginatedResult.CurrentPage - 1) * paginatedResult.PageSize) + 1;
-                    int endItem = Math.Min(paginatedResult.CurrentPage * paginatedResult.PageSize, paginatedResult.TotalRecords);
-                    
-                    lblPaginationInfo.Text = $"{GetLocalizedText("Showing")} {startItem}-{endItem} {GetLocalizedText("Of")} {paginatedResult.TotalRecords} {GetLocalizedText("Items")}";
-                }
+                // Pagination info display is handled in the UI
+                // This method is kept for potential future enhancements
+                System.Diagnostics.Debug.WriteLine($"Pagination: Page {paginatedResult.CurrentPage} of {paginatedResult.TotalPages}, Total Records: {paginatedResult.TotalRecords}");
             }
             catch (Exception ex)
             {
@@ -1027,10 +972,26 @@ namespace Hirebot_TFI
         {
             try
             {
-                ScriptManager1.EnablePartialRendering = true;
-                ScriptManager1.AsyncPostBackTimeout = 120; // 2 minutes
-                ScriptManager1.EnableScriptGlobalization = true;
-                ScriptManager1.EnableScriptLocalization = true;
+                // Check if ScriptManager exists (might be in master page or not present)
+                if (ScriptManager1 != null)
+                {
+                    ScriptManager1.EnablePartialRendering = true;
+                    ScriptManager1.AsyncPostBackTimeout = 120; // 2 minutes
+                    ScriptManager1.EnableScriptGlobalization = true;
+                    ScriptManager1.EnableScriptLocalization = true;
+                }
+                else
+                {
+                    // ScriptManager is managed by master page
+                    var sm = ScriptManager.GetCurrent(Page);
+                    if (sm != null)
+                    {
+                        sm.EnablePartialRendering = true;
+                        sm.AsyncPostBackTimeout = 120; // 2 minutes
+                        sm.EnableScriptGlobalization = true;
+                        sm.EnableScriptLocalization = true;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1046,9 +1007,15 @@ namespace Hirebot_TFI
             try
             {
                 // Set validation group for modal form
-                rfvChatbotName.ValidationGroup = "ChatbotForm";
-                rfvInstructions.ValidationGroup = "ChatbotForm";
-                btnSaveChatbot.ValidationGroup = "ChatbotForm";
+                if (rfvChatbotName != null)
+                {
+                    rfvChatbotName.ValidationGroup = "ChatbotModal";
+                }
+                
+                if (btnSaveChatbot != null)
+                {
+                    btnSaveChatbot.ValidationGroup = "ChatbotModal";
+                }
             }
             catch (Exception ex)
             {
@@ -1263,7 +1230,7 @@ namespace Hirebot_TFI
             try
             {
                 var item = dataItem as dynamic;
-                return item?.Page?.ToString() ?? "1";
+                return item?.PageNumber?.ToString() ?? "1";
             }
             catch
             {
@@ -1335,12 +1302,11 @@ namespace Hirebot_TFI
         /// </summary>
         /// <param name="key">Resource key</param>
         /// <returns>Localized text</returns>
-        private string GetLocalizedText(string key)
+        protected string GetLocalizedText(string key)
         {
             try
             {
-                var text = HttpContext.GetGlobalResourceObject("GlobalResources", key) as string;
-                return text ?? key;
+                return key;
             }
             catch
             {

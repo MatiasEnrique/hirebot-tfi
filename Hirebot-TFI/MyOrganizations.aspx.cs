@@ -437,7 +437,7 @@ namespace Hirebot_TFI
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
+                return key;
             }
             catch
             {

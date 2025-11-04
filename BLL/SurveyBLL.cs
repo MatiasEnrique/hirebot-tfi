@@ -43,6 +43,24 @@ namespace BLL
             return SurveyStatisticsResult.Failure(failureMessage, dalResult.Exception);
         }
 
+        public SurveyResultDataResult GetSurveyResults(int surveyId)
+        {
+            if (surveyId <= 0)
+            {
+                return SurveyResultDataResult.Failure(GetLocalizedString("SurveyInvalidIdentifier"));
+            }
+
+            var dalResult = _surveyDal.GetSurveyResultsForDisplay(surveyId);
+            if (!dalResult.IsSuccessful)
+            {
+                return SurveyResultDataResult.Failure(
+                    dalResult.ErrorMessage ?? GetLocalizedString("SurveyResultsNotAvailable"), 
+                    dalResult.Exception);
+            }
+
+            return SurveyResultDataResult.Success(dalResult.Data, dalResult.ErrorMessage);
+        }
+
         public SurveyResult GetSurveyDetails(int surveyId)
         {
             if (surveyId <= 0)
@@ -319,7 +337,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error recording survey omission: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error recording survey omission: {0}", ex.Message), ex);
             }
         }
 

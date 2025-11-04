@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ForgotPassword %>" /> - Hirebot-TFI</title>
+    <title><asp:Literal runat="server" Text="¿Olvidaste tu contraseña?" /> - Hirebot-TFI</title>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/site.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -214,22 +214,22 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="Default.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Home %>" /></a>
+                            <a class="nav-link" href="Default.aspx"><asp:Literal runat="server" Text="Inicio" /></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ProductCatalog %>" /></a>
+                            <a class="nav-link" href="Catalog.aspx"><asp:Literal runat="server" Text="Catálogo" /></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="institutionalDropdown" role="button" data-bs-toggle="dropdown">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutCompany %>" />
+                                <asp:Literal runat="server" Text="Acerca de la Empresa" />
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="AboutUs.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AboutUs %>" /></a></li>
-                                <li><a class="dropdown-item" href="ContactUs.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ContactUs %>" /></a></li>
+                                <li><a class="dropdown-item" href="AboutUs.aspx"><asp:Literal runat="server" Text="Quiénes Somos" /></a></li>
+                                <li><a class="dropdown-item" href="ContactUs.aspx"><asp:Literal runat="server" Text="Contáctanos" /></a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="TermsConditions.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TermsConditions %>" /></a></li>
-                                <li><a class="dropdown-item" href="PrivacyPolicy.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PrivacyPolicy %>" /></a></li>
-                                <li><a class="dropdown-item" href="SecurityPolicy.aspx"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SecurityPolicy %>" /></a></li>
+                                <li><a class="dropdown-item" href="TermsConditions.aspx"><asp:Literal runat="server" Text="Términos y Condiciones" /></a></li>
+                                <li><a class="dropdown-item" href="PrivacyPolicy.aspx"><asp:Literal runat="server" Text="Política de Privacidad" /></a></li>
+                                <li><a class="dropdown-item" href="SecurityPolicy.aspx"><asp:Literal runat="server" Text="Política de Seguridad" /></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -237,15 +237,15 @@
                         <!-- Language Selector -->
                         <div class="dropdown me-3">
                             <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-globe me-1"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Language %>" />
+                                <i class="fas fa-globe me-1"></i><asp:Literal runat="server" Text="Idioma" />
                             </button>
                             <ul class="dropdown-menu">
-                                <li><asp:LinkButton ID="btnSpanish" runat="server" CssClass="dropdown-item" OnClick="btnSpanish_Click"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Spanish %>" /></asp:LinkButton></li>
-                                <li><asp:LinkButton ID="btnEnglish" runat="server" CssClass="dropdown-item" OnClick="btnEnglish_Click"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,English %>" /></asp:LinkButton></li>
+                                <li><asp:LinkButton ID="btnSpanish" runat="server" CssClass="dropdown-item" OnClick="btnSpanish_Click"><asp:Literal runat="server" Text="Español" /></asp:LinkButton></li>
+                                <li><asp:LinkButton ID="btnEnglish" runat="server" CssClass="dropdown-item" OnClick="btnEnglish_Click"><asp:Literal runat="server" Text="English" /></asp:LinkButton></li>
                             </ul>
                         </div>
-                        <a href="SignIn.aspx" class="btn btn-outline-light me-2"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignIn %>" /></a>
-                        <a href="SignUp.aspx" class="btn btn-light"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignUp %>" /></a>
+                        <a href="SignIn.aspx" class="btn btn-outline-light me-2"><asp:Literal runat="server" Text="Iniciar Sesión" /></a>
+                        <a href="SignUp.aspx" class="btn btn-light"><asp:Literal runat="server" Text="Registrarse" /></a>
                     </div>
                 </div>
             </div>
@@ -254,14 +254,14 @@
         <div class="auth-container">
             <div class="auth-card">
                 <div class="text-center mb-4">
-                    <h2 class="text-primary-custom fw-bold"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ForgotPassword %>" /></h2>
-                    <p class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,EnterEmailForRecovery %>" /></p>
+                    <h2 class="text-primary-custom fw-bold"><asp:Literal runat="server" Text="¿Olvidaste tu contraseña?" /></h2>
+                    <p class="text-muted"><asp:Literal runat="server" Text="Ingresa tu correo electrónico o nombre de usuario para recuperar tu contraseña" /></p>
                 </div>
 
                 <!-- Info Section -->
                 <div class="info-section">
-                    <h6><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,HowItWorks %>" /></h6>
-                    <p><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordRecoveryInstructions %>" /></p>
+                    <h6><asp:Literal runat="server" Text="¿Cómo funciona?" /></h6>
+                    <p><asp:Literal runat="server" Text="Para restablecer tu contraseña, haz clic en el botón de abajo. Este enlace es válido por 24 horas por razones de seguridad." /></p>
                 </div>
 
                 <asp:Panel ID="pnlError" runat="server" CssClass="alert alert-danger" Visible="false">
@@ -269,7 +269,7 @@
                 </asp:Panel>
 
                 <asp:Panel ID="pnlSuccess" runat="server" CssClass="success-message" Visible="false">
-                    <h4><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,EmailSent %>" /></h4>
+                    <h4><asp:Literal runat="server" Text="Correo enviado" /></h4>
                     <p><asp:Label ID="lblSuccess" runat="server"></asp:Label></p>
                 </asp:Panel>
 
@@ -278,15 +278,15 @@
                         <ContentTemplate>
                             <div class="mb-3">
                                 <label for="txtEmailOrUsername" class="form-label fw-semibold">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,EmailOrUsernameForRecovery %>" />
+                                    <asp:Literal runat="server" Text="Correo electrónico o nombre de usuario" />
                                 </label>
                                 <asp:TextBox ID="txtEmailOrUsername" runat="server" CssClass="form-control" MaxLength="100"></asp:TextBox>
                                 <div class="form-text">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,EnterEmailOrUsernameHelp %>" />
+                                    <asp:Literal runat="server" Text="Ingresa tu correo electrónico o nombre de usuario para recuperar el acceso a tu cuenta" />
                                 </div>
                                 <asp:RequiredFieldValidator ID="rfvEmailOrUsername" runat="server" 
                                     ControlToValidate="txtEmailOrUsername" 
-                                    ErrorMessage="<%$ Resources:GlobalResources,EmailOrUsernameRequired %>" 
+                                    ErrorMessage="El correo electrónico o nombre de usuario son obligatorios" 
                                     CssClass="text-danger small" 
                                     Display="Dynamic" 
                                     ValidationGroup="ForgotPassword">
@@ -295,7 +295,7 @@
 
                             <div class="d-grid mb-3">
                                 <asp:Button ID="btnSendRecoveryEmail" runat="server" 
-                                    Text="<%$ Resources:GlobalResources,SendRecoveryEmail %>" 
+                                    Text="Enviar correo de recuperación" 
                                     CssClass="btn btn-primary-custom btn-lg" 
                                     OnClick="btnSendRecoveryEmail_Click" 
                                                     ValidationGroup="ForgotPassword" />
@@ -306,7 +306,7 @@
 
                 <div class="text-center">
                     <a href="SignIn.aspx" class="link-custom fw-semibold">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BackToSignIn %>" />
+                        <asp:Literal runat="server" Text="Volver al inicio de sesión" />
                     </a>
                 </div>
 
@@ -314,10 +314,10 @@
                 <div class="mt-4 pt-3 border-top">
                     <div class="text-center">
                         <p class="text-muted mb-2 small">
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NeedMoreHelp %>" />
+                            <asp:Literal runat="server" Text="¿Necesitas más ayuda?" />
                         </p>
                         <a href="ContactUs.aspx" class="link-custom small">
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ContactSupport %>" />
+                            <asp:Literal runat="server" Text="Contactar Soporte" />
                         </a>
                     </div>
                 </div>

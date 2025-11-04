@@ -18,7 +18,7 @@
                         <span class="badge bg-primary-subtle text-primary">Q</span>
                         <div>
                             <h5 class="mb-1"><%# Eval("QuestionText") %></h5>
-                            <small class="text-muted"><%# Container.DataItem is ABSTRACTIONS.SurveyQuestion question && question.IsRequired ? GetLocalizedString("SurveyQuestionRequiredLabel") : string.Empty %></small>
+                            <small class="text-muted"><%# Container.DataItem is ABSTRACTIONS.SurveyQuestion question && question.IsRequired ? "(Requerido)" : string.Empty %></small>
                         </div>
                     </div>
                     <div class="mt-3">
@@ -29,8 +29,8 @@
             </ItemTemplate>
         </asp:Repeater>
         <div class="d-flex gap-2">
-            <asp:Button ID="btnSubmitSurvey" runat="server" CssClass="btn btn-primary" Text="<%$ Resources:GlobalResources,Submit %>" OnClick="btnSubmitSurvey_Click" />
-            <asp:Button ID="btnSkipSurvey" runat="server" CssClass="btn btn-outline-secondary" Text="<%$ Resources:GlobalResources,Skip %>" OnClick="btnSkipSurvey_Click" CausesValidation="false" />
+            <asp:Button ID="btnSubmitSurvey" runat="server" CssClass="btn btn-primary" Text="Enviar" OnClick="btnSubmitSurvey_Click" />
+            <asp:Button ID="btnSkipSurvey" runat="server" CssClass="btn btn-outline-secondary" Text="Omitir" OnClick="btnSkipSurvey_Click" CausesValidation="false" />
         </div>
     </asp:Panel>
     <asp:Panel ID="pnlSurveyMessage" runat="server" CssClass="card-body" Visible="false">

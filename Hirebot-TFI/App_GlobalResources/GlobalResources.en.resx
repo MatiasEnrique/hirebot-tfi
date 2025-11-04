@@ -135,6 +135,9 @@
   <data name="SignOut" xml:space="preserve">
     <value>Sign Out</value>
   </data>
+  <data name="SearchPages" xml:space="preserve">
+    <value>Search pages...</value>
+  </data>
   <data name="GetStarted" xml:space="preserve">
     <value>Get Started</value>
   </data>
@@ -1355,6 +1358,48 @@ This action cannot be undone.</value>
   <data name="ViewDetails" xml:space="preserve">
     <value>View Details</value>
   </data>
+  <data name="CompareText" xml:space="preserve">
+    <value>Compare</value>
+  </data>
+  <data name="ComparePlans" xml:space="preserve">
+    <value>Compare Plans</value>
+  </data>
+  <data name="CompareSelected" xml:space="preserve">
+    <value>Compare selected</value>
+  </data>
+  <data name="ClearSelection" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="SelectUpTo3Plans" xml:space="preserve">
+    <value>Select up to 3 plans to compare</value>
+  </data>
+  <data name="PlansSelected" xml:space="preserve">
+    <value>plans selected</value>
+  </data>
+  <data name="MaxPlansReached" xml:space="preserve">
+    <value>Maximum 3 plans to compare</value>
+  </data>
+  <data name="SelectAtLeast2Plans" xml:space="preserve">
+    <value>Select at least 2 plans to compare</value>
+  </data>
+  <data name="PlanComparison" xml:space="preserve">
+    <value>Plan Comparison</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="PlanName" xml:space="preserve">
+    <value>Plan Name</value>
+  </data>
+  <data name="MonthlyPrice" xml:space="preserve">
+    <value>Monthly Price</value>
+  </data>
+  <data name="MaximumChatbots" xml:space="preserve">
+    <value>Maximum Chatbots</value>
+  </data>
+  <data name="MessagesPerMonth" xml:space="preserve">
+    <value>Messages per Month</value>
+  </data>
   <data name="FooterDescription" xml:space="preserve">
     <value>AI-powered human resources management system to optimize recruitment processes.</value>
   </data>
@@ -1390,6 +1435,9 @@ This action cannot be undone.</value>
   </data>
   <data name="ChatbotAdmin" xml:space="preserve">
     <value>Chatbot Administration</value>
+  </data>
+  <data name="ChatbotDetails" xml:space="preserve">
+    <value>Chatbot Details</value>
   </data>
   <data name="CreateChatbot" xml:space="preserve">
     <value>Create Chatbot</value>
@@ -2555,8 +2603,20 @@ This action cannot be undone.</value>
   <data name="NoQuestionsFound" xml:space="preserve">
     <value>No questions have been added.</value>
   </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Questions</value>
+  </data>
   <data name="Question" xml:space="preserve">
     <value>Question</value>
+  </data>
+  <data name="QuestionEditor" xml:space="preserve">
+    <value>Question Editor</value>
+  </data>
+  <data name="QuestionText" xml:space="preserve">
+    <value>Question Text</value>
+  </data>
+  <data name="QuestionType" xml:space="preserve">
+    <value>Question Type</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
@@ -2579,11 +2639,23 @@ This action cannot be undone.</value>
   <data name="NoOptionsFound" xml:space="preserve">
     <value>No options have been added.</value>
   </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="AddOption" xml:space="preserve">
+    <value>Add Option</value>
+  </data>
   <data name="OptionText" xml:space="preserve">
     <value>Option text</value>
   </data>
   <data name="OptionValue" xml:space="preserve">
     <value>Option value</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
   </data>
   <data name="OptionTextRequired" xml:space="preserve">
     <value>Option text is required.</value>
@@ -2780,9 +2852,12 @@ This action cannot be undone.</value>
   <data name="SubscribedSuccess">
     <value>Thank you for subscribing! Check your inbox for updates.</value>
   </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
-  </data>
+  <data name="Submit" xml:space="preserve">
+
+    <value>Submit</value>
+
+  </data>
+
   <data name="Skip" xml:space="preserve">
     <value>Skip</value>
   </data>
@@ -2845,6 +2920,9 @@ This action cannot be undone.</value>
   </data>
   <data name="AdminReportsNav" xml:space="preserve">
     <value>Reports</value>
+  </data>
+  <data name="AdminRolesNav" xml:space="preserve">
+    <value>Admin Roles</value>
   </data>
   <data name="BillingManagement" xml:space="preserve">
     <value>Billing management</value>
@@ -3541,5 +3619,176 @@ This action cannot be undone.</value>
   </data>
   <data name="SubscriptionsNav" xml:space="preserve">
     <value>Subscriptions</value>
+  </data>
+  <data name="HomepageAds" xml:space="preserve">
+    <value>Homepage Ads</value>
+  </data>
+  <data name="HomepageAdsManagement" xml:space="preserve">
+    <value>Homepage Ads Management</value>
+  </data>
+  <data name="HomepageAdsList" xml:space="preserve">
+    <value>Ads List</value>
+  </data>
+  <data name="CreateNewAd" xml:space="preserve">
+    <value>Create New Ad</value>
+  </data>
+  <data name="EditAd" xml:space="preserve">
+    <value>Edit Ad</value>
+  </data>
+  <data name="AdTitle" xml:space="preserve">
+    <value>Ad Title</value>
+  </data>
+  <data name="AdBadgeText" xml:space="preserve">
+    <value>Badge Text</value>
+  </data>
+  <data name="AdDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="AdCtaText" xml:space="preserve">
+    <value>Button Text</value>
+  </data>
+  <data name="AdTargetUrl" xml:space="preserve">
+    <value>Target URL</value>
+  </data>
+  <data name="AdIsActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="AdIsSelected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="AdCreatedDate" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="AdModifiedDate" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="SaveAd" xml:space="preserve">
+    <value>Save Ad</value>
+  </data>
+  <data name="DeleteAd" xml:space="preserve">
+    <value>Delete Ad</value>
+  </data>
+  <data name="SetAsSelected" xml:space="preserve">
+    <value>Set as Selected</value>
+  </data>
+  <data name="AdTitleRequired" xml:space="preserve">
+    <value>Ad title is required</value>
+  </data>
+  <data name="AdTitleMaxLength" xml:space="preserve">
+    <value>Title cannot exceed 200 characters</value>
+  </data>
+  <data name="AdBadgeMaxLength" xml:space="preserve">
+    <value>Badge text cannot exceed 100 characters</value>
+  </data>
+  <data name="AdDescriptionMaxLength" xml:space="preserve">
+    <value>Description cannot exceed 500 characters</value>
+  </data>
+  <data name="AdCtaMaxLength" xml:space="preserve">
+    <value>Button text cannot exceed 100 characters</value>
+  </data>
+  <data name="AdUrlMaxLength" xml:space="preserve">
+    <value>URL cannot exceed 500 characters</value>
+  </data>
+  <data name="AdSavedSuccess" xml:space="preserve">
+    <value>Ad saved successfully</value>
+  </data>
+  <data name="AdDeletedSuccess" xml:space="preserve">
+    <value>Ad deleted successfully</value>
+  </data>
+  <data name="AdSelectedSuccess" xml:space="preserve">
+    <value>Ad selected for display on homepage</value>
+  </data>
+  <data name="ConfirmDeleteAd" xml:space="preserve">
+    <value>Are you sure you want to delete this ad?</value>
+  </data>
+  <data name="NoAdsAvailable" xml:space="preserve">
+    <value>No ads available</value>
+  </data>
+  <data name="AdActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AdStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CurrentlyDisplayed" xml:space="preserve">
+    <value>Currently Displayed</value>
+  </data>
+  <data name="AdBadgeOptional" xml:space="preserve">
+    <value>Optional badge (e.g., "NEW")</value>
+  </data>
+  <data name="AdDescriptionOptional" xml:space="preserve">
+    <value>Ad description (optional)</value>
+  </data>
+  <data name="AdCtaOptional" xml:space="preserve">
+    <value>Button text (optional)</value>
+  </data>
+  <data name="AdUrlOptional" xml:space="preserve">
+    <value>Target URL (optional)</value>
+  </data>
+  <data name="ReadyToCreateAd" xml:space="preserve">
+    <value>Complete the form to create a new ad</value>
+  </data>
+  <data name="AdSaveError" xml:space="preserve">
+    <value>Error saving the ad</value>
+  </data>
+  <data name="AdDeleteError" xml:space="preserve">
+    <value>Error deleting the ad</value>
+  </data>
+  <data name="AdLoadError" xml:space="preserve">
+    <value>Error loading ads</value>
+  </data>
+  <data name="AdLoadDetailError" xml:space="preserve">
+    <value>Error loading ad details</value>
+  </data>
+  <data name="SelectAdWarning" xml:space="preserve">
+    <value>Please select an ad first</value>
+  </data>
+  <data name="SetSelectedError" xml:space="preserve">
+    <value>Error setting the selected ad</value>
+  </data>
+  <data name="DeleteAdConfirm" xml:space="preserve">
+    <value>Are you sure you want to delete this ad? This action cannot be undone.</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="EditAd" xml:space="preserve">
+    <value>Edit Ad</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackHeading" xml:space="preserve">
+    <value>Leave a review</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackRating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackComment" xml:space="preserve">
+    <value>Comment (optional)</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackSaveButton" xml:space="preserve">
+    <value>Save review</value>
+  </data>
+  <data name="SubscriptionFeedbackSavedSuccess" xml:space="preserve">
+    <value>Your review was saved successfully.</value>
+  </data>
+  <data name="SubscriptionFeedbackSaveError" xml:space="preserve">
+    <value>We couldn't save your review.</value>
+  </data>
+  <data name="RatingOutOfRange" xml:space="preserve">
+    <value>Rating must be between 1 and 5.</value>
+  </data>
+  <data name="SurveyResults" xml:space="preserve">
+    <value>Survey Results</value>
+  </data>
+  <data name="Votes" xml:space="preserve">
+    <value>Votes</value>
+  </data>
+  <data name="SurveyResultsNotAvailable" xml:space="preserve">
+    <value>Survey results are not available.</value>
   </data>
 </root>

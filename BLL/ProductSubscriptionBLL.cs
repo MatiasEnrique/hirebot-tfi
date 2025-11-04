@@ -312,7 +312,7 @@ namespace BLL
                     return;
                 }
 
-                string fullName = ($"{user.FirstName} {user.LastName}").Trim();
+                string fullName = string.Format("{0} {1}", user.FirstName, user.LastName).Trim();
                 EmailService.SendSubscriptionConfirmationEmail(
                     user.Email,
                     fullName,

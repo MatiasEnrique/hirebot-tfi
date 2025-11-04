@@ -93,12 +93,23 @@ The project follows a strict 5-layer architecture pattern:
 - Password encryption should use EncryptionService.EncryptPassword()
 
 ### Multilanguage Support
-- Application supports Spanish (default) and English
-- All text resources are stored in `App_GlobalResources/GlobalResources.resx` (Spanish) and `GlobalResources.en.resx` (English)
-- Use resource expressions in ASPX: `<%$ Resources:GlobalResources,KeyName %>`
-- BasePage class handles culture initialization based on Session["Language"]
-- Language selector available in navigation with flag icons
-- Code-behind files should use `HttpContext.GetGlobalResourceObject("GlobalResources", key)` for localization
+- **Translation Method**: Google Translate client-side translation (NO resource files)
+- **Default Language**: Spanish (all text must be written in Spanish)
+- **Supported Languages**: 20 languages via Google Translate widget:
+  - Spanish (es), English (en), French (fr), Portuguese (pt), German (de)
+  - Italian (it), Japanese (ja), Chinese (zh-CN), Arabic (ar), Russian (ru)
+  - Hindi (hi), Korean (ko), Turkish (tr), Swedish (sv), Dutch (nl)
+  - Polish (pl), Thai (th), Vietnamese (vi), Finnish (fi), Danish (da)
+- **Implementation**:
+  - All UI text written in plain Spanish (no resource expressions)
+  - Google Translate widget integrated in all master pages
+  - LanguageService manages language cookies (googtrans, googtransopt)
+  - BasePage.InitializeCulture() sets thread culture from cookies
+  - Select2 language selector with flag emojis in navigation
+- **DEPRECATED**: Resource files (GlobalResources.resx) are no longer used
+  - DO NOT use `<%$ Resources:GlobalResources,KeyName %>` in ASPX
+  - DO NOT use `GetGlobalResourceObject()` in code-behind
+  - Write all text in Spanish; Google Translate handles conversion
 
 ## Multi-Agent Development Strategy
 
@@ -152,7 +163,7 @@ This project uses specialized Claude Code agents for optimal development efficie
 #### **ASP.NET Web Forms Specific Coordination**
 - **Database + Backend**: Ensure stored procedure parameters match C# method signatures
 - **Backend + Frontend**: Coordinate UpdatePanel timing and JavaScript integration
-- **All Agents**: Maintain consistent localization keys across database, backend, and UI
+- **All Agents**: All text must be in Spanish; Google Translate handles multilanguage support
 
 ## ASP.NET Web Forms Best Practices
 
@@ -166,9 +177,11 @@ This project uses specialized Claude Code agents for optimal development efficie
 
 #### **Character Encoding & Localization**
 - Use Unicode escape sequences for special characters (`\u2605` instead of `★`)
-- All user-facing text must use resource files: `<%$ Resources:GlobalResources,Key %>`
-- Test functionality with both Spanish and English language switching
+- All user-facing text must be written in Spanish (hardcoded, not in resource files)
+- Google Translate handles client-side translation to all supported languages
+- Test functionality with language switching via the Google Translate widget
 - Implement proper HTML entity encoding in server controls and JavaScript
+- Never use resource expressions - always use plain Spanish text
 
 #### **Architectural Compliance**
 - **Never bypass layers** - always follow UI → Security → BLL → DAL flow
@@ -192,7 +205,7 @@ This project uses specialized Claude Code agents for optimal development efficie
 - **News System**: Article publishing and newsletter subscription management
 - **Surveys**: Survey creation and response collection
 - **Admin Dashboard**: System administration, user management, and audit logging
-- **Multilanguage**: Full Spanish/English support via resource files
+- **Multilanguage**: 20 languages via Google Translate (Spanish default)
 - **Responsive UI**: Bootstrap 5.3.7 with mobile, tablet, and desktop layouts
 
 ### Key Pages

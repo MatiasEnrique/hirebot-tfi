@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ABSTRACTIONS;
 using SECURITY;
+using BLL;
 
 namespace Hirebot_TFI
 {
@@ -80,9 +81,9 @@ namespace Hirebot_TFI
             {
                 ddlModalOwner.Items.Clear();
                 ddlModalOwner.Items.Add(new ListItem(GetResourceString("SelectOwner"), ""));
-                
+
                 // Load real users from the database using UserBLL
-                var userBLL = new BLL.UserBLL();
+                var userBLL = new UserBLL();
                 var users = userBLL.GetAllUsers();
                 
                 if (users != null && users.Count > 0)
@@ -275,22 +276,35 @@ namespace Hirebot_TFI
             }
         }
         
+        protected void rptOrganizations_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                LinkButton btnDelete = (LinkButton)e.Item.FindControl("btnDelete");
+                if (btnDelete != null)
+                {
+                    string confirmMessage = GetResourceString("ConfirmDelete");
+                    btnDelete.OnClientClick = $"return confirm('{confirmMessage.Replace("'", "\\'")}');";
+                }
+            }
+        }
+
         protected void rptOrganizations_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
             {
                 int organizationId = Convert.ToInt32(e.CommandArgument);
-                
+
                 switch (e.CommandName)
                 {
                     case "View":
                         Response.Redirect($"OrganizationView.aspx?id={organizationId}");
                         break;
-                        
+
                     case "Edit":
                         LoadOrganizationForEdit(organizationId);
                         break;
-                        
+
                     case "Delete":
                         DeleteOrganization(organizationId);
                         break;
@@ -520,7 +534,7 @@ namespace Hirebot_TFI
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
+                return key;
             }
             catch
             {

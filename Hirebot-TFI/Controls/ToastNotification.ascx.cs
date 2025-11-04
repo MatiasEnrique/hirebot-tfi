@@ -203,7 +203,7 @@ namespace Hirebot_TFI.Controls
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", "Success")?.ToString() ?? "Success";
+                return "Éxito";
             }
             catch
             {
@@ -218,7 +218,7 @@ namespace Hirebot_TFI.Controls
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", "Error")?.ToString() ?? "Error";
+                return "Error";
             }
             catch
             {
@@ -233,7 +233,7 @@ namespace Hirebot_TFI.Controls
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", "Information")?.ToString() ?? "Information";
+                return "Información";
             }
             catch
             {
@@ -248,7 +248,7 @@ namespace Hirebot_TFI.Controls
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", "Warning")?.ToString() ?? "Warning";
+                return "Advertencia";
             }
             catch
             {
@@ -263,7 +263,7 @@ namespace Hirebot_TFI.Controls
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", "Now")?.ToString() ?? "Now";
+                return "Ahora";
             }
             catch
             {
@@ -278,7 +278,7 @@ namespace Hirebot_TFI.Controls
         {
             try
             {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", "Close")?.ToString() ?? "Close";
+                return "Cerrar";
             }
             catch
             {

@@ -67,7 +67,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<int>.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return DatabaseResult<int>.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -89,7 +89,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return OrganizationResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return OrganizationResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -118,7 +118,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return OrganizationResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return OrganizationResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -165,7 +165,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return OrganizationListResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return OrganizationListResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -221,7 +221,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -258,7 +258,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -280,7 +280,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return OrganizationListResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return OrganizationListResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -331,7 +331,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -370,7 +370,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -393,7 +393,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return OrganizationMemberListResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return OrganizationMemberListResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -415,7 +415,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return OrganizationMemberListResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return OrganizationMemberListResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -460,7 +460,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -496,7 +496,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return UserOrganizationRoleResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return UserOrganizationRoleResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -522,7 +522,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return OrganizationStatisticsResult.Failure($"Unexpected error in business logic: {ex.Message}", ex);
+                return OrganizationStatisticsResult.Failure(string.Format("Unexpected error in business logic: {0}", ex.Message), ex);
             }
         }
 
@@ -693,7 +693,7 @@ namespace BLL
                 slug = slug.Substring(0, 50).TrimEnd('-');
 
             if (slug.Length < 3)
-                slug = $"org-{Guid.NewGuid().ToString("N").Substring(0, 8)}";
+                slug = string.Format("org-{0}", Guid.NewGuid().ToString("N").Substring(0, 8));
 
             return slug;
         }

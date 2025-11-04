@@ -264,7 +264,7 @@
     <li class="nav-item">
         <a class="nav-link" href="MyOrganizations.aspx">
             <i class="fas fa-building me-1"></i>
-            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" />
+            <asp:Literal runat="server" Text="Mis Organizaciones" />
         </a>
     </li>
 </asp:Content>
@@ -299,7 +299,7 @@
                                     <asp:Label ID="lblMemberCount" runat="server">0</asp:Label>
                                 </span>
                                 <span class="stat-label">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Members %>" />
+                                    <asp:Literal runat="server" Text="Miembros" />
                                 </span>
                             </div>
                             <div class="stat-item">
@@ -307,7 +307,7 @@
                                     <asp:Label ID="lblAdminCount" runat="server">0</asp:Label>
                                 </span>
                                 <span class="stat-label">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Administrators %>" />
+                                    <asp:Literal runat="server" Text="Administradores" />
                                 </span>
                             </div>
                             <div class="stat-item">
@@ -315,7 +315,7 @@
                                     <asp:Label ID="lblEstablishedDate" runat="server" />
                                 </span>
                                 <span class="stat-label">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Established %>" />
+                                    <asp:Literal runat="server" Text="Fundada" />
                                 </span>
                             </div>
                         </div>
@@ -328,7 +328,7 @@
                         <div class="section-header">
                             <h3>
                                 <i class="fas fa-info-circle me-2"></i>
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationDetails %>" />
+                                <asp:Literal runat="server" Text="Detalles de la Organización" />
                             </h3>
                         </div>
                         
@@ -339,7 +339,7 @@
                                 </div>
                                 <div class="info-content">
                                     <h6>
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationSlug %>" />
+                                        <asp:Literal runat="server" Text="Slug de la Organización" />
                                     </h6>
                                     <p><asp:Label ID="lblOrganizationSlug" runat="server" /></p>
                                 </div>
@@ -351,7 +351,7 @@
                                 </div>
                                 <div class="info-content">
                                     <h6>
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Owner %>" />
+                                        <asp:Literal runat="server" Text="Propietario" />
                                     </h6>
                                     <p><asp:Label ID="lblOwnerName" runat="server" /></p>
                                 </div>
@@ -363,7 +363,7 @@
                                 </div>
                                 <div class="info-content">
                                     <h6>
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CreatedDate %>" />
+                                        <asp:Literal runat="server" Text="Fecha de Creación" />
                                     </h6>
                                     <p><asp:Label ID="lblCreatedDate" runat="server" /></p>
                                 </div>
@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="info-content">
                                     <h6>
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Status %>" />
+                                        <asp:Literal runat="server" Text="Estado" />
                                     </h6>
                                     <p><asp:Label ID="lblStatus" runat="server" /></p>
                                 </div>
@@ -386,7 +386,7 @@
                         <div class="section-header">
                             <h3>
                                 <i class="fas fa-users me-2"></i>
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationMembers %>" />
+                                <asp:Literal runat="server" Text="Miembros de la organización" />
                             </h3>
                         </div>
                         
@@ -408,7 +408,7 @@
                                                 </span>
                                                 <p class="text-muted small mt-2 mb-0">
                                                     <i class="fas fa-calendar me-1"></i>
-                                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,JoinedOn %>" />: 
+                                                    <asp:Literal runat="server" Text="Se unió el" />: 
                                                     <%# ((DateTime)Eval("JoinDate")).ToString("MMM yyyy") %>
                                                 </p>
                                             </div>
@@ -424,10 +424,10 @@
                                 <i class="fas fa-lock display-4 text-muted"></i>
                             </div>
                             <h5 class="text-muted mb-3">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MembersListPrivate %>" />
+                                <asp:Literal runat="server" Text="La lista de miembros es privada" />
                             </h5>
                             <p class="text-muted">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,JoinToViewMembers %>" />
+                                <asp:Literal runat="server" Text="Únete para ver los miembros" />
                             </p>
                         </asp:Panel>
                         
@@ -437,10 +437,10 @@
                                 <i class="fas fa-users display-4 text-muted"></i>
                             </div>
                             <h5 class="text-muted mb-3">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoMembers %>" />
+                                <asp:Literal runat="server" Text="No hay miembros en esta organización" />
                             </h5>
                             <p class="text-muted">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BeFirstToJoin %>" />
+                                <asp:Literal runat="server" Text="Sé el primero en unirte" />
                             </p>
                         </asp:Panel>
                     </div>
@@ -454,13 +454,13 @@
                                         <i class="fas fa-user-plus"></i>
                                     </div>
                                     <h5 class="mb-3">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,JoinThisOrganization %>" />
+                                        <asp:Literal runat="server" Text="Unirse a esta organización" />
                                     </h5>
                                     <p class="text-muted mb-4">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,JoinOrganizationDescription %>" />
+                                        <asp:Literal runat="server" Text="Únete a esta organización para acceder a sus recursos y colaborar con otros miembros" />
                                     </p>
                                     <asp:Button ID="btnJoinOrganization" runat="server" CssClass="btn btn-success btn-lg w-100" 
-                                        Text="<%$ Resources:GlobalResources,JoinOrganization %>" OnClick="btnJoinOrganization_Click"
+                                        Text="Unirse a la Organización" OnClick="btnJoinOrganization_Click"
                                         OnClientClick="return confirm('Are you sure you want to join this organization?');" />
                                 </div>
                             </asp:Panel>
@@ -471,17 +471,17 @@
                                         <i class="fas fa-check-circle"></i>
                                     </div>
                                     <h5 class="mb-3">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AlreadyMember %>" />
+                                        <asp:Literal runat="server" Text="Ya eres miembro" />
                                     </h5>
                                     <p class="text-muted mb-4">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,YourRole %>" />: 
+                                        <asp:Literal runat="server" Text="Tu rol" />: 
                                         <strong><asp:Label ID="lblCurrentUserRole" runat="server" /></strong>
                                     </p>
                                     <div class="d-grid gap-2">
                                         <asp:Button ID="btnManageOrganization" runat="server" CssClass="btn btn-primary" 
-                                            Text="<%$ Resources:GlobalResources,ManageOrganization %>" OnClick="btnManageOrganization_Click" />
+                                            Text="Gestionar Organización" OnClick="btnManageOrganization_Click" />
                                         <asp:Button ID="btnLeaveOrganization" runat="server" CssClass="btn btn-outline-danger" 
-                                            Text="<%$ Resources:GlobalResources,LeaveOrganization %>" OnClick="btnLeaveOrganization_Click"
+                                            Text="Salir de la Organización" OnClick="btnLeaveOrganization_Click"
                                             OnClientClick='<%# "return confirm(\u0027" + HttpContext.GetGlobalResourceObject("GlobalResources", "ConfirmLeaveOrganization") + "\u0027);" %>' />
                                     </div>
                                 </div>
@@ -491,7 +491,7 @@
                             <div class="mt-4 pt-4 border-top">
                                 <h6 class="mb-3">
                                     <i class="fas fa-chart-bar me-2"></i>
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,QuickStats %>" />
+                                    <asp:Literal runat="server" Text="Estadísticas rápidas" />
                                 </h6>
                                 <div class="row text-center g-3">
                                     <div class="col-6">
@@ -500,7 +500,7 @@
                                                 <asp:Label ID="lblStatTotalMembers" runat="server">0</asp:Label>
                                             </div>
                                             <div class="small text-muted">
-                                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TotalMembers %>" />
+                                                <asp:Literal runat="server" Text="Total de miembros" />
                                             </div>
                                         </div>
                                     </div>
@@ -510,7 +510,7 @@
                                                 <asp:Label ID="lblStatAdmins" runat="server">0</asp:Label>
                                             </div>
                                             <div class="small text-muted">
-                                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Admins %>" />
+                                                <asp:Literal runat="server" Text="Admins" />
                                             </div>
                                         </div>
                                     </div>

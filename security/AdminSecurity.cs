@@ -13,6 +13,7 @@ namespace SECURITY
         private readonly ProductBLL productBLL;
         private readonly CatalogBLL catalogBLL;
         private readonly LogBLL _logBLL;
+        private readonly AuthorizationSecurity _authorizationSecurity;
 
         public AdminSecurity()
         {
@@ -20,12 +21,18 @@ namespace SECURITY
             productBLL = new ProductBLL();
             catalogBLL = new CatalogBLL();
             _logBLL = new LogBLL();
+            _authorizationSecurity = new AuthorizationSecurity();
         }
 
         public bool IsUserAdmin()
         {
             if (!IsUserAuthenticated())
                 return false;
+
+            if (_authorizationSecurity.UserHasAnyPermission("~/AdminDashboard.aspx", "~/AdminRoles.aspx"))
+            {
+                return true;
+            }
 
             try
             {
@@ -278,5 +285,229 @@ namespace SECURITY
 
             return _logBLL.GetFilteredLogsPaginated(filters, pageNumber, pageSize);
         }
+
+        #region User Management Methods
+
+        /// <summary>
+        /// Gets all users for admin management
+        /// </summary>
+        /// <param name="includeInactive">Whether to include inactive users</param>
+        /// <returns>List of users</returns>
+        public System.Collections.Generic.List<User> GetAllUsers(bool includeInactive = true)
+        {
+            if (!IsUserAdmin())
+                return new System.Collections.Generic.List<User>();
+
+            try
+            {
+                return userBLL.GetAllUsersForAdmin(includeInactive);
+            }
+            catch (Exception ex)
+            {
+                LogError(null, $"Error getting all users: {ex.Message}");
+                return new System.Collections.Generic.List<User>();
+            }
+        }
+
+        /// <summary>
+        /// Gets a user by ID for admin editing
+        /// </summary>
+        /// <param name="userId">User ID</param>
+        /// <returns>User object or null</returns>
+        public User GetUserById(int userId)
+        {
+            if (!IsUserAdmin())
+                return null;
+
+            try
+            {
+                return userBLL.GetUserById(userId);
+            }
+            catch (Exception ex)
+            {
+                LogError(null, $"Error getting user by ID {userId}: {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Updates a user (admin operation)
+        /// </summary>
+        /// <param name="user">User object with updated information</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult UpdateUser(User user)
+        {
+            if (!IsUserAdmin())
+                return DatabaseResult.Failure(-1, "Acceso denegado. Se requieren privilegios de administrador.");
+
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                    return DatabaseResult.Failure(-2, "Usuario actual no encontrado.");
+
+                var result = userBLL.UpdateUserAdmin(user, currentUser.UserId);
+
+                if (result.IsSuccessful)
+                {
+                    LogAccess(currentUser.UserId, $"Actualizó usuario: {user.Username} (ID: {user.UserId})");
+                }
+                else
+                {
+                    LogError(currentUser.UserId, $"Error al actualizar usuario {user.Username}: {result.ErrorMessage}");
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                LogError(null, $"Excepción al actualizar usuario: {ex.Message}");
+                return DatabaseResult.Failure(-999, "Ocurrió un error al actualizar el usuario.");
+            }
+        }
+
+        /// <summary>
+        /// Deletes (deactivates) a user (admin operation)
+        /// </summary>
+        /// <param name="userId">User ID to delete</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult DeleteUser(int userId)
+        {
+            if (!IsUserAdmin())
+                return DatabaseResult.Failure(-1, "Acceso denegado. Se requieren privilegios de administrador.");
+
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                    return DatabaseResult.Failure(-2, "Usuario actual no encontrado.");
+
+                var result = userBLL.DeleteUserAdmin(userId, currentUser.UserId);
+
+                if (result.IsSuccessful)
+                {
+                    LogAccess(currentUser.UserId, $"Eliminó usuario ID: {userId}");
+                }
+                else
+                {
+                    LogError(currentUser.UserId, $"Error al eliminar usuario ID {userId}: {result.ErrorMessage}");
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                LogError(null, $"Excepción al eliminar usuario: {ex.Message}");
+                return DatabaseResult.Failure(-999, "Ocurrió un error al eliminar el usuario.");
+            }
+        }
+
+        /// <summary>
+        /// Activates a user (admin operation)
+        /// </summary>
+        /// <param name="userId">User ID to activate</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult ActivateUser(int userId)
+        {
+            if (!IsUserAdmin())
+                return DatabaseResult.Failure(-1, "Acceso denegado. Se requieren privilegios de administrador.");
+
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                    return DatabaseResult.Failure(-2, "Usuario actual no encontrado.");
+
+                var result = userBLL.ActivateUserAdmin(userId, currentUser.UserId);
+
+                if (result.IsSuccessful)
+                {
+                    LogAccess(currentUser.UserId, $"Activó usuario ID: {userId}");
+                }
+                else
+                {
+                    LogError(currentUser.UserId, $"Error al activar usuario ID {userId}: {result.ErrorMessage}");
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                LogError(null, $"Excepción al activar usuario: {ex.Message}");
+                return DatabaseResult.Failure(-999, "Ocurrió un error al activar el usuario.");
+            }
+        }
+
+        /// <summary>
+        /// Creates a new user (admin operation)
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="email">Email address</param>
+        /// <param name="password">Password</param>
+        /// <param name="firstName">First name</param>
+        /// <param name="lastName">Last name</param>
+        /// <param name="userRole">User role (user or admin)</param>
+        /// <param name="isActive">Whether user is active</param>
+        /// <returns>DatabaseResult with operation status</returns>
+        public DatabaseResult CreateUser(string username, string email, string password, string firstName, string lastName, string userRole, bool isActive)
+        {
+            if (!IsUserAdmin())
+                return DatabaseResult.Failure(-1, "Acceso denegado. Se requieren privilegios de administrador.");
+
+            try
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                    return DatabaseResult.Failure(-2, "Usuario actual no encontrado.");
+
+                var result = userBLL.CreateUserAdmin(username, email, password, firstName, lastName, userRole, isActive, currentUser.UserId);
+
+                if (result.IsSuccessful)
+                {
+                    LogAccess(currentUser.UserId, $"Creó nuevo usuario: {username} (Rol: {userRole})");
+                }
+                else
+                {
+                    LogError(currentUser.UserId, $"Error al crear usuario {username}: {result.ErrorMessage}");
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                LogError(null, $"Excepción al crear usuario: {ex.Message}");
+                return DatabaseResult.Failure(-999, "Ocurrió un error al crear el usuario.");
+            }
+        }
+
+        /// <summary>
+        /// Gets the current user from session or database
+        /// </summary>
+        /// <returns>Current user or null</returns>
+        private User GetCurrentUser()
+        {
+            try
+            {
+                if (HttpContext.Current?.Session != null)
+                {
+                    var sessionUser = HttpContext.Current.Session["CurrentUser"] as User;
+                    if (sessionUser != null)
+                        return sessionUser;
+                }
+
+                if (HttpContext.Current?.User?.Identity?.Name != null)
+                {
+                    return userBLL.GetUserByUsername(HttpContext.Current.User.Identity.Name);
+                }
+
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
     }
 }

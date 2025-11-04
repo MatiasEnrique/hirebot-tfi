@@ -38,6 +38,25 @@ namespace SECURITY
             return _surveyBLL.GetAllSurveys();
         }
 
+        public SurveyResultDataResult GetSurveyResults(int surveyId)
+        {
+            var currentUserId = GetCurrentUserId();
+            if (!currentUserId.HasValue)
+            {
+                return SurveyResultDataResult.Failure("Access denied. User must be authenticated.");
+            }
+
+            try
+            {
+                return _surveyBLL.GetSurveyResults(surveyId);
+            }
+            catch (Exception ex)
+            {
+                LogError($"Security error retrieving survey results: {ex.Message}", currentUserId);
+                return SurveyResultDataResult.Failure("An unexpected error occurred while retrieving survey results.");
+            }
+        }
+
         public SurveyResult CreateSurvey(Survey survey)
         {
             if (!EnsureAdminAccess(out var currentUserId))

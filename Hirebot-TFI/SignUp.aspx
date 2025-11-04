@@ -72,23 +72,23 @@
             <div class="row align-items-center g-5">
                 <div class="col-lg-5 text-center text-lg-start">
                     <h1 class="display-5 fw-bold mb-4">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CreateAccount %>" />
+                        <asp:Literal runat="server" Text="Crear Cuenta" />
                     </h1>
                     <p class="lead mb-4">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,JoinHirebot %>" />
+                        <asp:Literal runat="server" Text="Únete a Hirebot hoy" />
                     </p>
                     <ul class="feature-list list-unstyled d-inline-block text-start">
                         <li>
                             <i class="bi bi-check-circle-fill me-2"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AIScreening %>" />
+                            <asp:Literal runat="server" Text="Filtrado con IA" />
                         </li>
                         <li>
                             <i class="bi bi-check-circle-fill me-2"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CandidateManagement %>" />
+                            <asp:Literal runat="server" Text="Gestión de Candidatos" />
                         </li>
                         <li>
                             <i class="bi bi-check-circle-fill me-2"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Analytics %>" />
+                            <asp:Literal runat="server" Text="Análisis e Insights" />
                         </li>
                     </ul>
                 </div>
@@ -106,67 +106,67 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="<%= txtFirstName.ClientID %>" class="form-label fw-semibold text-dark">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,FirstName %>" />
+                                        <asp:Literal runat="server" Text="Nombre" />
                                     </label>
                                     <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" ControlToValidate="txtFirstName"
-                                        ErrorMessage="<%$ Resources:GlobalResources,FirstNameRequired %>" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        ErrorMessage="El nombre es obligatorio" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="<%= txtLastName.ClientID %>" class="form-label fw-semibold text-dark">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,LastName %>" />
+                                        <asp:Literal runat="server" Text="Apellido" />
                                     </label>
                                     <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvLastName" runat="server" ControlToValidate="txtLastName"
-                                        ErrorMessage="<%$ Resources:GlobalResources,LastNameRequired %>" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        ErrorMessage="El apellido es obligatorio" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
 
                             <div class="mt-3">
                                 <label for="<%= txtUsername.ClientID %>" class="form-label fw-semibold text-dark">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Username %>" />
+                                    <asp:Literal runat="server" Text="Usuario" />
                                 </label>
                                 <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control"></asp:TextBox>
                                 <div class="form-text">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,UsernameHelp %>" />
+                                    <asp:Literal runat="server" Text="El usuario debe tener entre 3-20 caracteres y contener solo letras, números y guiones bajos." />
                                 </div>
                                 <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername"
-                                    ErrorMessage="<%$ Resources:GlobalResources,UsernameRequired %>" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    ErrorMessage="El nombre de usuario es obligatorio" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
 
                             <div class="mt-3">
                                 <label for="<%= txtEmail.ClientID %>" class="form-label fw-semibold text-dark">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Email %>" />
+                                    <asp:Literal runat="server" Text="Correo Electrónico" />
                                 </label>
                                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail"
-                                    ErrorMessage="<%$ Resources:GlobalResources,EmailRequired %>" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    ErrorMessage="El correo electrónico es obligatorio" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail"
                                     ValidationExpression="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                    ErrorMessage="<%$ Resources:GlobalResources,ValidEmailRequired %>" CssClass="text-danger small" Display="Dynamic"></asp:RegularExpressionValidator>
+                                    ErrorMessage="Por favor ingresa un correo electrónico válido" CssClass="text-danger small" Display="Dynamic"></asp:RegularExpressionValidator>
                             </div>
 
                             <div class="mt-3">
                                 <label for="<%= txtPassword.ClientID %>" class="form-label fw-semibold text-dark">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Password %>" />
+                                    <asp:Literal runat="server" Text="Contraseña" />
                                 </label>
                                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                 <div class="form-text">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PasswordHelp %>" />
+                                    <asp:Literal runat="server" Text="La contraseña debe tener al menos 6 caracteres." />
                                 </div>
                                 <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword"
-                                    ErrorMessage="<%$ Resources:GlobalResources,PasswordRequired %>" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    ErrorMessage="La contraseña es obligatoria" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
 
                             <div class="mt-3">
                                 <label for="<%= txtConfirmPassword.ClientID %>" class="form-label fw-semibold text-dark">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ConfirmPassword %>" />
+                                    <asp:Literal runat="server" Text="Confirmar Contraseña" />
                                 </label>
                                 <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="rfvConfirmPassword" runat="server" ControlToValidate="txtConfirmPassword"
-                                    ErrorMessage="<%$ Resources:GlobalResources,ConfirmPasswordRequired %>" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    ErrorMessage="Por favor confirma tu contraseña" CssClass="text-danger small" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <asp:CompareValidator ID="cvPassword" runat="server" ControlToValidate="txtConfirmPassword" ControlToCompare="txtPassword"
-                                    ErrorMessage="<%$ Resources:GlobalResources,PasswordsDoNotMatch %>" CssClass="text-danger small" Display="Dynamic"></asp:CompareValidator>
+                                    ErrorMessage="Las contraseñas no coinciden" CssClass="text-danger small" Display="Dynamic"></asp:CompareValidator>
                             </div>
 
                             <div class="mt-4">
@@ -175,15 +175,15 @@
                             </div>
 
                             <div class="d-grid mt-4">
-                                <asp:Button ID="btnSignUp" runat="server" Text="<%$ Resources:GlobalResources,CreateAccount %>" CssClass="btn btn-gradient btn-lg" OnClick="btnSignUp_Click" />
+                                <asp:Button ID="btnSignUp" runat="server" Text="Crear Cuenta" CssClass="btn btn-gradient btn-lg" OnClick="btnSignUp_Click" />
                             </div>
 
                             <div class="text-center mt-4">
                                 <span class="text-muted">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AlreadyHaveAccount %>" />
+                                    <asp:Literal runat="server" Text="¿Ya tienes una cuenta?" />
                                 </span>
                                 <a href="SignIn.aspx" class="auth-link ms-1">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignInHere %>" />
+                                    <asp:Literal runat="server" Text="Inicia sesión aquí" />
                                 </a>
                             </div>
                         </div>

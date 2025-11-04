@@ -44,10 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminRoleSecurity.cs" />
+    <Compile Include="AuthorizationSecurity.cs" />
     <Compile Include="AdminSecurity.cs" />
     <Compile Include="ChatbotSecurity.cs" />
     <Compile Include="CommentSecurity.cs" />
     <Compile Include="BillingSecurity.cs" />
+    <Compile Include="DatabaseBackupSecurity.cs" />
+    <Compile Include="HomepageAdSecurity.cs" />
     <Compile Include="OrganizationSecurity.cs" />
     <Compile Include="ProductSubscriptionSecurity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

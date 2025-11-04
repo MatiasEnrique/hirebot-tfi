@@ -36,11 +36,10 @@ namespace UI
             {
                 LoadProducts();
                 LoadCatalogs();
-                LoadDropDowns();
+                LoadCatalogProductDropdowns();
                 LoadCatalogProducts();
                 LoadDisplayedCatalogDropdown();
-                LoadCurrentDisplayedCatalog();
-                chkProductIsActive.Checked = true;
+                chkIsActive.Checked = true;
                 chkCatalogIsActive.Checked = true;
                 
                 // Set the delete confirmation message template
@@ -55,37 +54,20 @@ namespace UI
             }
         }
 
-        protected void btnSpanish_Click(object sender, EventArgs e)
-        {
-            Session["Language"] = "es";
-            Response.Redirect(Request.RawUrl);
-        }
 
-        protected void btnEnglish_Click(object sender, EventArgs e)
-        {
-            Session["Language"] = "en";
-            Response.Redirect(Request.RawUrl);
-        }
-
-        protected void btnSignOut_Click(object sender, EventArgs e)
-        {
-            var userSecurity = new SECURITY.UserSecurity();
-            userSecurity.SignOutUser();
-            Response.Redirect("~/Default.aspx");
-        }
 
         protected void btnCreateProduct_Click(object sender, EventArgs e)
         {
             try
             {
                 string name = txtProductName.Text.Trim();
-                string description = txtProductDescription.Text.Trim();
+                string description = "";
                 decimal price = 0;
                 string billingCycle = ddlBillingCycle.SelectedValue;
                 int maxChatbots = 0;
                 int maxMessages = 0;
                 string category = ddlProductCategory.SelectedValue;
-                string features = txtFeatures.Text.Trim();
+                string features = "";
 
                 if (!decimal.TryParse(txtProductPrice.Text, out price))
                 {
@@ -134,14 +116,14 @@ namespace UI
             try
             {
                 string name = txtProductName.Text.Trim();
-                string description = txtProductDescription.Text.Trim();
+                string description = "";
                 decimal price = 0;
                 string billingCycle = ddlBillingCycle.SelectedValue;
                 int maxChatbots = 0;
                 int maxMessages = 0;
                 string category = ddlProductCategory.SelectedValue;
-                string features = txtFeatures.Text.Trim();
-                bool isActive = chkProductIsActive.Checked;
+                string features = "";
+                bool isActive = chkIsActive.Checked;
 
                 if (!decimal.TryParse(txtProductPrice.Text, out price))
                 {
@@ -196,8 +178,6 @@ namespace UI
                     ShowMessage(result.Message, "success");
                     ClearProductForm();
                     LoadProducts();
-                    LoadDropDowns();
-                    LoadCatalogProducts();
                     SelectedProductId = 0;
                 }
                 else
@@ -296,44 +276,9 @@ namespace UI
             }
         }
 
-        protected void btnAddProductToCatalog_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int catalogId = 0;
-                int productId = 0;
 
-                if (!int.TryParse(ddlCatalogSelect.SelectedValue, out catalogId) || catalogId == 0)
-                {
-                    ShowMessage(GetLocalizedString("SelectCatalogFirst"), "warning");
-                    return;
-                }
 
-                if (!int.TryParse(ddlProductSelect.SelectedValue, out productId) || productId == 0)
-                {
-                    ShowMessage(GetLocalizedString("SelectProductFirst"), "warning");
-                    return;
-                }
-
-                var result = adminSecurity.AddProductToCatalog(catalogId, productId);
-                
-                if (result.IsSuccessful)
-                {
-                    Session["SuccessMessage"] = result.Message;
-                    Response.Redirect(Request.RawUrl);
-                }
-                else
-                {
-                    ShowMessage(result.Message, "danger");
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowMessage(GetLocalizedString("UnexpectedError"), "danger");
-            }
-        }
-
-        protected void btnSetDisplayedCatalog_Click(object sender, EventArgs e)
+        protected void btnSaveDisplayedCatalog_Click(object sender, EventArgs e)
         {
             try
             {
@@ -397,6 +342,48 @@ namespace UI
             }
         }
 
+        protected void ddlCatalogSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadCatalogProducts();
+        }
+
+        protected void btnAddProductToCatalog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int catalogId = 0;
+                int productId = 0;
+
+                if (!int.TryParse(ddlCatalogSelect.SelectedValue, out catalogId) || catalogId == 0)
+                {
+                    ShowMessage(GetLocalizedString("SelectCatalogFirst"), "warning");
+                    return;
+                }
+
+                if (!int.TryParse(ddlProductSelect.SelectedValue, out productId) || productId == 0)
+                {
+                    ShowMessage(GetLocalizedString("SelectProductFirst"), "warning");
+                    return;
+                }
+
+                var result = adminSecurity.AddProductToCatalog(catalogId, productId);
+                
+                if (result.IsSuccessful)
+                {
+                    Session["SuccessMessage"] = result.Message;
+                    Response.Redirect(Request.RawUrl);
+                }
+                else
+                {
+                    ShowMessage(result.Message, "danger");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(GetLocalizedString("UnexpectedError"), "danger");
+            }
+        }
+
         protected void gvCatalogProducts_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "RemoveFromCatalog")
@@ -425,6 +412,8 @@ namespace UI
                 }
             }
         }
+
+
 
         private void LoadProducts()
         {
@@ -462,75 +451,7 @@ namespace UI
             }
         }
 
-        private void LoadDropDowns()
-        {
-            try
-            {
-                var catalogBLL = adminSecurity.GetCatalogBLL();
-                var productBLL = adminSecurity.GetProductBLL();
 
-                if (catalogBLL != null)
-                {
-                    var catalogs = catalogBLL.GetActiveCatalogs();
-                    ddlCatalogSelect.DataSource = catalogs;
-                    ddlCatalogSelect.DataTextField = "Name";
-                    ddlCatalogSelect.DataValueField = "CatalogId";
-                    ddlCatalogSelect.DataBind();
-                    ddlCatalogSelect.Items.Insert(0, new ListItem(GetLocalizedString("SelectCatalog"), "0"));
-                }
-
-                if (productBLL != null)
-                {
-                    var products = productBLL.GetActiveProducts();
-                    ddlProductSelect.DataSource = products;
-                    ddlProductSelect.DataTextField = "Name";
-                    ddlProductSelect.DataValueField = "ProductId";
-                    ddlProductSelect.DataBind();
-                    ddlProductSelect.Items.Insert(0, new ListItem(GetLocalizedString("SelectProduct"), "0"));
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowMessage(GetLocalizedString("UnexpectedError"), "danger");
-            }
-        }
-
-        private void LoadCatalogProducts()
-        {
-            try
-            {
-                var catalogBLL = adminSecurity.GetCatalogBLL();
-                if (catalogBLL != null)
-                {
-                    var allCatalogs = catalogBLL.GetAllCatalogs();
-                    var catalogProductsList = new List<dynamic>();
-
-                    foreach (var catalog in allCatalogs)
-                    {
-                        var products = catalogBLL.GetProductsByCatalogId(catalog.CatalogId);
-                        foreach (var product in products)
-                        {
-                            catalogProductsList.Add(new
-                            {
-                                CatalogId = catalog.CatalogId,
-                                CatalogName = catalog.Name,
-                                ProductId = product.ProductId,
-                                ProductName = product.Name,
-                                Category = product.Category,
-                                Price = product.Price
-                            });
-                        }
-                    }
-
-                    gvCatalogProducts.DataSource = catalogProductsList;
-                    gvCatalogProducts.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowMessage(GetLocalizedString("UnexpectedError"), "danger");
-            }
-        }
 
         private void LoadProductForEdit(int productId)
         {
@@ -544,14 +465,12 @@ namespace UI
                     {
                         SelectedProductId = productId;
                         txtProductName.Text = product.Name;
-                        txtProductDescription.Text = product.Description;
                         txtProductPrice.Text = product.Price.ToString();
                         ddlBillingCycle.SelectedValue = product.BillingCycle ?? "Monthly";
                         txtMaxChatbots.Text = product.MaxChatbots.ToString();
                         txtMaxMessages.Text = product.MaxMessagesPerMonth.ToString();
-                        ddlProductCategory.SelectedValue = product.Category ?? "Basic";
-                        txtFeatures.Text = product.Features;
-                        chkProductIsActive.Checked = product.IsActive;
+                        ddlProductCategory.SelectedValue = product.Category ?? "SaaS";
+                        chkIsActive.Checked = product.IsActive;
                         
                         // Show cancel button when editing
                         btnCancelEditProduct.Visible = true;
@@ -597,14 +516,12 @@ namespace UI
         private void ClearProductForm()
         {
             txtProductName.Text = "";
-            txtProductDescription.Text = "";
             txtProductPrice.Text = "";
             ddlBillingCycle.SelectedIndex = 0;
             txtMaxChatbots.Text = "";
             txtMaxMessages.Text = "";
             ddlProductCategory.SelectedIndex = 0;
-            txtFeatures.Text = "";
-            chkProductIsActive.Checked = true;
+            chkIsActive.Checked = true;
             
             // Reset selection and hide cancel button
             SelectedProductId = 0;
@@ -620,6 +537,104 @@ namespace UI
             // Reset selection and hide cancel button
             SelectedCatalogId = 0;
             btnCancelEditCatalog.Visible = false;
+        }
+
+        private void LoadCatalogProductDropdowns()
+        {
+            try
+            {
+                var catalogBLL = adminSecurity.GetCatalogBLL();
+                var productBLL = adminSecurity.GetProductBLL();
+
+                if (catalogBLL != null)
+                {
+                    var catalogs = catalogBLL.GetActiveCatalogs();
+                    ddlCatalogSelect.DataSource = catalogs;
+                    ddlCatalogSelect.DataTextField = "Name";
+                    ddlCatalogSelect.DataValueField = "CatalogId";
+                    ddlCatalogSelect.DataBind();
+                    ddlCatalogSelect.Items.Insert(0, new ListItem(GetLocalizedString("SelectCatalog"), "0"));
+                }
+
+                if (productBLL != null)
+                {
+                    var products = productBLL.GetActiveProducts();
+                    ddlProductSelect.DataSource = products;
+                    ddlProductSelect.DataTextField = "Name";
+                    ddlProductSelect.DataValueField = "ProductId";
+                    ddlProductSelect.DataBind();
+                    ddlProductSelect.Items.Insert(0, new ListItem(GetLocalizedString("SelectProduct"), "0"));
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(GetLocalizedString("UnexpectedError"), "danger");
+            }
+        }
+
+        private void LoadCatalogProducts()
+        {
+            try
+            {
+                var catalogBLL = adminSecurity.GetCatalogBLL();
+                if (catalogBLL != null)
+                {
+                    int selectedCatalogId = 0;
+                    int.TryParse(ddlCatalogSelect.SelectedValue, out selectedCatalogId);
+
+                    var catalogProductsList = new List<dynamic>();
+
+                    if (selectedCatalogId > 0)
+                    {
+                        // Load products for selected catalog only
+                        var catalog = catalogBLL.GetCatalogById(selectedCatalogId);
+                        if (catalog != null)
+                        {
+                            var products = catalogBLL.GetProductsByCatalogId(catalog.CatalogId);
+                            foreach (var product in products)
+                            {
+                                catalogProductsList.Add(new
+                                {
+                                    CatalogId = catalog.CatalogId,
+                                    CatalogName = catalog.Name,
+                                    ProductId = product.ProductId,
+                                    ProductName = product.Name,
+                                    Category = product.Category,
+                                    Price = product.Price
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Load all catalog-product associations
+                        var allCatalogs = catalogBLL.GetAllCatalogs();
+                        foreach (var catalog in allCatalogs)
+                        {
+                            var products = catalogBLL.GetProductsByCatalogId(catalog.CatalogId);
+                            foreach (var product in products)
+                            {
+                                catalogProductsList.Add(new
+                                {
+                                    CatalogId = catalog.CatalogId,
+                                    CatalogName = catalog.Name,
+                                    ProductId = product.ProductId,
+                                    ProductName = product.Name,
+                                    Category = product.Category,
+                                    Price = product.Price
+                                });
+                            }
+                        }
+                    }
+
+                    gvCatalogProducts.DataSource = catalogProductsList;
+                    gvCatalogProducts.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(GetLocalizedString("UnexpectedError"), "danger");
+            }
         }
 
         private void LoadDisplayedCatalogDropdown()
@@ -643,34 +658,7 @@ namespace UI
             }
         }
 
-        private void LoadCurrentDisplayedCatalog()
-        {
-            try
-            {
-                if (Application["DisplayedCatalogId"] != null)
-                {
-                    if (int.TryParse(Application["DisplayedCatalogId"].ToString(), out int catalogId) && catalogId > 0)
-                    {
-                        var catalogBLL = adminSecurity.GetCatalogBLL();
-                        if (catalogBLL != null)
-                        {
-                            var catalog = catalogBLL.GetCatalogById(catalogId);
-                            if (catalog != null && catalog.IsActive)
-                            {
-                                litCurrentDisplayedCatalog.Text = catalog.Name;
-                                return;
-                            }
-                        }
-                    }
-                }
-                
-                litCurrentDisplayedCatalog.Text = GetLocalizedString("NoCatalogDisplayed");
-            }
-            catch (Exception ex)
-            {
-                litCurrentDisplayedCatalog.Text = GetLocalizedString("NoCatalogDisplayed");
-            }
-        }
+
 
         protected void btnCancelEditProduct_Click(object sender, EventArgs e)
         {
@@ -692,14 +680,7 @@ namespace UI
 
         private string GetLocalizedString(string key)
         {
-            try
-            {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
-            }
-            catch
-            {
-                return key;
-            }
+            return key;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using SERVICES;
 
 namespace Hirebot_TFI
 {
@@ -28,7 +29,8 @@ namespace Hirebot_TFI
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            var language = LanguageService.EnsureLanguage(HttpContext.Current);
+            LanguageService.ApplyCulture(language);
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

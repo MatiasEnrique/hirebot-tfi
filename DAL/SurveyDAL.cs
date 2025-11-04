@@ -37,11 +37,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyListResult.Failure($"Database error retrieving surveys: {sqlEx.Message}", sqlEx);
+                return SurveyListResult.Failure(string.Format("Database error retrieving surveys: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyListResult.Failure($"Unexpected error retrieving surveys: {ex.Message}", ex);
+                return SurveyListResult.Failure(string.Format("Unexpected error retrieving surveys: {0}", ex.Message), ex);
             }
         }
 
@@ -103,11 +103,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error retrieving survey: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error retrieving survey: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error retrieving survey: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error retrieving survey: {0}", ex.Message), ex);
             }
         }
 
@@ -166,11 +166,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error retrieving active survey: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error retrieving active survey: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error retrieving active survey: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error retrieving active survey: {0}", ex.Message), ex);
             }
         }
 
@@ -229,11 +229,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error creating survey: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error creating survey: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error creating survey: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error creating survey: {0}", ex.Message), ex);
             }
         }
 
@@ -289,11 +289,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error updating survey: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error updating survey: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error updating survey: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error updating survey: {0}", ex.Message), ex);
             }
         }
 
@@ -334,11 +334,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error deleting survey: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error deleting survey: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error deleting survey: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error deleting survey: {0}", ex.Message), ex);
             }
         }
 
@@ -393,11 +393,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error creating survey question: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error creating survey question: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error creating survey question: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error creating survey question: {0}", ex.Message), ex);
             }
         }
 
@@ -448,11 +448,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error updating survey question: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error updating survey question: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error updating survey question: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error updating survey question: {0}", ex.Message), ex);
             }
         }
 
@@ -493,11 +493,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error deleting survey question: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error deleting survey question: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error deleting survey question: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error deleting survey question: {0}", ex.Message), ex);
             }
         }
 
@@ -561,11 +561,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error creating survey option: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error creating survey option: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error creating survey option: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error creating survey option: {0}", ex.Message), ex);
             }
         }
 
@@ -625,11 +625,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyResult.Failure($"Database error updating survey option: {sqlEx.Message}", sqlEx);
+                return SurveyResult.Failure(string.Format("Database error updating survey option: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyResult.Failure($"Unexpected error updating survey option: {ex.Message}", ex);
+                return SurveyResult.Failure(string.Format("Unexpected error updating survey option: {0}", ex.Message), ex);
             }
         }
 
@@ -670,11 +670,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error deleting survey option: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error deleting survey option: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error deleting survey option: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error deleting survey option: {0}", ex.Message), ex);
             }
         }
 
@@ -854,11 +854,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error recording survey omission: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error recording survey omission: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error recording survey omission: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error recording survey omission: {0}", ex.Message), ex);
             }
         }
 
@@ -914,11 +914,151 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return SurveyStatisticsResult.Failure($"Database error retrieving survey statistics: {sqlEx.Message}", sqlEx);
+                return SurveyStatisticsResult.Failure(string.Format("Database error retrieving survey statistics: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return SurveyStatisticsResult.Failure($"Unexpected error retrieving survey statistics: {ex.Message}", ex);
+                return SurveyStatisticsResult.Failure(string.Format("Unexpected error retrieving survey statistics: {0}", ex.Message), ex);
+            }
+        }
+
+        public SurveyResultDataResult GetSurveyResultsForDisplay(int surveyId)
+        {
+            if (surveyId <= 0)
+            {
+                return SurveyResultDataResult.Failure("SurveyId must be positive.");
+            }
+
+            try
+            {
+                using (SqlConnection connection = DatabaseConnectionService.GetConnection())
+                using (SqlCommand command = new SqlCommand("sp_Survey_GetResultsForDisplay", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@SurveyId", surveyId);
+
+                    connection.Open();
+                    System.Diagnostics.Debug.WriteLine(string.Format("=== DAL: Executing sp_Survey_GetResultsForDisplay for SurveyId={0} ===", surveyId));
+                    
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        var resultData = new SurveyResultData();
+
+                        // First result set: Survey info
+                        System.Diagnostics.Debug.WriteLine("Result Set 1: Survey Info");
+                        if (reader.Read())
+                        {
+                            resultData.SurveyId = GetInt32(reader, "SurveyId");
+                            resultData.SurveyTitle = GetString(reader, "Title");
+                            System.Diagnostics.Debug.WriteLine(string.Format("  Survey: ID={0}, Title={1}", resultData.SurveyId, resultData.SurveyTitle));
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("  ERROR: No survey data returned");
+                        }
+
+                        if (resultData.SurveyId == 0)
+                        {
+                            return SurveyResultDataResult.Failure("Survey not found.");
+                        }
+
+                        // Second result set: Questions with vote counts
+                        System.Diagnostics.Debug.WriteLine("Result Set 2: Questions");
+                        if (reader.NextResult())
+                        {
+                            int qCount = 0;
+                            while (reader.Read())
+                            {
+                                var q = new SurveyQuestionResult
+                                {
+                                    SurveyQuestionId = GetInt32(reader, "SurveyQuestionId"),
+                                    QuestionText = GetString(reader, "QuestionText"),
+                                    QuestionType = GetString(reader, "QuestionType"),
+                                    TotalVotes = GetInt32(reader, "TotalVotes")
+                                };
+                                resultData.Questions.Add(q);
+                                qCount++;
+                                System.Diagnostics.Debug.WriteLine(string.Format("  Q{0}: ID={1}, Type={2}, Votes={3}", qCount, q.SurveyQuestionId, q.QuestionType, q.TotalVotes));
+                            }
+                            System.Diagnostics.Debug.WriteLine(string.Format("  Total questions: {0}", qCount));
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("  ERROR: No questions result set");
+                        }
+
+                        // Third result set: Options with vote counts and percentages
+                        System.Diagnostics.Debug.WriteLine("Result Set 3: Options");
+                        if (reader.NextResult())
+                        {
+                            var questionLookup = resultData.Questions.ToDictionary(q => q.SurveyQuestionId, q => q);
+                            System.Diagnostics.Debug.WriteLine(string.Format("  Question lookup: {0} questions", questionLookup.Count));
+                            
+                            int optCount = 0;
+                            while (reader.Read())
+                            {
+                                int questionId = GetInt32(reader, "SurveyQuestionId");
+                                int optionId = GetInt32(reader, "SurveyOptionId");
+                                string optionText = GetString(reader, "OptionText");
+                                int voteCount = GetInt32(reader, "VoteCount");
+                                decimal votePct = GetDecimal(reader, "VotePercentage");
+                                
+                                optCount++;
+                                System.Diagnostics.Debug.WriteLine(string.Format("  Opt{0}: QID={1}, OptID={2}, Text={3}, Votes={4}", optCount, questionId, optionId, optionText, voteCount));
+                                
+                                if (questionLookup.TryGetValue(questionId, out var question))
+                                {
+                                    question.Options.Add(new SurveyOptionResult
+                                    {
+                                        SurveyOptionId = optionId,
+                                        OptionText = optionText,
+                                        VoteCount = voteCount,
+                                        VotePercentage = votePct
+                                    });
+                                    System.Diagnostics.Debug.WriteLine(string.Format("    -> Added to Q{0} (now has {1} options)", questionId, question.Options.Count));
+                                }
+                                else
+                                {
+                                    System.Diagnostics.Debug.WriteLine(string.Format("    -> ERROR: Question {0} not in lookup!", questionId));
+                                }
+                            }
+                            System.Diagnostics.Debug.WriteLine(string.Format("  Total options: {0}", optCount));
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("  ERROR: No options result set");
+                        }
+
+                        // Fourth result set: Text answers for unique answer questions
+                        if (reader.NextResult())
+                        {
+                            var questionLookup = resultData.Questions.ToDictionary(q => q.SurveyQuestionId, q => q);
+                            while (reader.Read())
+                            {
+                                int questionId = GetInt32(reader, "SurveyQuestionId");
+                                if (questionLookup.TryGetValue(questionId, out var question))
+                                {
+                                    question.TextAnswers.Add(new SurveyTextAnswer
+                                    {
+                                        SurveyAnswerId = GetInt32(reader, "SurveyAnswerId"),
+                                        AnswerText = GetString(reader, "AnswerText"),
+                                        SubmittedDateUtc = reader.GetDateTime(reader.GetOrdinal("SubmittedDateUtc"))
+                                    });
+                                }
+                            }
+                        }
+
+                        return SurveyResultDataResult.Success(resultData, "Survey results retrieved successfully.");
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                return SurveyResultDataResult.Failure(string.Format("Database error retrieving survey results: {0}", sqlEx.Message), sqlEx);
+            }
+            catch (Exception ex)
+            {
+                return SurveyResultDataResult.Failure(string.Format("Unexpected error retrieving survey results: {0}", ex.Message), ex);
             }
         }
 

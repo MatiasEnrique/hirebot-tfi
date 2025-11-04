@@ -245,8 +245,7 @@ namespace Hirebot_TFI
 
         private string GetResource(string key, string fallback)
         {
-            var value = GetGlobalResourceObject("GlobalResources", key) as string;
-            return string.IsNullOrWhiteSpace(value) ? fallback : value;
+            return fallback;
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

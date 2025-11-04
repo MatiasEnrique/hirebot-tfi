@@ -123,7 +123,7 @@ namespace Hirebot_TFI
 
                     ShowSurveyEditor(GetLocalizedString("SurveyCreateTitle"));
 
-                    pnlQuestionSection.Visible = true;
+                    if (pnlQuestionSection != null) pnlQuestionSection.Visible = true;
 
                     BindTemporaryQuestions();
 
@@ -213,7 +213,7 @@ namespace Hirebot_TFI
 
 
 
-        protected void btnAddQuestion_Click(object sender, EventArgs e)
+        protected void btnNewQuestion_Click(object sender, EventArgs e)
 
         {
 
@@ -237,11 +237,11 @@ namespace Hirebot_TFI
 
 
 
-            txtQuestionOrder.Text = nextOrder.ToString(CultureInfo.InvariantCulture);
+            if (txtQuestionOrder != null) txtQuestionOrder.Text = nextOrder.ToString(CultureInfo.InvariantCulture);
 
-            pnlOptionEditor.Visible = false;
+            if (pnlOptionEditor != null) pnlOptionEditor.Visible = false;
 
-            pnlQuestionSection.Visible = true;
+            if (pnlQuestionSection != null) pnlQuestionSection.Visible = true;
 
 
 
@@ -311,7 +311,7 @@ namespace Hirebot_TFI
 
             {
 
-                if (int.TryParse(hfSelectedSurveyId.Value, out var persistedSurveyId) && persistedSurveyId > 0)
+                if (hfSelectedSurveyId != null && int.TryParse(hfSelectedSurveyId.Value, out var persistedSurveyId) && persistedSurveyId > 0)
 
                 {
 
@@ -372,6 +372,18 @@ namespace Hirebot_TFI
             {
 
                 questionsForValidation = TemporaryQuestions ?? new List<SurveyQuestion>();
+
+            }
+
+
+
+            if (txtSurveyTitle == null || txtSurveyDescription == null || ddlSurveyLanguage == null || 
+
+                txtSurveyStart == null || txtSurveyEnd == null || chkSurveyIsActive == null || chkAllowMultipleResponses == null)
+
+            {
+
+                return;
 
             }
 
@@ -605,15 +617,15 @@ namespace Hirebot_TFI
 
                         {
 
-                            txtQuestionText.Text = tempQuestion.QuestionText;
+                            if (txtQuestionText != null) txtQuestionText.Text = tempQuestion.QuestionText;
 
-                            ddlQuestionType.SelectedValue = tempQuestion.QuestionType;
+                            if (ddlQuestionType != null) ddlQuestionType.SelectedValue = tempQuestion.QuestionType;
 
-                            chkQuestionRequired.Checked = tempQuestion.IsRequired;
+                            if (chkQuestionRequired != null) chkQuestionRequired.Checked = tempQuestion.IsRequired;
 
-                            txtQuestionOrder.Text = tempQuestion.SortOrder.ToString(CultureInfo.InvariantCulture);
+                            if (txtQuestionOrder != null) txtQuestionOrder.Text = tempQuestion.SortOrder.ToString(CultureInfo.InvariantCulture);
 
-                            pnlQuestionEditor.Visible = true;
+                            if (pnlQuestionEditor != null) pnlQuestionEditor.Visible = true;
 
                         }
 
@@ -737,6 +749,16 @@ namespace Hirebot_TFI
 
 
 
+            if (txtQuestionText == null || ddlQuestionType == null || chkQuestionRequired == null || txtQuestionOrder == null)
+
+            {
+
+                return;
+
+            }
+
+
+
             var question = new SurveyQuestion
 
             {
@@ -807,9 +829,9 @@ namespace Hirebot_TFI
 
             ClearQuestionEditor();
 
-            pnlQuestionEditor.Visible = false;
+            if (pnlQuestionEditor != null) pnlQuestionEditor.Visible = false;
 
-            pnlOptionEditor.Visible = false;
+            if (pnlOptionEditor != null) pnlOptionEditor.Visible = false;
 
             SelectedQuestionId = null;
 
@@ -973,7 +995,27 @@ namespace Hirebot_TFI
 
             ClearOptionEditor();
 
-            pnlOptionEditor.Visible = SelectedQuestionId.HasValue && !IsTextQuestion(ddlQuestionType.SelectedValue);
+            if (pnlOptionEditor != null && ddlQuestionType != null)
+
+                pnlOptionEditor.Visible = SelectedQuestionId.HasValue && !IsTextQuestion(ddlQuestionType.SelectedValue);
+
+        }
+
+
+
+        protected void btnNewOption_Click(object sender, EventArgs e)
+
+        {
+
+            SelectedOptionId = null;
+
+            ClearOptionEditor();
+
+
+
+            var nextOrder = gvOptions != null ? gvOptions.Rows.Count + 1 : 1;
+
+            if (txtOptionOrder != null) txtOptionOrder.Text = nextOrder.ToString(CultureInfo.InvariantCulture);
 
         }
 
@@ -1001,7 +1043,9 @@ namespace Hirebot_TFI
 
         {
 
-            pnlOptionEditor.Visible = SelectedSurveyId.HasValue && SelectedQuestionId.HasValue && !IsTextQuestion(ddlQuestionType.SelectedValue);
+            if (pnlOptionEditor != null && ddlQuestionType != null)
+
+                pnlOptionEditor.Visible = SelectedSurveyId.HasValue && SelectedQuestionId.HasValue && !IsTextQuestion(ddlQuestionType.SelectedValue);
 
         }
 
@@ -1077,13 +1121,13 @@ namespace Hirebot_TFI
 
             SelectedSurveyId = result.Data.SurveyId;
 
-            hfSelectedSurveyId.Value = result.Data.SurveyId.ToString(CultureInfo.InvariantCulture);
+            if (hfSelectedSurveyId != null) hfSelectedSurveyId.Value = result.Data.SurveyId.ToString(CultureInfo.InvariantCulture);
 
             BindSurveyEditor(result.Data);
 
-            pnlSurveyEditor.Visible = true;
+            if (pnlSurveyEditor != null) pnlSurveyEditor.Visible = true;
 
-            pnlQuestionSection.Visible = true;
+            if (pnlQuestionSection != null) pnlQuestionSection.Visible = true;
 
         }
 
@@ -1093,33 +1137,39 @@ namespace Hirebot_TFI
 
         {
 
-            litEditorTitle.Text = GetLocalizedString("SurveyEditTitle");
+            if (litEditorTitle != null) litEditorTitle.Text = GetLocalizedString("SurveyEditTitle");
 
-            txtSurveyTitle.Text = survey.Title;
+            if (txtSurveyTitle != null) txtSurveyTitle.Text = survey.Title;
 
-            txtSurveyDescription.Text = survey.Description;
+            if (txtSurveyDescription != null) txtSurveyDescription.Text = survey.Description;
 
-            ddlSurveyLanguage.SelectedValue = SupportedLanguages.Contains(survey.LanguageCode) ? survey.LanguageCode : SupportedLanguages[0];
+            if (ddlSurveyLanguage != null) ddlSurveyLanguage.SelectedValue = SupportedLanguages.Contains(survey.LanguageCode) ? survey.LanguageCode : SupportedLanguages[0];
 
-            txtSurveyStart.Text = survey.StartDateUtc?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
+            if (txtSurveyStart != null) txtSurveyStart.Text = survey.StartDateUtc?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
 
-            txtSurveyEnd.Text = survey.EndDateUtc?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
+            if (txtSurveyEnd != null) txtSurveyEnd.Text = survey.EndDateUtc?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
 
-            chkSurveyIsActive.Checked = survey.IsActive;
+            if (chkSurveyIsActive != null) chkSurveyIsActive.Checked = survey.IsActive;
 
-            chkAllowMultipleResponses.Checked = survey.AllowMultipleResponses;
-
-
-
-            gvQuestions.DataSource = (survey.Questions ?? new List<SurveyQuestion>()).OrderBy(q => q.SortOrder).ThenBy(q => q.SurveyQuestionId).ToList();
-
-            gvQuestions.DataBind();
+            if (chkAllowMultipleResponses != null) chkAllowMultipleResponses.Checked = survey.AllowMultipleResponses;
 
 
 
-            pnlQuestionEditor.Visible = false;
+            if (gvQuestions != null)
 
-            pnlOptionEditor.Visible = false;
+            {
+
+                gvQuestions.DataSource = (survey.Questions ?? new List<SurveyQuestion>()).OrderBy(q => q.SortOrder).ThenBy(q => q.SurveyQuestionId).ToList();
+
+                gvQuestions.DataBind();
+
+            }
+
+
+
+            if (pnlQuestionEditor != null) pnlQuestionEditor.Visible = false;
+
+            if (pnlOptionEditor != null) pnlOptionEditor.Visible = false;
 
         }
 
@@ -1167,15 +1217,15 @@ namespace Hirebot_TFI
 
 
 
-            txtQuestionText.Text = question.QuestionText;
+            if (txtQuestionText != null) txtQuestionText.Text = question.QuestionText;
 
-            ddlQuestionType.SelectedValue = question.QuestionType;
+            if (ddlQuestionType != null) ddlQuestionType.SelectedValue = question.QuestionType;
 
-            chkQuestionRequired.Checked = question.IsRequired;
+            if (chkQuestionRequired != null) chkQuestionRequired.Checked = question.IsRequired;
 
-            txtQuestionOrder.Text = question.SortOrder.ToString(CultureInfo.InvariantCulture);
+            if (txtQuestionOrder != null) txtQuestionOrder.Text = question.SortOrder.ToString(CultureInfo.InvariantCulture);
 
-            pnlQuestionEditor.Visible = true;
+            if (pnlQuestionEditor != null) pnlQuestionEditor.Visible = true;
 
 
 
@@ -1203,7 +1253,7 @@ namespace Hirebot_TFI
 
 
 
-            pnlOptionEditor.Visible = !IsTextQuestion(question.QuestionType);
+            if (pnlOptionEditor != null) pnlOptionEditor.Visible = !IsTextQuestion(question.QuestionType);
 
             ClearOptionEditor();
 
@@ -1267,13 +1317,13 @@ namespace Hirebot_TFI
 
 
 
-            txtOptionText.Text = option.OptionText;
+            if (txtOptionText != null) txtOptionText.Text = option.OptionText;
 
-            txtOptionValue.Text = option.OptionValue;
+            if (txtOptionValue != null) txtOptionValue.Text = option.OptionValue;
 
-            txtOptionOrder.Text = option.SortOrder.ToString(CultureInfo.InvariantCulture);
+            if (txtOptionOrder != null) txtOptionOrder.Text = option.SortOrder.ToString(CultureInfo.InvariantCulture);
 
-            pnlOptionEditor.Visible = true;
+            if (pnlOptionEditor != null) pnlOptionEditor.Visible = true;
 
         }
 
@@ -1301,6 +1351,10 @@ namespace Hirebot_TFI
 
         {
 
+            if (ddlQuestionType == null) return;
+
+            
+
             ddlQuestionType.Items.Clear();
 
             ddlQuestionType.Items.Add(new ListItem(GetLocalizedString("QuestionTypeSingleChoice"), SurveyQuestion.QuestionTypeSingleChoice));
@@ -1317,13 +1371,13 @@ namespace Hirebot_TFI
 
         {
 
-            litEditorTitle.Text = title;
+            if (litEditorTitle != null) litEditorTitle.Text = title;
 
-            pnlSurveyEditor.Visible = true;
+            if (pnlSurveyEditor != null) pnlSurveyEditor.Visible = true;
 
             // Show question section for both new and existing surveys
 
-            pnlQuestionSection.Visible = true;
+            if (pnlQuestionSection != null) pnlQuestionSection.Visible = true;
 
         }
 
@@ -1333,15 +1387,15 @@ namespace Hirebot_TFI
 
         {
 
-            pnlSurveyEditor.Visible = false;
+            if (pnlSurveyEditor != null) pnlSurveyEditor.Visible = false;
 
-            pnlQuestionSection.Visible = false;
+            if (pnlQuestionSection != null) pnlQuestionSection.Visible = false;
 
-            pnlQuestionEditor.Visible = false;
+            if (pnlQuestionEditor != null) pnlQuestionEditor.Visible = false;
 
-            pnlOptionEditor.Visible = false;
+            if (pnlOptionEditor != null) pnlOptionEditor.Visible = false;
 
-            hfSelectedSurveyId.Value = string.Empty;
+            if (hfSelectedSurveyId != null) hfSelectedSurveyId.Value = string.Empty;
 
         }
 
@@ -1351,23 +1405,29 @@ namespace Hirebot_TFI
 
         {
 
-            txtSurveyTitle.Text = string.Empty;
+            if (txtSurveyTitle != null) txtSurveyTitle.Text = string.Empty;
 
-            txtSurveyDescription.Text = string.Empty;
+            if (txtSurveyDescription != null) txtSurveyDescription.Text = string.Empty;
 
-            txtSurveyStart.Text = string.Empty;
+            if (txtSurveyStart != null) txtSurveyStart.Text = string.Empty;
 
-            txtSurveyEnd.Text = string.Empty;
+            if (txtSurveyEnd != null) txtSurveyEnd.Text = string.Empty;
 
-            chkSurveyIsActive.Checked = false;
+            if (chkSurveyIsActive != null) chkSurveyIsActive.Checked = false;
 
-            chkAllowMultipleResponses.Checked = false;
+            if (chkAllowMultipleResponses != null) chkAllowMultipleResponses.Checked = false;
 
-            ddlSurveyLanguage.SelectedIndex = 0;
+            if (ddlSurveyLanguage != null) ddlSurveyLanguage.SelectedIndex = 0;
 
-            gvQuestions.DataSource = null;
+            if (gvQuestions != null)
 
-            gvQuestions.DataBind();
+            {
+
+                gvQuestions.DataSource = null;
+
+                gvQuestions.DataBind();
+
+            }
 
         }
 
@@ -1377,13 +1437,13 @@ namespace Hirebot_TFI
 
         {
 
-            txtQuestionText.Text = string.Empty;
+            if (txtQuestionText != null) txtQuestionText.Text = string.Empty;
 
-            ddlQuestionType.SelectedIndex = 0;
+            if (ddlQuestionType != null) ddlQuestionType.SelectedIndex = 0;
 
-            chkQuestionRequired.Checked = false;
+            if (chkQuestionRequired != null) chkQuestionRequired.Checked = false;
 
-            txtQuestionOrder.Text = "1";
+            if (txtQuestionOrder != null) txtQuestionOrder.Text = "1";
 
         }
 
@@ -1407,9 +1467,15 @@ namespace Hirebot_TFI
 
         {
 
-            gvQuestions.DataSource = TemporaryQuestions.OrderBy(q => q.SortOrder).ThenBy(q => q.SurveyQuestionId).ToList();
+            if (gvQuestions != null)
 
-            gvQuestions.DataBind();
+            {
+
+                gvQuestions.DataSource = TemporaryQuestions.OrderBy(q => q.SortOrder).ThenBy(q => q.SurveyQuestionId).ToList();
+
+                gvQuestions.DataBind();
+
+            }
 
         }
 
@@ -1421,7 +1487,7 @@ namespace Hirebot_TFI
 
             ClearQuestionEditor();
 
-            pnlQuestionEditor.Visible = true;
+            if (pnlQuestionEditor != null) pnlQuestionEditor.Visible = true;
 
             SelectedQuestionId = null;
 
@@ -1434,6 +1500,16 @@ namespace Hirebot_TFI
         {
 
             if (!Page.IsValid)
+
+            {
+
+                return;
+
+            }
+
+
+
+            if (txtQuestionText == null || ddlQuestionType == null || chkQuestionRequired == null || txtQuestionOrder == null)
 
             {
 
@@ -1497,7 +1573,7 @@ namespace Hirebot_TFI
 
             ClearQuestionEditor();
 
-            pnlQuestionEditor.Visible = false;
+            if (pnlQuestionEditor != null) pnlQuestionEditor.Visible = false;
 
             BindTemporaryQuestions();
 
@@ -1606,13 +1682,8 @@ namespace Hirebot_TFI
 
 
         private string GetLocalizedString(string key)
-
         {
-
-            var value = (string)HttpContext.GetGlobalResourceObject("GlobalResources", key);
-
-            return string.IsNullOrWhiteSpace(value) ? key : value;
-
+            return key;
         }
 
 
@@ -1663,7 +1734,7 @@ namespace Hirebot_TFI
 
 
 
-        private string GetQuestionTypeDisplay(string questionType)
+        protected string GetQuestionTypeDisplay(string questionType)
 
         {
 
@@ -1715,7 +1786,7 @@ namespace Hirebot_TFI
 
                 {
 
-                    var localized = HttpContext.GetGlobalResourceObject("GlobalResources", pendingAlert.Item1) as string;
+                    var localized = pendingAlert.Item1;
 
                     if (!string.IsNullOrWhiteSpace(localized))
 

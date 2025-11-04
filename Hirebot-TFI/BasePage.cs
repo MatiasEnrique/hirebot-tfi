@@ -1,22 +1,28 @@
 using System;
-using System.Globalization;
-using System.Threading;
 using System.Web;
 using System.Web.UI;
+using SECURITY;
+using SERVICES;
 
 namespace Hirebot_TFI
 {
     public class BasePage : Page
     {
+        private readonly AuthorizationSecurity _authorizationSecurity = new AuthorizationSecurity();
+
         protected override void InitializeCulture()
         {
-            string language = Session["Language"] as string ?? "es";
-            
-            CultureInfo culture = new CultureInfo(language);
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
-            
+            var context = HttpContext.Current ?? Context;
+            var language = LanguageService.EnsureLanguage(context);
+            LanguageService.ApplyCulture(language);
+
             base.InitializeCulture();
+        }
+
+        protected override void OnPreInit(EventArgs e)
+        {
+            base.OnPreInit(e);
+            _authorizationSecurity.EnsurePageAccess(this);
         }
     }
 }

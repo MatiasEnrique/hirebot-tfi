@@ -225,14 +225,7 @@ namespace Hirebot_TFI
 
         private string GetLocalizedString(string key)
         {
-            try
-            {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
-            }
-            catch
-            {
-                return key;
-            }
+            return key;
         }
     }
 }

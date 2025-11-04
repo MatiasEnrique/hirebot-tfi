@@ -256,14 +256,7 @@ namespace Hirebot_TFI
         // Public method to be used in JavaScript for placeholder and message localization
         public string GetLocalizedString(string key)
         {
-            try
-            {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
-            }
-            catch
-            {
-                return key;
-            }
+            return key;
         }
 
         #region Toast Notification Methods (Proven ShowAlert Pattern from ForgotPassword)

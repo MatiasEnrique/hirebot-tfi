@@ -1,7 +1,7 @@
 <%@ Page Title="Organization Dashboard - Hirebot-TFI" Language="C#" MasterPageFile="~/Protected.master" AutoEventWireup="true" CodeBehind="OrganizationDashboard.aspx.cs" Inherits="Hirebot_TFI.OrganizationDashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationDashboard %>" /> - Hirebot-TFI
+    <asp:Literal runat="server" Text="Panel de Organización" /> - Hirebot-TFI
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
@@ -166,7 +166,7 @@
     <li class="nav-item">
         <a class="nav-link" href="MyOrganizations.aspx">
             <i class="fas fa-building me-1"></i>
-            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MyOrganizations %>" />
+            <asp:Literal runat="server" Text="Mis Organizaciones" />
         </a>
     </li>
 </asp:Content>
@@ -201,11 +201,11 @@
                         <div class="col-md-4 text-md-end mt-3 mt-md-0">
                             <span class="badge role-owner fs-6 me-2" id="badgeOwner" runat="server" visible="false">
                                 <i class="fas fa-crown me-1"></i>
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Owner %>" />
+                                <asp:Literal runat="server" Text="Propietario" />
                             </span>
                             <span class="badge role-admin fs-6" id="badgeAdmin" runat="server" visible="false">
                                 <i class="fas fa-user-shield me-1"></i>
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Admin %>" />
+                                <asp:Literal runat="server" Text="Administrador" />
                             </span>
                         </div>
                     </div>
@@ -217,7 +217,7 @@
                                 <asp:Label ID="lblTotalMembers" runat="server">0</asp:Label>
                             </span>
                             <span class="stat-label">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TotalMembers %>" />
+                                <asp:Literal runat="server" Text="Total de miembros" />
                             </span>
                         </div>
                         <div class="stat-card">
@@ -225,7 +225,7 @@
                                 <asp:Label ID="lblAdminCount" runat="server">0</asp:Label>
                             </span>
                             <span class="stat-label">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Administrators %>" />
+                                <asp:Literal runat="server" Text="Administradores" />
                             </span>
                         </div>
                         <div class="stat-card">
@@ -233,7 +233,7 @@
                                 <asp:Label ID="lblCreatedDate" runat="server" />
                             </span>
                             <span class="stat-label">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Established %>" />
+                                <asp:Literal runat="server" Text="Fundada" />
                             </span>
                         </div>
                         <div class="stat-card">
@@ -255,10 +255,10 @@
                                 <i class="fas fa-users"></i>
                             </div>
                             <h5 class="mb-3">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ManageMembers %>" />
+                                <asp:Literal runat="server" Text="Gestionar Miembros" />
                             </h5>
                             <p class="text-muted mb-0">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ManageMembersDescription %>" />
+                                <asp:Literal runat="server" Text="Administra los miembros de la organización y sus roles" />
                             </p>
                         </a>
                     </div>
@@ -268,10 +268,10 @@
                                 <i class="fas fa-cog"></i>
                             </div>
                             <h5 class="mb-3">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationSettings %>" />
+                                <asp:Literal runat="server" Text="Configuración de la organización" />
                             </h5>
                             <p class="text-muted mb-0">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,UpdateOrgDetails %>" />
+                                <asp:Literal runat="server" Text="Actualizar detalles de la organización" />
                             </p>
                         </a>
                     </div>
@@ -281,10 +281,10 @@
                                 <i class="fas fa-chart-bar"></i>
                             </div>
                             <h5 class="mb-3">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ViewStatistics %>" />
+                                <asp:Literal runat="server" Text="Ver estadísticas" />
                             </h5>
                             <p class="text-muted mb-0">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,DetailedAnalytics %>" />
+                                <asp:Literal runat="server" Text="Análisis detallado" />
                             </p>
                         </a>
                     </div>
@@ -296,12 +296,12 @@
                         <div class="d-flex justify-content-between align-items-center section-header">
                             <h3>
                                 <i class="fas fa-users me-2"></i>
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationMembers %>" />
+                                <asp:Literal runat="server" Text="Miembros de la organización" />
                             </h3>
                             <div id="memberActions" runat="server">
                                 <button type="button" class="btn btn-success" onclick="showAddMemberModal();">
                                     <i class="fas fa-user-plus me-1"></i>
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AddMember %>" />
+                                    <asp:Literal runat="server" Text="Agregar Miembro" />
                                 </button>
                             </div>
                         </div>
@@ -329,7 +329,7 @@
                                             
                                             <div class="text-muted small mb-2">
                                                 <i class="fas fa-calendar me-1"></i>
-                                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,JoinedOn %>" />: 
+                                                <asp:Literal runat="server" Text="Se unió el" />: 
                                                 <%# ((DateTime)Eval("JoinDate")).ToString("MMM dd, yyyy") %>
                                             </div>
                                             
@@ -337,8 +337,8 @@
                                                  visible='<%# CanManageMember(Eval("Role")?.ToString(), Eval("UserId")) %>'>
                                                 <asp:DropDownList ID="ddlMemberRole" runat="server" CssClass="form-select form-select-sm flex-grow-1"
                                                     Visible='<%# CanUpdateRole(Eval("Role")?.ToString()) %>'>
-                                                    <asp:ListItem Value="member" Text="<%$ Resources:GlobalResources,Member %>" />
-                                                    <asp:ListItem Value="organization_admin" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" />
+                                                    <asp:ListItem Value="member" Text="Miembro" />
+                                                    <asp:ListItem Value="organization_admin" Text="Administrador de Organización" />
                                                 </asp:DropDownList>
                                                 <asp:LinkButton ID="btnUpdateRole" runat="server" CssClass="btn btn-outline-primary btn-sm"
                                                     CommandName="UpdateRole" CommandArgument='<%# Eval("UserId") %>'
@@ -367,10 +367,10 @@
                                 <i class="fas fa-users display-4 text-muted"></i>
                             </div>
                             <h5 class="text-muted mb-3">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoMembers %>" />
+                                <asp:Literal runat="server" Text="No hay miembros en esta organización" />
                             </h5>
                             <p class="text-muted">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AddFirstMember %>" />
+                                <asp:Literal runat="server" Text="Agregar primer miembro" />
                             </p>
                         </asp:Panel>
                     </div>
@@ -388,40 +388,40 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="addMemberModalLabel">
                                 <i class="fas fa-user-plus me-2"></i>
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AddMember %>" />
+                                <asp:Literal runat="server" Text="Agregar Miembro" />
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="ddlAddUser" class="form-label">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SelectUser %>" /> *
+                                    <asp:Literal runat="server" Text="Seleccionar usuario" /> *
                                 </label>
                                 <asp:DropDownList ID="ddlAddUser" runat="server" CssClass="form-select" />
                                 <asp:RequiredFieldValidator ID="rfvAddUser" runat="server" ControlToValidate="ddlAddUser" 
-                                    InitialValue="" ErrorMessage="<%$ Resources:GlobalResources,UserRequired %>" 
+                                    InitialValue="" ErrorMessage="Usuario requerido" 
                                     CssClass="text-danger small" Display="Dynamic" ValidationGroup="AddMember" />
                             </div>
                             <div class="mb-3">
                                 <label for="ddlAddRole" class="form-label">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Role %>" /> *
+                                    <asp:Literal runat="server" Text="Rol" /> *
                                 </label>
                                 <asp:DropDownList ID="ddlAddRole" runat="server" CssClass="form-select">
-                                    <asp:ListItem Value="" Text="<%$ Resources:GlobalResources,SelectRole %>" />
-                                    <asp:ListItem Value="member" Text="<%$ Resources:GlobalResources,Member %>" />
-                                    <asp:ListItem Value="organization_admin" Text="<%$ Resources:GlobalResources,OrganizationAdmin %>" />
+                                    <asp:ListItem Value="" Text="Selecciona un rol" />
+                                    <asp:ListItem Value="member" Text="Miembro" />
+                                    <asp:ListItem Value="organization_admin" Text="Administrador de Organización" />
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="rfvAddRole" runat="server" ControlToValidate="ddlAddRole" 
-                                    InitialValue="" ErrorMessage="<%$ Resources:GlobalResources,RoleRequired %>" 
+                                    InitialValue="" ErrorMessage="El rol es obligatorio" 
                                     CssClass="text-danger small" Display="Dynamic" ValidationGroup="AddMember" />
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Cancel %>" />
+                                <asp:Literal runat="server" Text="Cancelar" />
                             </button>
                             <asp:Button ID="btnAddMember" runat="server" CssClass="btn btn-success" 
-                                Text="<%$ Resources:GlobalResources,AddMember %>" OnClick="btnAddMember_Click" 
+                                Text="Agregar Miembro" OnClick="btnAddMember_Click" 
                                 ValidationGroup="AddMember" />
                         </div>
                     </ContentTemplate>
@@ -439,7 +439,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="settingsModalLabel">
                                 <i class="fas fa-cog me-2"></i>
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationSettings %>" />
+                                <asp:Literal runat="server" Text="Configuración de la organización" />
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -447,21 +447,21 @@
                             <div class="row g-3">
                                 <div class="col-md-8">
                                     <label for="txtSettingsName" class="form-label">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationName %>" /> *
+                                        <asp:Literal runat="server" Text="Nombre de la Organización" /> *
                                     </label>
                                     <asp:TextBox ID="txtSettingsName" runat="server" CssClass="form-control" MaxLength="100" />
                                     <asp:RequiredFieldValidator ID="rfvSettingsName" runat="server" ControlToValidate="txtSettingsName" 
-                                        ErrorMessage="<%$ Resources:GlobalResources,OrganizationNameRequired %>" 
+                                        ErrorMessage="El nombre de la organización es obligatorio" 
                                         CssClass="text-danger small" Display="Dynamic" ValidationGroup="Settings" />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="chkSettingsActive" class="form-label">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Status %>" />
+                                        <asp:Literal runat="server" Text="Estado" />
                                     </label>
                                     <div class="form-check form-switch">
                                         <asp:CheckBox ID="chkSettingsActive" runat="server" CssClass="form-check-input" />
                                         <label class="form-check-label" for="chkSettingsActive">
-                                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Active %>" />
+                                            <asp:Literal runat="server" Text="Activo" />
                                         </label>
                                     </div>
                                 </div>
@@ -470,44 +470,44 @@
                             <div class="row g-3 mt-1">
                                 <div class="col-md-6">
                                     <label for="txtSettingsSlug" class="form-label">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationSlug %>" /> *
+                                        <asp:Literal runat="server" Text="Slug de la Organización" /> *
                                     </label>
                                     <asp:TextBox ID="txtSettingsSlug" runat="server" CssClass="form-control" MaxLength="50" />
                                     <div class="form-text">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SlugHelpText %>" />
+                                        <asp:Literal runat="server" Text="Solo letras, números y guiones. Se usará en la URL de la organización." />
                                     </div>
                                     <asp:RequiredFieldValidator ID="rfvSettingsSlug" runat="server" ControlToValidate="txtSettingsSlug" 
-                                        ErrorMessage="<%$ Resources:GlobalResources,OrganizationSlugRequired %>" 
+                                        ErrorMessage="El slug de la organización es obligatorio" 
                                         CssClass="text-danger small" Display="Dynamic" ValidationGroup="Settings" />
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Owner %>" />
+                                        <asp:Literal runat="server" Text="Propietario" />
                                     </label>
                                     <asp:TextBox ID="txtOwnerDisplay" runat="server" CssClass="form-control" ReadOnly="true" />
                                     <div class="form-text">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OwnerCannotBeChanged %>" />
+                                        <asp:Literal runat="server" Text="El propietario no puede ser cambiado" />
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mt-3">
                                 <label for="txtSettingsDescription" class="form-label">
-                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,OrganizationDescription %>" />
+                                    <asp:Literal runat="server" Text="Descripción de la Organización" />
                                 </label>
                                 <asp:TextBox ID="txtSettingsDescription" runat="server" CssClass="form-control" 
                                     TextMode="MultiLine" Rows="4" MaxLength="500" />
                                 <div class="form-text">
-                                    <span id="settingsCharCount">0</span>/500 <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Characters %>" />
+                                    <span id="settingsCharCount">0</span>/500 <asp:Literal runat="server" Text="caracteres" />
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Cancel %>" />
+                                <asp:Literal runat="server" Text="Cancelar" />
                             </button>
                             <asp:Button ID="btnSaveSettings" runat="server" CssClass="btn btn-primary" 
-                                Text="<%$ Resources:GlobalResources,SaveChanges %>" OnClick="btnSaveSettings_Click" 
+                                Text="Guardar cambios" OnClick="btnSaveSettings_Click" 
                                 ValidationGroup="Settings" />
                         </div>
                     </ContentTemplate>

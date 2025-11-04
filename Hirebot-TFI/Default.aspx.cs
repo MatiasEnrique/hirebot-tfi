@@ -18,13 +18,71 @@ namespace Hirebot_TFI
         protected void Page_Load(object sender, EventArgs e)
         {
             userSecurity = new UserSecurity();
-            
+
             // Set culture from session or default to Spanish
             SetCulture();
-            
+
             if (!IsPostBack)
             {
+                LoadHomepageAd();
                 CheckUserAuthentication();
+            }
+        }
+
+        private void LoadHomepageAd()
+        {
+            try
+            {
+                var homepageAdSecurity = new HomepageAdSecurity();
+                var result = homepageAdSecurity.GetSelectedAdForDisplay();
+
+                if (result.IsSuccessful && result.Data != null && result.Data.IsActive)
+                {
+                    var ad = result.Data;
+                    pnlHomepageAd.Visible = true;
+
+                    if (!string.IsNullOrWhiteSpace(ad.BadgeText))
+                    {
+                        spanAdBadge.Visible = true;
+                        spanAdBadge.InnerText = ad.BadgeText;
+                    }
+                    else
+                    {
+                        spanAdBadge.Visible = false;
+                    }
+
+                    litAdTitle.Text = Server.HtmlEncode(ad.Title);
+
+                    if (!string.IsNullOrWhiteSpace(ad.Description))
+                    {
+                        litAdDescription.Visible = true;
+                        litAdDescription.Text = Server.HtmlEncode(ad.Description);
+                    }
+                    else
+                    {
+                        litAdDescription.Visible = false;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(ad.CtaText) && !string.IsNullOrWhiteSpace(ad.TargetUrl))
+                    {
+                        lnkAdCta.Visible = true;
+                        lnkAdCta.HRef = ad.TargetUrl;
+                        lnkAdCta.InnerText = ad.CtaText;
+                    }
+                    else
+                    {
+                        lnkAdCta.Visible = false;
+                    }
+                }
+                else
+                {
+                    pnlHomepageAd.Visible = false;
+                }
+            }
+            catch (Exception)
+            {
+                // Silently hide ad section if there's an error
+                pnlHomepageAd.Visible = false;
             }
         }
 
@@ -38,7 +96,7 @@ namespace Hirebot_TFI
                     // Show authenticated user interface
                     pnlWelcomeMessage.Visible = true;
                     pnlGuestMessage.Visible = false;
-                    
+
                     lblWelcomeUser.Text = currentUser.FirstName + " " + currentUser.LastName;
                 }
             }
@@ -54,7 +112,7 @@ namespace Hirebot_TFI
         private void SetCulture()
         {
             string language = Session["Language"] as string ?? "es";
-            
+
             CultureInfo culture = new CultureInfo(language);
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;

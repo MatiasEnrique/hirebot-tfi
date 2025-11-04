@@ -4,18 +4,14 @@
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="bi bi-translate"></i>
-        <span class="ms-1 d-none d-md-inline"><asp:Literal ID="litCurrentLanguage" runat="server" /></span>
+        <span class="ms-1 d-none d-md-inline" data-language-display="true"><asp:Literal ID="litCurrentLanguage" runat="server" /></span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end">
         <li>
-            <asp:LinkButton ID="btnSpanish" runat="server" CssClass="dropdown-item" OnClick="btnSpanish_Click">
-                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Spanish %>" />
-            </asp:LinkButton>
+            <asp:HyperLink ID="lnkSpanish" runat="server" CssClass="dropdown-item lang" NavigateUrl="#" Text="Espa&#241;ol" />
         </li>
         <li>
-            <asp:LinkButton ID="btnEnglish" runat="server" CssClass="dropdown-item" OnClick="btnEnglish_Click">
-                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,English %>" />
-            </asp:LinkButton>
+            <asp:HyperLink ID="lnkEnglish" runat="server" CssClass="dropdown-item lang" NavigateUrl="#" Text="English" />
         </li>
     </ul>
 </li>

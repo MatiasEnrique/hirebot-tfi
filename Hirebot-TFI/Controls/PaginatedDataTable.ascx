@@ -11,10 +11,10 @@
         <asp:Panel ID="pnlEmptyData" runat="server" Visible="false" CssClass="text-center p-4">
             <i class="bi bi-inbox display-1 text-muted"></i>
             <h5 class="mt-3 text-muted">
-                <asp:Literal ID="litEmptyTitle" runat="server" Text="<%$ Resources:GlobalResources,NoRecordsFound %>" />
+                <asp:Literal ID="litEmptyTitle" runat="server" Text="No se encontraron registros" />
             </h5>
             <p class="text-muted">
-                <asp:Literal ID="litEmptyMessage" runat="server" Text="<%$ Resources:GlobalResources,NoRecordsFoundMessage %>" />
+                <asp:Literal ID="litEmptyMessage" runat="server" Text="No hay datos disponibles para mostrar en este momento." />
             </p>
         </asp:Panel>
     </div>
@@ -23,13 +23,13 @@
     <div class="d-flex justify-content-between align-items-center mt-3" id="paginationContainer" runat="server">
         <div class="pagination-info">
             <small class="text-muted">
-                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Showing %>" />
+                <asp:Literal runat="server" Text="Mostrando" />
                 <strong><asp:Literal ID="litRecordStart" runat="server" Text="0" /></strong>
                 -
                 <strong><asp:Literal ID="litRecordEnd" runat="server" Text="0" /></strong>
-                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Of %>" />
+                <asp:Literal runat="server" Text="de" />
                 <strong><asp:Literal ID="litTotalRecords" runat="server" Text="0" /></strong>
-                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Records %>" />
+                <asp:Literal runat="server" Text="registros" />
             </small>
         </div>
         
@@ -68,7 +68,7 @@
         
         <div class="page-size-selector">
             <small class="text-muted me-2">
-                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,RecordsPerPage %>" />:
+                <asp:Literal runat="server" Text="Registros por página" />:
             </small>
             <asp:DropDownList ID="ddlPageSize" runat="server" CssClass="form-select form-select-sm" 
                               AutoPostBack="true" OnSelectedIndexChanged="ddlPageSize_SelectedIndexChanged"

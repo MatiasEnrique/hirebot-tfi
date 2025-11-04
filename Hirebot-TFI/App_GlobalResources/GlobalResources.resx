@@ -135,6 +135,9 @@
   <data name="SignOut" xml:space="preserve">
     <value>Cerrar Sesión</value>
   </data>
+  <data name="SearchPages" xml:space="preserve">
+    <value>Buscar páginas...</value>
+  </data>
   <data name="GetStarted" xml:space="preserve">
     <value>Comenzar</value>
   </data>
@@ -1606,6 +1609,48 @@ Esta acción no se puede deshacer.</value>
   <data name="ViewDetails" xml:space="preserve">
     <value>Ver detalles</value>
   </data>
+  <data name="CompareText" xml:space="preserve">
+    <value>Comparar</value>
+  </data>
+  <data name="ComparePlans" xml:space="preserve">
+    <value>Comparar Planes</value>
+  </data>
+  <data name="CompareSelected" xml:space="preserve">
+    <value>Comparar seleccionados</value>
+  </data>
+  <data name="ClearSelection" xml:space="preserve">
+    <value>Limpiar selección</value>
+  </data>
+  <data name="SelectUpTo3Plans" xml:space="preserve">
+    <value>Selecciona hasta 3 planes para comparar</value>
+  </data>
+  <data name="PlansSelected" xml:space="preserve">
+    <value>planes seleccionados</value>
+  </data>
+  <data name="MaxPlansReached" xml:space="preserve">
+    <value>Máximo 3 planes para comparar</value>
+  </data>
+  <data name="SelectAtLeast2Plans" xml:space="preserve">
+    <value>Selecciona al menos 2 planes para comparar</value>
+  </data>
+  <data name="PlanComparison" xml:space="preserve">
+    <value>Comparación de Planes</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Características</value>
+  </data>
+  <data name="PlanName" xml:space="preserve">
+    <value>Nombre del Plan</value>
+  </data>
+  <data name="MonthlyPrice" xml:space="preserve">
+    <value>Precio Mensual</value>
+  </data>
+  <data name="MaximumChatbots" xml:space="preserve">
+    <value>Chatbots Máximos</value>
+  </data>
+  <data name="MessagesPerMonth" xml:space="preserve">
+    <value>Mensajes por Mes</value>
+  </data>
   <data name="FooterDescription" xml:space="preserve">
     <value>Sistema de gestión de recursos humanos con inteligencia artificial para optimizar procesos de reclutamiento.</value>
   </data>
@@ -1641,6 +1686,9 @@ Esta acción no se puede deshacer.</value>
   </data>
   <data name="ChatbotAdmin" xml:space="preserve">
     <value>Administración de Chatbots</value>
+  </data>
+  <data name="ChatbotDetails" xml:space="preserve">
+    <value>Detalles del Chatbot</value>
   </data>
   <data name="CreateChatbot" xml:space="preserve">
     <value>Crear Chatbot</value>
@@ -2806,8 +2854,20 @@ Esta acción no se puede deshacer.</value>
   <data name="NoQuestionsFound" xml:space="preserve">
     <value>No se registraron preguntas.</value>
   </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Preguntas</value>
+  </data>
   <data name="Question" xml:space="preserve">
     <value>Pregunta</value>
+  </data>
+  <data name="QuestionEditor" xml:space="preserve">
+    <value>Editor de Preguntas</value>
+  </data>
+  <data name="QuestionText" xml:space="preserve">
+    <value>Texto de la Pregunta</value>
+  </data>
+  <data name="QuestionType" xml:space="preserve">
+    <value>Tipo de Pregunta</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Tipo</value>
@@ -2830,11 +2890,23 @@ Esta acción no se puede deshacer.</value>
   <data name="NoOptionsFound" xml:space="preserve">
     <value>No se registraron opciones.</value>
   </data>
+  <data name="Options" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
+  <data name="AddOption" xml:space="preserve">
+    <value>Agregar Opción</value>
+  </data>
   <data name="OptionText" xml:space="preserve">
     <value>Texto de la opción</value>
   </data>
   <data name="OptionValue" xml:space="preserve">
     <value>Valor de la opción</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Valor</value>
   </data>
   <data name="OptionTextRequired" xml:space="preserve">
     <value>El texto de la opción es obligatorio.</value>
@@ -3031,9 +3103,12 @@ Esta acción no se puede deshacer.</value>
   <data name="SubscribedSuccess">
     <value>¡Gracias por suscribirte! Revisa tu bandeja para más novedades.</value>
   </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Enviar</value>
-  </data>
+  <data name="Submit" xml:space="preserve">
+
+    <value>Enviar</value>
+
+  </data>
+
   <data name="Skip" xml:space="preserve">
     <value>Omitir</value>
   </data>
@@ -3096,6 +3171,111 @@ Esta acción no se puede deshacer.</value>
   </data>
   <data name="AdminReportsNav" xml:space="preserve">
     <value>Reportes</value>
+  </data>
+  <data name="AdminRolesNav" xml:space="preserve">
+    <value>Roles de administración</value>
+  </data>
+  <data name="AdminRolesPageTitle" xml:space="preserve">
+    <value>Gestión de roles</value>
+  </data>
+  <data name="AdminRolesCreateButton" xml:space="preserve">
+    <value>Crear rol</value>
+  </data>
+  <data name="AdminRolesListTitle" xml:space="preserve">
+    <value>Roles existentes</value>
+  </data>
+  <data name="AdminRolesNoRoles" xml:space="preserve">
+    <value>Aún no se crearon roles.</value>
+  </data>
+  <data name="AdminRolesRoleName" xml:space="preserve">
+    <value>Nombre del rol</value>
+  </data>
+  <data name="AdminRolesRoleNameRequired" xml:space="preserve">
+    <value>El nombre del rol es obligatorio.</value>
+  </data>
+  <data name="AdminRolesPermissionsTitle" xml:space="preserve">
+    <value>Permisos disponibles</value>
+  </data>
+  <data name="AdminRolesAssignedUsersTitle" xml:space="preserve">
+    <value>Usuarios asignados</value>
+  </data>
+  <data name="AdminRolesAssignPlaceholder" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="AdminRolesAssignButton" xml:space="preserve">
+    <value>Asignar</value>
+  </data>
+  <data name="AdminRolesNoUsers" xml:space="preserve">
+    <value>No hay usuarios asignados a este rol.</value>
+  </data>
+  <data name="AdminRolesDeleteButton" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="AdminRolesSaveButton" xml:space="preserve">
+    <value>Guardar cambios</value>
+  </data>
+  <data name="AdminRolesReadyToCreate" xml:space="preserve">
+    <value>Completa el formulario para crear un nuevo rol.</value>
+  </data>
+  <data name="AdminRolesSaveError" xml:space="preserve">
+    <value>No se pudo guardar el rol.</value>
+  </data>
+  <data name="AdminRolesPermissionsUpdateError" xml:space="preserve">
+    <value>No se pudieron actualizar los permisos del rol.</value>
+  </data>
+  <data name="AdminRolesSaveSuccess" xml:space="preserve">
+    <value>Rol guardado correctamente.</value>
+  </data>
+  <data name="AdminRolesSelectRoleWarning" xml:space="preserve">
+    <value>Selecciona un rol primero.</value>
+  </data>
+  <data name="AdminRolesDeleteError" xml:space="preserve">
+    <value>No se pudo eliminar el rol.</value>
+  </data>
+  <data name="AdminRolesDeleteSuccess" xml:space="preserve">
+    <value>Rol eliminado correctamente.</value>
+  </data>
+  <data name="AdminRolesUsernameRequired" xml:space="preserve">
+    <value>Ingresa un nombre de usuario.</value>
+  </data>
+  <data name="AdminRolesAssignError" xml:space="preserve">
+    <value>No se pudo asignar el rol.</value>
+  </data>
+  <data name="AdminRolesAssignSuccess" xml:space="preserve">
+    <value>Rol asignado correctamente.</value>
+  </data>
+  <data name="AdminRolesRemoveError" xml:space="preserve">
+    <value>No se pudo quitar el rol del usuario.</value>
+  </data>
+  <data name="AdminRolesRemoveSuccess" xml:space="preserve">
+    <value>Rol quitado del usuario correctamente.</value>
+  </data>
+  <data name="AdminRolesRemoveUserConfirm" xml:space="preserve">
+    <value>¿Quitar este usuario del rol?</value>
+  </data>
+  <data name="AdminRolesStatusActive" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="AdminRolesStatusInactive" xml:space="preserve">
+    <value>Inactivo</value>
+  </data>
+  <data name="AdminRolesSummaryFormat" xml:space="preserve">
+    <value>{0} · {1} usuarios · {2} permisos</value>
+  </data>
+  <data name="AdminRolesLoadError" xml:space="preserve">
+    <value>No se pudieron cargar los roles.</value>
+  </data>
+  <data name="AdminRolesLoadPermissionsError" xml:space="preserve">
+    <value>No se pudieron cargar los permisos.</value>
+  </data>
+  <data name="AdminRolesLoadDetailError" xml:space="preserve">
+    <value>No se pudieron cargar los detalles del rol.</value>
+  </data>
+  <data name="AdminRolesNewRole" xml:space="preserve">
+    <value>Nuevo rol</value>
+  </data>
+  <data name="AdminRolesDeleteConfirm" xml:space="preserve">
+    <value>¿Seguro que deseas eliminar este rol?</value>
   </data>
   <data name="BillingManagement" xml:space="preserve">
     <value>Gestión de facturación</value>
@@ -3561,5 +3741,176 @@ Esta acción no se puede deshacer.</value>
   </data>
   <data name="SubscriptionsNav" xml:space="preserve">
     <value>Suscripciones</value>
+  </data>
+  <data name="HomepageAds" xml:space="preserve">
+    <value>Anuncios de Inicio</value>
+  </data>
+  <data name="HomepageAdsManagement" xml:space="preserve">
+    <value>Gestión de Anuncios de Inicio</value>
+  </data>
+  <data name="HomepageAdsList" xml:space="preserve">
+    <value>Lista de Anuncios</value>
+  </data>
+  <data name="CreateNewAd" xml:space="preserve">
+    <value>Crear Nuevo Anuncio</value>
+  </data>
+  <data name="EditAd" xml:space="preserve">
+    <value>Editar Anuncio</value>
+  </data>
+  <data name="AdTitle" xml:space="preserve">
+    <value>Título del Anuncio</value>
+  </data>
+  <data name="AdBadgeText" xml:space="preserve">
+    <value>Texto de Etiqueta</value>
+  </data>
+  <data name="AdDescription" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="AdCtaText" xml:space="preserve">
+    <value>Texto del Botón</value>
+  </data>
+  <data name="AdTargetUrl" xml:space="preserve">
+    <value>URL de Destino</value>
+  </data>
+  <data name="AdIsActive" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="AdIsSelected" xml:space="preserve">
+    <value>Seleccionado</value>
+  </data>
+  <data name="AdCreatedDate" xml:space="preserve">
+    <value>Fecha de Creación</value>
+  </data>
+  <data name="AdModifiedDate" xml:space="preserve">
+    <value>Última Modificación</value>
+  </data>
+  <data name="SaveAd" xml:space="preserve">
+    <value>Guardar Anuncio</value>
+  </data>
+  <data name="DeleteAd" xml:space="preserve">
+    <value>Eliminar Anuncio</value>
+  </data>
+  <data name="SetAsSelected" xml:space="preserve">
+    <value>Seleccionar para Mostrar</value>
+  </data>
+  <data name="AdTitleRequired" xml:space="preserve">
+    <value>El título del anuncio es obligatorio</value>
+  </data>
+  <data name="AdTitleMaxLength" xml:space="preserve">
+    <value>El título no puede exceder los 200 caracteres</value>
+  </data>
+  <data name="AdBadgeMaxLength" xml:space="preserve">
+    <value>La etiqueta no puede exceder los 100 caracteres</value>
+  </data>
+  <data name="AdDescriptionMaxLength" xml:space="preserve">
+    <value>La descripción no puede exceder los 500 caracteres</value>
+  </data>
+  <data name="AdCtaMaxLength" xml:space="preserve">
+    <value>El texto del botón no puede exceder los 100 caracteres</value>
+  </data>
+  <data name="AdUrlMaxLength" xml:space="preserve">
+    <value>La URL no puede exceder los 500 caracteres</value>
+  </data>
+  <data name="AdSavedSuccess" xml:space="preserve">
+    <value>Anuncio guardado exitosamente</value>
+  </data>
+  <data name="AdDeletedSuccess" xml:space="preserve">
+    <value>Anuncio eliminado exitosamente</value>
+  </data>
+  <data name="AdSelectedSuccess" xml:space="preserve">
+    <value>Anuncio seleccionado para mostrar en la página de inicio</value>
+  </data>
+  <data name="ConfirmDeleteAd" xml:space="preserve">
+    <value>¿Está seguro de que desea eliminar este anuncio?</value>
+  </data>
+  <data name="NoAdsAvailable" xml:space="preserve">
+    <value>No hay anuncios disponibles</value>
+  </data>
+  <data name="AdActions" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="AdStatus" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="CurrentlyDisplayed" xml:space="preserve">
+    <value>Mostrándose Actualmente</value>
+  </data>
+  <data name="AdBadgeOptional" xml:space="preserve">
+    <value>Etiqueta opcional (ej: "NUEVO")</value>
+  </data>
+  <data name="AdDescriptionOptional" xml:space="preserve">
+    <value>Descripción del anuncio (opcional)</value>
+  </data>
+  <data name="AdCtaOptional" xml:space="preserve">
+    <value>Texto del botón (opcional)</value>
+  </data>
+  <data name="AdUrlOptional" xml:space="preserve">
+    <value>URL de destino (opcional)</value>
+  </data>
+  <data name="ReadyToCreateAd" xml:space="preserve">
+    <value>Complete el formulario para crear un nuevo anuncio</value>
+  </data>
+  <data name="AdSaveError" xml:space="preserve">
+    <value>Error al guardar el anuncio</value>
+  </data>
+  <data name="AdDeleteError" xml:space="preserve">
+    <value>Error al eliminar el anuncio</value>
+  </data>
+  <data name="AdLoadError" xml:space="preserve">
+    <value>Error al cargar los anuncios</value>
+  </data>
+  <data name="AdLoadDetailError" xml:space="preserve">
+    <value>Error al cargar los detalles del anuncio</value>
+  </data>
+  <data name="SelectAdWarning" xml:space="preserve">
+    <value>Por favor seleccione un anuncio primero</value>
+  </data>
+  <data name="SetSelectedError" xml:space="preserve">
+    <value>Error al seleccionar el anuncio para mostrar</value>
+  </data>
+  <data name="DeleteAdConfirm" xml:space="preserve">
+    <value>¿Está seguro de que desea eliminar este anuncio? Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Vista Previa</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Creado</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Modificado</value>
+  </data>
+  <data name="EditAd" xml:space="preserve">
+    <value>Editar Anuncio</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackHeading" xml:space="preserve">
+    <value>Deja una reseña</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackRating" xml:space="preserve">
+    <value>Calificación</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackComment" xml:space="preserve">
+    <value>Comentario (opcional)</value>
+  </data>
+  <data name="AccountSubscriptionFeedbackSaveButton" xml:space="preserve">
+    <value>Guardar reseña</value>
+  </data>
+  <data name="SubscriptionFeedbackSavedSuccess" xml:space="preserve">
+    <value>Tu reseña fue guardada correctamente.</value>
+  </data>
+  <data name="SubscriptionFeedbackSaveError" xml:space="preserve">
+    <value>No pudimos guardar tu reseña.</value>
+  </data>
+  <data name="RatingOutOfRange" xml:space="preserve">
+    <value>La calificación debe estar entre 1 y 5.</value>
+  </data>
+  <data name="SurveyResults" xml:space="preserve">
+    <value>Resultados de la Encuesta</value>
+  </data>
+  <data name="Votes" xml:space="preserve">
+    <value>Votos</value>
+  </data>
+  <data name="SurveyResultsNotAvailable" xml:space="preserve">
+    <value>Los resultados de la encuesta no están disponibles.</value>
   </data>
 </root>

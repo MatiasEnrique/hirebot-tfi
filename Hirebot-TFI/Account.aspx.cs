@@ -2,7 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using ABSTRACTIONS;
 using SECURITY;
@@ -20,11 +24,14 @@ namespace Hirebot_TFI
 
             pnlAlert.Visible = false;
 
-            txtChatInputPlaceholder.Attributes["placeholder"] = GetLocalizedText("AccountChatInputPlaceholder");
-
             if (!IsPostBack)
             {
                 BindDashboard();
+                InitializeChatHistory();
+            }
+            else
+            {
+                LoadChatHistory();
             }
         }
 
@@ -70,6 +77,38 @@ namespace Hirebot_TFI
                     BindDashboard();
                 }
             }
+            else if (string.Equals(e.CommandName, "SaveFeedback", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!int.TryParse(e.CommandArgument?.ToString(), out var subscriptionId))
+                {
+                    ShowAlert(GetLocalizedText("SubscriptionFeedbackSaveError"), false);
+                    return;
+                }
+
+                var ddlRating = e.Item.FindControl("ddlRating") as DropDownList;
+                var txtComment = e.Item.FindControl("txtFeedbackComment") as System.Web.UI.WebControls.TextBox;
+
+                if (ddlRating == null)
+                {
+                    ShowAlert(GetLocalizedText("SubscriptionFeedbackSaveError"), false);
+                    return;
+                }
+
+                if (!int.TryParse(ddlRating.SelectedValue, out var rating))
+                {
+                    ShowAlert(GetLocalizedText("SubscriptionFeedbackSaveError"), false);
+                    return;
+                }
+
+                string comment = txtComment?.Text ?? string.Empty;
+                var result = userSecurity.SaveCurrentUserSubscriptionFeedback(subscriptionId, rating, comment);
+                ShowAlert(result.ErrorMessage, result.IsSuccessful);
+
+                if (result.IsSuccessful)
+                {
+                    BindDashboard();
+                }
+            }
         }
 
         protected void rptSubscriptions_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -87,11 +126,66 @@ namespace Hirebot_TFI
                     ? null
                     : $"return confirm('{encoded}');";
             }
+
+            // Populate feedback UI controls (rating dropdown and existing comment)
+            var hidSubscriptionId = DataBinder.Eval(e.Item.DataItem, "SubscriptionId");
+            int subscriptionId;
+            if (hidSubscriptionId != null && int.TryParse(Convert.ToString(hidSubscriptionId, CultureInfo.InvariantCulture), out subscriptionId))
+            {
+                var ddlRating = e.Item.FindControl("ddlRating") as DropDownList;
+                if (ddlRating != null)
+                {
+                    ddlRating.Items.Clear();
+                    ddlRating.Items.Add(new ListItem("1", "1"));
+                    ddlRating.Items.Add(new ListItem("2", "2"));
+                    ddlRating.Items.Add(new ListItem("3", "3"));
+                    ddlRating.Items.Add(new ListItem("4", "4"));
+                    ddlRating.Items.Add(new ListItem("5", "5"));
+
+                    try
+                    {
+                        var feedbackResult = userSecurity.GetCurrentUserSubscriptionFeedback(subscriptionId);
+                        if (feedbackResult != null && feedbackResult.IsSuccessful && feedbackResult.Data != null)
+                        {
+                            var feedback = feedbackResult.Data;
+                            var txtComment = e.Item.FindControl("txtFeedbackComment") as System.Web.UI.WebControls.TextBox;
+                            if (txtComment != null)
+                            {
+                                txtComment.Text = feedback.Comment ?? string.Empty;
+                            }
+
+                            if (feedback.Rating >= 1 && feedback.Rating <= 5)
+                            {
+                                var item = ddlRating.Items.FindByValue(feedback.Rating.ToString(CultureInfo.InvariantCulture));
+                                if (item != null)
+                                {
+                                    ddlRating.ClearSelection();
+                                    item.Selected = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Default rating selection
+                            var defaultItem = ddlRating.Items.FindByValue("5");
+                            if (defaultItem != null)
+                            {
+                                ddlRating.ClearSelection();
+                                defaultItem.Selected = true;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // Swallow feedback load errors to avoid breaking dashboard rendering
+                    }
+                }
+            }
         }
 
         protected string GetLocalizedText(string key)
         {
-            return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
+            return key;
         }
 
         protected string FormatDateTime(object value)
@@ -255,6 +349,101 @@ namespace Hirebot_TFI
                 ? FormatCurrency(creditNoteTotal * -1m, currencyCode)
                 : FormatCurrency(0m, currencyCode);
             litBillingBalance.Text = FormatCurrency(balance, currencyCode);
+        }
+
+        private void InitializeChatHistory()
+        {
+            var chatHistory = new List<ChatMessage>();
+            Session["ChatHistory"] = chatHistory;
+            rptChatMessages.DataSource = chatHistory;
+            rptChatMessages.DataBind();
+        }
+
+        private void LoadChatHistory()
+        {
+            var chatHistory = Session["ChatHistory"] as List<ChatMessage> ?? new List<ChatMessage>();
+            rptChatMessages.DataSource = chatHistory;
+            rptChatMessages.DataBind();
+        }
+
+        protected async void btnSendMessage_Click(object sender, EventArgs e)
+        {
+            string userMessage = txtChatInput.Text.Trim();
+            if (string.IsNullOrWhiteSpace(userMessage))
+            {
+                return;
+            }
+
+            var chatHistory = Session["ChatHistory"] as List<ChatMessage> ?? new List<ChatMessage>();
+
+            chatHistory.Add(new ChatMessage { Role = "user", Content = userMessage });
+
+            txtChatInput.Text = string.Empty;
+
+            try
+            {
+                string apiKey = System.Configuration.ConfigurationManager.AppSettings["OpenAI.ApiKey"];
+                string assistantResponse = await CallOpenAI(apiKey, chatHistory);
+                chatHistory.Add(new ChatMessage { Role = "assistant", Content = assistantResponse });
+            }
+            catch (Exception ex)
+            {
+                chatHistory.Add(new ChatMessage { Role = "assistant", Content = "Error: " + ex.Message });
+            }
+
+            Session["ChatHistory"] = chatHistory;
+            rptChatMessages.DataSource = chatHistory;
+            rptChatMessages.DataBind();
+        }
+
+        private async System.Threading.Tasks.Task<string> CallOpenAI(string apiKey, List<ChatMessage> messages)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
+
+                var messagesList = new List<object>();
+                foreach (var msg in messages)
+                {
+                    messagesList.Add(new { role = msg.Role, content = msg.Content });
+                }
+
+                var requestBody = new
+                {
+                    model = "gpt-3.5-turbo",
+                    messages = messagesList
+                };
+
+                var serializer = new JavaScriptSerializer();
+                string json = serializer.Serialize(requestBody);
+
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("https://api.openai.com/v1/chat/completions", content);
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return "API Error: " + response.StatusCode + " - " + responseBody;
+                }
+
+                var result = serializer.Deserialize<Dictionary<string, object>>(responseBody);
+                var choices = result["choices"] as System.Collections.ArrayList;
+                if (choices != null && choices.Count > 0)
+                {
+                    var choice = choices[0] as Dictionary<string, object>;
+                    var message = choice["message"] as Dictionary<string, object>;
+                    return message["content"].ToString();
+                }
+
+                return "No response from AI";
+            }
+        }
+
+        public class ChatMessage
+        {
+            public string Role { get; set; }
+            public string Content { get; set; }
         }
     }
 }

@@ -1,7 +1,7 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminNews.aspx.cs" Inherits="Hirebot_TFI.AdminNews" MasterPageFile="~/Admin.master" %>
 
 <asp:Content ID="AdminNewsTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" />
+    <asp:Literal runat="server" Text="Gestión de noticias" />
 </asp:Content>
 
 <asp:Content ID="AdminNewsHead" ContentPlaceHolderID="HeadContent" runat="server">
@@ -83,8 +83,8 @@
     <div class="admin-title">
         <i class="bi bi-newspaper"></i>
         <div>
-            <h2 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" /></h2>
-            <small class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AdminNewsSubtitle %>" /></small>
+            <h2 class="mb-0"><asp:Literal runat="server" Text="Gestión de noticias" /></h2>
+            <small class="text-muted"><asp:Literal runat="server" Text="Gestiona las novedades del sitio y el newsletter oficial." /></small>
         </div>
     </div>
 
@@ -92,32 +92,32 @@
         <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
             <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-funnel text-primary"></i>
-                <strong><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Search %>" /></strong>
+                <strong><asp:Literal runat="server" Text="Buscar" /></strong>
             </div>
-            <asp:Button ID="btnCreateNews" runat="server" CssClass="btn btn-primary" Text="<%$ Resources:GlobalResources,CreateNews %>" UseSubmitBehavior="false" CausesValidation="false" OnClientClick="return openCreateNewsModal();" />
+            <asp:Button ID="btnCreateNews" runat="server" CssClass="btn btn-primary" Text="Crear noticia" UseSubmitBehavior="false" CausesValidation="false" OnClientClick="return openCreateNewsModal();" />
         </div>
         <div class="card-body">
             <div class="row g-3 align-items-end">
                 <div class="col-md-4">
-                    <label for="txtSearch" class="form-label text-secondary"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Keyword %>" /></label>
-                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" MaxLength="150" placeholder="<%$ Resources:GlobalResources,SearchPlaceholder %>" />
+                    <label for="txtSearch" class="form-label text-secondary"><asp:Literal runat="server" Text="Palabra clave" /></label>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" MaxLength="150" placeholder="Buscar por título o contenido" />
                 </div>
                 <div class="col-md-3">
-                    <label for="ddlStatusFilter" class="form-label text-secondary"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Status %>" /></label>
+                    <label for="ddlStatusFilter" class="form-label text-secondary"><asp:Literal runat="server" Text="Estado" /></label>
                     <asp:DropDownList ID="ddlStatusFilter" runat="server" CssClass="form-select">
-                        <asp:ListItem Value="All" Text="<%$ Resources:GlobalResources,StatusAll %>" />
-                        <asp:ListItem Value="Published" Text="<%$ Resources:GlobalResources,StatusPublished %>" />
-                        <asp:ListItem Value="Unpublished" Text="<%$ Resources:GlobalResources,StatusUnpublished %>" />
-                        <asp:ListItem Value="Archived" Text="<%$ Resources:GlobalResources,StatusArchived %>" />
+                        <asp:ListItem Value="All" Text="Todos" />
+                        <asp:ListItem Value="Published" Text="Publicadas" />
+                        <asp:ListItem Value="Unpublished" Text="No publicadas" />
+                        <asp:ListItem Value="Archived" Text="Archivadas" />
                     </asp:DropDownList>
                 </div>
                 <div class="col-md-3">
-                    <label for="ddlLanguageFilter" class="form-label text-secondary"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Language %>" /></label>
+                    <label for="ddlLanguageFilter" class="form-label text-secondary"><asp:Literal runat="server" Text="Idioma" /></label>
                     <asp:DropDownList ID="ddlLanguageFilter" runat="server" CssClass="form-select" />
                 </div>
                 <div class="col-md-2 d-flex gap-2">
-                    <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-outline-primary w-100" Text="<%$ Resources:GlobalResources,Search %>" OnClick="btnSearch_Click" />
-                    <asp:Button ID="btnClearFilters" runat="server" CssClass="btn btn-outline-secondary w-100" Text="<%$ Resources:GlobalResources,Reset %>" OnClick="btnClearFilters_Click" CausesValidation="false" />
+                    <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-outline-primary w-100" Text="Buscar" OnClick="btnSearch_Click" />
+                    <asp:Button ID="btnClearFilters" runat="server" CssClass="btn btn-outline-secondary w-100" Text="Restablecer" OnClick="btnClearFilters_Click" CausesValidation="false" />
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mt-4">
@@ -129,39 +129,39 @@
     <div class="card table-card mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="gvNews" runat="server" CssClass="table table-hover align-middle" AutoGenerateColumns="false" DataKeyNames="NewsId" OnRowCommand="gvNews_RowCommand" OnRowDataBound="gvNews_RowDataBound" EmptyDataText="<%$ Resources:GlobalResources,NoNewsFound %>">
+                <asp:GridView ID="gvNews" runat="server" CssClass="table table-hover align-middle" AutoGenerateColumns="false" DataKeyNames="NewsId" OnRowCommand="gvNews_RowCommand" OnRowDataBound="gvNews_RowDataBound" EmptyDataText="No se encontraron noticias con los filtros seleccionados.">
                     <Columns>
-                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,Title %>" ItemStyle-Width="35%">
+                        <asp:TemplateField HeaderText="Título" ItemStyle-Width="35%">
                             <ItemTemplate>
                                 <div class="fw-semibold text-dark"><%#: Eval("Title") %></div>
                                 <div class="text-muted small"><%#: Eval("Summary") %></div>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,Language %>" ItemStyle-Width="10%">
+                        <asp:TemplateField HeaderText="Idioma" ItemStyle-Width="10%">
                             <ItemTemplate>
                                 <span class="badge bg-light text-dark"><%#: Eval("LanguageCode") %></span>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,PublishedDate %>" ItemStyle-Width="15%">
+                        <asp:TemplateField HeaderText="Fecha de publicación" ItemStyle-Width="15%">
                             <ItemTemplate>
                                 <asp:Label ID="lblPublishedDate" runat="server" CssClass="small text-secondary" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,Status %>" ItemStyle-Width="15%">
+                        <asp:TemplateField HeaderText="Estado" ItemStyle-Width="15%">
                             <ItemTemplate>
                                 <span class="badge-status" runat="server" id="badgeStatus"></span>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,LastUpdated %>" ItemStyle-Width="15%">
+                        <asp:TemplateField HeaderText="Última actualización" ItemStyle-Width="15%">
                             <ItemTemplate>
                                 <asp:Label ID="lblUpdatedDate" runat="server" CssClass="small text-secondary" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,Actions %>" ItemStyle-CssClass="text-end" ItemStyle-Width="20%">
+                        <asp:TemplateField HeaderText="Acciones" ItemStyle-CssClass="text-end" ItemStyle-Width="20%">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkEdit" runat="server" CssClass="btn btn-sm btn-outline-primary me-2" CommandName="EditNews" CommandArgument='<%# Eval("NewsId") %>' Text="<%$ Resources:GlobalResources,Edit %>" />
-                                <asp:LinkButton ID="lnkTogglePublish" runat="server" CssClass="btn btn-sm btn-outline-success me-2" CommandName="TogglePublish" CommandArgument='<%# string.Format("{0}|{1}|{2}", Eval("NewsId"), Eval("IsPublished"), Eval("IsArchived")) %>' Text="<%$ Resources:GlobalResources,Publish %>" />
-                                <asp:LinkButton ID="lnkArchive" runat="server" CssClass="btn btn-sm btn-outline-danger" CommandName="ArchiveNews" CommandArgument='<%# Eval("NewsId") %>' Text="<%$ Resources:GlobalResources,Archive %>" />
+                                <asp:LinkButton ID="lnkEdit" runat="server" CssClass="btn btn-sm btn-outline-primary me-2" CommandName="EditNews" CommandArgument='<%# Eval("NewsId") %>' Text="Editar" />
+                                <asp:LinkButton ID="lnkTogglePublish" runat="server" CssClass="btn btn-sm btn-outline-success me-2" CommandName="TogglePublish" CommandArgument='<%# string.Format("{0}|{1}|{2}", Eval("NewsId"), Eval("IsPublished"), Eval("IsArchived")) %>' Text="Publicar" />
+                                <asp:LinkButton ID="lnkArchive" runat="server" CssClass="btn btn-sm btn-outline-danger" CommandName="ArchiveNews" CommandArgument='<%# Eval("NewsId") %>' Text="Archivar" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -174,29 +174,29 @@
         <div class="col-12 col-lg-4">
             <div class="card summary-card h-100">
                 <div class="card-header">
-                    <h6 class="mb-0"><i class="bi bi-envelope-open me-2 text-primary"></i><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsletterSummary %>" /></h6>
+                    <h6 class="mb-0"><i class="bi bi-envelope-open me-2 text-primary"></i><asp:Literal runat="server" Text="Resumen del newsletter" /></h6>
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-column gap-3">
                         <div>
-                            <span class="text-muted d-block"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,TotalSubscribers %>" /></span>
+                            <span class="text-muted d-block"><asp:Literal runat="server" Text="Suscriptores totales" /></span>
                             <h4 class="mb-0 summary-value"><asp:Literal ID="litTotalSubscribers" runat="server" /></h4>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div>
-                                <span class="newsletter-summary-badge bg-success-subtle text-success"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Active %>" /></span>
+                                <span class="newsletter-summary-badge bg-success-subtle text-success"><asp:Literal runat="server" Text="Activo" /></span>
                                 <h5 class="mt-1 mb-0"><asp:Literal ID="litActiveSubscribers" runat="server" /></h5>
                             </div>
                             <div>
-                                <span class="newsletter-summary-badge bg-secondary-subtle text-secondary"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Inactive %>" /></span>
+                                <span class="newsletter-summary-badge bg-secondary-subtle text-secondary"><asp:Literal runat="server" Text="Inactivo" /></span>
                                 <h5 class="mt-1 mb-0"><asp:Literal ID="litInactiveSubscribers" runat="server" /></h5>
                             </div>
                         </div>
                         <div>
-                            <span class="text-muted d-block"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewSubscribers30Days %>" /></span>
+                            <span class="text-muted d-block"><asp:Literal runat="server" Text="Suscriptores últimos 30 días" /></span>
                             <h5 class="mb-0 text-primary"><asp:Literal ID="litRecentSubscribers" runat="server" /></h5>
                         </div>
-                        <asp:Button ID="btnRefreshSummary" runat="server" CssClass="btn btn-outline-secondary btn-sm" Text="<%$ Resources:GlobalResources,Refresh %>" OnClick="btnRefreshSummary_Click" />
+                        <asp:Button ID="btnRefreshSummary" runat="server" CssClass="btn btn-outline-secondary btn-sm" Text="Actualizar" OnClick="btnRefreshSummary_Click" />
                     </div>
                 </div>
             </div>
@@ -206,42 +206,42 @@
                 <div class="card-header d-flex flex-wrap align-items-center gap-2 justify-content-between">
                     <div class="d-flex align-items-center gap-2">
                         <i class="bi bi-people text-primary"></i>
-                        <strong><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsletterSubscribers %>" /></strong>
+                        <strong><asp:Literal runat="server" Text="Suscriptores" /></strong>
                     </div>
                     <div class="d-flex flex-wrap gap-2">
-                        <asp:TextBox ID="txtSubscriberSearch" runat="server" CssClass="form-control form-control-sm" MaxLength="150" placeholder="<%$ Resources:GlobalResources,SearchEmail %>" />
+                        <asp:TextBox ID="txtSubscriberSearch" runat="server" CssClass="form-control form-control-sm" MaxLength="150" placeholder="Buscar por correo" />
                         <asp:DropDownList ID="ddlSubscriberStatus" runat="server" CssClass="form-select form-select-sm">
-                            <asp:ListItem Value="All" Text="<%$ Resources:GlobalResources,StatusAll %>" />
-                            <asp:ListItem Value="Active" Text="<%$ Resources:GlobalResources,Active %>" />
-                            <asp:ListItem Value="Inactive" Text="<%$ Resources:GlobalResources,Inactive %>" />
+                            <asp:ListItem Value="All" Text="Todos" />
+                            <asp:ListItem Value="Active" Text="Activo" />
+                            <asp:ListItem Value="Inactive" Text="Inactivo" />
                         </asp:DropDownList>
-                        <asp:Button ID="btnSearchSubscribers" runat="server" CssClass="btn btn-outline-primary btn-sm" Text="<%$ Resources:GlobalResources,Search %>" OnClick="btnSearchSubscribers_Click" />
-                        <asp:Button ID="btnClearSubscribers" runat="server" CssClass="btn btn-outline-secondary btn-sm" Text="<%$ Resources:GlobalResources,Reset %>" OnClick="btnClearSubscribers_Click" CausesValidation="false" />
+                        <asp:Button ID="btnSearchSubscribers" runat="server" CssClass="btn btn-outline-primary btn-sm" Text="Buscar" OnClick="btnSearchSubscribers_Click" />
+                        <asp:Button ID="btnClearSubscribers" runat="server" CssClass="btn btn-outline-secondary btn-sm" Text="Restablecer" OnClick="btnClearSubscribers_Click" CausesValidation="false" />
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <asp:GridView ID="gvSubscribers" runat="server" CssClass="table table-sm table-striped align-middle" AutoGenerateColumns="false" DataKeyNames="SubscriptionId" OnRowCommand="gvSubscribers_RowCommand" EmptyDataText="<%$ Resources:GlobalResources,NoSubscribersFound %>">
+                        <asp:GridView ID="gvSubscribers" runat="server" CssClass="table table-sm table-striped align-middle" AutoGenerateColumns="false" DataKeyNames="SubscriptionId" OnRowCommand="gvSubscribers_RowCommand" EmptyDataText="No se encontraron suscriptores.">
                             <Columns>
-                                <asp:BoundField DataField="Email" HeaderText="<%$ Resources:GlobalResources,Email %>" />
-                                <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,Language %>">
+                                <asp:BoundField DataField="Email" HeaderText="Correo Electrónico" />
+                                <asp:TemplateField HeaderText="Idioma">
                                     <ItemTemplate>
                                         <span class="badge bg-light text-dark"><%#: Eval("LanguageCode") %></span>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,Status %>">
+                                <asp:TemplateField HeaderText="Estado">
                                     <ItemTemplate>
                                         <span class="badge" runat="server" id="badgeSubscriberStatus"></span>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,SubscribedOn %>">
+                                <asp:TemplateField HeaderText="Suscripto el">
                                     <ItemTemplate>
                                         <asp:Label ID="lblSubscribedOn" runat="server" CssClass="small text-secondary"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:GlobalResources,Actions %>" ItemStyle-CssClass="text-end">
+                                <asp:TemplateField HeaderText="Acciones" ItemStyle-CssClass="text-end">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkUnsubscribe" runat="server" CssClass="btn btn-sm btn-outline-danger" CommandName="Unsubscribe" CommandArgument='<%# Eval("Email") %>' Text="<%$ Resources:GlobalResources,Unsubscribe %>" />
+                                        <asp:LinkButton ID="lnkUnsubscribe" runat="server" CssClass="btn btn-sm btn-outline-danger" CommandName="Unsubscribe" CommandArgument='<%# Eval("Email") %>' Text="Eliminar" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -262,43 +262,43 @@
                 <div class="modal-body">
                     <asp:HiddenField ID="hfEditingNewsId" runat="server" />
                     <asp:HiddenField ID="hfOpenNewsModal" runat="server" Value="0" />
-                    <asp:HiddenField ID="hfCreateModalTitle" runat="server" Value="<%$ Resources:GlobalResources,CreateNews %>" />
+                    <asp:HiddenField ID="hfCreateModalTitle" runat="server" Value="Crear noticia" />
                     <div class="mb-3">
-                        <label for="txtNewsTitle" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Title %>" /></label>
+                        <label for="txtNewsTitle" class="form-label"><asp:Literal runat="server" Text="Título" /></label>
                         <asp:TextBox ID="txtNewsTitle" runat="server" CssClass="form-control" MaxLength="200" />
-                        <asp:RequiredFieldValidator ID="rfvTitle" runat="server" ControlToValidate="txtNewsTitle" CssClass="text-danger small" Display="Dynamic" ErrorMessage="<%$ Resources:GlobalResources,ValidationTitleRequired %>" ValidationGroup="NewsModal" />
+                        <asp:RequiredFieldValidator ID="rfvTitle" runat="server" ControlToValidate="txtNewsTitle" CssClass="text-danger small" Display="Dynamic" ErrorMessage="El título es obligatorio." ValidationGroup="NewsModal" />
                     </div>
                     <div class="mb-3">
-                        <label for="txtNewsSummary" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Summary %>" /></label>
+                        <label for="txtNewsSummary" class="form-label"><asp:Literal runat="server" Text="Resumen" /></label>
                         <asp:TextBox ID="txtNewsSummary" runat="server" CssClass="form-control" MaxLength="500" TextMode="MultiLine" Rows="3" />
                     </div>
                     <div class="mb-3">
-                        <label for="txtNewsContent" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Content %>" /></label>
+                        <label for="txtNewsContent" class="form-label"><asp:Literal runat="server" Text="Contenido" /></label>
                         <asp:TextBox ID="txtNewsContent" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="10" />
-                        <asp:RequiredFieldValidator ID="rfvContent" runat="server" ControlToValidate="txtNewsContent" CssClass="text-danger small" Display="Dynamic" ErrorMessage="<%$ Resources:GlobalResources,ValidationContentRequired %>" ValidationGroup="NewsModal" />
+                        <asp:RequiredFieldValidator ID="rfvContent" runat="server" ControlToValidate="txtNewsContent" CssClass="text-danger small" Display="Dynamic" ErrorMessage="El contenido es obligatorio." ValidationGroup="NewsModal" />
                     </div>
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <label for="ddlNewsLanguage" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Language %>" /></label>
+                            <label for="ddlNewsLanguage" class="form-label"><asp:Literal runat="server" Text="Idioma" /></label>
                             <asp:DropDownList ID="ddlNewsLanguage" runat="server" CssClass="form-select" />
                         </div>
                         <div class="col-md-4">
-                            <label for="txtPublishedDate" class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PublishedDate %>" /></label>
+                            <label for="txtPublishedDate" class="form-label"><asp:Literal runat="server" Text="Fecha de publicación" /></label>
                             <asp:TextBox ID="txtPublishedDate" runat="server" CssClass="form-control" />
-                            <small class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Optional %>" /></small>
+                            <small class="text-muted"><asp:Literal runat="server" Text="Opcional" /></small>
                         </div>
                         <div class="col-md-4 d-flex align-items-center">
                             <div class="form-check mt-3">
                                 <asp:CheckBox ID="chkNewsPublish" runat="server" CssClass="form-check-input" />
-                                <label class="form-check-label" for="chkNewsPublish"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PublishImmediately %>" /></label>
+                                <label class="form-check-label" for="chkNewsPublish"><asp:Literal runat="server" Text="Publicar inmediatamente" /></label>
                             </div>
                         </div>
                     </div>
                     <asp:Label ID="lblModalError" runat="server" CssClass="text-danger small d-block mt-3" Visible="false" />
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnSaveNews" runat="server" CssClass="btn btn-primary" Text="<%$ Resources:GlobalResources,Save %>" OnClick="btnSaveNews_Click" ValidationGroup="NewsModal" />
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Cancel %>" /></button>
+                    <asp:Button ID="btnSaveNews" runat="server" CssClass="btn btn-primary" Text="Guardar" OnClick="btnSaveNews_Click" ValidationGroup="NewsModal" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><asp:Literal runat="server" Text="Cancelar" /></button>
                 </div>
             </div>
         </div>

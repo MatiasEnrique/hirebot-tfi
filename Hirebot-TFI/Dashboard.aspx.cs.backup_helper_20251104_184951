@@ -1,0 +1,196 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using ABSTRACTIONS;
+using Newtonsoft.Json;
+using SECURITY;
+
+namespace Hirebot_TFI
+{
+    public partial class Dashboard : BasePage
+    {
+        private UserSecurity userSecurity;
+        private SurveySecurity surveySecurity;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            userSecurity = new UserSecurity();
+            surveySecurity = new SurveySecurity();
+
+            userSecurity.RequireAuthentication();
+
+            if (!IsPostBack)
+            {
+                LoadUserData();
+                LoadSurveyResults();
+            }
+        }
+
+        private void LoadUserData()
+        {
+            try
+            {
+                var currentUser = userSecurity.GetCurrentUser();
+                if (currentUser != null)
+                {
+                    lblUserName.Text = $"{currentUser.FirstName} {currentUser.LastName}";
+                    lblUsernameInfo.Text = currentUser.Username;
+                    lblEmail.Text = currentUser.Email;
+                    lblFirstName.Text = currentUser.FirstName;
+                    lblLastName.Text = currentUser.LastName;
+
+                    // Survey control loads automatically through its own Page_Load
+                    // The SurveyDisplay user control is already on the page and will:
+                    // 1. Call SurveySecurity.GetActiveSurveyForCurrentUser() in its Page_Load
+                    // 2. Automatically display the survey if one is available
+                    // 3. Hide itself if no survey is available or user already responded
+                    // No explicit initialization needed from Dashboard
+                }
+                else
+                {
+                    Response.Redirect("~/SignIn.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("~/SignIn.aspx");
+            }
+        }
+
+
+        protected void btnProfile_Click(object sender, EventArgs e)
+        {
+            // TODO: Redirect to profile page when implemented
+            ShowMessage("ProfileComingSoon");
+        }
+
+        protected void btnJobs_Click(object sender, EventArgs e)
+        {
+            // TODO: Redirect to jobs page when implemented
+            ShowMessage("JobsComingSoon");
+        }
+
+        protected void btnChat_Click(object sender, EventArgs e)
+        {
+            ShowMessage("ChatComingSoon");
+        }
+
+        private void ShowMessage(string resourceKey)
+        {
+            var message = HttpContext.GetGlobalResourceObject("GlobalResources", resourceKey) as string ?? resourceKey;
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{HttpUtility.JavaScriptStringEncode(message)}');", true);
+        }
+
+        private void LoadSurveyResults()
+        {
+            try
+            {
+                // Check if there's a survey ID in session (set after user submits a survey)
+                if (Session["LastCompletedSurveyId"] != null && int.TryParse(Session["LastCompletedSurveyId"].ToString(), out int surveyId))
+                {
+                    var result = surveySecurity.GetSurveyResults(surveyId);
+                    if (result.IsSuccessful && result.Data != null)
+                    {
+                        pnlSurveyResults.Visible = true;
+                        lblSurveyResultsTitle.Text = $"- {result.Data.SurveyTitle}";
+                        rptSurveyResults.DataSource = result.Data.Questions.OrderBy(q => q.SurveyQuestionId).ToList();
+                        rptSurveyResults.DataBind();
+                    }
+
+                    // Clear session variable after displaying
+                    Session.Remove("LastCompletedSurveyId");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error but don't show to user - survey results are optional
+                pnlSurveyResults.Visible = false;
+            }
+        }
+
+        protected void rptSurveyResults_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
+                return;
+
+            if (e.Item.DataItem is SurveyQuestionResult question)
+            {
+                var hfQuestionId = e.Item.FindControl("hfQuestionId") as HiddenField;
+                var hfChartData = e.Item.FindControl("hfChartData") as HiddenField;
+                var pnlChart = e.Item.FindControl("pnlChart") as Panel;
+                var pnlTextAnswers = e.Item.FindControl("pnlTextAnswers") as Panel;
+                var rptTextAnswers = e.Item.FindControl("rptTextAnswers") as Repeater;
+
+                // Check if this question has options (SingleChoice/MultipleChoice) or text answers (UniqueAnswer)
+                if (question.Options != null && question.Options.Count > 0)
+                {
+                    // Show chart for questions with options
+                    if (pnlChart != null) pnlChart.Visible = true;
+                    if (pnlTextAnswers != null) pnlTextAnswers.Visible = false;
+
+                    if (hfChartData != null)
+                    {
+                        // Prepare chart data as JSON (following AdminReports pattern)
+                        var chartData = new
+                        {
+                            labels = question.Options.Select(o => o.OptionText).ToArray(),
+                            datasets = new[]
+                            {
+                                new
+                                {
+                                    label = GetLocalizedString("Votes"),
+                                    data = question.Options.Select(o => o.VoteCount).ToArray(),
+                                    backgroundColor = new[]
+                                    {
+                                        "#4b4e6dff", // Ultra Violet
+                                        "#84dcc6ff", // Tiffany Blue
+                                        "#95a3b3ff", // Cadet Gray
+                                        "#222222ff", // Eerie Black
+                                        "#6c757d",   // Secondary gray
+                                        "#007bff",   // Primary blue
+                                        "#28a745",   // Success green
+                                        "#ffc107",   // Warning yellow
+                                        "#dc3545",   // Danger red
+                                        "#17a2b8"    // Info cyan
+                                    },
+                                    borderWidth = 1
+                                }
+                            }
+                        };
+
+                        // Store chart data in hidden field - JavaScript will render it
+                        hfChartData.Value = JsonConvert.SerializeObject(chartData);
+                    }
+                }
+                else if (question.TextAnswers != null && question.TextAnswers.Count > 0)
+                {
+                    // Show text answers for unique answer questions
+                    if (pnlChart != null) pnlChart.Visible = false;
+                    if (pnlTextAnswers != null)
+                    {
+                        pnlTextAnswers.Visible = true;
+                        if (rptTextAnswers != null)
+                        {
+                            rptTextAnswers.DataSource = question.TextAnswers;
+                            rptTextAnswers.DataBind();
+                        }
+                    }
+                }
+                else
+                {
+                    // No data available for this question
+                    if (pnlChart != null) pnlChart.Visible = false;
+                    if (pnlTextAnswers != null) pnlTextAnswers.Visible = false;
+                }
+            }
+        }
+
+        private string GetLocalizedString(string key)
+        {
+            return HttpContext.GetGlobalResourceObject("GlobalResources", key) as string ?? key;
+        }
+    }
+}

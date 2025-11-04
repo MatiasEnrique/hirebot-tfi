@@ -42,14 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminPermission.cs" />
+    <Compile Include="AdminRole.cs" />
+    <Compile Include="AdminRoleDetail.cs" />
+    <Compile Include="AdminUserRoleAssignment.cs" />
     <Compile Include="AuditLogEntry.cs" />
     <Compile Include="AuthenticationResult.cs" />
     <Compile Include="Catalog.cs" />
     <Compile Include="Chatbot.cs" />
     <Compile Include="ChatbotSearchCriteria.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="DatabaseBackup.cs" />
     <Compile Include="DatabaseResult.cs" />
     <Compile Include="EncryptionService.cs" />
+    <Compile Include="HomepageAd.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="BillingDocument.cs" />
     <Compile Include="Reporting.cs" />
@@ -58,12 +64,14 @@
     <Compile Include="PaginatedResult.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductSubscription.cs" />
+    <Compile Include="SubscriptionFeedback.cs" />
     <Compile Include="UserAccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="NewsArticle.cs" />
     <Compile Include="NewsletterSubscription.cs" />
     <Compile Include="Survey.cs" />
+    <Compile Include="SurveyResultData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -44,6 +44,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -52,6 +55,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -127,7 +131,11 @@
     <Content Include="SecurityPolicy.aspx" />
     <Content Include="AdminCatalog.aspx" />
     <Content Include="AdminLogs.aspx" />
+    <Content Include="AdminUsers.aspx" />
     <Content Include="AdminDashboard.aspx" />
+    <Content Include="AdminDatabase.aspx" />
+    <Content Include="AdminRoles.aspx" />
+    <Content Include="AdminAds.aspx" />
     <Content Include="ChatbotAdmin.aspx" />
     <Content Include="Controls\LanguageSelector.ascx" />
     <Content Include="Controls\PublicLanguageSelector.ascx" />
@@ -276,12 +284,40 @@
     <Compile Include="AdminLogs.aspx.designer.cs">
       <DependentUpon>AdminLogs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminUsers.aspx.cs">
+      <DependentUpon>AdminUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminUsers.aspx.designer.cs">
+      <DependentUpon>AdminUsers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard.aspx.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDatabase.aspx.cs">
+      <DependentUpon>AdminDatabase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDatabase.aspx.designer.cs">
+      <DependentUpon>AdminDatabase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRoles.aspx.cs">
+      <DependentUpon>AdminRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRoles.aspx.designer.cs">
+      <DependentUpon>AdminRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminAds.aspx.cs">
+      <DependentUpon>AdminAds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminAds.aspx.designer.cs">
+      <DependentUpon>AdminAds.aspx</DependentUpon>
     </Compile>
     <Compile Include="ChatbotAdmin.aspx.cs">
       <DependentUpon>ChatbotAdmin.aspx</DependentUpon>

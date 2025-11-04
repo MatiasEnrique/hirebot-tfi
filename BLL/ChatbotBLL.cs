@@ -53,7 +53,7 @@ namespace BLL
                 if (result.IsSuccessful)
                 {
                     // Business rule: Log successful creation for audit purposes
-                    LogBusinessEvent($"Chatbot '{chatbot.Name}' created successfully by {createdBy ?? "system"}", 
+                    LogBusinessEvent(string.Format("Chatbot '{0}' created successfully by {1}", chatbot.Name, createdBy ?? "system"), 
                                    result.Data?.ChatbotId ?? 0);
                 }
 
@@ -61,7 +61,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<Chatbot>.Failure($"Business logic error creating chatbot: {ex.Message}", ex);
+                return DatabaseResult<Chatbot>.Failure(string.Format("Business logic error creating chatbot: {0}", ex.Message), ex);
             }
         }
 
@@ -93,7 +93,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<Chatbot>.Failure($"Business logic error retrieving chatbot: {ex.Message}", ex);
+                return DatabaseResult<Chatbot>.Failure(string.Format("Business logic error retrieving chatbot: {0}", ex.Message), ex);
             }
         }
 
@@ -131,7 +131,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<PaginatedResult<Chatbot>>.Failure($"Business logic error retrieving chatbots: {ex.Message}", ex);
+                return DatabaseResult<PaginatedResult<Chatbot>>.Failure(string.Format("Business logic error retrieving chatbots: {0}", ex.Message), ex);
             }
         }
 
@@ -168,7 +168,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<PaginatedResult<Chatbot>>.Failure($"Business logic error retrieving organization chatbots: {ex.Message}", ex);
+                return DatabaseResult<PaginatedResult<Chatbot>>.Failure(string.Format("Business logic error retrieving organization chatbots: {0}", ex.Message), ex);
             }
         }
 
@@ -201,7 +201,7 @@ namespace BLL
                 if (result.IsSuccessful)
                 {
                     // Business rule: Log successful update for audit purposes
-                    LogBusinessEvent($"Chatbot '{chatbot.Name}' updated successfully by {modifiedBy ?? "system"}", 
+                    LogBusinessEvent(string.Format("Chatbot '{0}' updated successfully by {1}", chatbot.Name, modifiedBy ?? "system"), 
                                    chatbot.ChatbotId);
                 }
 
@@ -209,7 +209,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<Chatbot>.Failure($"Business logic error updating chatbot: {ex.Message}", ex);
+                return DatabaseResult<Chatbot>.Failure(string.Format("Business logic error updating chatbot: {0}", ex.Message), ex);
             }
         }
 
@@ -249,7 +249,7 @@ namespace BLL
                 if (result.IsSuccessful)
                 {
                     // Business rule: Log successful deletion for audit purposes
-                    LogBusinessEvent($"Chatbot '{existingChatbot.Data.Name}' deleted successfully by {deletedBy ?? "system"}", 
+                    LogBusinessEvent(string.Format("Chatbot '{0}' deleted successfully by {1}", existingChatbot.Data.Name, deletedBy ?? "system"), 
                                    chatbotId);
                 }
 
@@ -257,7 +257,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Business logic error deleting chatbot: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Business logic error deleting chatbot: {0}", ex.Message), ex);
             }
         }
 
@@ -296,7 +296,7 @@ namespace BLL
                 if (result.IsSuccessful)
                 {
                     // Business rule: Log successful assignment for audit purposes
-                    LogBusinessEvent($"Chatbot assigned to organization {organizationId} by {assignedBy ?? "system"}", 
+                    LogBusinessEvent(string.Format("Chatbot assigned to organization {0} by {1}", organizationId, assignedBy ?? "system"), 
                                    chatbotId);
                 }
 
@@ -304,7 +304,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<Chatbot>.Failure($"Business logic error assigning chatbot: {ex.Message}", ex);
+                return DatabaseResult<Chatbot>.Failure(string.Format("Business logic error assigning chatbot: {0}", ex.Message), ex);
             }
         }
 
@@ -337,7 +337,7 @@ namespace BLL
                 if (result.IsSuccessful)
                 {
                     // Business rule: Log successful unassignment for audit purposes
-                    LogBusinessEvent($"Chatbot unassigned from organization by {unassignedBy ?? "system"}", 
+                    LogBusinessEvent(string.Format("Chatbot unassigned from organization by {0}", unassignedBy ?? "system"), 
                                    chatbotId);
                 }
 
@@ -345,7 +345,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<Chatbot>.Failure($"Business logic error unassigning chatbot: {ex.Message}", ex);
+                return DatabaseResult<Chatbot>.Failure(string.Format("Business logic error unassigning chatbot: {0}", ex.Message), ex);
             }
         }
 
@@ -377,7 +377,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                return DatabaseResult<PaginatedResult<AuditLogEntry>>.Failure($"Business logic error retrieving audit log: {ex.Message}", ex);
+                return DatabaseResult<PaginatedResult<AuditLogEntry>>.Failure(string.Format("Business logic error retrieving audit log: {0}", ex.Message), ex);
             }
         }
 
@@ -602,7 +602,7 @@ namespace BLL
             {
                 // Business rule: Log important events for audit trail
                 // This would typically integrate with the existing LogService
-                Console.WriteLine($"[CHATBOT-BLL] {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss} - ChatbotId: {chatbotId} - {message}");
+                Console.WriteLine(string.Format("[CHATBOT-BLL] {0:yyyy-MM-dd HH:mm:ss} - ChatbotId: {1} - {2}", DateTime.UtcNow, chatbotId, message));
             }
             catch
             {

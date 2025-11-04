@@ -77,7 +77,7 @@
 </asp:Content>
 
 <asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
-    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,PublicNewsPageTitle %>" />
+    <asp:Literal runat="server" Text="Noticias" />
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -90,24 +90,24 @@
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-lg-7">
-                    <h1 class="display-5 fw-bold mb-3"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsHeroTitle %>" /></h1>
-                    <p class="fs-5 text-white-50 mb-4"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsHeroSubtitle %>" /></p>
+                    <h1 class="display-5 fw-bold mb-3"><asp:Literal runat="server" Text="Últimas novedades" /></h1>
+                    <p class="fs-5 text-white-50 mb-4"><asp:Literal runat="server" Text="Explorá actualizaciones, lanzamientos y noticias importantes de nuestra comunidad." /></p>
                 </div>
                 <div class="col-lg-5">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="mb-3">
-                                <label for="txtPublicSearch" class="form-label text-secondary fw-semibold"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Keyword %>" /></label>
-                                <asp:TextBox ID="txtPublicSearch" runat="server" CssClass="form-control" MaxLength="150" placeholder="<%$ Resources:GlobalResources,SearchPlaceholder %>" />
+                                <label for="txtPublicSearch" class="form-label text-secondary fw-semibold"><asp:Literal runat="server" Text="Palabra clave" /></label>
+                                <asp:TextBox ID="txtPublicSearch" runat="server" CssClass="form-control" MaxLength="150" placeholder="Buscar por título o contenido" />
                             </div>
                             <div class="mb-3">
-                                <label for="ddlPublicLanguage" class="form-label text-secondary fw-semibold"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Language %>" /></label>
+                                <label for="ddlPublicLanguage" class="form-label text-secondary fw-semibold"><asp:Literal runat="server" Text="Idioma" /></label>
                                 <asp:DropDownList ID="ddlPublicLanguage" runat="server" CssClass="form-select">
                                 </asp:DropDownList>
                             </div>
                             <div class="d-flex gap-2">
-                                <asp:Button ID="btnSearchNews" runat="server" CssClass="btn btn-primary flex-fill" Text="<%$ Resources:GlobalResources,Search %>" OnClick="btnSearchNews_Click" />
-                                <asp:Button ID="btnResetNewsSearch" runat="server" CssClass="btn btn-outline-light flex-fill" Text="<%$ Resources:GlobalResources,Reset %>" OnClick="btnResetNewsSearch_Click" CausesValidation="false" />
+                                <asp:Button ID="btnSearchNews" runat="server" CssClass="btn btn-primary flex-fill" Text="Buscar" OnClick="btnSearchNews_Click" />
+                                <asp:Button ID="btnResetNewsSearch" runat="server" CssClass="btn btn-outline-light flex-fill" Text="Restablecer" OnClick="btnResetNewsSearch_Click" CausesValidation="false" />
                             </div>
                         </div>
                     </div>
@@ -135,9 +135,9 @@
                         <p class="news-content mb-3"><%#: GetExcerpt(Eval("Content")) %></p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="text-muted small">
-                                <i class="bi bi-eye me-1"></i><%#: Eval("ViewCount") %> <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Reads %>" />
+                                <i class="bi bi-eye me-1"></i><%#: Eval("ViewCount") %> <asp:Literal runat="server" Text="lecturas" />
                             </div>
-                            <asp:LinkButton ID="btnReadMore" runat="server" CssClass="btn btn-outline-primary btn-sm" CommandName="ReadMore" CommandArgument='<%# Eval("NewsId") %>' Text="<%$ Resources:GlobalResources,ReadMore %>" CausesValidation="false" />
+                            <asp:LinkButton ID="btnReadMore" runat="server" CssClass="btn btn-outline-primary btn-sm" CommandName="ReadMore" CommandArgument='<%# Eval("NewsId") %>' Text="Leer más" CausesValidation="false" />
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
         </asp:Repeater>
         <asp:Panel ID="pnlNoNews" runat="server" Visible="false" CssClass="text-center py-5">
             <i class="bi bi-newspaper display-4 text-muted d-block mb-3"></i>
-            <p class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoNewsAvailable %>" /></p>
+            <p class="text-muted"><asp:Literal runat="server" Text="Todavía no hay noticias disponibles." /></p>
         </asp:Panel>
         </section>
     </div>
@@ -154,19 +154,19 @@
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="fw-bold mb-3"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsletterTitle %>" /></h2>
-                    <p class="text-white-50 mb-0"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsletterSubtitle %>" /></p>
+                    <h2 class="fw-bold mb-3"><asp:Literal runat="server" Text="Suscríbete al newsletter" /></h2>
+                    <p class="text-white-50 mb-0"><asp:Literal runat="server" Text="Recibe novedades y actualizaciones directamente en tu correo." /></p>
                 </div>
                 <div class="col-lg-6">
                     <div class="row g-3">
                         <div class="col-sm-7">
-                            <asp:TextBox ID="txtSubscribeEmail" runat="server" CssClass="form-control" MaxLength="150" placeholder="<%$ Resources:GlobalResources,EmailPlaceholder %>" />
+                            <asp:TextBox ID="txtSubscribeEmail" runat="server" CssClass="form-control" MaxLength="150" placeholder="ingresa tu correo electrónico" />
                         </div>
                         <div class="col-sm-3">
                             <asp:DropDownList ID="ddlSubscribeLanguage" runat="server" CssClass="form-select" />
                         </div>
                         <div class="col-sm-2 d-grid">
-                            <asp:Button ID="btnSubscribeNewsletter" runat="server" CssClass="btn btn-primary" Text="<%$ Resources:GlobalResources,Subscribe %>" OnClick="btnSubscribeNewsletter_Click" />
+                            <asp:Button ID="btnSubscribeNewsletter" runat="server" CssClass="btn btn-primary" Text="Suscribirme" OnClick="btnSubscribeNewsletter_Click" />
                         </div>
                     </div>
                     <asp:Label ID="lblSubscribeFeedback" runat="server" CssClass="d-block mt-3 small" Visible="false" />
@@ -193,7 +193,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Close %>" /></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><asp:Literal runat="server" Text="Cerrar" /></button>
                 </div>
             </div>
         </div>

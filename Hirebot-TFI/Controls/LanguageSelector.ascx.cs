@@ -1,8 +1,7 @@
 using System;
-using System.Globalization;
-using System.Threading;
-using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using SERVICES;
 
 namespace UI.Controls
 {
@@ -16,105 +15,53 @@ namespace UI.Controls
             }
         }
 
-        protected void btnSpanish_Click(object sender, EventArgs e)
+        protected override void OnPreRender(EventArgs e)
         {
-            SetLanguage("es");
-        }
+            base.OnPreRender(e);
 
-        protected void btnEnglish_Click(object sender, EventArgs e)
-        {
-            SetLanguage("en");
-        }
+            lnkSpanish.Attributes["data-lang"] = "es";
+            lnkEnglish.Attributes["data-lang"] = "en";
 
-        private void SetLanguage(string languageCode)
-        {
-            try
-            {
-                // Store the selected language in session
-                Session["Language"] = languageCode;
-
-                // Set the culture for the current thread
-                CultureInfo culture = new CultureInfo(languageCode);
-                Thread.CurrentThread.CurrentCulture = culture;
-                Thread.CurrentThread.CurrentUICulture = culture;
-
-                // Create a cookie to remember the language preference
-                HttpCookie languageCookie = new HttpCookie("Language", languageCode)
-                {
-                    Expires = DateTime.Now.AddYears(1),
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.Lax
-                };
-                Response.Cookies.Add(languageCookie);
-
-                // Update the display
-                UpdateCurrentLanguageDisplay();
-
-                // Refresh the current page to apply the language change
-                Response.Redirect(Request.RawUrl, false);
-                Context.ApplicationInstance.CompleteRequest();
-            }
-            catch (Exception)
-            {
-                // Silently handle any errors in language switching
-            }
+            UpdateCurrentLanguageDisplay();
         }
 
         private void UpdateCurrentLanguageDisplay()
         {
+            string language;
+
             try
             {
-                string currentLanguage = Session["Language"]?.ToString() ?? "es";
-                
-                switch (currentLanguage.ToLower())
-                {
-                    case "en":
-                        litCurrentLanguage.Text = "English";
-                        break;
-                    case "es":
-                    default:
-                        litCurrentLanguage.Text = "Español";
-                        break;
-                }
+                language = LanguageService.EnsureLanguage(Context);
             }
             catch
             {
-                // Default to Spanish if there's any issue
-                litCurrentLanguage.Text = "Español";
+                language = LanguageService.DefaultLanguage;
             }
+
+            var normalized = (language ?? LanguageService.DefaultLanguage).ToLowerInvariant();
+            var isEnglish = normalized.StartsWith("en");
+
+            litCurrentLanguage.Text = isEnglish ? "English" : "Espa\u00f1ol";
+
+            lnkSpanish.CssClass = isEnglish
+                ? "dropdown-item lang"
+                : "dropdown-item lang active";
+
+            lnkEnglish.CssClass = isEnglish
+                ? "dropdown-item lang active"
+                : "dropdown-item lang";
         }
 
-        /// <summary>
-        /// Gets the current language code
-        /// </summary>
         public string CurrentLanguage
         {
             get
             {
-                return Session["Language"]?.ToString() ?? "es";
+                return LanguageService.EnsureLanguage(Context);
             }
         }
 
-        /// <summary>
-        /// Determines if the current language is Spanish
-        /// </summary>
-        public bool IsSpanish
-        {
-            get
-            {
-                return CurrentLanguage.Equals("es", StringComparison.OrdinalIgnoreCase);
-            }
-        }
+        public bool IsSpanish => (CurrentLanguage ?? LanguageService.DefaultLanguage).StartsWith("es", StringComparison.OrdinalIgnoreCase);
 
-        /// <summary>
-        /// Determines if the current language is English
-        /// </summary>
-        public bool IsEnglish
-        {
-            get
-            {
-                return CurrentLanguage.Equals("en", StringComparison.OrdinalIgnoreCase);
-            }
-        }
+        public bool IsEnglish => (CurrentLanguage ?? LanguageService.DefaultLanguage).StartsWith("en", StringComparison.OrdinalIgnoreCase);
     }
 }

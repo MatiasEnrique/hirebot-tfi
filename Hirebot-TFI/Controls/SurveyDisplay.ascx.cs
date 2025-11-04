@@ -98,14 +98,14 @@ namespace Hirebot_TFI.Controls
         {
             if (!ActiveSurveyId.HasValue)
             {
-                ShowMessage(GetLocalizedString("SurveyUnavailable"), true);
+                ShowMessage("Encuesta no disponible", true);
                 return;
             }
 
             var surveyResult = _surveySecurity.GetActiveSurveyForCurrentUser();
             if (!surveyResult.IsSuccessful || surveyResult.Data == null)
             {
-                ShowMessage(surveyResult.ErrorMessage ?? GetLocalizedString("SurveyUnavailable"), true);
+                ShowMessage(surveyResult.ErrorMessage ?? "Encuesta no disponible", true);
                 pnlSurveyContent.Visible = false;
                 return;
             }
@@ -145,50 +145,60 @@ namespace Hirebot_TFI.Controls
                 {
                     case SurveyQuestion.QuestionTypeSingleChoice:
                         var rbl = item.FindControl("rblOptions") as RadioButtonList;
-                        var selectedValue = rbl?.SelectedValue;
-                        if (string.IsNullOrEmpty(selectedValue))
+                        // Check if the control has any options before validating
+                        if (rbl != null && rbl.Items.Count > 0)
                         {
-                            if (isRequired)
+                            var selectedValue = rbl.SelectedValue;
+                            if (string.IsNullOrEmpty(selectedValue))
                             {
-                                validationFailed = true;
-                                ShowAnswerValidation(lblValidation, GetLocalizedString("SurveyQuestionRequiredMessage"));
+                                if (isRequired)
+                                {
+                                    validationFailed = true;
+                                    ShowAnswerValidation(lblValidation, "Esta pregunta es requerida");
+                                }
+                            }
+                            else if (int.TryParse(selectedValue, out var optionId))
+                            {
+                                answers.Add(new SurveyAnswer
+                                {
+                                    SurveyQuestionId = questionId,
+                                    SurveyOptionId = optionId
+                                });
                             }
                         }
-                        else if (int.TryParse(selectedValue, out var optionId))
-                        {
-                            answers.Add(new SurveyAnswer
-                            {
-                                SurveyQuestionId = questionId,
-                                SurveyOptionId = optionId
-                            });
-                        }
+                        // Skip validation if no options are available
                         break;
 
                     case SurveyQuestion.QuestionTypeMultipleChoice:
                         var cbl = item.FindControl("cblOptions") as CheckBoxList;
-                        var selectedOptions = cbl?.Items.Cast<ListItem>().Where(li => li.Selected).Select(li => li.Value).ToList() ?? new List<string>();
-                        if (!selectedOptions.Any())
+                        // Check if the control has any options before validating
+                        if (cbl != null && cbl.Items.Count > 0)
                         {
-                            if (isRequired)
+                            var selectedOptions = cbl.Items.Cast<ListItem>().Where(li => li.Selected).Select(li => li.Value).ToList();
+                            if (!selectedOptions.Any())
                             {
-                                validationFailed = true;
-                                ShowAnswerValidation(lblValidation, GetLocalizedString("SurveyQuestionRequiredMessage"));
-                            }
-                        }
-                        else
-                        {
-                            foreach (var value in selectedOptions)
-                            {
-                                if (int.TryParse(value, out var optionId))
+                                if (isRequired)
                                 {
-                                    answers.Add(new SurveyAnswer
+                                    validationFailed = true;
+                                    ShowAnswerValidation(lblValidation, "Esta pregunta es requerida");
+                                }
+                            }
+                            else
+                            {
+                                foreach (var value in selectedOptions)
+                                {
+                                    if (int.TryParse(value, out var optionId))
                                     {
-                                        SurveyQuestionId = questionId,
-                                        SurveyOptionId = optionId
-                                    });
+                                        answers.Add(new SurveyAnswer
+                                        {
+                                            SurveyQuestionId = questionId,
+                                            SurveyOptionId = optionId
+                                        });
+                                    }
                                 }
                             }
                         }
+                        // Skip validation if no options are available
                         break;
 
                     default:
@@ -217,20 +227,27 @@ namespace Hirebot_TFI.Controls
 
             if (validationFailed)
             {
-                ShowMessage(GetLocalizedString("SurveyValidationError"), true);
+                ShowMessage("Por favor complete todas las preguntas requeridas", true);
                 return;
             }
 
             var submitResult = _surveySecurity.SubmitSurveyResponse(survey.SurveyId, answers);
             if (submitResult.IsSuccessful)
             {
-                ShowMessage(submitResult.ErrorMessage ?? GetLocalizedString("SurveySubmitted"), false);
+                ShowMessage(submitResult.ErrorMessage ?? "¡Gracias por completar la encuesta!", false);
                 pnlSurveyContent.Visible = false;
+                
+                // Store survey ID in session so Dashboard can display results
+                Session["LastCompletedSurveyId"] = survey.SurveyId;
+                
                 ActiveSurveyId = null;
+                
+                // Redirect to refresh Dashboard and show results
+                Response.Redirect(Request.RawUrl, false);
             }
             else
             {
-                ShowMessage(submitResult.ErrorMessage ?? GetLocalizedString("SurveySubmitFailed"), true);
+                ShowMessage(submitResult.ErrorMessage ?? "Error al enviar la encuesta. Por favor intente nuevamente.", true);
             }
         }
 
@@ -238,7 +255,7 @@ namespace Hirebot_TFI.Controls
         {
             if (!ActiveSurveyId.HasValue)
             {
-                ShowMessage(GetLocalizedString("SurveyUnavailable"), true);
+                ShowMessage("Encuesta no disponible", true);
                 return;
             }
 
@@ -247,12 +264,12 @@ namespace Hirebot_TFI.Controls
             if (result.IsSuccessful)
             {
                 pnlSurveyContent.Visible = false;
-                ShowMessage(result.ErrorMessage ?? GetLocalizedString("SurveySkipped"), false);
+                ShowMessage(result.ErrorMessage ?? "Encuesta omitida", false);
                 ActiveSurveyId = null;
             }
             else
             {
-                ShowMessage(result.ErrorMessage ?? GetLocalizedString("SurveyUnavailable"), true);
+                ShowMessage(result.ErrorMessage ?? "Encuesta no disponible", true);
             }
         }
 
@@ -329,10 +346,9 @@ namespace Hirebot_TFI.Controls
             label.Visible = true;
         }
 
-        protected string GetLocalizedString(string key)
+        private string GetLocalizedString(string key)
         {
-            var value = (string)System.Web.HttpContext.GetGlobalResourceObject("GlobalResources", key);
-            return string.IsNullOrWhiteSpace(value) ? key : value;
+            return key;
         }
     }
 }

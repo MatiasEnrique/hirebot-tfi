@@ -85,11 +85,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<NewsArticle>.Failure($"Database error creating news article: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<NewsArticle>.Failure(string.Format("Database error creating news article: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<NewsArticle>.Failure($"Unexpected error creating news article: {ex.Message}", ex);
+                return DatabaseResult<NewsArticle>.Failure(string.Format("Unexpected error creating news article: {0}", ex.Message), ex);
             }
         }
 
@@ -160,11 +160,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<NewsArticle>.Failure($"Database error updating news article: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<NewsArticle>.Failure(string.Format("Database error updating news article: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<NewsArticle>.Failure($"Unexpected error updating news article: {ex.Message}", ex);
+                return DatabaseResult<NewsArticle>.Failure(string.Format("Unexpected error updating news article: {0}", ex.Message), ex);
             }
         }
 
@@ -210,11 +210,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error updating publish status: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error updating publish status: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error updating publish status: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error updating publish status: {0}", ex.Message), ex);
             }
         }
 
@@ -258,11 +258,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error archiving news article: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error archiving news article: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error archiving news article: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error archiving news article: {0}", ex.Message), ex);
             }
         }
 
@@ -296,11 +296,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<NewsArticle>.Failure($"Database error retrieving news article: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<NewsArticle>.Failure(string.Format("Database error retrieving news article: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<NewsArticle>.Failure($"Unexpected error retrieving news article: {ex.Message}", ex);
+                return DatabaseResult<NewsArticle>.Failure(string.Format("Unexpected error retrieving news article: {0}", ex.Message), ex);
             }
         }
 
@@ -345,15 +345,15 @@ namespace DAL
                     }
                 }
 
-                return DatabaseResult<List<NewsArticle>>.Success(articles, $"Retrieved {articles.Count} news article(s).");
+                return DatabaseResult<List<NewsArticle>>.Success(articles, string.Format("Retrieved {0} news article(s).", articles.Count));
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<List<NewsArticle>>.Failure($"Database error searching news articles: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<List<NewsArticle>>.Failure(string.Format("Database error searching news articles: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<List<NewsArticle>>.Failure($"Unexpected error searching news articles: {ex.Message}", ex);
+                return DatabaseResult<List<NewsArticle>>.Failure(string.Format("Unexpected error searching news articles: {0}", ex.Message), ex);
             }
         }
 
@@ -385,15 +385,15 @@ namespace DAL
                     }
                 }
 
-                return DatabaseResult<List<NewsArticle>>.Success(articles, $"Retrieved {articles.Count} latest news articles.");
+                return DatabaseResult<List<NewsArticle>>.Success(articles, string.Format("Retrieved {0} latest news articles.", articles.Count));
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult<List<NewsArticle>>.Failure($"Database error retrieving latest news: {sqlEx.Message}", sqlEx);
+                return DatabaseResult<List<NewsArticle>>.Failure(string.Format("Database error retrieving latest news: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult<List<NewsArticle>>.Failure($"Unexpected error retrieving latest news: {ex.Message}", ex);
+                return DatabaseResult<List<NewsArticle>>.Failure(string.Format("Unexpected error retrieving latest news: {0}", ex.Message), ex);
             }
         }
 
@@ -425,11 +425,11 @@ namespace DAL
             }
             catch (SqlException sqlEx)
             {
-                return DatabaseResult.Failure($"Database error updating view count: {sqlEx.Message}", sqlEx);
+                return DatabaseResult.Failure(string.Format("Database error updating view count: {0}", sqlEx.Message), sqlEx);
             }
             catch (Exception ex)
             {
-                return DatabaseResult.Failure($"Unexpected error updating view count: {ex.Message}", ex);
+                return DatabaseResult.Failure(string.Format("Unexpected error updating view count: {0}", ex.Message), ex);
             }
         }
 

@@ -3,11 +3,22 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using SECURITY;
+using SERVICES;
 
 namespace Hirebot_TFI
 {
     public partial class Protected : System.Web.UI.MasterPage
     {
+        private readonly AuthorizationSecurity _authorizationSecurity = new AuthorizationSecurity();
+
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            // Set culture from Google Translate cookie
+            string language = LanguageService.EnsureLanguage(HttpContext.Current);
+            LanguageService.ApplyCulture(language);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Ensure user is authenticated
@@ -16,7 +27,7 @@ namespace Hirebot_TFI
                 FormsAuthentication.RedirectToLoginPage();
                 return;
             }
-            
+
             if (!IsPostBack)
             {
                 ConfigureNavigation();
@@ -27,18 +38,48 @@ namespace Hirebot_TFI
         {
             try
             {
-                // Show admin navigation if user is admin
-                if (IsCurrentUserAdmin())
-                {
-                    pnlAdminNavigation.Visible = true;
-                }
-
+                ConfigurePrimaryLinks();
+                ConfigureAdminLinks();
                 SetActiveNavigationLink();
             }
             catch (Exception ex)
             {
                 // Log error but don't break the page
                 System.Diagnostics.Debug.WriteLine($"Error configuring navigation: {ex.Message}");
+            }
+        }
+
+        private void ConfigurePrimaryLinks()
+        {
+            ToggleLinkVisibility(lnkDashboard, "~/Dashboard.aspx");
+            ToggleLinkVisibility(lnkAccount, "~/Account.aspx");
+            ToggleLinkVisibility(lnkCatalog, "~/Catalog.aspx");
+            ToggleLinkVisibility(lnkSubscriptions, "~/Subscriptions.aspx");
+            ToggleLinkVisibility(lnkOrganizations, "~/MyOrganizations.aspx");
+        }
+
+        private void ConfigureAdminLinks()
+        {
+            ToggleLinkVisibility(lnkAdminOrganizations, "~/OrganizationAdmin.aspx");
+            ToggleLinkVisibility(lnkAdminNews, "~/AdminNews.aspx");
+            ToggleLinkVisibility(lnkAdminSurveys, "~/AdminSurveys.aspx");
+            ToggleLinkVisibility(lnkAdminBilling, "~/AdminBilling.aspx");
+            ToggleLinkVisibility(lnkAdminReports, "~/AdminReports.aspx");
+        }
+
+        private void ToggleLinkVisibility(HtmlAnchor anchor, string permissionKey)
+        {
+            if (anchor == null)
+            {
+                return;
+            }
+
+            var isVisible = _authorizationSecurity.UserHasPermission(permissionKey);
+            anchor.Visible = isVisible;
+
+            if (anchor.Parent is HtmlGenericControl container)
+            {
+                container.Visible = isVisible;
             }
         }
 
@@ -51,15 +92,11 @@ namespace Hirebot_TFI
             ApplyNavClass(lnkCatalog, "Catalog.aspx", currentPage);
             ApplyNavClass(lnkSubscriptions, "Subscriptions.aspx", currentPage);
             ApplyNavClass(lnkOrganizations, "MyOrganizations.aspx", currentPage);
-
-            if (pnlAdminNavigation.Visible)
-            {
-                ApplyNavClass(lnkAdminOrganizations, "OrganizationAdmin.aspx", currentPage);
-                ApplyNavClass(lnkAdminNews, "AdminNews.aspx", currentPage);
-                ApplyNavClass(lnkAdminSurveys, "AdminSurveys.aspx", currentPage);
-                ApplyNavClass(lnkAdminBilling, "AdminBilling.aspx", currentPage);
-                ApplyNavClass(lnkAdminReports, "AdminReports.aspx", currentPage);
-            }
+            ApplyNavClass(lnkAdminOrganizations, "OrganizationAdmin.aspx", currentPage);
+            ApplyNavClass(lnkAdminNews, "AdminNews.aspx", currentPage);
+            ApplyNavClass(lnkAdminSurveys, "AdminSurveys.aspx", currentPage);
+            ApplyNavClass(lnkAdminBilling, "AdminBilling.aspx", currentPage);
+            ApplyNavClass(lnkAdminReports, "AdminReports.aspx", currentPage);
         }
 
         private void ApplyNavClass(HtmlAnchor anchor, string targetPage, string currentPage)
@@ -80,15 +117,7 @@ namespace Hirebot_TFI
         
         private bool IsCurrentUserAdmin()
         {
-            try
-            {
-                return Session["UserRole"] != null && 
-                       Session["UserRole"].ToString().Equals("Admin", StringComparison.OrdinalIgnoreCase);
-            }
-            catch
-            {
-                return false;
-            }
+            return _authorizationSecurity.UserHasAnyPermission("~/AdminDashboard.aspx", "~/AdminRoles.aspx");
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

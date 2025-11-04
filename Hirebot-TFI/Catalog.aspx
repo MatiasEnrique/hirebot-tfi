@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Public.master" AutoEventWireup="true" CodeBehind="Catalog.aspx.cs" Inherits="UI.Catalog" EnableEventValidation="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ProductCatalog %>" /> - Hirebot-TFI
+    <asp:Literal runat="server" Text="Catálogo" /> - Hirebot-TFI
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
@@ -259,6 +259,99 @@
             opacity: 0.6;
             cursor: not-allowed;
         }
+
+        /* Plan Comparison Styles */
+        .compare-checkbox-wrapper {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+
+        .compare-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: var(--ultra-violet);
+        }
+
+        .product-card {
+            position: relative;
+        }
+
+        .product-card.selected-for-comparison {
+            border: 2px solid var(--ultra-violet);
+            box-shadow: 0 4px 12px rgba(75, 78, 109, 0.2);
+        }
+
+        .comparison-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--ultra-violet), var(--tiffany-blue));
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+            z-index: 1050;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .comparison-bar.show {
+            transform: translateY(0);
+        }
+
+        .comparison-table th {
+            background-color: var(--ultra-violet);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            vertical-align: middle;
+            padding: 1rem;
+        }
+
+        .comparison-table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .comparison-table .feature-label {
+            font-weight: 600;
+            text-align: left;
+            background-color: #f8f9fa;
+            color: var(--eerie-black);
+        }
+
+        .comparison-plan-header {
+            background-color: var(--tiffany-blue);
+            color: var(--eerie-black);
+            font-weight: 600;
+            padding: 1.5rem;
+        }
+
+        .comparison-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--ultra-violet);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.5rem;
+            }
+
+            .comparison-price {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </asp:Content>
 
@@ -280,13 +373,13 @@
                         <div class="d-flex align-items-center justify-content-lg-end gap-3">
                             <div class="text-center">
                                 <h3 class="mb-0"><asp:Literal ID="litProductCount" runat="server"></asp:Literal></h3>
-                                <small><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ProductsAvailable %>" /></small>
+                                <small><asp:Literal runat="server" Text="productos disponibles" /></small>
                             </div>
                             <div class="vr d-none d-lg-block"></div>
                             <div class="text-center">
                                 <asp:DropDownList ID="ddlCategories" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategories_SelectedIndexChanged">
                                 </asp:DropDownList>
-                                <small class="text-light"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,FilterByCategory %>" /></small>
+                                <small class="text-light"><asp:Literal runat="server" Text="Filtrar por categoría" /></small>
                             </div>
                         </div>
                     </div>
@@ -302,8 +395,8 @@
                     <div class="col-12">
                         <div class="no-products">
                             <i class="bi bi-collection display-1 text-muted mb-4"></i>
-                            <h3 class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoCatalogSelected %>" /></h3>
-                            <p class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoCatalogSelectedMessage %>" /></p>
+                            <h3 class="text-muted"><asp:Literal runat="server" Text="Ningún catálogo seleccionado" /></h3>
+                            <p class="text-muted"><asp:Literal runat="server" Text="El administrador aún no ha seleccionado un catálogo para mostrar. Por favor vuelve más tarde." /></p>
                         </div>
                     </div>
                 </asp:PlaceHolder>
@@ -312,8 +405,8 @@
                     <div class="col-12">
                         <div class="no-products">
                             <i class="bi bi-box display-1 text-muted mb-4"></i>
-                            <h3 class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoProductsFound %>" /></h3>
-                            <p class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoProductsFoundMessage %>" /></p>
+                            <h3 class="text-muted"><asp:Literal runat="server" Text="No se encontraron productos" /></h3>
+                            <p class="text-muted"><asp:Literal runat="server" Text="No hay productos disponibles en esta categoría o el catálogo está vacío." /></p>
                         </div>
                     </div>
                 </asp:PlaceHolder>
@@ -321,7 +414,20 @@
                 <asp:Repeater ID="rptProducts" runat="server">
                     <ItemTemplate>
                         <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="product-card h-100">
+                            <div class="product-card h-100" data-product-id="<%# Eval("ProductId") %>"
+                                 data-product-name="<%# Eval("Name") %>"
+                                 data-product-price="<%# Eval("Price") %>"
+                                 data-product-category="<%# Eval("Category") ?? "Basic" %>"
+                                 data-product-billing="<%# Eval("BillingCycle") ?? "Monthly" %>"
+                                 data-product-chatbots="<%# Eval("MaxChatbots") %>"
+                                 data-product-messages="<%# Eval("MaxMessagesPerMonth") %>"
+                                 data-product-description="<%# Eval("Description") %>">
+                                <div class="compare-checkbox-wrapper">
+                                    <input type="checkbox" class="compare-checkbox"
+                                           data-product-id="<%# Eval("ProductId") %>"
+                                           onchange="handleCompareCheckbox(this)"
+                                           aria-label="Compare">
+                                </div>
                                 <div class="card-body d-flex flex-column">
                                     <div class="d-flex justify-content-between align-items-start mb-2">
                                         <h5 class="card-title mb-0"><%# Eval("Name") %></h5>
@@ -342,10 +448,10 @@
                                             </div>
                                             <div class="row text-center">
                                                 <div class="col-6">
-                                                    <small class="text-muted d-block"><i class="bi bi-robot me-1"></i><%# Eval("MaxChatbots") %> <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BotsText %>" /></small>
+                                                    <small class="text-muted d-block"><i class="bi bi-robot me-1"></i><%# Eval("MaxChatbots") %> <asp:Literal runat="server" Text="bots" /></small>
                                                 </div>
                                                 <div class="col-6">
-                                                    <small class="text-muted d-block"><i class="bi bi-chat-dots me-1"></i><%# string.Format("{0:N0}", Eval("MaxMessagesPerMonth")) %>/<asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MonthText %>" /></small>
+                                                    <small class="text-muted d-block"><i class="bi bi-chat-dots me-1"></i><%# string.Format("{0:N0}", Eval("MaxMessagesPerMonth")) %>/<asp:Literal runat="server" Text="mes" /></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,11 +459,11 @@
                                         <div class="d-grid gap-2">
                                             <button type="button" class="btn btn-outline-primary" disabled>
                                                 <i class="bi bi-info-circle me-1"></i>
-                                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ViewDetails %>" />
+                                                <asp:Literal runat="server" Text="Ver Detalles" />
                                             </button>
                                             <button type="button" class="btn btn-sm btn-light comments-toggle" onclick="toggleComments(<%# Eval("ProductId") %>)">
                                                 <i class="bi bi-chat-text me-1"></i>
-                                                <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Comments %>" />
+                                                <asp:Literal runat="server" Text="Comentarios" />
                                                 <span class="comment-count badge bg-secondary ms-1" data-product-id="<%# Eval("ProductId") %>">0</span>
                                             </button>
                                         </div>
@@ -377,7 +483,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="commentsModalLabel">
                             <i class="bi bi-chat-text me-2"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Comments %>" />
+                            <asp:Literal runat="server" Text="Comentarios" />
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -390,7 +496,7 @@
                                     <span class="rating-stars" id="productRatingStars">&#9734;&#9734;&#9734;&#9734;&#9734;</span>
                                     <small class="text-muted ms-2">
                                         <span id="averageRating">0.0</span> 
-                                        (<span id="totalComments">0</span> <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Comments %>" />)
+                                        (<span id="totalComments">0</span> <asp:Literal runat="server" Text="Comentarios" />)
                                     </small>
                                 </div>
                             </div>
@@ -404,11 +510,11 @@
                                 <div class="card border-0 bg-light text-center">
                                     <div class="card-body py-4">
                                         <i class="bi bi-person-circle display-4 text-muted mb-3"></i>
-                                        <h6 class="mb-2"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,LoginToComment %>" /></h6>
-                                        <p class="text-muted mb-3"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,LoginToCommentMessage %>" /></p>
+                                        <h6 class="mb-2"><asp:Literal runat="server" Text="Inicia sesión para comentar" /></h6>
+                                        <p class="text-muted mb-3"><asp:Literal runat="server" Text="Debes iniciar sesión para poder agregar comentarios y calificaciones." /></p>
                                         <a href="SignIn.aspx" class="btn btn-primary">
                                             <i class="bi bi-box-arrow-in-right me-2"></i>
-                                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignIn %>" />
+                                            <asp:Literal runat="server" Text="Iniciar Sesión" />
                                         </a>
                                     </div>
                                 </div>
@@ -426,11 +532,11 @@
                                 <!-- CRITICAL: Comment Form MUST be inside UpdatePanel for proper postback -->
                                 <asp:PlaceHolder ID="phAddCommentInPanel" runat="server">
                                     <div class="add-comment-section mb-4">
-                                        <h6 class="mb-3"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AddComment %>" /></h6>
+                                        <h6 class="mb-3"><asp:Literal runat="server" Text="Agregar Comentario" /></h6>
                                         <div class="card border-0 bg-light">
                                             <div class="card-body">
                                                 <div class="mb-3">
-                                                    <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Rating %>" /></label>
+                                                    <label class="form-label"><asp:Literal runat="server" Text="Calificación" /></label>
                                                     <div class="rating-input">
                                                         <asp:RadioButtonList ID="rblRating" runat="server" RepeatDirection="Horizontal" CssClass="rating-stars-input">
                                                         </asp:RadioButtonList>
@@ -438,19 +544,19 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <asp:TextBox ID="txtComment" runat="server" TextMode="MultiLine" Rows="3" 
-                                                        CssClass="form-control" placeholder="<%$ Resources:GlobalResources,WriteComment %>" 
+                                                        CssClass="form-control" placeholder="Escribe tu comentario..." 
                                                         MaxLength="1000" />
                                                     <div class="form-text">
                                                         <span id="commentCharCount">0</span>/1000 caracteres
                                                     </div>
                                                     <asp:RequiredFieldValidator ID="rfvComment" runat="server" 
                                                         ControlToValidate="txtComment" 
-                                                        ErrorMessage="<%$ Resources:GlobalResources,CommentRequired %>"
+                                                        ErrorMessage="El comentario es obligatorio."
                                                         CssClass="text-danger" Display="Dynamic" ValidationGroup="CommentGroup" />
                                                 </div>
                                                 <div class="d-grid">
                                                     <asp:Button ID="btnPostComment" runat="server" 
-                                                        Text="<%$ Resources:GlobalResources,PostComment %>" 
+                                                        Text="Publicar Comentario" 
                                                         CssClass="btn btn-primary" 
                                                         OnClick="btnPostComment_Click" 
                                                         ValidationGroup="CommentGroup" />
@@ -462,7 +568,7 @@
                                 
                                 <div class="comments-list">
                                     <h6 class="mb-3">
-                                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Comments %>" />
+                                        <asp:Literal runat="server" Text="Comentarios" />
                                         <span class="badge bg-secondary ms-2" id="commentsCount">0</span>
                                     </h6>
                                     
@@ -470,8 +576,8 @@
                                     <asp:PlaceHolder ID="phNoComments" runat="server">
                                         <div class="no-comments text-center py-5">
                                             <i class="bi bi-chat display-1 text-muted mb-3"></i>
-                                            <h6 class="text-muted mb-2"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoComments %>" /></h6>
-                                            <p class="text-muted"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NoCommentsMessage %>" /></p>
+                                            <h6 class="text-muted mb-2"><asp:Literal runat="server" Text="Sin comentarios" /></h6>
+                                            <p class="text-muted"><asp:Literal runat="server" Text="Sé el primero en comentar este producto." /></p>
                                         </div>
                                     </asp:PlaceHolder>
 
@@ -488,7 +594,7 @@
                                                                     <%# Eval("Username") %>
                                                                 </h6>
                                                                 <small class="text-muted">
-                                                                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CommentOn %>" />
+                                                                    <asp:Literal runat="server" Text="el" />
                                                                     <%# ((DateTime)Eval("CreatedDate")).ToString("dd/MM/yyyy HH:mm") %>
                                                                 </small>
                                                             </div>
@@ -509,7 +615,94 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Cancel %>" />
+                            <asp:Literal runat="server" Text="Cancelar" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Bar (Fixed at bottom) -->
+        <div id="comparisonBar" class="comparison-bar">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 class="mb-0">
+                            <i class="bi bi-check2-square me-2"></i>
+                            <span id="comparisonCount">0</span> <asp:Literal runat="server" Text="planes seleccionados" />
+                        </h5>
+                        <small><asp:Literal runat="server" Text="Selecciona hasta 3 planes para comparar" /></small>
+                    </div>
+                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                        <button type="button" class="btn btn-light me-2" onclick="clearComparison()">
+                            <i class="bi bi-x-circle me-1"></i>
+                            <asp:Literal runat="server" Text="Limpiar selección" />
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="showComparisonModal()">
+                            <i class="bi bi-layout-three-columns me-1"></i>
+                            <asp:Literal runat="server" Text="Comparar seleccionados" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Modal -->
+        <div class="modal fade" id="comparisonModal" tabindex="-1" aria-labelledby="comparisonModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="comparisonModalLabel">
+                            <i class="bi bi-layout-three-columns me-2"></i>
+                            <asp:Literal runat="server" Text="Comparación de Planes" />
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered comparison-table" id="comparisonTable">
+                                <thead>
+                                    <tr>
+                                        <th class="feature-label"><asp:Literal runat="server" Text="Características (JSON)" /></th>
+                                        <!-- Plan columns will be dynamically added here -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="feature-label"><asp:Literal runat="server" Text="Nombre del Plan" /></td>
+                                        <!-- Plan names will be added here -->
+                                    </tr>
+                                    <tr>
+                                        <td class="feature-label"><asp:Literal runat="server" Text="Categoría" /></td>
+                                        <!-- Categories will be added here -->
+                                    </tr>
+                                    <tr>
+                                        <td class="feature-label"><asp:Literal runat="server" Text="Precio Mensual" /></td>
+                                        <!-- Prices will be added here -->
+                                    </tr>
+                                    <tr>
+                                        <td class="feature-label"><asp:Literal runat="server" Text="Ciclo de facturación" /></td>
+                                        <!-- Billing cycles will be added here -->
+                                    </tr>
+                                    <tr>
+                                        <td class="feature-label"><asp:Literal runat="server" Text="Chatbots Máximos" /></td>
+                                        <!-- Max chatbots will be added here -->
+                                    </tr>
+                                    <tr>
+                                        <td class="feature-label"><asp:Literal runat="server" Text="Mensajes por Mes" /></td>
+                                        <!-- Messages per month will be added here -->
+                                    </tr>
+                                    <tr>
+                                        <td class="feature-label"><asp:Literal runat="server" Text="Descripción" /></td>
+                                        <!-- Descriptions will be added here -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <asp:Literal runat="server" Text="Cancelar" />
                         </button>
                     </div>
                 </div>
@@ -520,6 +713,219 @@
         <asp:HiddenField ID="hfSelectedProductId" runat="server" />
 
         <script>
+            // ===== PLAN COMPARISON FUNCTIONALITY =====
+            // Global state for selected plans (max 3)
+            let selectedPlans = [];
+            const MAX_PLANS = 3;
+
+            // Initialize comparison on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('\u2705 Comparison functionality initialized');
+                updateComparisonUI();
+            });
+
+            // Handle checkbox change for plan comparison
+            function handleCompareCheckbox(checkbox) {
+                try {
+                    const productId = parseInt(checkbox.getAttribute('data-product-id'));
+                    const productCard = checkbox.closest('.product-card');
+
+                    if (!productCard) {
+                        console.log('\u274c Product card not found');
+                        return;
+                    }
+
+                    if (checkbox.checked) {
+                        // Check if we've reached the maximum
+                        if (selectedPlans.length >= MAX_PLANS) {
+                            checkbox.checked = false;
+                            alert('<%= HttpContext.GetGlobalResourceObject("GlobalResources", "MaxPlansReached") %>');
+                            return;
+                        }
+
+                        // Add plan to selection
+                        const planData = {
+                            id: productId,
+                            name: productCard.getAttribute('data-product-name'),
+                            price: parseFloat(productCard.getAttribute('data-product-price')),
+                            category: productCard.getAttribute('data-product-category'),
+                            billing: productCard.getAttribute('data-product-billing'),
+                            chatbots: productCard.getAttribute('data-product-chatbots'),
+                            messages: productCard.getAttribute('data-product-messages'),
+                            description: productCard.getAttribute('data-product-description')
+                        };
+
+                        selectedPlans.push(planData);
+                        productCard.classList.add('selected-for-comparison');
+                        console.log('\u2705 Added plan to comparison:', planData.name);
+                    } else {
+                        // Remove plan from selection
+                        selectedPlans = selectedPlans.filter(plan => plan.id !== productId);
+                        productCard.classList.remove('selected-for-comparison');
+                        console.log('\u274c Removed plan from comparison');
+                    }
+
+                    updateComparisonUI();
+                } catch (e) {
+                    console.error('\u274c Error in handleCompareCheckbox:', e);
+                }
+            }
+
+            // Update the comparison UI (bar visibility and count)
+            function updateComparisonUI() {
+                try {
+                    const comparisonBar = document.getElementById('comparisonBar');
+                    const comparisonCount = document.getElementById('comparisonCount');
+
+                    if (comparisonCount) {
+                        comparisonCount.textContent = selectedPlans.length;
+                    }
+
+                    if (comparisonBar) {
+                        if (selectedPlans.length > 0) {
+                            comparisonBar.classList.add('show');
+                        } else {
+                            comparisonBar.classList.remove('show');
+                        }
+                    }
+
+                    console.log('\u{1F504} Updated comparison UI - Selected plans:', selectedPlans.length);
+                } catch (e) {
+                    console.error('\u274c Error updating comparison UI:', e);
+                }
+            }
+
+            // Clear all selected plans
+            function clearComparison() {
+                try {
+                    // Uncheck all checkboxes
+                    document.querySelectorAll('.compare-checkbox:checked').forEach(checkbox => {
+                        checkbox.checked = false;
+                        const productCard = checkbox.closest('.product-card');
+                        if (productCard) {
+                            productCard.classList.remove('selected-for-comparison');
+                        }
+                    });
+
+                    selectedPlans = [];
+                    updateComparisonUI();
+                    console.log('\u2705 Cleared all comparisons');
+                } catch (e) {
+                    console.error('\u274c Error clearing comparison:', e);
+                }
+            }
+
+            // Show the comparison modal with selected plans
+            function showComparisonModal() {
+                try {
+                    if (selectedPlans.length < 2) {
+                        alert('<%= HttpContext.GetGlobalResourceObject("GlobalResources", "SelectAtLeast2Plans") %>');
+                        return;
+                    }
+
+                    console.log('\u{1F504} Building comparison table for', selectedPlans.length, 'plans');
+                    buildComparisonTable();
+
+                    const modal = new bootstrap.Modal(document.getElementById('comparisonModal'));
+                    modal.show();
+                } catch (e) {
+                    console.error('\u274c Error showing comparison modal:', e);
+                }
+            }
+
+            // Build the comparison table dynamically
+            function buildComparisonTable() {
+                try {
+                    const table = document.getElementById('comparisonTable');
+                    if (!table) return;
+
+                    const thead = table.querySelector('thead tr');
+                    const tbody = table.querySelector('tbody');
+
+                    // Clear existing plan columns (keep the feature label column)
+                    while (thead.children.length > 1) {
+                        thead.removeChild(thead.lastChild);
+                    }
+
+                    // Add header columns for each selected plan
+                    selectedPlans.forEach(plan => {
+                        const th = document.createElement('th');
+                        th.className = 'comparison-plan-header';
+                        th.innerHTML = '<i class="bi bi-box-seam me-2"></i>' + escapeHtml(plan.name);
+                        thead.appendChild(th);
+                    });
+
+                    // Update each row with plan data
+                    const rows = tbody.querySelectorAll('tr');
+
+                    // Row 0: Plan Names (already in header, but add again for clarity)
+                    updateTableRow(rows[0], selectedPlans.map(p => '<strong>' + escapeHtml(p.name) + '</strong>'));
+
+                    // Row 1: Categories
+                    updateTableRow(rows[1], selectedPlans.map(p => '<span class="badge category-badge">' + escapeHtml(p.category) + '</span>'));
+
+                    // Row 2: Prices
+                    updateTableRow(rows[2], selectedPlans.map(p => '<span class="comparison-price">ARS ' + parseFloat(p.price).toFixed(2) + '</span>'));
+
+                    // Row 3: Billing Cycles
+                    updateTableRow(rows[3], selectedPlans.map(p => '<i class="bi bi-arrow-repeat me-1"></i>' + escapeHtml(p.billing)));
+
+                    // Row 4: Max Chatbots
+                    updateTableRow(rows[4], selectedPlans.map(p => '<i class="bi bi-robot me-1"></i><strong>' + escapeHtml(p.chatbots) + '</strong>'));
+
+                    // Row 5: Messages per Month
+                    updateTableRow(rows[5], selectedPlans.map(p => {
+                        const messages = parseInt(p.messages);
+                        return '<i class="bi bi-chat-dots me-1"></i><strong>' + messages.toLocaleString() + '</strong>';
+                    }));
+
+                    // Row 6: Descriptions
+                    updateTableRow(rows[6], selectedPlans.map(p => {
+                        const desc = p.description || '<em class="text-muted">N/A</em>';
+                        return '<small>' + escapeHtml(desc) + '</small>';
+                    }));
+
+                    console.log('\u2705 Comparison table built successfully');
+                } catch (e) {
+                    console.error('\u274c Error building comparison table:', e);
+                }
+            }
+
+            // Helper function to update a table row with data
+            function updateTableRow(row, dataArray) {
+                try {
+                    if (!row) return;
+
+                    // Remove existing data cells (keep the feature label)
+                    while (row.children.length > 1) {
+                        row.removeChild(row.lastChild);
+                    }
+
+                    // Add new data cells
+                    dataArray.forEach(data => {
+                        const td = document.createElement('td');
+                        td.innerHTML = data;
+                        row.appendChild(td);
+                    });
+                } catch (e) {
+                    console.error('\u274c Error updating table row:', e);
+                }
+            }
+
+            // Helper function to escape HTML
+            function escapeHtml(text) {
+                if (!text) return '';
+                const map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                };
+                return text.toString().replace(/[&<>"']/g, m => map[m]);
+            }
+
+            // ===== EXISTING COMMENTS FUNCTIONALITY =====
             // Function to toggle comments modal
             function toggleComments(productId) {
                 try {

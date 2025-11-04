@@ -212,7 +212,7 @@ namespace UI
             {
                 var users = userBLL.GetAllUsers();
                 ddlUserFilter.Items.Clear();
-                ddlUserFilter.Items.Add(new ListItem(HttpContext.GetGlobalResourceObject("GlobalResources", "AllUsers").ToString(), ""));
+                ddlUserFilter.Items.Add(new ListItem("Todos los Usuarios", ""));
                 
                 foreach (var user in users)
                 {
@@ -481,14 +481,7 @@ namespace UI
 
         private string GetLocalizedString(string key)
         {
-            try
-            {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
-            }
-            catch
-            {
-                return key;
-            }
+            return key;
         }
     }
 

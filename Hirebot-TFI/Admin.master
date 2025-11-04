@@ -1,5 +1,4 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="Hirebot_TFI.AdminMaster" %>
-<%@ Register Src="~/Controls/LanguageSelector.ascx" TagPrefix="uc" TagName="LanguageSelector" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,6 +8,8 @@
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /> - Hirebot</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
     <style>
         :root {
             --eerie-black: #222222;
@@ -32,14 +33,17 @@
             padding: 0;
             z-index: 1000;
             transition: transform 0.3s ease;
-            overflow-y: auto;
+            overflow: hidden;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar-brand {
             padding: 1.5rem 1.25rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
         }
 
         .sidebar-brand h4 {
@@ -57,6 +61,47 @@
 
         .sidebar-nav {
             padding: 1rem 0;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: rgba(132, 220, 198, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: rgba(132, 220, 198, 0.5);
+        }
+
+        .sidebar-search {
+            padding: 0.75rem 1rem 0.25rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-search .form-control {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .sidebar-search .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .sidebar-search .input-group-text {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .nav-section {
@@ -108,10 +153,7 @@
         }
 
         .sidebar-footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            flex-shrink: 0;
             padding: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(0, 0, 0, 0.2);
@@ -299,12 +341,30 @@
                 padding: 4rem 0.75rem 1rem;
             }
         }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        body {
+            top: 0px !important;
+        }
+
+        /* Language selector styling in sidebar */
+        #languageSelector {
+            width: 100%;
+        }
+
+        .sidebar-language-selector {
+            padding: 0 1rem;
+        }
     </style>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </head>
 <body>
     <form id="adminForm" runat="server">
-        <asp:ScriptManager ID="smAdmin" runat="server" />
+        <asp:ScriptManager ID="smAdmin" runat="server" EnablePageMethods="true" />
 
         <div class="mobile-header">
             <button class="mobile-toggle-btn" id="sidebarToggle" type="button">
@@ -326,62 +386,92 @@
             </div>
 
             <div class="sidebar-nav">
+                <div class="sidebar-search">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <asp:TextBox ID="navSearch" runat="server" CssClass="form-control" autocomplete="off" />
+                    </div>
+                </div>
                 <div class="nav-section">
                     <div class="nav-section-title">
-                        <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,MainNavigation %>" />
+                        Navegación Principal
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="AdminDashboard.aspx" class="sidebar-nav-link">
+                    <div id="navAdminDashboard" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminDashboard" runat="server" href="AdminDashboard.aspx" class="sidebar-nav-link">
                             <i class="bi bi-speedometer2"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Dashboard %>" />
+                            Panel de Control
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="OrganizationAdmin.aspx" class="sidebar-nav-link">
+                    <div id="navAdminRoles" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminRoles" runat="server" href="AdminRoles.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-shield-lock"></i>
+                            Roles de Administración
+                        </a>
+                    </div>
+                    <div id="navAdminUsers" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminUsers" runat="server" href="AdminUsers.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-people-fill"></i>
+                            Gestión de Usuarios
+                        </a>
+                    </div>
+                    <div id="navOrganizationAdmin" runat="server" class="sidebar-nav-item">
+                        <a id="lnkOrganizationAdmin" runat="server" href="OrganizationAdmin.aspx" class="sidebar-nav-link">
                             <i class="bi bi-building"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Organizations %>" />
+                            Organizaciones
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="ChatbotAdmin.aspx" class="sidebar-nav-link">
+                    <div id="navChatbotAdmin" runat="server" class="sidebar-nav-item">
+                        <a id="lnkChatbotAdmin" runat="server" href="ChatbotAdmin.aspx" class="sidebar-nav-link">
                             <i class="bi bi-robot"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,ChatbotManagement %>" />
+                            Gestión de Chatbot
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="AdminCatalog.aspx" class="sidebar-nav-link">
+                    <div id="navAdminCatalog" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminCatalog" runat="server" href="AdminCatalog.aspx" class="sidebar-nav-link">
                             <i class="bi bi-box-seam"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,CatalogManagement %>" />
+                            Gestión de Catálogo
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="AdminNews.aspx" class="sidebar-nav-link">
+                    <div id="navAdminNews" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminNews" runat="server" href="AdminNews.aspx" class="sidebar-nav-link">
                             <i class="bi bi-newspaper"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,NewsManagement %>" />
+                            Gestión de Noticias
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="AdminBilling.aspx" class="sidebar-nav-link">
+                    <div id="navAdminBilling" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminBilling" runat="server" href="AdminBilling.aspx" class="sidebar-nav-link">
                             <i class="bi bi-receipt"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,BillingManagement %>" />
+                            Gestión de Facturación
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="AdminSurveys.aspx" class="sidebar-nav-link">
+                    <div id="navAdminSurveys" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminSurveys" runat="server" href="AdminSurveys.aspx" class="sidebar-nav-link">
                             <i class="bi bi-clipboard-check"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SurveyManagement %>" />
+                            Gestión de Encuestas
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="AdminReports.aspx" class="sidebar-nav-link">
+                    <div id="navAdminAds" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminAds" runat="server" href="AdminAds.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-megaphone"></i>
+                            Anuncios de Página Principal
+                        </a>
+                    </div>
+                    <div id="navAdminReports" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminReports" runat="server" href="AdminReports.aspx" class="sidebar-nav-link">
                             <i class="bi bi-graph-up"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,AdminReportsNav %>" />
+                            Informes de Administración
                         </a>
                     </div>
-                    <div class="sidebar-nav-item">
-                        <a href="AdminLogs.aspx" class="sidebar-nav-link">
+                    <div id="navAdminLogs" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminLogs" runat="server" href="AdminLogs.aspx" class="sidebar-nav-link">
                             <i class="bi bi-journal-text"></i>
-                            <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,LogManagement %>" />
+                            Gestión de Logs
+                        </a>
+                    </div>
+                    <div id="navAdminDatabase" runat="server" class="sidebar-nav-item">
+                        <a id="lnkAdminDatabase" runat="server" href="AdminDatabase.aspx" class="sidebar-nav-link">
+                            <i class="bi bi-database"></i>
+                            Gestión de Base de Datos
                         </a>
                     </div>
                 </div>
@@ -393,18 +483,18 @@
                         <i class="bi bi-person-fill"></i>
                     </div>
                     <div class="user-details">
-                        <h6 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,Administrator %>" /></h6>
-                        <small><asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SystemAdmin %>" /></small>
+                        <h6 class="mb-0">Administrador</h6>
+                        <small>Administrador del Sistema</small>
                     </div>
                 </div>
 
                 <div class="sidebar-language-selector">
-                    <uc:LanguageSelector ID="ucLanguageSelector" runat="server" />
+                    <select id="languageSelector" class="form-select form-select-sm"></select>
                 </div>
 
                 <asp:LinkButton ID="btnLogout" runat="server" CssClass="sidebar-nav-link" OnClick="btnLogout_Click">
                     <i class="bi bi-box-arrow-right"></i>
-                    <asp:Literal runat="server" Text="<%$ Resources:GlobalResources,SignOut %>" />
+                    Cerrar Sesión
                 </asp:LinkButton>
             </div>
         </nav>
@@ -412,10 +502,165 @@
         <div class="main-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
+
+        <div id="google_translate_element" style="display:none;"></div>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script>
+        // All available languages
+        var allLanguages = [
+            { code: 'es', name: 'Español', flag: '🇪🇸' },
+            { code: 'en', name: 'English', flag: '🇬🇧' },
+            { code: 'fr', name: 'Français', flag: '🇫🇷' },
+            { code: 'pt', name: 'Português', flag: '🇵🇹' },
+            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+            { code: 'ja', name: '日本語', flag: '🇯🇵' },
+            { code: 'zh-CN', name: '中文', flag: '🇨🇳' },
+            { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+            { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
+            { code: 'ko', name: '한국어', flag: '🇰🇷' },
+            { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+            { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+            { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+            { code: 'th', name: 'ไทย', flag: '🇹🇭' },
+            { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+            { code: 'fi', name: 'Suomi', flag: '🇫🇮' },
+            { code: 'da', name: 'Dansk', flag: '🇩🇰' }
+        ];
+
+        // Initialize Google Translate
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'es',
+                includedLanguages: allLanguages.map(function(l) { return l.code; }).join(','),
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Change language function
+        function changeLanguage(langCode) {
+            console.log('🔄 Cambiando idioma a:', langCode);
+
+            // Set Google Translate cookie
+            if (langCode !== 'es') {
+                var val = '/auto/' + langCode;
+                var oneYear = new Date(Date.now() + 365*24*60*60*1000).toUTCString();
+                var host = location.hostname.replace(/^www\./, '');
+
+                document.cookie = 'googtrans=' + val + '; expires=' + oneYear + '; path=/';
+                document.cookie = 'googtransopt=1; expires=' + oneYear + '; path=/';
+
+                if (host && host !== 'localhost') {
+                    document.cookie = 'googtrans=' + val + '; expires=' + oneYear + '; path=/; domain=' + host;
+                    document.cookie = 'googtransopt=1; expires=' + oneYear + '; path=/; domain=' + host;
+                }
+
+                console.log('✅ Cookie de Google Translate establecida:', val);
+            } else {
+                // Clear cookies for Spanish (default)
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                document.cookie = 'googtransopt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+                var host = location.hostname.replace(/^www\./, '');
+                if (host && host !== 'localhost') {
+                    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + host;
+                    document.cookie = 'googtransopt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + host;
+                }
+
+                console.log('✅ Cookies de Google Translate limpiadas (español por defecto)');
+            }
+
+            // Reload page to apply translation
+            console.log('🔄 Recargando página para aplicar traducción...');
+            window.location.reload();
+        }
+    </script>
+
+    <script>
+        // Get current language from cookie
+        function getCurrentLanguage() {
+            var currentLang = 'es';
+            var cookies = document.cookie.split('; ');
+            for (var i = 0; i < cookies.length; i++) {
+                if (cookies[i].startsWith('googtrans=')) {
+                    var value = cookies[i].substring('googtrans='.length);
+                    var parts = value.split('/');
+                    if (parts.length >= 3) {
+                        currentLang = parts[2];
+                        console.log('🔍 Idioma actual desde cookie:', currentLang);
+                    }
+                    break;
+                }
+            }
+            return currentLang;
+        }
+
+        // Initialize Select2 on document ready
+        $(document).ready(function() {
+            console.log('📋 Inicializando selector de idioma en Admin');
+
+            // Populate language selector
+            var $selector = $('#languageSelector');
+            allLanguages.forEach(function(lang) {
+                var option = new Option(lang.flag + ' ' + lang.name, lang.code);
+                $selector.append(option);
+            });
+
+            // Initialize Select2
+            $selector.select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                minimumResultsForSearch: 5,
+                templateResult: formatLanguage,
+                templateSelection: formatLanguage
+            });
+
+            // Get current language from cookie
+            var currentLang = getCurrentLanguage();
+            console.log('🌐 Idioma detectado:', currentLang);
+
+            // Set current language without triggering change event
+            $selector.val(currentLang).trigger('change.select2');
+
+            // Handle language change
+            $selector.on('select2:select', function(e) {
+                var selectedLang = e.params.data.id;
+                var currentDisplayLang = getCurrentLanguage();
+
+                console.log('👆 Usuario seleccionó:', selectedLang);
+                console.log('📍 Idioma actual:', currentDisplayLang);
+
+                // Only change if different from current
+                if (selectedLang && selectedLang !== currentDisplayLang) {
+                    changeLanguage(selectedLang);
+                } else {
+                    console.log('ℹ️ Mismo idioma seleccionado, sin cambios');
+                }
+            });
+
+            console.log('✅ Selector de idioma inicializado correctamente');
+        });
+
+        // Format language option with flag
+        function formatLanguage(lang) {
+            if (!lang.id) {
+                return lang.text;
+            }
+            var langObj = allLanguages.find(function(l) { return l.code === lang.id; });
+            if (langObj) {
+                return $('<span>' + langObj.flag + ' ' + langObj.name + '</span>');
+            }
+            return lang.text;
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const sidebarToggle = document.getElementById('sidebarToggle');
             const adminSidebar = document.getElementById('adminSidebar');
@@ -456,14 +701,50 @@
             navLinks.forEach(function (link) {
                 const href = link.getAttribute('href');
                 if (href && currentPage.includes(href.toLowerCase())) {
-                    navLinks.forEach(function (l) {
-                        l.classList.remove('active');
-                    });
+                    navLinks.forEach(function (l) { l.classList.remove('active'); });
                     link.classList.add('active');
                 }
             });
+
+            // Sidebar search: filter nav items and navigate on Enter
+            const searchInput = document.getElementById('navSearch');
+            if (searchInput) {
+                const items = Array.from(document.querySelectorAll('.sidebar-nav-item'));
+                const links = items.map(it => it.querySelector('a.sidebar-nav-link'));
+
+                function normalize(str) {
+                    return (str || '').toLowerCase().trim();
+                }
+
+                function filterNav(query) {
+                    const q = normalize(query);
+                    let firstMatch = null;
+                    items.forEach((item, idx) => {
+                        const link = links[idx];
+                        const text = normalize(link ? link.textContent : '');
+                        const match = !q || text.includes(q);
+                        item.style.display = match ? '' : 'none';
+                        if (match && !firstMatch) { firstMatch = link; }
+                    });
+                    return firstMatch;
+                }
+
+                searchInput.addEventListener('input', function () {
+                    filterNav(searchInput.value);
+                });
+
+                searchInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        const first = filterNav(searchInput.value);
+                        if (first && first.href) {
+                            window.location.href = first.getAttribute('href');
+                        }
+                    }
+                });
+            }
         });
     </script>
+
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server" />
 </body>
 </html>

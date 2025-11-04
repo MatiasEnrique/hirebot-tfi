@@ -38,14 +38,30 @@ namespace Hirebot_TFI
             // Check authentication and redirect if already logged in
             if (userSecurity.IsUserAuthenticated())
             {
+                // Check for ReturnUrl parameter
+                string returnUrl = Request.QueryString["ReturnUrl"];
+
+                // Prevent infinite redirect loops
+                if (!string.IsNullOrEmpty(returnUrl) &&
+                    !returnUrl.Contains("SignIn.aspx") &&
+                    !returnUrl.Contains("SignUp.aspx") &&
+                    returnUrl.StartsWith("/", StringComparison.OrdinalIgnoreCase))
+                {
+                    Response.Redirect(returnUrl, false);
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
+
+                // Default redirect based on user role
                 if (adminSecurity.IsUserAdmin())
                 {
-                    Response.Redirect("~/AdminDashboard.aspx");
+                    Response.Redirect("~/AdminDashboard.aspx", false);
                 }
                 else
                 {
-                    Response.Redirect("~/Dashboard.aspx");
+                    Response.Redirect("~/Dashboard.aspx", false);
                 }
+                Context.ApplicationInstance.CompleteRequest();
             }
 
             if (!IsPostBack)
@@ -137,14 +153,30 @@ namespace Hirebot_TFI
 
                 if (result.IsSuccessful)
                 {
+                    // Check for ReturnUrl parameter
+                    string returnUrl = Request.QueryString["ReturnUrl"];
+
+                    // Prevent infinite redirect loops and validate ReturnUrl
+                    if (!string.IsNullOrEmpty(returnUrl) &&
+                        !returnUrl.Contains("SignIn.aspx") &&
+                        !returnUrl.Contains("SignUp.aspx") &&
+                        returnUrl.StartsWith("/", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Response.Redirect(returnUrl, false);
+                        Context.ApplicationInstance.CompleteRequest();
+                        return;
+                    }
+
+                    // Default redirect based on user role
                     if (adminSecurity.IsUserAdmin())
                     {
-                        Response.Redirect("~/AdminDashboard.aspx");
+                        Response.Redirect("~/AdminDashboard.aspx", false);
                     }
                     else
                     {
-                        Response.Redirect("~/Dashboard.aspx");
+                        Response.Redirect("~/Dashboard.aspx", false);
                     }
+                    Context.ApplicationInstance.CompleteRequest();
                 }
                 else
                 {
@@ -218,14 +250,7 @@ namespace Hirebot_TFI
         // Public method to be used in JavaScript placeholder setting
         public string GetLocalizedString(string key)
         {
-            try
-            {
-                return HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
-            }
-            catch
-            {
-                return key;
-            }
+            return key;
         }
     }
 }

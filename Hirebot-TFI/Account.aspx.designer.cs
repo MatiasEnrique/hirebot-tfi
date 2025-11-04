@@ -240,12 +240,39 @@ namespace Hirebot_TFI
         protected global::System.Web.UI.WebControls.Button btnChangePassword;
 
         /// <summary>
-        /// txtChatInputPlaceholder control.
+        /// pnlChatMessages control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChatInputPlaceholder;
+        protected global::System.Web.UI.WebControls.Panel pnlChatMessages;
+
+        /// <summary>
+        /// rptChatMessages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptChatMessages;
+
+        /// <summary>
+        /// txtChatInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtChatInput;
+
+        /// <summary>
+        /// btnSendMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSendMessage;
     }
 }

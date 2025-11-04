@@ -15,21 +15,21 @@ namespace UI.Controls
     {
 
         /// <summary>
-        /// btnSpanish control.
+        /// lnkSpanish control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSpanish;
+        protected global::System.Web.UI.WebControls.HyperLink lnkSpanish;
 
         /// <summary>
-        /// btnEnglish control.
+        /// lnkEnglish control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEnglish;
+        protected global::System.Web.UI.WebControls.HyperLink lnkEnglish;
     }
 }
