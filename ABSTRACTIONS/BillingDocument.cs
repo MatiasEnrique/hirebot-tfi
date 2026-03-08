@@ -80,6 +80,14 @@ namespace ABSTRACTIONS
         [StringLength(20)]
         public string Status { get; set; }
 
+        public int? SubscriptionId { get; set; }
+        public string PrimaryPaymentMethod { get; set; }
+        public string SecondaryPaymentMethod { get; set; }
+        public string CardBrand { get; set; }
+        public string CardLast4 { get; set; }
+        public string TransferReference { get; set; }
+        public string SecondTransferReference { get; set; }
+
         public string Notes { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedDateUtc { get; set; }
@@ -251,6 +259,7 @@ namespace ABSTRACTIONS
         public DateTime? ToIssueDateUtc { get; set; }
         public int? UserId { get; set; }
         public string DocumentNumber { get; set; }
+        public string PaymentMethod { get; set; }
         public string SortColumn { get; set; } = "IssueDateUtc";
         public string SortDirection { get; set; } = "DESC";
 
@@ -259,6 +268,7 @@ namespace ABSTRACTIONS
             DocumentType = string.IsNullOrWhiteSpace(DocumentType) ? null : DocumentType.Trim();
             Status = string.IsNullOrWhiteSpace(Status) ? null : Status.Trim();
             DocumentNumber = string.IsNullOrWhiteSpace(DocumentNumber) ? null : DocumentNumber.Trim();
+            PaymentMethod = string.IsNullOrWhiteSpace(PaymentMethod) ? null : PaymentMethod.Trim();
 
             if (string.IsNullOrWhiteSpace(SortColumn) || !AllowedSortColumns.Contains(SortColumn))
             {

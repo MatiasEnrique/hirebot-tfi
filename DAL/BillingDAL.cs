@@ -29,6 +29,7 @@ namespace DAL
                 {
                     connection.Open();
                     var itemColumns = GetBillingDocumentItemTypeColumns(connection);
+                    bool supportsSubscriptionFields = StoredProcedureHasParameter(connection, "sp_BillingDocument_Create", "@SubscriptionId");
 
                     using (SqlCommand command = new SqlCommand("sp_BillingDocument_Create", connection))
                     {
@@ -44,6 +45,17 @@ namespace DAL
                         command.Parameters.AddWithValue("@Status", document.Status ?? BillingDocumentStatuses.Draft);
                         command.Parameters.AddWithValue("@Notes", ToDbValue(document.Notes));
                         command.Parameters.AddWithValue("@CreatedBy", document.CreatedBy > 0 ? document.CreatedBy : document.UserId);
+
+                        if (supportsSubscriptionFields)
+                        {
+                            command.Parameters.AddWithValue("@SubscriptionId", ToDbValue(document.SubscriptionId));
+                            command.Parameters.AddWithValue("@PrimaryPaymentMethod", ToDbValue(document.PrimaryPaymentMethod));
+                            command.Parameters.AddWithValue("@SecondaryPaymentMethod", ToDbValue(document.SecondaryPaymentMethod));
+                            command.Parameters.AddWithValue("@CardBrand", ToDbValue(document.CardBrand));
+                            command.Parameters.AddWithValue("@CardLast4", ToDbValue(document.CardLast4));
+                            command.Parameters.AddWithValue("@TransferReference", ToDbValue(document.TransferReference));
+                            command.Parameters.AddWithValue("@SecondTransferReference", ToDbValue(document.SecondTransferReference));
+                        }
 
                         SqlParameter itemsParam = command.Parameters.Add("@Items", SqlDbType.Structured);
                         itemsParam.TypeName = "dbo.BillingDocumentItemTableType";
@@ -171,6 +183,11 @@ namespace DAL
                     command.Parameters.AddWithValue("@DocumentNumber", ToDbValue(criteria.DocumentNumber));
 
                     connection.Open();
+                    if (StoredProcedureHasParameter(connection, "sp_BillingDocument_Search", "@PaymentMethod"))
+                    {
+                        command.Parameters.AddWithValue("@PaymentMethod", ToDbValue(criteria.PaymentMethod));
+                    }
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -476,6 +493,19 @@ namespace DAL
                             }
                         }
 
+                        if (reader.NextResult())
+                        {
+                            while (reader.Read())
+                            {
+                                response.PaymentMethodBreakdown.Add(new BillingPaymentMethodStatistic
+                                {
+                                    PaymentMethodKey = GetString(reader, "PaymentMethodKey"),
+                                    TotalDocuments = GetInt32(reader, "TotalDocuments"),
+                                    TotalAmount = GetDecimal(reader, "TotalAmount")
+                                });
+                            }
+                        }
+
                         return BillingStatisticsResult.Success(response, "Billing statistics retrieved successfully.");
                     }
                 }
@@ -635,6 +665,13 @@ ORDER BY c.column_id;";
                 TaxAmount = reader["TaxAmount"] != DBNull.Value ? Convert.ToDecimal(reader["TaxAmount"]) : 0,
                 TotalAmount = reader["TotalAmount"] != DBNull.Value ? Convert.ToDecimal(reader["TotalAmount"]) : 0,
                 Status = reader["Status"] as string ?? BillingDocumentStatuses.Draft,
+                SubscriptionId = HasColumn(reader, "SubscriptionId") && reader["SubscriptionId"] != DBNull.Value ? (int?)Convert.ToInt32(reader["SubscriptionId"]) : null,
+                PrimaryPaymentMethod = HasColumn(reader, "PrimaryPaymentMethod") ? reader["PrimaryPaymentMethod"] as string : null,
+                SecondaryPaymentMethod = HasColumn(reader, "SecondaryPaymentMethod") ? reader["SecondaryPaymentMethod"] as string : null,
+                CardBrand = HasColumn(reader, "CardBrand") ? reader["CardBrand"] as string : null,
+                CardLast4 = HasColumn(reader, "CardLast4") ? reader["CardLast4"] as string : null,
+                TransferReference = HasColumn(reader, "TransferReference") ? reader["TransferReference"] as string : null,
+                SecondTransferReference = HasColumn(reader, "SecondTransferReference") ? reader["SecondTransferReference"] as string : null,
                 Notes = reader["Notes"] as string,
                 CreatedBy = reader["CreatedBy"] != DBNull.Value ? Convert.ToInt32(reader["CreatedBy"]) : 0,
                 CreatedDateUtc = reader["CreatedDateUtc"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedDateUtc"]) : DateTime.UtcNow,
@@ -665,6 +702,40 @@ ORDER BY c.column_id;";
         private static object ToDbValue(object value)
         {
             return value ?? DBNull.Value;
+        }
+
+        private static bool HasColumn(SqlDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).Equals(columnName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool StoredProcedureHasParameter(SqlConnection connection, string procedureName, string parameterName)
+        {
+            const string query = @"
+SELECT 1
+FROM sys.parameters p
+INNER JOIN sys.objects o ON o.object_id = p.object_id
+WHERE o.[type] = 'P'
+  AND o.[name] = @ProcedureName
+  AND SCHEMA_NAME(o.[schema_id]) = 'dbo'
+  AND p.[name] = @ParameterName;";
+
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@ProcedureName", procedureName);
+                command.Parameters.AddWithValue("@ParameterName", parameterName);
+
+                object result = command.ExecuteScalar();
+                return result != null && result != DBNull.Value;
+            }
         }
 
         private static int GetInt32(SqlDataReader reader, string columnName)

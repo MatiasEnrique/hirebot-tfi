@@ -45,6 +45,11 @@ namespace Hirebot_TFI
         protected global::System.Web.UI.WebControls.TextBox txtFilterUser;
 
         /// <summary>
+        /// ddlFilterPaymentMethod control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFilterPaymentMethod;
+
+        /// <summary>
         /// txtFilterDocumentNumber control.
         /// </summary>
         protected global::System.Web.UI.WebControls.TextBox txtFilterDocumentNumber;

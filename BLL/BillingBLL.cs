@@ -9,6 +9,14 @@ namespace BLL
 {
     public class BillingBLL
     {
+        private static readonly HashSet<string> AllowedPaymentMethods = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Tarjeta",
+            "Transferencia",
+            "CuentaCorriente",
+            "PagoCombinado"
+        };
+
         private readonly BillingDAL billingDal;
 
         public BillingBLL()
@@ -102,6 +110,11 @@ namespace BLL
             if (criteria.Status != null && !BillingDocumentStatuses.Allowed.Contains(criteria.Status))
             {
                 return BillingDocumentListResult.Failure("Invalid document status filter.");
+            }
+
+            if (criteria.PaymentMethod != null && !AllowedPaymentMethods.Contains(criteria.PaymentMethod))
+            {
+                return BillingDocumentListResult.Failure("Invalid payment method filter.");
             }
 
             var dalResult = billingDal.Search(criteria);

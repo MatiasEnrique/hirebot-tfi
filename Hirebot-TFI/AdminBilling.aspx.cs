@@ -86,6 +86,13 @@ namespace Hirebot_TFI
             ddlFilterStatus.Items.Add(new ListItem(GetResource("StatusPaid", "Paid"), BillingDocumentStatuses.Paid));
             ddlFilterStatus.Items.Add(new ListItem(GetResource("StatusCancelled", "Cancelled"), BillingDocumentStatuses.Cancelled));
 
+            ddlFilterPaymentMethod.Items.Clear();
+            ddlFilterPaymentMethod.Items.Add(new ListItem(GetResource("AllPaymentMethods", "All payment methods"), string.Empty));
+            ddlFilterPaymentMethod.Items.Add(new ListItem(GetPaymentMethodDisplay("Tarjeta"), "Tarjeta"));
+            ddlFilterPaymentMethod.Items.Add(new ListItem(GetPaymentMethodDisplay("Transferencia"), "Transferencia"));
+            ddlFilterPaymentMethod.Items.Add(new ListItem(GetPaymentMethodDisplay("CuentaCorriente"), "CuentaCorriente"));
+            ddlFilterPaymentMethod.Items.Add(new ListItem(GetPaymentMethodDisplay("PagoCombinado"), "PagoCombinado"));
+
             ddlDocumentType.Items.Clear();
             ddlDocumentType.Items.Add(new ListItem(GetResource("SelectOption", "Select"), string.Empty));
             ddlDocumentType.Items.Add(new ListItem(GetResource("DocumentTypeInvoice", "Invoice"), BillingDocumentTypes.Invoice));
@@ -189,7 +196,8 @@ namespace Hirebot_TFI
             {
                 DocumentType = string.IsNullOrWhiteSpace(ddlFilterType.SelectedValue) ? null : ddlFilterType.SelectedValue,
                 Status = string.IsNullOrWhiteSpace(ddlFilterStatus.SelectedValue) ? null : ddlFilterStatus.SelectedValue,
-                DocumentNumber = string.IsNullOrWhiteSpace(txtFilterDocumentNumber.Text) ? null : txtFilterDocumentNumber.Text.Trim()
+                DocumentNumber = string.IsNullOrWhiteSpace(txtFilterDocumentNumber.Text) ? null : txtFilterDocumentNumber.Text.Trim(),
+                PaymentMethod = string.IsNullOrWhiteSpace(ddlFilterPaymentMethod.SelectedValue) ? null : ddlFilterPaymentMethod.SelectedValue
             };
 
             if (DateTime.TryParse(txtFilterFromDate.Text, CultureInfo.CurrentCulture, DateTimeStyles.AssumeLocal, out var fromDate))
@@ -229,7 +237,7 @@ namespace Hirebot_TFI
 
                 var viewModels = (result.Data ?? new List<BillingDocument>())
                     .Where(doc => !filterUserId.HasValue || doc.UserId == filterUserId.Value)
-                    .Select(doc => new BillingDocumentViewModel(doc, userLookup, unknownUserLabel, GetDocumentTypeDisplay))
+                    .Select(doc => new BillingDocumentViewModel(doc, userLookup, unknownUserLabel, GetDocumentTypeDisplay, GetOriginDisplay, BuildPaymentSummary))
                     .ToList();
 
                 gvBilling.DataSource = viewModels;
@@ -263,6 +271,7 @@ namespace Hirebot_TFI
         {
             ddlFilterType.SelectedIndex = 0;
             ddlFilterStatus.SelectedIndex = 0;
+            ddlFilterPaymentMethod.SelectedIndex = 0;
             txtFilterUser.Text = string.Empty;
             txtFilterDocumentNumber.Text = string.Empty;
             txtFilterFromDate.Text = string.Empty;
@@ -415,15 +424,27 @@ namespace Hirebot_TFI
 
             var issueDate = document.IssueDateUtc.ToLocalTime().ToString("f", CultureInfo.CurrentUICulture);
             var statusDisplay = GetStatusDisplay(document.Status);
+            var originDisplay = GetOriginDisplay(document);
+            var paymentSummary = BuildPaymentSummary(document);
+            var notesDisplay = string.IsNullOrWhiteSpace(document.Notes) ? null : document.Notes.Trim();
 
             litViewHeader.Text = string.Format(CultureInfo.CurrentUICulture,
-                "<div class='small text-muted'><strong>{0}</strong>: {1}<br/><strong>{2}</strong>: {3}<br/><strong>{4}</strong>: {5}</div>",
+                "<div class='small text-muted'><strong>{0}</strong>: {1}<br/><strong>{2}</strong>: {3}<br/><strong>{4}</strong>: {5}<br/><strong>{6}</strong>: {7}<br/><strong>{8}</strong>: {9}{10}</div>",
                 HttpUtility.HtmlEncode(GetResource("User", "User")),
                 HttpUtility.HtmlEncode(userName),
                 HttpUtility.HtmlEncode(GetResource("IssueDate", "Issue date")),
                 HttpUtility.HtmlEncode(issueDate),
                 HttpUtility.HtmlEncode(GetResource("Status", "Status")),
-                HttpUtility.HtmlEncode(statusDisplay));
+                HttpUtility.HtmlEncode(statusDisplay),
+                HttpUtility.HtmlEncode(GetResource("Origin", "Origin")),
+                HttpUtility.HtmlEncode(originDisplay),
+                HttpUtility.HtmlEncode(GetResource("Payment", "Payment")),
+                HttpUtility.HtmlEncode(paymentSummary),
+                string.IsNullOrWhiteSpace(notesDisplay)
+                    ? string.Empty
+                    : string.Format(CultureInfo.CurrentUICulture, "<br/><strong>{0}</strong>: {1}",
+                        HttpUtility.HtmlEncode(GetResource("Notes", "Notes")),
+                        HttpUtility.HtmlEncode(notesDisplay)));
 
             rptViewItems.DataSource = document.Items ?? new List<BillingDocumentItem>();
             rptViewItems.DataBind();
@@ -724,9 +745,147 @@ namespace Hirebot_TFI
             }
         }
 
+        private string GetOriginDisplay(BillingDocument document)
+        {
+            if (document?.SubscriptionId > 0)
+            {
+                return string.Format(CultureInfo.CurrentUICulture, "{0} #{1}",
+                    GetResource("SubscriptionOrigin", "Subscription"),
+                    document.SubscriptionId.Value);
+            }
+
+            return GetResource("ManualOrigin", "Manual billing document");
+        }
+
+        private string BuildPaymentSummary(BillingDocument document)
+        {
+            if (document == null)
+            {
+                return GetResource("PaymentNotAvailable", "Not available");
+            }
+
+            string primaryMethod = string.IsNullOrWhiteSpace(document.PrimaryPaymentMethod) ? null : document.PrimaryPaymentMethod.Trim();
+            string secondaryMethod = string.IsNullOrWhiteSpace(document.SecondaryPaymentMethod) ? null : document.SecondaryPaymentMethod.Trim();
+
+            if (string.Equals(primaryMethod, "PagoCombinado", StringComparison.OrdinalIgnoreCase))
+            {
+                string inferredPrimaryMethod = InferCombinedPrimaryMethod(document);
+                string firstLeg = BuildPaymentLegSummary(inferredPrimaryMethod, document.TransferReference, document);
+                string secondLeg = BuildPaymentLegSummary(secondaryMethod, document.SecondTransferReference, document);
+
+                if (string.IsNullOrWhiteSpace(firstLeg) && string.IsNullOrWhiteSpace(secondLeg))
+                {
+                    return GetPaymentMethodDisplay("PagoCombinado");
+                }
+
+                return string.Format(CultureInfo.CurrentUICulture, "50% {0} + 50% {1}",
+                    string.IsNullOrWhiteSpace(firstLeg) ? GetResource("PaymentUnknown", "Unknown") : firstLeg,
+                    string.IsNullOrWhiteSpace(secondLeg) ? GetResource("PaymentUnknown", "Unknown") : secondLeg);
+            }
+
+            string single = BuildPaymentLegSummary(primaryMethod, document.TransferReference, document);
+            return string.IsNullOrWhiteSpace(single) ? GetResource("PaymentNotAvailable", "Not available") : single;
+        }
+
+        private string BuildPaymentLegSummary(string method, string transferReference, BillingDocument document)
+        {
+            if (string.IsNullOrWhiteSpace(method))
+            {
+                return string.Empty;
+            }
+
+            switch (method)
+            {
+                case "Tarjeta":
+                    string cardTail = string.IsNullOrWhiteSpace(document?.CardLast4)
+                        ? GetResource("PaymentCardMasked", "Card")
+                        : string.Format(CultureInfo.CurrentUICulture, "**** {0}", document.CardLast4);
+
+                    if (!string.IsNullOrWhiteSpace(document?.CardBrand))
+                    {
+                        return string.Format(CultureInfo.CurrentUICulture, "{0} ({1})", cardTail, document.CardBrand);
+                    }
+
+                    return cardTail;
+
+                case "Transferencia":
+                    if (!string.IsNullOrWhiteSpace(transferReference))
+                    {
+                        return string.Format(CultureInfo.CurrentUICulture, "{0} ({1}: {2})",
+                            GetPaymentMethodDisplay(method),
+                            GetResource("Reference", "Ref"),
+                            transferReference);
+                    }
+
+                    return GetPaymentMethodDisplay(method);
+
+                case "CuentaCorriente":
+                    return GetPaymentMethodDisplay(method);
+
+                default:
+                    return GetPaymentMethodDisplay(method);
+            }
+        }
+
+        private string InferCombinedPrimaryMethod(BillingDocument document)
+        {
+            if (document == null)
+            {
+                return string.Empty;
+            }
+
+            if (!string.IsNullOrWhiteSpace(document.TransferReference))
+            {
+                return "Transferencia";
+            }
+
+            if (HasCardSnapshot(document) && !string.Equals(document.SecondaryPaymentMethod, "Tarjeta", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Tarjeta";
+            }
+
+            if (string.Equals(document.SecondaryPaymentMethod, "Transferencia", StringComparison.OrdinalIgnoreCase) && HasCardSnapshot(document))
+            {
+                return "Tarjeta";
+            }
+
+            return "CuentaCorriente";
+        }
+
+        private static bool HasCardSnapshot(BillingDocument document)
+        {
+            return document != null &&
+                   (!string.IsNullOrWhiteSpace(document.CardLast4) || !string.IsNullOrWhiteSpace(document.CardBrand));
+        }
+
+        private string GetPaymentMethodDisplay(string paymentMethod)
+        {
+            switch (paymentMethod)
+            {
+                case "Tarjeta":
+                    return GetResource("PaymentMethodCard", "Card");
+                case "Transferencia":
+                    return GetResource("PaymentMethodTransfer", "Bank transfer");
+                case "CuentaCorriente":
+                    return GetResource("PaymentMethodCurrentAccount", "Current account");
+                case "PagoCombinado":
+                    return GetResource("PaymentMethodCombined", "Combined payment");
+                default:
+                    return string.IsNullOrWhiteSpace(paymentMethod)
+                        ? GetResource("PaymentNotAvailable", "Not available")
+                        : paymentMethod;
+            }
+        }
+
         private class BillingDocumentViewModel
         {
-            public BillingDocumentViewModel(BillingDocument document, Dictionary<int, User> userLookup, string unknownUserLabel, Func<string, string> documentTypeResolver)
+            public BillingDocumentViewModel(
+                BillingDocument document,
+                Dictionary<int, User> userLookup,
+                string unknownUserLabel,
+                Func<string, string> documentTypeResolver,
+                Func<BillingDocument, string> originResolver,
+                Func<BillingDocument, string> paymentSummaryResolver)
             {
                 BillingDocumentId = document.BillingDocumentId;
                 DocumentNumber = document.DocumentNumber;
@@ -738,6 +897,8 @@ namespace Hirebot_TFI
                 SubtotalAmount = document.SubtotalAmount;
                 TaxAmount = document.TaxAmount;
                 TotalAmount = document.TotalAmount;
+                OriginDisplay = originResolver != null ? originResolver(document) : string.Empty;
+                PaymentSummary = paymentSummaryResolver != null ? paymentSummaryResolver(document) : string.Empty;
 
                 if (userLookup != null && userLookup.TryGetValue(document.UserId, out var user))
                 {
@@ -765,6 +926,8 @@ namespace Hirebot_TFI
             public decimal SubtotalAmount { get; }
             public decimal TaxAmount { get; }
             public decimal TotalAmount { get; }
+            public string OriginDisplay { get; }
+            public string PaymentSummary { get; }
             public string UserDisplay { get; }
             public string UserEmail { get; }
         }

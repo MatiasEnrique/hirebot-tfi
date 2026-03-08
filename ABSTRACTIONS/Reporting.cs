@@ -31,15 +31,24 @@ namespace ABSTRACTIONS
         public decimal OutstandingAmount { get; set; }
     }
 
+    public class BillingPaymentMethodStatistic
+    {
+        public string PaymentMethodKey { get; set; }
+        public int TotalDocuments { get; set; }
+        public decimal TotalAmount { get; set; }
+    }
+
     public class BillingStatisticsResponse
     {
         public BillingStatisticsSummary Summary { get; set; }
         public List<BillingMonthlyStatistic> MonthlyBreakdown { get; set; }
+        public List<BillingPaymentMethodStatistic> PaymentMethodBreakdown { get; set; }
 
         public BillingStatisticsResponse()
         {
             Summary = new BillingStatisticsSummary();
             MonthlyBreakdown = new List<BillingMonthlyStatistic>();
+            PaymentMethodBreakdown = new List<BillingPaymentMethodStatistic>();
         }
     }
 

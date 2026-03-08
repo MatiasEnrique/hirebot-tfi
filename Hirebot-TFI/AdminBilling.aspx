@@ -84,6 +84,10 @@
                     <asp:TextBox ID="txtFilterUser" runat="server" CssClass="form-control" MaxLength="100" />
                 </div>
                 <div class="col-md-3">
+                    <label for="ddlFilterPaymentMethod" class="form-label text-secondary"><asp:Literal runat="server" Text="Método de pago" /></label>
+                    <asp:DropDownList ID="ddlFilterPaymentMethod" runat="server" CssClass="form-select" />
+                </div>
+                <div class="col-md-3">
                     <label for="txtFilterDocumentNumber" class="form-label text-secondary"><asp:Literal runat="server" Text="Número de documento" /></label>
                     <asp:TextBox ID="txtFilterDocumentNumber" runat="server" CssClass="form-control" MaxLength="50" />
                 </div>
@@ -123,23 +127,33 @@
                                 <div class="text-muted small"><%#: Eval("UserEmail") %></div>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Fecha de emisión" ItemStyle-Width="14%">
+                        <asp:TemplateField HeaderText="Origen" ItemStyle-Width="14%">
+                            <ItemTemplate>
+                                <div class="small text-secondary"><%#: Eval("OriginDisplay") %></div>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Pago" ItemStyle-Width="18%">
+                            <ItemTemplate>
+                                <div class="small text-secondary"><%#: Eval("PaymentSummary") %></div>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Fecha de emisión" ItemStyle-Width="12%">
                             <ItemTemplate>
                                 <asp:Label ID="lblIssueDate" runat="server" CssClass="small text-secondary" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Fecha de vencimiento" ItemStyle-Width="14%">
+                        <asp:TemplateField HeaderText="Fecha de vencimiento" ItemStyle-Width="12%">
                             <ItemTemplate>
                                 <asp:Label ID="lblDueDate" runat="server" CssClass="small text-secondary" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="TotalAmount" HeaderText="Total" DataFormatString="{0:C2}" ItemStyle-Width="10%" />
-                        <asp:TemplateField HeaderText="Estado" ItemStyle-Width="10%">
+                        <asp:BoundField DataField="TotalAmount" HeaderText="Total" DataFormatString="{0:C2}" ItemStyle-Width="8%" />
+                        <asp:TemplateField HeaderText="Estado" ItemStyle-Width="8%">
                             <ItemTemplate>
                                 <span class="badge-status" runat="server" id="badgeStatus"></span>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Acciones" ItemStyle-CssClass="text-end" ItemStyle-Width="16%">
+                        <asp:TemplateField HeaderText="Acciones" ItemStyle-CssClass="text-end" ItemStyle-Width="20%">
                             <ItemTemplate>
                                 <asp:LinkButton ID="lnkView" runat="server" CssClass="btn btn-sm btn-outline-primary me-1" CommandName="ViewDocument" CommandArgument='<%# Eval("BillingDocumentId") %>' Text="Ver" />
                                 <asp:LinkButton ID="lnkMarkIssued" runat="server" CssClass="btn btn-sm btn-outline-success me-1" CommandName="MarkIssued" CommandArgument='<%# Eval("BillingDocumentId") %>' Text="Marcar como emitido" />

@@ -167,6 +167,38 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 fw-bold text-primary">
+                    <asp:Literal runat="server" Text="Métodos de pago" />
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <asp:Repeater ID="rptBillingPaymentMethods" runat="server">
+                        <ItemTemplate>
+                            <div class="col-md-6 col-xl-3">
+                                <div class="border rounded-3 h-100 p-3 bg-light-subtle">
+                                    <div class="text-xs fw-bold text-uppercase text-muted mb-1">
+                                        <%# GetBillingPaymentMethodLabel(Eval("PaymentMethodKey")) %>
+                                    </div>
+                                    <div class="h5 mb-1 fw-bold text-gray-800">
+                                        <%# Eval("TotalDocuments") %>
+                                    </div>
+                                    <div class="small text-muted">
+                                        <asp:Literal runat="server" Text="Documentos" />
+                                    </div>
+                                    <div class="mt-2 fw-semibold">
+                                        <%# string.Format(System.Globalization.CultureInfo.CurrentUICulture, "{0:C}", Eval("TotalAmount")) %>
+                                    </div>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 fw-bold text-primary">
                     <asp:Literal runat="server" Text="Desempeño mensual de facturación" />
                 </h6>
             </div>

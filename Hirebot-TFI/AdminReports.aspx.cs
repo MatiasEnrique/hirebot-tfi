@@ -110,6 +110,8 @@ namespace Hirebot_TFI
 
             rptBillingMonthly.DataSource = breakdown;
             rptBillingMonthly.DataBind();
+            rptBillingPaymentMethods.DataSource = GetPaymentMethodBreakdown(data.PaymentMethodBreakdown);
+            rptBillingPaymentMethods.DataBind();
 
             var labels = breakdown
                 .Select(m => string.Format(CultureInfo.InvariantCulture, "{0:00}/{1}", m.MonthNumber, m.YearNumber))
@@ -343,6 +345,55 @@ namespace Hirebot_TFI
             }
 
             return string.Empty;
+        }
+
+        private List<BillingPaymentMethodStatistic> GetPaymentMethodBreakdown(List<BillingPaymentMethodStatistic> source)
+        {
+            var lookup = (source ?? new List<BillingPaymentMethodStatistic>())
+                .Where(item => item != null && !string.IsNullOrWhiteSpace(item.PaymentMethodKey))
+                .GroupBy(item => item.PaymentMethodKey, StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(group => group.Key, group => group.First(), StringComparer.OrdinalIgnoreCase);
+
+            string[] order = { "Tarjeta", "Transferencia", "CuentaCorriente", "PagoCombinado" };
+            var result = new List<BillingPaymentMethodStatistic>();
+
+            foreach (string key in order)
+            {
+                if (lookup.TryGetValue(key, out var item))
+                {
+                    result.Add(item);
+                }
+                else
+                {
+                    result.Add(new BillingPaymentMethodStatistic
+                    {
+                        PaymentMethodKey = key,
+                        TotalDocuments = 0,
+                        TotalAmount = 0m
+                    });
+                }
+            }
+
+            return result;
+        }
+
+        protected string GetBillingPaymentMethodLabel(object paymentMethodKey)
+        {
+            string key = paymentMethodKey as string;
+
+            switch (key)
+            {
+                case "Tarjeta":
+                    return Encode(GetResource("AdminReportsPaymentCard", "Card"));
+                case "Transferencia":
+                    return Encode(GetResource("AdminReportsPaymentTransfer", "Bank transfer"));
+                case "CuentaCorriente":
+                    return Encode(GetResource("AdminReportsPaymentCurrentAccount", "Current account"));
+                case "PagoCombinado":
+                    return Encode(GetResource("AdminReportsPaymentCombined", "Combined payment"));
+                default:
+                    return Encode(GetResource("AdminReportsNoData", "-"));
+            }
         }
     }
 }
