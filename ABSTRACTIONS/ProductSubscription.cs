@@ -19,6 +19,10 @@ namespace ABSTRACTIONS
         public string DecryptedCardholderName { get; set; }
         public int ExpirationMonth { get; set; }
         public int ExpirationYear { get; set; }
+        public string PaymentMethod { get; set; }
+        public string TransferReference { get; set; }
+        public string SecondPaymentMethod { get; set; }
+        public string SecondTransferReference { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public bool IsActive { get; set; }
         public DateTime? CancelledDateUtc { get; set; }

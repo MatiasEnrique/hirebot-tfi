@@ -435,13 +435,18 @@ namespace Hirebot_TFI
         
         private string GetResourceString(string key)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return string.Empty;
+            }
+
             try
             {
-                return key;
+                return System.Web.HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
             }
             catch
             {
-                return key; // Return the key if resource lookup fails
+                return key;
             }
         }
         

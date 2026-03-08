@@ -68,38 +68,178 @@
                         <asp:RequiredFieldValidator ID="rfvProduct" runat="server" ControlToValidate="ddlProducts" CssClass="text-danger" ValidationGroup="Subscribe" InitialValue="" ErrorMessage="Seleccione un producto." Display="Dynamic" />
                     </div>
                     <div class="col-md-6">
-                        <label for="txtCardholderName" class="form-label subscription-label">
-                            <asp:Literal runat="server" Text="Titular de la tarjeta" />
+                        <label class="form-label subscription-label">
+                            <asp:Literal runat="server" Text="Método de pago" />
                         </label>
-                        <asp:TextBox ID="txtCardholderName" runat="server" CssClass="form-control" MaxLength="100" ValidationGroup="Subscribe" />
-                        <asp:RequiredFieldValidator ID="rfvCardholder" runat="server" ControlToValidate="txtCardholderName" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el titular de la tarjeta." Display="Dynamic" />
+                        <asp:DropDownList ID="ddlPaymentMethod" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlPaymentMethod_Changed">
+                            <asp:ListItem Value="Tarjeta" Text="Tarjeta de crédito/débito" />
+                            <asp:ListItem Value="Transferencia" Text="Transferencia bancaria" />
+                            <asp:ListItem Value="CuentaCorriente" Text="Cuenta corriente" />
+                            <asp:ListItem Value="PagoCombinado" Text="Pago combinado 50/50" />
+                        </asp:DropDownList>
                     </div>
                 </div>
 
-                <div class="row g-4 mt-1">
-                    <div class="col-md-6">
-                        <label for="txtCardNumber" class="form-label subscription-label">
-                            <asp:Literal runat="server" Text="Número de tarjeta" />
-                        </label>
-                        <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control" MaxLength="23" ValidationGroup="Subscribe" />
-                        <asp:RequiredFieldValidator ID="rfvCardNumber" runat="server" ControlToValidate="txtCardNumber" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el número de la tarjeta." Display="Dynamic" />
-                        <asp:RegularExpressionValidator ID="revCardNumber" runat="server" ControlToValidate="txtCardNumber" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="El número de tarjeta no es válido." Display="Dynamic" ValidationExpression="^[0-9\s-]{12,23}$" />
+                <%-- Card fields panel --%>
+                <asp:Panel ID="pnlCardFields" runat="server" Visible="true">
+                    <div class="row g-4 mt-1">
+                        <div class="col-md-6">
+                            <label class="form-label subscription-label">
+                                <asp:Literal runat="server" Text="Titular de la tarjeta" />
+                            </label>
+                            <asp:TextBox ID="txtCardholderName" runat="server" CssClass="form-control" MaxLength="100" ValidationGroup="Subscribe" />
+                            <asp:RequiredFieldValidator ID="rfvCardholder" runat="server" ControlToValidate="txtCardholderName" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el titular de la tarjeta." Display="Dynamic" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label subscription-label">
+                                <asp:Literal runat="server" Text="Número de tarjeta" />
+                            </label>
+                            <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control" MaxLength="23" ValidationGroup="Subscribe" />
+                            <asp:RequiredFieldValidator ID="rfvCardNumber" runat="server" ControlToValidate="txtCardNumber" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el número de la tarjeta." Display="Dynamic" />
+                            <asp:RegularExpressionValidator ID="revCardNumber" runat="server" ControlToValidate="txtCardNumber" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="El número de tarjeta no es válido." Display="Dynamic" ValidationExpression="^[0-9\s-]{12,23}$" />
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <label for="ddlExpirationMonth" class="form-label subscription-label">
-                            <asp:Literal runat="server" Text="Mes de vencimiento" />
-                        </label>
-                        <asp:DropDownList ID="ddlExpirationMonth" runat="server" CssClass="form-select" ValidationGroup="Subscribe" AppendDataBoundItems="true" />
-                        <asp:RequiredFieldValidator ID="rfvExpirationMonth" runat="server" ControlToValidate="ddlExpirationMonth" CssClass="text-danger" ValidationGroup="Subscribe" InitialValue="" ErrorMessage="Seleccione una fecha de vencimiento." Display="Dynamic" />
+                    <div class="row g-4 mt-1">
+                        <div class="col-md-3">
+                            <label class="form-label subscription-label">
+                                <asp:Literal runat="server" Text="Mes de vencimiento" />
+                            </label>
+                            <asp:DropDownList ID="ddlExpirationMonth" runat="server" CssClass="form-select" ValidationGroup="Subscribe" AppendDataBoundItems="true" />
+                            <asp:RequiredFieldValidator ID="rfvExpirationMonth" runat="server" ControlToValidate="ddlExpirationMonth" CssClass="text-danger" ValidationGroup="Subscribe" InitialValue="" ErrorMessage="Seleccione una fecha de vencimiento." Display="Dynamic" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label subscription-label">
+                                <asp:Literal runat="server" Text="Año de vencimiento" />
+                            </label>
+                            <asp:DropDownList ID="ddlExpirationYear" runat="server" CssClass="form-select" ValidationGroup="Subscribe" AppendDataBoundItems="true" />
+                            <asp:RequiredFieldValidator ID="rfvExpirationYear" runat="server" ControlToValidate="ddlExpirationYear" CssClass="text-danger" ValidationGroup="Subscribe" InitialValue="" ErrorMessage="Seleccione una fecha de vencimiento." Display="Dynamic" />
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <label for="ddlExpirationYear" class="form-label subscription-label">
-                            <asp:Literal runat="server" Text="Año de vencimiento" />
-                        </label>
-                        <asp:DropDownList ID="ddlExpirationYear" runat="server" CssClass="form-select" ValidationGroup="Subscribe" AppendDataBoundItems="true" />
-                        <asp:RequiredFieldValidator ID="rfvExpirationYear" runat="server" ControlToValidate="ddlExpirationYear" CssClass="text-danger" ValidationGroup="Subscribe" InitialValue="" ErrorMessage="Seleccione una fecha de vencimiento." Display="Dynamic" />
+                </asp:Panel>
+
+                <%-- Transfer fields panel --%>
+                <asp:Panel ID="pnlTransferFields" runat="server" Visible="false">
+                    <div class="row g-4 mt-1">
+                        <div class="col-md-6">
+                            <label class="form-label subscription-label">
+                                <asp:Literal runat="server" Text="Número de comprobante de transferencia" />
+                            </label>
+                            <asp:TextBox ID="txtTransferReference" runat="server" CssClass="form-control" MaxLength="100" ValidationGroup="Subscribe" />
+                            <asp:RequiredFieldValidator ID="rfvTransferReference" runat="server" ControlToValidate="txtTransferReference" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el número de comprobante." Display="Dynamic" Enabled="false" />
+                        </div>
                     </div>
-                </div>
+                </asp:Panel>
+
+                <%-- Cuenta corriente info panel --%>
+                <asp:Panel ID="pnlCuentaCorriente" runat="server" Visible="false">
+                    <div class="row g-4 mt-1">
+                        <div class="col-md-12">
+                            <div class="alert alert-info mb-0">
+                                <asp:Literal runat="server" Text="El importe será debitado de su cuenta corriente." />
+                            </div>
+                        </div>
+                    </div>
+                </asp:Panel>
+
+                <%-- Combined payment panel --%>
+                <asp:Panel ID="pnlCombinedFields" runat="server" Visible="false">
+                    <div class="row g-4 mt-1">
+                        <div class="col-md-6">
+                            <label class="form-label subscription-label">
+                                <asp:Literal runat="server" Text="Primer método (50%)" />
+                            </label>
+                            <asp:DropDownList ID="ddlMethod1" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlMethod1_Changed">
+                                <asp:ListItem Value="Tarjeta" Text="Tarjeta de crédito/débito" />
+                                <asp:ListItem Value="Transferencia" Text="Transferencia bancaria" />
+                                <asp:ListItem Value="CuentaCorriente" Text="Cuenta corriente" />
+                            </asp:DropDownList>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label subscription-label">
+                                <asp:Literal runat="server" Text="Segundo método (50%)" />
+                            </label>
+                            <asp:DropDownList ID="ddlMethod2" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlMethod2_Changed">
+                                <asp:ListItem Value="Transferencia" Text="Transferencia bancaria" />
+                                <asp:ListItem Value="CuentaCorriente" Text="Cuenta corriente" />
+                                <asp:ListItem Value="Tarjeta" Text="Tarjeta de crédito/débito" />
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <%-- Card fields for combined leg --%>
+                    <asp:Panel ID="pnlCombinedCard" runat="server" Visible="true">
+                        <div class="row g-4 mt-1">
+                            <div class="col-md-6">
+                                <label class="form-label subscription-label">
+                                    <asp:Literal runat="server" Text="Titular de la tarjeta" />
+                                </label>
+                                <asp:TextBox ID="txtCombinedCardholderName" runat="server" CssClass="form-control" MaxLength="100" ValidationGroup="Subscribe" />
+                                <asp:RequiredFieldValidator ID="rfvCombinedCardholder" runat="server" ControlToValidate="txtCombinedCardholderName" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el titular de la tarjeta." Display="Dynamic" Enabled="false" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label subscription-label">
+                                    <asp:Literal runat="server" Text="Número de tarjeta" />
+                                </label>
+                                <asp:TextBox ID="txtCombinedCardNumber" runat="server" CssClass="form-control" MaxLength="23" ValidationGroup="Subscribe" />
+                                <asp:RequiredFieldValidator ID="rfvCombinedCardNumber" runat="server" ControlToValidate="txtCombinedCardNumber" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el número de la tarjeta." Display="Dynamic" Enabled="false" />
+                                <asp:RegularExpressionValidator ID="revCombinedCardNumber" runat="server" ControlToValidate="txtCombinedCardNumber" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="El número de tarjeta no es válido." Display="Dynamic" ValidationExpression="^[0-9\s-]{12,23}$" Enabled="false" />
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-1">
+                            <div class="col-md-3">
+                                <label class="form-label subscription-label">
+                                    <asp:Literal runat="server" Text="Mes de vencimiento" />
+                                </label>
+                                <asp:DropDownList ID="ddlCombinedExpirationMonth" runat="server" CssClass="form-select" ValidationGroup="Subscribe" AppendDataBoundItems="true" />
+                                <asp:RequiredFieldValidator ID="rfvCombinedExpirationMonth" runat="server" ControlToValidate="ddlCombinedExpirationMonth" CssClass="text-danger" ValidationGroup="Subscribe" InitialValue="" ErrorMessage="Seleccione una fecha de vencimiento." Display="Dynamic" Enabled="false" />
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label subscription-label">
+                                    <asp:Literal runat="server" Text="Año de vencimiento" />
+                                </label>
+                                <asp:DropDownList ID="ddlCombinedExpirationYear" runat="server" CssClass="form-select" ValidationGroup="Subscribe" AppendDataBoundItems="true" />
+                                <asp:RequiredFieldValidator ID="rfvCombinedExpirationYear" runat="server" ControlToValidate="ddlCombinedExpirationYear" CssClass="text-danger" ValidationGroup="Subscribe" InitialValue="" ErrorMessage="Seleccione una fecha de vencimiento." Display="Dynamic" Enabled="false" />
+                            </div>
+                        </div>
+                    </asp:Panel>
+
+                    <%-- Transfer reference for combined leg 1 --%>
+                    <asp:Panel ID="pnlCombinedTransfer1" runat="server" Visible="false">
+                        <div class="row g-4 mt-1">
+                            <div class="col-md-6">
+                                <label class="form-label subscription-label">
+                                    <asp:Literal runat="server" Text="Comprobante de transferencia (1er método)" />
+                                </label>
+                                <asp:TextBox ID="txtCombinedTransferRef1" runat="server" CssClass="form-control" MaxLength="100" ValidationGroup="Subscribe" />
+                                <asp:RequiredFieldValidator ID="rfvCombinedTransferRef1" runat="server" ControlToValidate="txtCombinedTransferRef1" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el número de comprobante." Display="Dynamic" Enabled="false" />
+                            </div>
+                        </div>
+                    </asp:Panel>
+
+                    <%-- Transfer reference for combined leg 2 --%>
+                    <asp:Panel ID="pnlCombinedTransfer2" runat="server" Visible="false">
+                        <div class="row g-4 mt-1">
+                            <div class="col-md-6">
+                                <label class="form-label subscription-label">
+                                    <asp:Literal runat="server" Text="Comprobante de transferencia (2do método)" />
+                                </label>
+                                <asp:TextBox ID="txtCombinedTransferRef2" runat="server" CssClass="form-control" MaxLength="100" ValidationGroup="Subscribe" />
+                                <asp:RequiredFieldValidator ID="rfvCombinedTransferRef2" runat="server" ControlToValidate="txtCombinedTransferRef2" CssClass="text-danger" ValidationGroup="Subscribe" ErrorMessage="Ingrese el número de comprobante." Display="Dynamic" Enabled="false" />
+                            </div>
+                        </div>
+                    </asp:Panel>
+
+                    <%-- Cuenta corriente info for combined --%>
+                    <asp:Panel ID="pnlCombinedCuentaCorriente" runat="server" Visible="false">
+                        <div class="row g-4 mt-1">
+                            <div class="col-md-12">
+                                <div class="alert alert-info mb-0">
+                                    <asp:Literal runat="server" Text="El 50% restante será debitado de su cuenta corriente." />
+                                </div>
+                            </div>
+                        </div>
+                    </asp:Panel>
+                </asp:Panel>
 
                 <div class="mt-4">
                     <asp:Button ID="btnSubscribe" runat="server" CssClass="btn btn-primary" ValidationGroup="Subscribe" Text="Confirmar suscripción" OnClick="btnSubscribe_Click" />
@@ -140,8 +280,7 @@
                             <td><%# Eval("BillingCycle") %></td>
                             <td><%# ((decimal)Eval("ProductPrice")).ToString("C") %></td>
                             <td>
-                                <span class="d-block">**** **** **** <%# Eval("CardLast4") %></span>
-                                <span class="text-muted small"><%# Eval("CardBrand") %></span>
+                                <%# GetPaymentDisplay((ABSTRACTIONS.ProductSubscription)Container.DataItem) %>
                             </td>
                             <td>
                                 <span class="badge" runat="server" id="lblStatus" ></span>

@@ -230,13 +230,31 @@ namespace DAL
 
                         command.Parameters.AddWithValue("@UserId", subscription.UserId);
                         command.Parameters.AddWithValue("@ProductId", subscription.ProductId);
-                        command.Parameters.AddWithValue("@CardholderName", subscription.CardholderName ?? string.Empty);
-                        command.Parameters.AddWithValue("@CardLast4", subscription.CardLast4 ?? string.Empty);
-                        command.Parameters.AddWithValue("@CardBrand", string.IsNullOrWhiteSpace(subscription.CardBrand) ? (object)DBNull.Value : subscription.CardBrand);
-                        command.Parameters.AddWithValue("@EncryptedCardNumber", subscription.EncryptedCardNumber ?? string.Empty);
-                        command.Parameters.AddWithValue("@EncryptedCardholderName", subscription.EncryptedCardholderName ?? string.Empty);
-                        command.Parameters.AddWithValue("@ExpirationMonth", subscription.ExpirationMonth);
-                        command.Parameters.AddWithValue("@ExpirationYear", subscription.ExpirationYear);
+                        command.Parameters.AddWithValue("@PaymentMethod", string.IsNullOrWhiteSpace(subscription.PaymentMethod) ? "Tarjeta" : subscription.PaymentMethod);
+
+                        bool hasCardPayload = !string.IsNullOrWhiteSpace(subscription.CardholderName)
+                            || !string.IsNullOrWhiteSpace(subscription.CardLast4)
+                            || !string.IsNullOrWhiteSpace(subscription.CardBrand)
+                            || !string.IsNullOrWhiteSpace(subscription.EncryptedCardNumber)
+                            || !string.IsNullOrWhiteSpace(subscription.EncryptedCardholderName)
+                            || subscription.ExpirationMonth > 0
+                            || subscription.ExpirationYear > 0;
+
+                        bool involvesCard = subscription.PaymentMethod == "Tarjeta"
+                            || (subscription.PaymentMethod == "PagoCombinado"
+                                && (subscription.SecondPaymentMethod == "Tarjeta" || hasCardPayload));
+
+                        command.Parameters.AddWithValue("@CardholderName", involvesCard ? (object)(subscription.CardholderName ?? string.Empty) : DBNull.Value);
+                        command.Parameters.AddWithValue("@CardLast4", involvesCard ? (object)(subscription.CardLast4 ?? string.Empty) : DBNull.Value);
+                        command.Parameters.AddWithValue("@CardBrand", involvesCard && !string.IsNullOrWhiteSpace(subscription.CardBrand) ? (object)subscription.CardBrand : DBNull.Value);
+                        command.Parameters.AddWithValue("@EncryptedCardNumber", involvesCard ? (object)(subscription.EncryptedCardNumber ?? string.Empty) : DBNull.Value);
+                        command.Parameters.AddWithValue("@EncryptedCardholderName", involvesCard ? (object)(subscription.EncryptedCardholderName ?? string.Empty) : DBNull.Value);
+                        command.Parameters.AddWithValue("@ExpirationMonth", involvesCard ? (object)subscription.ExpirationMonth : DBNull.Value);
+                        command.Parameters.AddWithValue("@ExpirationYear", involvesCard ? (object)subscription.ExpirationYear : DBNull.Value);
+
+                        command.Parameters.AddWithValue("@TransferReference", string.IsNullOrWhiteSpace(subscription.TransferReference) ? (object)DBNull.Value : subscription.TransferReference);
+                        command.Parameters.AddWithValue("@SecondPaymentMethod", string.IsNullOrWhiteSpace(subscription.SecondPaymentMethod) ? (object)DBNull.Value : subscription.SecondPaymentMethod);
+                        command.Parameters.AddWithValue("@SecondTransferReference", string.IsNullOrWhiteSpace(subscription.SecondTransferReference) ? (object)DBNull.Value : subscription.SecondTransferReference);
 
                         SqlParameter resultCodeParam = command.Parameters.Add("@ResultCode", SqlDbType.Int);
                         resultCodeParam.Direction = ParameterDirection.Output;
@@ -434,17 +452,31 @@ namespace DAL
                 ProductName = reader["ProductName"].ToString(),
                 ProductPrice = reader["ProductPrice"] == DBNull.Value ? 0 : (decimal)reader["ProductPrice"],
                 BillingCycle = reader["BillingCycle"].ToString(),
-                CardholderName = reader["CardholderName"].ToString(),
-                CardLast4 = reader["CardLast4"].ToString(),
+                CardholderName = reader["CardholderName"] == DBNull.Value ? null : reader["CardholderName"].ToString(),
+                CardLast4 = reader["CardLast4"] == DBNull.Value ? null : reader["CardLast4"].ToString(),
                 CardBrand = reader["CardBrand"] == DBNull.Value ? null : reader["CardBrand"].ToString(),
                 EncryptedCardNumber = reader["EncryptedCardNumber"] == DBNull.Value ? null : reader["EncryptedCardNumber"].ToString(),
                 EncryptedCardholderName = reader["EncryptedCardholderName"] == DBNull.Value ? null : reader["EncryptedCardholderName"].ToString(),
                 ExpirationMonth = reader["ExpirationMonth"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ExpirationMonth"]),
                 ExpirationYear = reader["ExpirationYear"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ExpirationYear"]),
+                PaymentMethod = HasColumn(reader, "PaymentMethod") && reader["PaymentMethod"] != DBNull.Value ? reader["PaymentMethod"].ToString() : "Tarjeta",
+                TransferReference = HasColumn(reader, "TransferReference") && reader["TransferReference"] != DBNull.Value ? reader["TransferReference"].ToString() : null,
+                SecondPaymentMethod = HasColumn(reader, "SecondPaymentMethod") && reader["SecondPaymentMethod"] != DBNull.Value ? reader["SecondPaymentMethod"].ToString() : null,
+                SecondTransferReference = HasColumn(reader, "SecondTransferReference") && reader["SecondTransferReference"] != DBNull.Value ? reader["SecondTransferReference"].ToString() : null,
                 CreatedDateUtc = reader["CreatedDateUtc"] == DBNull.Value ? DateTime.MinValue : (DateTime)reader["CreatedDateUtc"],
                 IsActive = reader["IsActive"] != DBNull.Value && (bool)reader["IsActive"],
                 CancelledDateUtc = reader["CancelledDateUtc"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["CancelledDateUtc"]
             };
+        }
+
+        private bool HasColumn(SqlDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).Equals(columnName, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
         }
     }
 }

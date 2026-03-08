@@ -23,7 +23,11 @@ namespace SECURITY
             _productBLL = new ProductBLL();
         }
 
-        public ProductSubscriptionResult SubscribeToProduct(int productId, string cardholderName, string cardNumber, int expirationMonth, int expirationYear)
+        public ProductSubscriptionResult SubscribeToProduct(
+            int productId, string paymentMethod,
+            string cardholderName, string cardNumber, int expirationMonth, int expirationYear,
+            string transferReference,
+            string secondPaymentMethod, string secondTransferReference)
         {
             if (!_userSecurity.IsUserAuthenticated())
             {
@@ -38,7 +42,11 @@ namespace SECURITY
 
             try
             {
-                var result = _productSubscriptionBLL.CreateSubscription(currentUser.UserId, productId, cardholderName, cardNumber, expirationMonth, expirationYear);
+                var result = _productSubscriptionBLL.CreateSubscription(
+                    currentUser.UserId, productId, paymentMethod,
+                    cardholderName, cardNumber, expirationMonth, expirationYear,
+                    transferReference,
+                    secondPaymentMethod, secondTransferReference);
 
                 LogSubscriptionAttempt(result, currentUser, productId);
 

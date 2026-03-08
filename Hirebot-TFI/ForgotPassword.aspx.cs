@@ -217,7 +217,19 @@ namespace Hirebot_TFI
         // Public method to be used in JavaScript for placeholder and message localization
         public string GetLocalizedString(string key)
         {
-            return key;
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return string.Empty;
+            }
+        
+            try
+            {
+                return System.Web.HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
+            }
+            catch
+            {
+                return key;
+            }
         }
 
         #region Toast Notification Methods (Proven ShowAlert Pattern from ChatbotAdmin)

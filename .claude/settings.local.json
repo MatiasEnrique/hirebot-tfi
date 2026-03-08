@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(\"/mnt/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe\" Hirebot-TFI.sln /p:Configuration=Debug /verbosity:minimal /nologo)"
+      "Bash(\"/mnt/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe\" Hirebot-TFI.sln /p:Configuration=Debug /verbosity:minimal /nologo)",
+      "Bash(iconv:*)"
     ],
     "deny": [],
     "ask": []

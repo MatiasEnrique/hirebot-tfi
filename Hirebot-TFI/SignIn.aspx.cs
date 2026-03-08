@@ -250,7 +250,20 @@ namespace Hirebot_TFI
         // Public method to be used in JavaScript placeholder setting
         public string GetLocalizedString(string key)
         {
-            return key;
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return string.Empty;
+            }
+        
+            try
+            {
+                return System.Web.HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
+            }
+            catch
+            {
+                return key;
+            }
         }
     }
 }
+

@@ -1304,9 +1304,17 @@ namespace Hirebot_TFI
         /// <returns>Localized text</returns>
         protected string GetLocalizedText(string key)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return string.Empty;
+            }
+
             try
             {
-                return key;
+                var localized = HttpContext.GetGlobalResourceObject("GlobalResources", key, System.Globalization.CultureInfo.CurrentUICulture) as string
+                    ?? HttpContext.GetGlobalResourceObject("GlobalResources", key) as string;
+
+                return string.IsNullOrWhiteSpace(localized) ? key : localized;
             }
             catch
             {
@@ -1424,3 +1432,4 @@ namespace Hirebot_TFI
         #endregion
     }
 }
+

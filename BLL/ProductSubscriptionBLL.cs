@@ -20,7 +20,11 @@ namespace BLL
             userDAL = new UserDALProduction();
         }
 
-        public ProductSubscriptionResult CreateSubscription(int userId, int productId, string cardholderName, string cardNumber, int expirationMonth, int expirationYear)
+        public ProductSubscriptionResult CreateSubscription(
+            int userId, int productId, string paymentMethod,
+            string cardholderName, string cardNumber, int expirationMonth, int expirationYear,
+            string transferReference,
+            string secondPaymentMethod, string secondTransferReference)
         {
             if (userId <= 0)
             {
@@ -32,11 +36,61 @@ namespace BLL
                 return ProductSubscriptionResult.Failure(GetLocalizedString("SubscriptionProductRequired"));
             }
 
-            string normalizedCardNumber;
-            string validationError = ValidateSubscriptionInputs(cardholderName, cardNumber, expirationMonth, expirationYear, out normalizedCardNumber);
-            if (!string.IsNullOrEmpty(validationError))
+            if (string.IsNullOrWhiteSpace(paymentMethod))
             {
-                return ProductSubscriptionResult.Failure(validationError);
+                paymentMethod = "Tarjeta";
+            }
+
+            paymentMethod = paymentMethod.Trim();
+            secondPaymentMethod = (secondPaymentMethod ?? string.Empty).Trim();
+            transferReference = (transferReference ?? string.Empty).Trim();
+            secondTransferReference = (secondTransferReference ?? string.Empty).Trim();
+
+            bool hasCardPayload = !string.IsNullOrWhiteSpace(cardholderName)
+                || !string.IsNullOrWhiteSpace(cardNumber)
+                || expirationMonth > 0
+                || expirationYear > 0;
+
+            bool involvesCard = paymentMethod == "Tarjeta"
+                || (paymentMethod == "PagoCombinado" && (secondPaymentMethod == "Tarjeta" || hasCardPayload));
+            bool firstMethodIsTransfer = paymentMethod == "Transferencia";
+
+            string normalizedCardNumber = null;
+
+            if (involvesCard)
+            {
+                string validationError = ValidateSubscriptionInputs(cardholderName, cardNumber, expirationMonth, expirationYear, out normalizedCardNumber);
+                if (!string.IsNullOrEmpty(validationError))
+                {
+                    return ProductSubscriptionResult.Failure(validationError);
+                }
+            }
+
+            if (firstMethodIsTransfer && string.IsNullOrWhiteSpace(transferReference))
+            {
+                return ProductSubscriptionResult.Failure(GetLocalizedString("SubscriptionTransferReferenceRequired"));
+            }
+
+            if (paymentMethod == "PagoCombinado")
+            {
+                if (string.IsNullOrWhiteSpace(secondPaymentMethod))
+                {
+                    return ProductSubscriptionResult.Failure(GetLocalizedString("SubscriptionSecondMethodRequired"));
+                }
+
+                if (secondPaymentMethod == "Transferencia" && string.IsNullOrWhiteSpace(secondTransferReference))
+                {
+                    return ProductSubscriptionResult.Failure(GetLocalizedString("SubscriptionTransferReferenceRequired"));
+                }
+
+                // Backward compatibility for older SQL validation that expects @TransferReference
+                // when combined payments have bank transfer as second method.
+                if (secondPaymentMethod == "Transferencia"
+                    && string.IsNullOrWhiteSpace(transferReference)
+                    && !string.IsNullOrWhiteSpace(secondTransferReference))
+                {
+                    transferReference = secondTransferReference;
+                }
             }
 
             Product product = productDAL.GetProductById(productId);
@@ -56,12 +110,6 @@ namespace BLL
                 return ProductSubscriptionResult.Failure(GetLocalizedString("SubscriptionAlreadyExists"));
             }
 
-            string cardBrand = DetermineCardBrand(normalizedCardNumber);
-            string trimmedCardholder = cardholderName.Trim();
-            string encryptedCardNumber = ServiceEncryption.EncryptSymmetric(normalizedCardNumber);
-            string encryptedCardholderName = ServiceEncryption.EncryptAsymmetric(trimmedCardholder);
-            string maskedCardholder = MaskCardholderName(trimmedCardholder);
-
             var subscription = new ProductSubscription
             {
                 UserId = userId,
@@ -69,16 +117,29 @@ namespace BLL
                 ProductName = product.Name,
                 ProductPrice = product.Price,
                 BillingCycle = string.IsNullOrWhiteSpace(product.BillingCycle) ? "Monthly" : product.BillingCycle,
-                CardholderName = maskedCardholder,
-                CardLast4 = normalizedCardNumber.Substring(normalizedCardNumber.Length - 4),
-                CardBrand = cardBrand,
-                EncryptedCardNumber = encryptedCardNumber,
-                EncryptedCardholderName = encryptedCardholderName,
-                ExpirationMonth = expirationMonth,
-                ExpirationYear = expirationYear,
+                PaymentMethod = paymentMethod,
+                TransferReference = transferReference,
+                SecondPaymentMethod = secondPaymentMethod,
+                SecondTransferReference = secondTransferReference,
                 CreatedDateUtc = DateTime.UtcNow,
                 IsActive = true
             };
+
+            if (involvesCard)
+            {
+                string cardBrand = DetermineCardBrand(normalizedCardNumber);
+                string trimmedCardholder = cardholderName.Trim();
+                string encryptedCardNumber = ServiceEncryption.EncryptSymmetric(normalizedCardNumber);
+                string encryptedCardholderName = ServiceEncryption.EncryptAsymmetric(trimmedCardholder);
+
+                subscription.CardholderName = MaskCardholderName(trimmedCardholder);
+                subscription.CardLast4 = normalizedCardNumber.Substring(normalizedCardNumber.Length - 4);
+                subscription.CardBrand = cardBrand;
+                subscription.EncryptedCardNumber = encryptedCardNumber;
+                subscription.EncryptedCardholderName = encryptedCardholderName;
+                subscription.ExpirationMonth = expirationMonth;
+                subscription.ExpirationYear = expirationYear;
+            }
 
             ProductSubscriptionResult dalResult = productDAL.CreateProductSubscription(subscription);
             if (!dalResult.IsSuccessful)
@@ -90,6 +151,7 @@ namespace BLL
             persistedSubscription.ProductName = subscription.ProductName;
             persistedSubscription.ProductPrice = subscription.ProductPrice;
             persistedSubscription.BillingCycle = subscription.BillingCycle;
+            persistedSubscription.PaymentMethod = subscription.PaymentMethod;
             HydrateSensitiveData(persistedSubscription);
 
             SendSubscriptionEmail(userId, persistedSubscription);
@@ -313,19 +375,66 @@ namespace BLL
                 }
 
                 string fullName = string.Format("{0} {1}", user.FirstName, user.LastName).Trim();
+                string paymentDescription = BuildPaymentDescription(subscription);
+
                 EmailService.SendSubscriptionConfirmationEmail(
                     user.Email,
                     fullName,
                     subscription.ProductName,
                     subscription.BillingCycle,
                     subscription.ProductPrice,
-                    subscription.CardLast4,
-                    subscription.CardBrand
+                    paymentDescription
                 );
             }
             catch
             {
                 // Intentionally ignore email errors to avoid breaking subscription flow
+            }
+        }
+
+        private string BuildPaymentDescription(ProductSubscription subscription)
+        {
+            string method = subscription.PaymentMethod ?? "Tarjeta";
+
+            switch (method)
+            {
+                case "Tarjeta":
+                    string cardInfo = string.Format("**** {0}", subscription.CardLast4);
+                    if (!string.IsNullOrWhiteSpace(subscription.CardBrand))
+                        cardInfo = string.Format("{0} ({1})", cardInfo, subscription.CardBrand);
+                    return cardInfo;
+
+                case "Transferencia":
+                    return string.Format("Transferencia - Ref: {0}", subscription.TransferReference);
+
+                case "CuentaCorriente":
+                    return "Cuenta corriente";
+
+                case "PagoCombinado":
+                    string first = GetMethodShortDescription(method, subscription.CardLast4, subscription.CardBrand, subscription.TransferReference);
+                    string second = GetMethodShortDescription(subscription.SecondPaymentMethod, subscription.CardLast4, subscription.CardBrand, subscription.SecondTransferReference);
+                    return string.Format("50% {0} / 50% {1}", first, second);
+
+                default:
+                    return method;
+            }
+        }
+
+        private string GetMethodShortDescription(string method, string cardLast4, string cardBrand, string transferRef)
+        {
+            switch (method)
+            {
+                case "Tarjeta":
+                    string card = string.Format("**** {0}", cardLast4);
+                    if (!string.IsNullOrWhiteSpace(cardBrand))
+                        card = string.Format("{0} ({1})", card, cardBrand);
+                    return card;
+                case "Transferencia":
+                    return string.Format("Transferencia (Ref: {0})", transferRef);
+                case "CuentaCorriente":
+                    return "Cuenta corriente";
+                default:
+                    return method ?? "";
             }
         }
 

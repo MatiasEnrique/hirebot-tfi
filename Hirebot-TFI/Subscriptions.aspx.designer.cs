@@ -22,6 +22,10 @@ namespace Hirebot_TFI
 
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProduct;
 
+        protected global::System.Web.UI.WebControls.DropDownList ddlPaymentMethod;
+
+        protected global::System.Web.UI.WebControls.Panel pnlCardFields;
+
         protected global::System.Web.UI.WebControls.TextBox txtCardholderName;
 
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCardholder;
@@ -39,6 +43,54 @@ namespace Hirebot_TFI
         protected global::System.Web.UI.WebControls.DropDownList ddlExpirationYear;
 
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvExpirationYear;
+
+        protected global::System.Web.UI.WebControls.Panel pnlTransferFields;
+
+        protected global::System.Web.UI.WebControls.TextBox txtTransferReference;
+
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTransferReference;
+
+        protected global::System.Web.UI.WebControls.Panel pnlCuentaCorriente;
+
+        protected global::System.Web.UI.WebControls.Panel pnlCombinedFields;
+
+        protected global::System.Web.UI.WebControls.DropDownList ddlMethod1;
+
+        protected global::System.Web.UI.WebControls.DropDownList ddlMethod2;
+
+        protected global::System.Web.UI.WebControls.Panel pnlCombinedCard;
+
+        protected global::System.Web.UI.WebControls.TextBox txtCombinedCardholderName;
+
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCombinedCardholder;
+
+        protected global::System.Web.UI.WebControls.TextBox txtCombinedCardNumber;
+
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCombinedCardNumber;
+
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revCombinedCardNumber;
+
+        protected global::System.Web.UI.WebControls.DropDownList ddlCombinedExpirationMonth;
+
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCombinedExpirationMonth;
+
+        protected global::System.Web.UI.WebControls.DropDownList ddlCombinedExpirationYear;
+
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCombinedExpirationYear;
+
+        protected global::System.Web.UI.WebControls.Panel pnlCombinedTransfer1;
+
+        protected global::System.Web.UI.WebControls.TextBox txtCombinedTransferRef1;
+
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCombinedTransferRef1;
+
+        protected global::System.Web.UI.WebControls.Panel pnlCombinedTransfer2;
+
+        protected global::System.Web.UI.WebControls.TextBox txtCombinedTransferRef2;
+
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCombinedTransferRef2;
+
+        protected global::System.Web.UI.WebControls.Panel pnlCombinedCuentaCorriente;
 
         protected global::System.Web.UI.WebControls.Button btnSubscribe;
 

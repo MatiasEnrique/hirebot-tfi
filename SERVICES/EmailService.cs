@@ -397,7 +397,7 @@ namespace SERVICES
             }
         }
 
-        public static bool SendSubscriptionConfirmationEmail(string userEmail, string userName, string productName, string billingCycle, decimal productPrice, string cardLast4, string cardBrand)
+        public static bool SendSubscriptionConfirmationEmail(string userEmail, string userName, string productName, string billingCycle, decimal productPrice, string paymentDescription)
         {
             try
             {
@@ -427,17 +427,9 @@ namespace SERVICES
                     GetLocalizedString("SubscriptionEmailPrice"),
                     productPrice.ToString("C", CultureInfo.CurrentCulture));
 
-                if (!string.IsNullOrWhiteSpace(cardLast4))
+                if (!string.IsNullOrWhiteSpace(paymentDescription))
                 {
-                    string maskedCard = string.Format(CultureInfo.InvariantCulture, "**** **** **** {0}", cardLast4);
-                    string paymentDetail = maskedCard;
-
-                    if (!string.IsNullOrWhiteSpace(cardBrand))
-                    {
-                        paymentDetail = string.Format(CultureInfo.InvariantCulture, "{0} ({1})", maskedCard, cardBrand);
-                    }
-
-                    AppendLineWithFormat(content, "<p><strong>{0}:</strong> {1}</p>", GetLocalizedString("SubscriptionEmailPayment"), paymentDetail);
+                    AppendLineWithFormat(content, "<p><strong>{0}:</strong> {1}</p>", GetLocalizedString("SubscriptionEmailPayment"), paymentDescription);
                 }
 
                 AppendLineWithFormat(content, "<p>{0}</p>", GetLocalizedString("SubscriptionEmailSupport"));

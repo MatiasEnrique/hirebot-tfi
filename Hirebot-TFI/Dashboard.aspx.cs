@@ -189,7 +189,19 @@ namespace Hirebot_TFI
 
         private string GetLocalizedString(string key)
         {
-            return key;
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return string.Empty;
+            }
+        
+            try
+            {
+                return System.Web.HttpContext.GetGlobalResourceObject("GlobalResources", key)?.ToString() ?? key;
+            }
+            catch
+            {
+                return key;
+            }
         }
     }
 }

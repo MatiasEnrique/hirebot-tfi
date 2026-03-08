@@ -185,7 +185,22 @@ namespace Hirebot_TFI
 
         protected string GetLocalizedText(string key)
         {
-            return key;
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+                var localized = HttpContext.GetGlobalResourceObject("GlobalResources", key, CultureInfo.CurrentUICulture) as string
+                    ?? HttpContext.GetGlobalResourceObject("GlobalResources", key) as string;
+
+                return string.IsNullOrWhiteSpace(localized) ? key : localized;
+            }
+            catch
+            {
+                return key;
+            }
         }
 
         protected string FormatDateTime(object value)
@@ -447,3 +462,4 @@ namespace Hirebot_TFI
         }
     }
 }
+
